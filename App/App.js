@@ -1,10 +1,10 @@
-import Base from "/module/Base/Base.js";
-import Events from "/module/Events/Events.js";
-import { el, div, View, h1, h2, h3, p, is, icon } from "/module/View/View.js";
-import Test, { test } from "/module/Test/Test.js";
-import socket from "/module/socket.js";
+import Base from "/framework/Base/Base.js";
+import Events from "/framework/Events/Events.js";
+import { el, div, View, h1, h2, h3, p, is, icon } from "/framework/View/View.js";
+import Test, { test } from "/framework/Test/Test.js";
+import socket from "/framework/socket.js";
 
-View.stylesheet("/module/base.css");
+View.stylesheet("/framework/base.css");
 
 
 

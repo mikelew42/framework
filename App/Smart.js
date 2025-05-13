@@ -1,5 +1,5 @@
-import Base from "/module/Base/Base.js";
-import Events from "/module/Events/Events.js";
+import Base from "/framework/Base/Base.js";
+import Events from "/framework/Events/Events.js";
 import { el, div, View, h1, h2, h3, p, is } from "./View.js";
 
 

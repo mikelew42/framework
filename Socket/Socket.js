@@ -1,7 +1,7 @@
-import Events from "/module/Events/Events.js";
-import { el, div, View, h1, h2, h3, p, is, Base, icon } from "/module/View/View.js";
+import Events from "/framework/Events/Events.js";
+import { el, div, View, h1, h2, h3, p, is, Base, icon } from "/framework/View/View.js";
 
-import FSView from "/module/App/FSView.js";
+import FSView from "/framework/App/FSView.js";
 
 export default class Socket extends Events {
 	initialize(){

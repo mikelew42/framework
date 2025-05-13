@@ -1,5 +1,5 @@
-import Base from "/module/Base/Base.js";
-import Socket from "/module/socket.js";
+import Base from "/framework/Base/Base.js";
+import Socket from "/framework/socket.js";
 
 export default class File extends Base {
 
@@ -85,9 +85,9 @@ export default class File extends Base {
 }
 
 /*
-Might we need module-relative files AND path-relative files?
+Might we need framework-relative files AND path-relative files?
 
-module/
+framework/
 	Thing/
 		Thing.js
 		data.json

@@ -1,6 +1,6 @@
-import View, { el, div, Base, is } from "/module/View/View.js";
+import View, { el, div, Base, is } from "/framework/View/View.js";
 
-View.stylesheet("/module/Test/test.css");
+View.stylesheet("/framework/Test/test.css");
 
 
 export default class Test extends Base {

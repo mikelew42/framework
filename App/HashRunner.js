@@ -68,12 +68,12 @@ export default class HashRunner extends Base {
 	}
 
 	load_script(src){
-		// this.script = el("script").attr("src", src).attr("type", "module")
+		// this.script = el("script").attr("src", src).attr("type", "framework")
 		// this.script.el
 		// this.script.append_to(document.head);
 	
 		this.script = document.createElement("script");
-		this.script.type = "module";
+		this.script.type = "framework";
 		this.script.src = src;
 		document.head.appendChild(this.script);
 	}

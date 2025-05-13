@@ -1,5 +1,5 @@
-import Base from "/module/Base/Base.js";
-import { el, div, View, h1, h2, h3, p, is } from "/module/View/View.js";
+import Base from "/framework/Base/Base.js";
+import { el, div, View, h1, h2, h3, p, is } from "/framework/View/View.js";
 
 export default class FileSystem extends Base {
 	load(files){

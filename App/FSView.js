@@ -1,6 +1,6 @@
-import { el, div, View, h1, h2, h3, p, is, Base, icon } from "/module/View/View.js";
+import { el, div, View, h1, h2, h3, p, is, Base, icon } from "/framework/View/View.js";
 
-View.stylesheet("/module/App/fs.css");
+View.stylesheet("/framework/App/fs.css");
 export default class FSView extends View {
 	render(){
 		this.bar = div.c("bar", icon("file_copy"), "File System");

@@ -1,7 +1,7 @@
-import Base from "/module/Base/Base.js";
-import Socket from "/module/socket.js";
-import is from "/module/lib/is.js";
-import File from "/module/File/file.js";
+import Base from "/framework/Base/Base.js";
+import Socket from "/framework/socket.js";
+import is from "/framework/lib/is.js";
+import File from "/framework/File/file.js";
 
 
 export default class Dir extends Base {

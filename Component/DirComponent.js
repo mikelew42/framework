@@ -6,7 +6,7 @@ new DirComponent({
 	
 });
 
-DirComponent.dir = /module/DirComponent/?
+DirComponent.dir = /framework/DirComponent/?
 
 test = new DC({ name: "test" }) -> /test/ + test.json?
 test.dir = /test/

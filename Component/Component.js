@@ -1,7 +1,7 @@
-import File from "/module/File/File.js";
-import Dir from "/module/Dir/Dir.js";
-import socket from "/module/socket.js";
-import is from "/module/lib/is.js";
+import File from "/framework/File/File.js";
+import Dir from "/framework/Dir/Dir.js";
+import socket from "/framework/socket.js";
+import is from "/framework/lib/is.js";
 
 File.socket = Dir.socket = socket;
 
@@ -143,7 +143,7 @@ for (const prop of methods){
 		Component[prop] = value;
 }
 
-// Component.instantiate(); // 2 // shared /module/ can't save...
+// Component.instantiate(); // 2 // shared /framework/ can't save...
 Component.instances = []; // for now...
 
 // // dir need to create files
