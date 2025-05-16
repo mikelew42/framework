@@ -4,8 +4,6 @@ export default class Base {
 	}
 
 	instantiate(...args){
-		// this.name = this.constructor.name.toLowerCase();
-		// this.type = this.constructor.name;
 		this.assign(...args);
 		this.initialize();
 	}

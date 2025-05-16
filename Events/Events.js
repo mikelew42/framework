@@ -75,3 +75,5 @@ export default class Events extends Base {
     this.events[event] = [];
   }
 }
+
+export { Base }

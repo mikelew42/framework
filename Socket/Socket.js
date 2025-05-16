@@ -1,8 +1,6 @@
 import Events from "/framework/Events/Events.js";
 import { el, div, View, h1, h2, h3, p, is, Base, icon } from "/framework/View/View.js";
 
-import FSView from "/framework/App/FSView.js";
-
 export default class Socket extends Events {
 	initialize(){
 		const protocol = window.location.protocol === "https:" ? "wss" : "ws";
@@ -17,7 +15,7 @@ export default class Socket extends Events {
 		this.requests = [];
 	}
 	open(){
-		console.log("%cSocket connected.", "color: green; font-weight: bold;", performance.now());
+		console.log("%cSocket connected.", "color: green; font-weight: bold;");
 		this.rpc("log", "connected!");
 		this._ready();
 	}

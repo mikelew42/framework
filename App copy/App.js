@@ -25,20 +25,3 @@ export default class App extends Base {
 }
 
 export { View, Base, Events, App, el, div, h1, h2, h3, p, is, icon, Test, test };
-
-class Thing {
-	jump(){
-		console.log("jumping");
-	}
-}
-
-var thing = new Thing();
-var thing2 = new Thing();
-
-
-thing.name = "yo";
-
-thing.jump();
-
-var obj = { prop: 123, prop2: 456 };
-obj.prop; // 123

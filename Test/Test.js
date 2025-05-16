@@ -6,7 +6,7 @@ View.stylesheet("/framework/Test/test.css");
 export default class Test extends Base {
 
 	render(){
-		this.view = div.c("test " + this.name, {
+		this.view = div.c(this.name.split(" ").join("-") + " test", {
 			name: div(this.name).click(this.activate.bind(this)),
 			container: div()
 		});
@@ -28,7 +28,7 @@ export default class Test extends Base {
 		this.view.ac("ran");
 
 		if (this.value)
-			this.value(this.arg);
+			this.value(this.arg); // if this returns a promise, then await it before closing console group
 		else 
 			console.warn("no test.fn");
 
