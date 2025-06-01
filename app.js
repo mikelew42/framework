@@ -3,11 +3,8 @@ import Socket from "./Socket/Socket.js";
 
 const app = window.app = new App();
 
-if (window.location.hostname == "localhost"){
-    const socket = new Socket();
-    app.ready = Promise.all([app.ready, socket.ready]);
-}
-
+// you might not always want to do this (wait for window.load and socket), 
+// and if you don't do it here, you probably want to await app.ready once imported.
 await app.ready;
 
 export default app;

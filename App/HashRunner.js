@@ -4,7 +4,7 @@ import FSView from "./FSView.js";
 export default class HashRunner extends Base {
 	async initialize(){
 		const directory = await fetch("/directory.json").then(response => response.json());
-		this.files = directory.files;
+		this.files = window.files = directory.files;
 
 		// if window.location.path.length > 1 (defaults to "/")
 		// either set files = matching path children, or...
@@ -72,8 +72,9 @@ export default class HashRunner extends Base {
 		// this.script.el
 		// this.script.append_to(document.head);
 	
+		console.log("loading script", src);
 		this.script = document.createElement("script");
-		this.script.type = "framework";
+		this.script.type = "module";
 		this.script.src = src;
 		document.head.appendChild(this.script);
 	}
@@ -94,7 +95,7 @@ export default class HashRunner extends Base {
 						})
 					});
 				} else {
-					div.c("file", icon("draft"), fd.name);
+					div.c("file", icon("insert_drive_file"), fd.name);
 				}
 			}
 		});

@@ -10,6 +10,7 @@ export default class FSView extends View {
 	}
 
 	files(files){
+		if (!files?.length) return;
 		for (const fd of files){
 			if (fd.type == "file"){
 				this.file(fd);
@@ -20,7 +21,7 @@ export default class FSView extends View {
 	}
 
 	file(fd){
-		div.c("file", icon("draft"), fd.name);
+		div.c("file", icon("insert_drive_file"), fd.name);
 	}
 
 	dir(fd){

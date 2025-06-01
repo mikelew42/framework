@@ -341,7 +341,7 @@ export default class View extends Base {
 }
 
 export function icon(name){
-	return el.c("span", "material-symbols-rounded icon", name);
+	return el.c("span", "material-icons icon", name);
 }
 
 export const { el, div, p, h1, h2, h3 } = View.elements();

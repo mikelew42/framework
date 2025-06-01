@@ -13,6 +13,7 @@ export default class App extends Base {
 	initialize_ready(){
 		this.ready = new Promise(resolve => {
 			window.addEventListener("load", () => {
+				console.log("window.load");
 				this.initialize_body();
 				resolve(this);
 			}); 
@@ -20,25 +21,9 @@ export default class App extends Base {
 	}
 
 	initialize_body(){
-		this.body = View.body().init();
+		this.$body = View.body().init();
 	}
+
 }
 
 export { View, Base, Events, App, el, div, h1, h2, h3, p, is, icon, Test, test };
-
-class Thing {
-	jump(){
-		console.log("jumping");
-	}
-}
-
-var thing = new Thing();
-var thing2 = new Thing();
-
-
-thing.name = "yo";
-
-thing.jump();
-
-var obj = { prop: 123, prop2: 456 };
-obj.prop; // 123

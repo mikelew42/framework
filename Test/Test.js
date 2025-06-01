@@ -52,6 +52,7 @@ export default class Test extends Base {
 
 export function test(name, value, arg){
 	return new Test({ name, value, arg }).render();
+	// Test.captor.add({});
 }
 
 Object.assign(Test, {
