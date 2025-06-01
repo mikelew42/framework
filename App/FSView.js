@@ -1,4 +1,4 @@
-import { el, div, View, h1, h2, h3, p, is, Base, icon } from "/framework/View/View.js";
+import { el, div, View, h1, h2, h3, p, is, Base, icon } from "../View/View.js";
 
 View.stylesheet("/framework/App/fs.css");
 export default class FSView extends View {

@@ -1,4 +1,4 @@
-import { View, Base, Events, App, el, div, h1, h2, h3, p, is, icon, Test, test } from "/framework/App/App.js";
+import { View, Base, Events, App, el, div, h1, h2, h3, p, is, icon, Test, test } from "../App/App.js";
 import Socket from "./Socket/Socket.js";
 
 const app = window.app = new App({

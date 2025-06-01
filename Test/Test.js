@@ -1,4 +1,4 @@
-import View, { el, div, Base, is } from "/framework/View/View.js";
+import View, { el, div, Base, is } from "../View/View.js";
 
 View.stylesheet("/framework/Test/test.css");
 

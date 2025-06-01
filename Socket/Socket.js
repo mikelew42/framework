@@ -1,5 +1,5 @@
-import Events from "/framework/Events/Events.js";
-import { el, div, View, h1, h2, h3, p, is, Base, icon } from "/framework/View/View.js";
+import Events from "../Events/Events.js";
+import { el, div, View, h1, h2, h3, p, is, Base, icon } from "../View/View.js";
 
 export default class Socket extends Events {
 	initialize(){

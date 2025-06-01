@@ -1,7 +1,7 @@
-import File from "/framework/File/File.js";
-import Dir from "/framework/Dir/Dir.js";
-import socket from "/framework/socket.js";
-import is from "/framework/lib/is.js";
+import File from "../File/File.js";
+import Dir from "../Dir/Dir.js";
+import socket from "../socket.js";
+import is from "../lib/is.js";
 
 File.socket = Dir.socket = socket;
 

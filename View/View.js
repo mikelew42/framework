@@ -1,5 +1,5 @@
-import is from "/framework/lib/is.js";
-import Base from "/framework/Base/Base.js";
+import is from "../lib/is.js";
+import Base from "../Base/Base.js";
 
 export default class View extends Base {
 

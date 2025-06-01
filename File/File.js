@@ -1,5 +1,5 @@
-import Base from "/framework/Base/Base.js";
-import Socket from "/framework/socket.js";
+import Base from "../Base/Base.js";
+import Socket from "../socket.js";
 
 export default class File extends Base {
 

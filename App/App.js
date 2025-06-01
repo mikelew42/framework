@@ -1,7 +1,7 @@
-import Base from "/framework/Base/Base.js";
-import Events from "/framework/Events/Events.js";
-import { el, div, View, h1, h2, h3, p, is, icon } from "/framework/View/View.js";
-import Test, { test } from "/framework/Test/Test.js";
+import Base from "../Base/Base.js";
+import Events from "../Events/Events.js";
+import { el, div, View, h1, h2, h3, p, is, icon } from "../View/View.js";
+import Test, { test } from "../Test/Test.js";
 
 
 export default class App extends Base {
