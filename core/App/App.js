@@ -12,11 +12,16 @@ export default class App extends Base {
 
 	initialize_ready(){
 		this.ready = new Promise(resolve => {
-			window.addEventListener("load", () => {
-				console.log("window.load");
+			if (document.readyState === "complete"){
 				this.initialize_body();
 				resolve(this);
-			}); 
+			} else {
+				window.addEventListener("load", () => {
+					// console.log("window.load");
+					this.initialize_body();
+					resolve(this);
+				});
+			}
 		});
 	}
 

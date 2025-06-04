@@ -1,0 +1,9 @@
+.directory { display: flex; flex-direction: column; padding: 1em 0 1.5em; font-size:0.85em; font-weight: 500; background: white; max-width: 500px; }
+.directory .file .bar, .directory .dir .bar { display: flex; align-items: center;}
+.directory .dir .bar .icon { margin-left: 0.5em; visibility: hidden; width: 1em; font-size: 1.2em; user-select: none; }
+.directory .file, .directory .dir .name { padding: 0.5em 2em 0.5em 2.15em; flex: 1; }
+.directory .dir.has-icon > .bar > .name { padding-left: 0.4em; }
+.directory .file:hover, .directory .dir .bar:hover { background: #eee; cursor: pointer; }
+.directory .name {}
+.directory .children { padding-left: 1.6em;}
+.directory:hover .dir .bar .icon {visibility: visible;  }

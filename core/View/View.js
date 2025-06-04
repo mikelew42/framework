@@ -1,9 +1,10 @@
-import is from "../lib/is.js";
+import is from "../../lib/is.js";
 import Base from "../Base/Base.js";
 
 export default class View extends Base {
 
 	tag = "div";
+	// capture = true; // this is set on View.prototype at end of file
 
 	instantiate(...args){
 		this.assign(...args);
@@ -102,7 +103,7 @@ export default class View extends Base {
 		for (const arg of args){
 			if (arg && arg.el){
 				arg.parent = this;
-				this.el.prependChild(arg.el);
+				this.el.prepend(arg.el);
 			} else if (is.pojo(arg)){
 				this.prepend_pojo(arg);
 			} else if (is.obj(arg)){
@@ -222,6 +223,15 @@ export default class View extends Base {
 
 		return this;
 	}
+
+	// this might mess up the normal capturing?
+	// this would be called synchronously... it might work though
+	// load(src){
+	// 	set this as captor
+	// 	const mod = await import(src);
+	// 	console.log("loaded script", src, mod);
+	// 	restor captor
+	// }
 
 	empty(){
 		this.el.innerHTML = "";

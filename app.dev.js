@@ -1,24 +1,50 @@
-import { View, Base, Events, App, el, div, h1, h2, h3, p, is, icon, Test, test } from "../App/App.js";
+import { View, Base, Events, App, el, div, h1, h2, h3, p, is, icon, Test, test } from "./core/App/App.js";
 import Socket from "./Socket/Socket.js";
+import Directory from "./ext/Directory/Directory.js";
 
 const app = window.app = new App({
     initialize(){
 		this.initialize_google_icon_font();
-		this.initialize_ready();
         this.initialize_socket();
+        this.initialize_directory();
+		this.initialize_ready();
 	},
 
-    // initialize_router() {}
+    initialize_directory() {
+        this.directory = new Directory({
+            app: this,
+            url: "/framework/directory.json",
+            ignore: ["framework.page.js"]
+        });
+    },
 
     initialize_socket(){
         if (window.location.hostname == "localhost"){
             this.socket = new Socket();
-            this.ready = Promise.all([this.ready, this.socket.ready]);
+        } else {
+            this.socket = { ready: Promise.resolve() };
         }
     },
+
+    initialize_ready(){
+		this.ready = Promise.all([
+            this.socket.ready, 
+            new Promise(resolve => {
+                if (document.readyState === "complete"){
+                    this.initialize_body();
+                    resolve(this);
+                } else {
+                    window.addEventListener("load", () => {
+                        // console.log("window.load");
+                        this.initialize_body();
+                        resolve(this);
+                    });
+                }
+		})]);
+	},
     
 	initialize_google_icon_font(){
-		View.stylesheet("https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,1,0");
+		View.stylesheet("https://fonts.googleapis.com/icon?family=Material+Icons");
 	}
 });
 

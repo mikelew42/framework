@@ -1,8 +1,11 @@
 /* @import url('https://fonts.googleapis.com/css2?family=Lato&display=swap'); */
 
-* { box-sizing: border-box; }
+* { box-sizing: border-box; margin-top: 0; }
+*:last-child { margin-bottom: 0; }
 
-body { background: #ddd; /*font-family: Lato;*/ margin: 0; padding: 0; }
+html, body { min-height: 100%; }
+
+body { background: #ddd; margin: 0; padding: 0; }
 
 .body1 { padding: 1em; }
 
