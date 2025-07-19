@@ -1,9 +1,9 @@
 import File from "../File/File.js";
 import Dir from "../Dir/Dir.js";
-import socket from "../socket.js";
-import is from "../lib/is.js";
+// import socket from "../socket.js";
+import is from "../../lib/is.js";
 
-File.socket = Dir.socket = socket;
+// File.socket = Dir.socket = socket;
 
 export default class Component {
 
@@ -28,7 +28,7 @@ export default class Component {
 
 		this.File = this.constructor.File; // so load_file() works on the Class
 
-		this.constructor.new(this);
+		this.constructor.track(this);
 
 		this.assign(...args);
 	}
@@ -50,9 +50,7 @@ export default class Component {
 			// (by manipulating this object)
 		this.data = this.file.data;
 	}
-
-
-	// encapsulating like this means we have to copy these new methods to the Class...
+  
 	load_file(){
 		this.file = new this.File(this.file || {
 			name: this.name + ".json"
@@ -70,6 +68,7 @@ export default class Component {
 			const current = this.data[name];
 
 			if (current?.set){
+				console.warn("set(name, value) ?") // not sure this is used
 				current.set(value);
 			} else {
 				this.data[name] = value;	
@@ -91,7 +90,7 @@ export default class Component {
 	get(name){
 		const value = this.data[name];
 		if (value.get)
-			return value.get();
+			return value.get(); // ? what type of instance is this?
 		else
 			return value;
 	}
@@ -118,7 +117,7 @@ export default class Component {
 		return import.meta;
 	}
 
-	static new(instance){
+	static track(instance){
 		this.instances.push(instance);
 		// this.emit("new", instance);
 	}

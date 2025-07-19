@@ -7,3 +7,13 @@
 .directory .name {}
 .directory .children { padding-left: 1.6em;}
 .directory:hover .dir .bar .icon {visibility: visible;  }
+
+.card .directory { background: rgba(0,0,0,0.1); }
+
+.directory.pad { padding: 1em 0 1.5em 1.5em;  }
+
+.directory2 {}
+.directory2 .file:hover, .directory2 .dir .bar:hover { background: rgba(255,255,255,0.5); }
+.directory2 .dir .dir .file:hover, .directory2 .dir .dir .dir .bar:hover { background: rgba(0,0,0,0.1); }
+
+.directory2 .dir.root > .children { padding-left: 0; }

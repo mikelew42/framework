@@ -3,15 +3,51 @@
 * { box-sizing: border-box; margin-top: 0; }
 *:last-child { margin-bottom: 0; }
 
-html, body { min-height: 100%; }
+html { height: 100%; }
+body { min-height: 100%; background: #ddd; margin: 0; padding: 0; display: flex; }
 
-body { background: #ddd; margin: 0; padding: 0; }
-
-.body1 { padding: 1em; }
-
-.card {
-	padding: 1em;
-	background: white;
+@media (min-width: 1333px) {
+    body {
+        font-size: 1.2vw;
+    }
 }
 
-.pad1em { padding: 1em; }
+@media (min-width: 1666px) {
+    body {
+        font-size: 20px;
+    }
+}
+
+p { line-height: 2;}
+
+h1 { font-size: 3em; margin-bottom: 1em; font-weight: 900; line-height: 1.4;}
+h2, h3 { line-height: 1.6em; }
+
+#main { flex: 1; }
+#main.pad { padding: clamp(1em, 3%, 3em); }
+
+.flex-h-center { justify-content: center; }
+.flex-v-center { align-items: center; }
+
+.flex { display: flex; }
+
+#main .card { background: white; max-width: 1042px; flex: 5; padding: clamp(2em, 6%, 5em) clamp(3em, 7%, 6em); }
+
+
+.sidenav { background: white;}
+.sidenav .logobar { display: flex; align-items: center; padding: 1.6em 3.2em 1.4em 1.7em; gap: 0.7em;  cursor: pointer; }
+.sidenav .logobar:hover { background: #eee; }
+.sidenav .logobar .title { flex: 1; font-weight: 700; }
+.sidenav .logobar .close {}
+.sidenav .logo { height: 24px; cursor:pointer; }
+
+.sidenav .nav .nav-item { text-decoration: none; font-weight: 500; color: var(--bg); padding: 0.7em 1.8em; display: block; }
+.sidenav .nav .nav-item:hover { background: #eee; }
+
+.page-framework {}
+.page-framework .sidenav .logobar {}
+.page-framework .sidenav .logobar:hover { background: white; }
+.page-framework .sidenav .logobar .logo { padding: 0.25em 0.5em; height: 2em; }
+.page-framework .sidenav .logobar .logo:hover { background: rgba(0,0,0,0.1); }
+.page-framework .sidenav .logobar .title { padding: 0.25em 0.5em; }
+.page-framework .sidenav .logobar .title:hover { background: rgba(0,0,0,0.1); }

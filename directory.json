@@ -4,7 +4,8 @@
 			"name": ".git",
 			"path": "./framework/",
 			"full": "framework/.git",
-			"type": "dir"
+			"type": "dir",
+			"children": []
 		},
 		{
 			"name": "app.dev.js",
@@ -17,26 +18,6 @@
 			"path": "./framework/",
 			"full": "framework/app.js",
 			"type": "file"
-		},
-		{
-			"name": "Component",
-			"path": "./framework/",
-			"full": "framework/Component",
-			"type": "dir",
-			"children": [
-				{
-					"name": "Component.js",
-					"path": "framework/Component",
-					"full": "framework/Component/Component.js",
-					"type": "file"
-				},
-				{
-					"name": "DirComponent.js",
-					"path": "framework/Component",
-					"full": "framework/Component/DirComponent.js",
-					"type": "file"
-				}
-			]
 		},
 		{
 			"name": "core",
@@ -83,6 +64,12 @@
 							"type": "file"
 						}
 					]
+				},
+				{
+					"name": "core.js",
+					"path": "framework/core",
+					"full": "framework/core/core.js",
+					"type": "file"
 				},
 				{
 					"name": "core.page.js",
@@ -147,20 +134,6 @@
 			]
 		},
 		{
-			"name": "Dir",
-			"path": "./framework/",
-			"full": "framework/Dir",
-			"type": "dir",
-			"children": [
-				{
-					"name": "Dir.js",
-					"path": "framework/Dir",
-					"full": "framework/Dir/Dir.js",
-					"type": "file"
-				}
-			]
-		},
-		{
 			"name": "directory.json",
 			"path": "./framework/",
 			"full": "framework/directory.json",
@@ -173,11 +146,51 @@
 			"type": "dir",
 			"children": [
 				{
+					"name": "Component",
+					"path": "framework/ext",
+					"full": "framework/ext/Component",
+					"type": "dir",
+					"children": [
+						{
+							"name": "Component.js",
+							"path": "framework/ext/Component",
+							"full": "framework/ext/Component/Component.js",
+							"type": "file"
+						},
+						{
+							"name": "DirComponent.js",
+							"path": "framework/ext/Component",
+							"full": "framework/ext/Component/DirComponent.js",
+							"type": "file"
+						}
+					]
+				},
+				{
+					"name": "Dir",
+					"path": "framework/ext",
+					"full": "framework/ext/Dir",
+					"type": "dir",
+					"children": [
+						{
+							"name": "Dir.js",
+							"path": "framework/ext/Dir",
+							"full": "framework/ext/Dir/Dir.js",
+							"type": "file"
+						}
+					]
+				},
+				{
 					"name": "Directory",
 					"path": "framework/ext",
 					"full": "framework/ext/Directory",
 					"type": "dir",
 					"children": [
+						{
+							"name": "Dir.js",
+							"path": "framework/ext/Directory",
+							"full": "framework/ext/Directory/Dir.js",
+							"type": "file"
+						},
 						{
 							"name": "Directory.css",
 							"path": "framework/ext/Directory",
@@ -195,29 +208,146 @@
 							"path": "framework/ext/Directory",
 							"full": "framework/ext/Directory/Directory.page.js",
 							"type": "file"
+						},
+						{
+							"name": "Directory2.js",
+							"path": "framework/ext/Directory",
+							"full": "framework/ext/Directory/Directory2.js",
+							"type": "file"
+						},
+						{
+							"name": "Directory2.page.js",
+							"path": "framework/ext/Directory",
+							"full": "framework/ext/Directory/Directory2.page.js",
+							"type": "file"
+						},
+						{
+							"name": "File.js",
+							"path": "framework/ext/Directory",
+							"full": "framework/ext/Directory/File.js",
+							"type": "file"
+						},
+						{
+							"name": "FrameworkDirectory.js",
+							"path": "framework/ext/Directory",
+							"full": "framework/ext/Directory/FrameworkDirectory.js",
+							"type": "file"
+						},
+						{
+							"name": "test.page.js",
+							"path": "framework/ext/Directory",
+							"full": "framework/ext/Directory/test.page.js",
+							"type": "file"
 						}
 					]
 				},
 				{
-					"name": "meh",
+					"name": "Document",
 					"path": "framework/ext",
-					"full": "framework/ext/meh",
+					"full": "framework/ext/Document",
 					"type": "dir",
-					"children": []
-				}
-			]
-		},
-		{
-			"name": "File",
-			"path": "./framework/",
-			"full": "framework/File",
-			"type": "dir",
-			"children": [
+					"children": [
+						{
+							"name": "BaseDocument.js",
+							"path": "framework/ext/Document",
+							"full": "framework/ext/Document/BaseDocument.js",
+							"type": "file"
+						},
+						{
+							"name": "Document.js",
+							"path": "framework/ext/Document",
+							"full": "framework/ext/Document/Document.js",
+							"type": "file"
+						},
+						{
+							"name": "ServerDocument.js",
+							"path": "framework/ext/Document",
+							"full": "framework/ext/Document/ServerDocument.js",
+							"type": "file"
+						}
+					]
+				},
 				{
-					"name": "File.js",
-					"path": "framework/File",
-					"full": "framework/File/File.js",
-					"type": "file"
+					"name": "File",
+					"path": "framework/ext",
+					"full": "framework/ext/File",
+					"type": "dir",
+					"children": [
+						{
+							"name": "File.js",
+							"path": "framework/ext/File",
+							"full": "framework/ext/File/File.js",
+							"type": "file"
+						}
+					]
+				},
+				{
+					"name": "List",
+					"path": "framework/ext",
+					"full": "framework/ext/List",
+					"type": "dir",
+					"children": [
+						{
+							"name": "List.js",
+							"path": "framework/ext/List",
+							"full": "framework/ext/List/List.js",
+							"type": "file"
+						}
+					]
+				},
+				{
+					"name": "Savable",
+					"path": "framework/ext",
+					"full": "framework/ext/Savable",
+					"type": "dir",
+					"children": [
+						{
+							"name": "Savable.js",
+							"path": "framework/ext/Savable",
+							"full": "framework/ext/Savable/Savable.js",
+							"type": "file"
+						}
+					]
+				},
+				{
+					"name": "Socket",
+					"path": "framework/ext",
+					"full": "framework/ext/Socket",
+					"type": "dir",
+					"children": [
+						{
+							"name": "Socket.js",
+							"path": "framework/ext/Socket",
+							"full": "framework/ext/Socket/Socket.js",
+							"type": "file"
+						}
+					]
+				},
+				{
+					"name": "Thing",
+					"path": "framework/ext",
+					"full": "framework/ext/Thing",
+					"type": "dir",
+					"children": [
+						{
+							"name": "BaseThing.js",
+							"path": "framework/ext/Thing",
+							"full": "framework/ext/Thing/BaseThing.js",
+							"type": "file"
+						},
+						{
+							"name": "ServerThing.js",
+							"path": "framework/ext/Thing",
+							"full": "framework/ext/Thing/ServerThing.js",
+							"type": "file"
+						},
+						{
+							"name": "Thing.js",
+							"path": "framework/ext/Thing",
+							"full": "framework/ext/Thing/Thing.js",
+							"type": "file"
+						}
+					]
 				}
 			]
 		},
@@ -284,70 +414,10 @@
 			]
 		},
 		{
-			"name": "List",
-			"path": "./framework/",
-			"full": "framework/List",
-			"type": "dir",
-			"children": [
-				{
-					"name": "index.html",
-					"path": "framework/List",
-					"full": "framework/List/index.html",
-					"type": "file"
-				},
-				{
-					"name": "index.js",
-					"path": "framework/List",
-					"full": "framework/List/index.js",
-					"type": "file"
-				},
-				{
-					"name": "List.js",
-					"path": "framework/List",
-					"full": "framework/List/List.js",
-					"type": "file"
-				},
-				{
-					"name": "ListView.js",
-					"path": "framework/List",
-					"full": "framework/List/ListView.js",
-					"type": "file"
-				}
-			]
-		},
-		{
 			"name": "README.md",
 			"path": "./framework/",
 			"full": "framework/README.md",
 			"type": "file"
-		},
-		{
-			"name": "Router",
-			"path": "./framework/",
-			"full": "framework/Router",
-			"type": "dir",
-			"children": [
-				{
-					"name": "Router.js",
-					"path": "framework/Router",
-					"full": "framework/Router/Router.js",
-					"type": "file"
-				}
-			]
-		},
-		{
-			"name": "Socket",
-			"path": "./framework/",
-			"full": "framework/Socket",
-			"type": "dir",
-			"children": [
-				{
-					"name": "Socket.js",
-					"path": "framework/Socket",
-					"full": "framework/Socket/Socket.js",
-					"type": "file"
-				}
-			]
 		},
 		{
 			"name": "ux",

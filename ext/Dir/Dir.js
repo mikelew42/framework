@@ -1,7 +1,7 @@
-import Base from "../Base/Base.js";
-import Socket from "../socket.js";
-import is from "../lib/is.js";
-import File from "../File/file.js";
+import Base from "../../core/Base/Base.js";
+// import Socket from "../socket.js";
+import is from "../../lib/is.js";
+import File from "../File/File.js";
 
 
 export default class Dir extends Base {
@@ -10,8 +10,8 @@ export default class Dir extends Base {
 		// if (!this.name)
 		// 	throw "Must provide dir.name";
 
-		if (this.path)
-			this.path = this.path + "/";
+		// if (this.path)
+		// 	this.path = this.path + "/";
 
 		// pass `meta: import.meta` for script-relative file
 		if (this.meta){

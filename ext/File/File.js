@@ -1,5 +1,4 @@
-import Base from "../Base/Base.js";
-import Socket from "../socket.js";
+import Base from "../../core/Base/Base.js";
 
 export default class File extends Base {
 

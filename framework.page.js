@@ -1,14 +1,33 @@
 import app, { App, el, div, View, h1, h2, h3, p, is, Base, icon, test } from "/framework/app.dev.js";
 
-app.$body.style("background", "#eee");
+app.$body.style("background", "#eee").style("font-family", "'Courier New', Courier");
 
-h1("Framework").click(() => {
-    window.location.href = "/framework/";
-}).style("cursor", "pointer");
+app.sidenav();
 
+el("main", main => {
+    
+    app.$main = main; // otherwise it's not available in the loaded script
 
-// new HashRunner();
-// app.dir = new Directory();
-// app.dir.render();
-app.directory.render();
-app.directory.container();
+    main.attr("id", "main");
+
+    if (window.location.hash){
+    
+        app.directory.load();
+        
+    } else {
+        
+        // default content here
+        main.ac("flex pad flex-h-center");
+
+        div.c("card", () =>{
+
+            h1("/framework/").click(() => {
+                window.location.href = "/framework/";
+            }).style("cursor", "pointer");
+            
+            app.directory.render();
+        });
+    
+    }
+
+});

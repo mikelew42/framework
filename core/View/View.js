@@ -171,8 +171,16 @@ export default class View extends Base {
 		return this.el.classList.contains(cls);
 	}
 
+	hc(cls){
+		return this.has_class(cls);
+	}
+
 	toggle_class(cls){
 		return this.has_class(cls) ? this.rc(cls) : this.ac(cls);
+	}
+
+	tc(cls){
+		return this.toggle_class(cls);
 	}
 
 	html(value){

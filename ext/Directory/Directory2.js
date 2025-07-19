@@ -5,7 +5,7 @@ import File from "./File.js";
 
 View.stylesheet("/framework/ext/Directory/Directory.css");
 
-export default class Directory extends Base {
+export default class Directory2 extends Base {
 	instantiate(...args){
 		this.assign(...args);
 		this.initialize();
@@ -28,15 +28,25 @@ export default class Directory extends Base {
     }
 
     fetched(data){
-        this.files = data.files.filter(this.filter.bind(this)).sort(this.compare);
+        // this.files = data.files.filter(this.filter.bind(this)).sort(this.compare);
+        this.files = data.files;
 
-        console.log(this.files);
-        this.update();
+        // the dir that the directory represents might vary?
+        // / - root
+        // /path/ (root directory.json)
+        // /path/two/
+        // /framework/ (/framework/directory.json)
+        this.dir = new Dir({
+            children: this.files,
+            root: true
+        });
+
+        this.update2();
 
         this.resolve(this);
     }
 
-    load(){
+    load(){  //? probably needs a better method name, like content() or loader()
         const container = View.captor; // thx Ultron
 
         if (window.location.hash) {
@@ -190,7 +200,7 @@ export default class Directory extends Base {
 	}
 
     render(){
-        const $dir = div.c("directory");
+        const $dir = div.c("directory directory2");
         this.views.push($dir);
 
         if (this.files) // directory.json loads quickly sometimes
@@ -201,7 +211,7 @@ export default class Directory extends Base {
 
     render_file(fd){
         div.c("file", fd.label).click(() => {
-            window.location.hash = "/" + (fd.hash || fd.full).replace(".page.js", "");
+            window.location.hash = "/" + fd.full.replace(".page.js", "");
             window.location.reload();
         })
     }
@@ -228,11 +238,9 @@ export default class Directory extends Base {
                     this.render_files(fd.children || []);
                 });
 
-                // console.log("hash", window.location.hash.substring(1), "fd.hash", fd.hash, "fd.full", fd.full);
                 // hide all but active
                 if (  window.location.hash.substring(1) !== ("/" + (fd.hash || fd.full) + "/")  ){
                     dir.children.hide();
-                } else {
                     dir.ac("active");
                 }
             }
@@ -264,5 +272,32 @@ export default class Directory extends Base {
                 this.render_files(this.files);
             });
         }
+    }
+
+    render2(){
+        const $dir = div.c("directory directory2 pad");
+        this.views.push($dir);
+
+        if (this.files) // directory.json loads quickly sometimes
+            this.update2();
+
+        return $dir;
+    }
+
+    update2(){
+        for (const view of this.views){
+            // view.empty(); // if this can only update once, this isn't necessary?
+            view.append(() => {
+                this.render_files2();
+            });
+        }
+    }
+
+    render_files2(){
+        // for (const file of this.files){
+        //     file.render_nav();
+        // }
+
+        this.dir.render_nav();
     }
 }
