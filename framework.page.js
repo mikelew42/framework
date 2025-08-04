@@ -11,7 +11,7 @@ el("main", main => {
     main.attr("id", "main");
 
     if (window.location.hash){
-    
+        
         app.directory.load();
         
     } else {
@@ -31,3 +31,8 @@ el("main", main => {
     }
 
 });
+
+/*
+
+This is showing up in the nav, because it has an index.html file, and doesn't get detected as a "default page".
+*/

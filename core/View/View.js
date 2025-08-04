@@ -40,27 +40,6 @@ export default class View extends Base {
 		return this;
 	}
 
-	html(value){
-		// set
-		if (typeof value !== "undefined"){
-			this.el.innerHTML = value;
-			return this;
-
-		// get
-		} else {
-			return this.el.innerHTML;
-		}
-	}
-
-	attr(name, value){
-		if (typeof value !== "undefined"){
-			this.el.setAttribute(name, value);
-			return this;
-		} else {
-			return this.el.getAttribute(name);
-		}
-	}
-
 	classify(){
 		this.ac(this.classes); // probably a bad idea, this won't stay sync'd...
 
@@ -185,7 +164,10 @@ export default class View extends Base {
 
 	html(value){
 		// set
-		if (is.def(value)){
+		if (is.def(value) && value !== this.el.innerHTML){  
+									// don't re-update, important for contenteditable change events
+									// and losing focus upon re-update, etc.
+									// does touching this.el.innerHTML cause a performance hit?
 			this.el.innerHTML = value;
 			return this;
 
@@ -197,7 +179,7 @@ export default class View extends Base {
 
 	text(value){
 		// set
-		if (is.def(value)){
+		if (is.def(value) && value !== this.el.textContent){ // see comment in html()
 			this.el.textContent = value;
 			return this;
 
@@ -209,7 +191,7 @@ export default class View extends Base {
 
 	attr(name, value){
 		// set
-		if (is.def(value)){
+		if (is.def(value) && value !== this.el.getAttribute(name)){ // see comment in html()
 			this.el.setAttribute(name, value);
 			return this;
 

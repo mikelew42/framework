@@ -21,19 +21,38 @@ export default class Directory extends Base {
 
         fetch(this.url || "/directory.json").then(res => res.json()).then(this.fetched.bind(this));
 
-        window.addEventListener('hashchange', function() {
-            // Reload the page on back/forward
-            window.location.reload();
-		});
     }
 
     fetched(data){
         this.files = data.files.filter(this.filter.bind(this)).sort(this.compare);
 
-        console.log(this.files);
+        // console.log(this.files);
+        this.log();
         this.update();
 
         this.resolve(this);
+    }
+
+    log(){
+        console.group("Directory3");
+        for (const child of this.files){
+            if (child.type === "file") this.log_file(child);
+            else if (child.type === "dir") this.log_dir(child);
+        }
+        console.groupEnd();
+    }
+
+    log_dir(fd){
+        console.group(fd.full);
+        for (const child of fd.children){
+            if (child.type === "file") this.log_file(child);
+            else if (child.type === "dir") this.log_dir(child);
+        }
+        console.groupEnd();
+    }
+
+    log_file(fd){
+        console.log(fd.full);
     }
 
     load(){
@@ -89,16 +108,6 @@ export default class Directory extends Base {
 
         if (this.ignore && this.ignore.includes(fd.name)) {
             return false;
-        }
-
-        if (window.location.pathname.length > 1){
-            const parts = fd.full.split("/").filter(Boolean);
-            parts.shift(); // remove "framework" path part
-            fd.hash = parts.join("/")
-        }
-
-        if (window.location.hash.substring(1) !== (  "/" + (fd.hash || fd.full) + "/")){
-            fd.active = true;
         }
 
         if (fd.type === "dir" && fd.children && fd.children.length){
@@ -205,8 +214,7 @@ export default class Directory extends Base {
 
     render_file(fd){
         div.c("file", fd.label).click(() => {
-            window.location.hash = "/" + (fd.hash || fd.full).replace(".page.js", "");
-            window.location.reload();
+            window.location = "/" + fd.full.replace(".page.js", "");
         })
     }
 
@@ -214,12 +222,10 @@ export default class Directory extends Base {
         const dir = div.c("dir", dir =>{
             dir.bar = div.c("bar", {
                 name: div(fd.name).click(() => {
-                    if (fd.real){
+                    if (fd.real || fd.default)
                         window.location.assign("/" + fd.full + "/");
-                    } else if (fd.default){
-                        window.location.hash = "/" + (fd.hash || fd.full) + "/";
-                        window.location.reload();
-                    }
+                    else
+                        dir.children.toggle();
                 })
             })
 
@@ -231,14 +237,15 @@ export default class Directory extends Base {
                 dir.children = div.c("children", () => {
                     this.render_files(fd.children || []);
                 });
+                dir.children.hide();
 
                 // console.log("hash", window.location.hash.substring(1), "fd.hash", fd.hash, "fd.full", fd.full);
                 // hide all but active
-                if (  window.location.hash.substring(1) !== ("/" + (fd.hash || fd.full) + "/")  ){
-                    dir.children.hide();
-                } else {
-                    dir.ac("active");
-                }
+                // if (  window.location.hash.substring(1) !== ("/" + (fd.hash || fd.full) + "/")  ){
+                //     dir.children.hide();
+                // } else {
+                //     dir.ac("active");
+                // }
             }
         });
 

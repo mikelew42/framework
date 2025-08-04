@@ -1,7 +1,9 @@
 import Base from "../../core/Base/Base.js";
-// import Socket from "../socket.js";
+import Socket from "../../ext/Socket/Socket.js";
 import is from "../../lib/is.js";
 import File from "../File/File.js";
+
+const socket = Socket.singleton();
 
 
 export default class Dir extends Base {
@@ -48,13 +50,18 @@ export default class Dir extends Base {
 		// console.log("dir data", this.full, data);
 	}
 
-	file(name){
+	rm(){
+		this.constructor.socket.rm(this.full);
+	}
+
+	file(name, opts){
 		// if filename.ext, we use this.filename
 		// might be a problem if you have filename.ext1 and filename.ext2
-		return this[remove_ext(name)] = new File({ name,
+		return this[remove_ext(name)] = new File({ 
+			name,
 			meta: this.meta, // might be undefined
 			path: this.path ? this.path + this.name : this.name
-		});
+		}, opts);
 	}
 
 	dir(name){

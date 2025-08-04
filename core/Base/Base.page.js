@@ -1,4 +1,4 @@
-import app, { el, div, View, h1, h2, h3, p, is, Base, test, Test } from "/framework/app.js";
+import app, { el, div, View, h1, h2, h3, p, is, Base, test, Test } from "/framework/app.dev.js";
 
 Test.controls();
 

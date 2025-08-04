@@ -9,3 +9,5 @@ await app.ready;
 export default app;
 
 export { app, View, Base, Events, App, el, div, h1, h2, h3, p, is, icon, Test, test };
+
+// this doesn't seem to be used currently?

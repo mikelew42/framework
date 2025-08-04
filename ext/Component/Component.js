@@ -1,59 +1,81 @@
 import File from "../File/File.js";
 import Dir from "../Dir/Dir.js";
-// import socket from "../socket.js";
+import Socket from "../../ext/Socket/Socket.js";
 import is from "../../lib/is.js";
 
+
+const socket = Socket.singleton();
 // File.socket = Dir.socket = socket;
 
 export default class Component {
 
+	// constructor(...args){
+	// 	this.instantiate(...args).catch(e => {
+	// 		console.error("new " + this.constructor.name + "().instantiate()", e)
+	// 	});
+	// 	// surprisingly, this makes the console log errors in a different (better?) order (the order in which they occur)
+	// }
+
 	constructor(...args){
-		this.instantiate(...args).catch(e => {
-			console.error("new " + this.constructor.name + "().instantiate()", e)
-		});
-		// surprisingly, this makes the console log errors in a different (better?) order (the order in which they occur)
+		this.instantiate(...args);
 	}
 
-	async instantiate(...args){
+	instantiate(...args){
 		this.config(...args);
-		await this.load(); // load the file
-		this.initialize(); // then initialize
+		this.load(); // load the file
+
+			// if we await comp.ready, will initialize() run first or after?
+			// hopefully they run in the order they are added, which I think would run this first...
+
+			// Nope, seems like the external await runs first, not sure why
+
+		// this.initialize(); // then initialize 
+			// moved this to the file.ready.then
+
+		/* The whole point of async here was to get initialize() to run AFTER data, but BEFORE ready?
+		Well, it didn't work.  Not it basically does/should :D */
 	}
 
 	initialize(){} // leave empty for extension
+		// can be async, doesn't have to be? see load -> await this.initialize()
+		// this is so that initialize can do async things, like load children
+		// it's also so we can await component.ready, initialize() will run, then we can render
 	
 	config(...args){
 		this.name = this.constructor.name.toLowerCase();
 		this.classname = this.constructor.name;
 
-		this.File = this.constructor.File; // so load_file() works on the Class
+		// this is a hack, please figure out a better way
+		if (!this.constructor.socket)
+			this.constructor.socket = socket;
 
-		this.constructor.track(this);
+		this.File = this.constructor.File; // so load_file() works on the Class
+			// can't do new this.constructor.File on the class, the constructor prop doesn't exist
+
+		this.constructor?.track(this);
 
 		this.assign(...args);
 	}
 
-	async load(){
-		this.load_file();
-
-		// this needs to be set without await
-		this.ready = this.file.ready.then(() => this);
-// console.log(`before ${this.name}.ready`);
-		// the constructor will finish while we're waiting
-		await this.ready;
-// console.log(`after ${this.name}.ready`);
-			// well, the constructor finishes
-			// initialize is delayed
-			// also, await new Component().ready is also delayed
-
-		// this is how data is passed to the file
-			// (by manipulating this object)
-		this.data = this.file.data;
+	load(){
+		if (!this.data){
+			this.load_file();
+			this.ready = this.file.ready.then(async () => {
+				this.data = this.file.data;
+				this.saver = this.file;
+				await this.initialize();
+				return this;
+			});
+			
+		}  else {
+			this.saver = this.parent.saver;
+		}// assume if data is present, it's from a parent component
 	}
   
 	load_file(){
 		this.file = new this.File(this.file || {
-			name: this.name + ".json"
+			name: this.name + ".json",
+			path: this.path || (window.location.hash ? window.location.hash.substring(1) : "")
 		});
 	}
 
@@ -63,6 +85,7 @@ export default class Component {
 				this.set(prop, name[prop]);
 			}
 		} else if (value?.setup){
+			console.warn("is this used?");
 			value.setup(this, name);
 		} else {
 			const current = this.data[name];
@@ -71,25 +94,33 @@ export default class Component {
 				console.warn("set(name, value) ?") // not sure this is used
 				current.set(value);
 			} else {
-				this.data[name] = value;	
+				if (this.data[name] !== value){
+					this.data[name] = value;	
+					this.changed();
+				}
 			}
 		}
 
-		this.save();
+		// this.changed();
 		
 		return this;
 	}
 
-	setup(parent, name){
+	async setup(parent, name){
 		this.parent = parent;
-		this.name = name;
-
-
+		this.name = name; // overrides own name?
+			// can thing.name be different than parent["name"] = thing?
+		
+		await this.parent.ready;
+		await this.ready;
+		this.parent.data[name] = this.data;
+		console.warn("huh?"); // i'm not sure this logically makes sense?
+			// does the data come from the parent? or...?
 	}
 
 	get(name){
 		const value = this.data[name];
-		if (value.get)
+		if (value?.get)
 			return value.get(); // ? what type of instance is this?
 		else
 			return value;
@@ -99,9 +130,20 @@ export default class Component {
 		return Object.assign(this, ...args);
 	}
 
-	save(){
-		this.file.save();
+	changed(){
+		this.save();
+
+		if (this.update && !this.updating){
+			this.updating = setTimeout(() => {
+				this.updating = false;
+				this.update();
+			}, 0);
+		}
 	}
+
+    save(){
+        this.saver.save();
+    }
 
 	static config(){
 		this.instances = [];

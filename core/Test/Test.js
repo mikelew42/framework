@@ -1,6 +1,6 @@
 import View, { el, div, Base, is } from "../View/View.js";
 
-// View.stylesheet("/framework/Test/test.css");
+View.stylesheet("/framework/core/Test/test.delete.css");
 
 
 export default class Test extends Base {
@@ -17,7 +17,7 @@ export default class Test extends Base {
 	}
 
 	activate(){
-		window.location.hash = this.name;
+		window.location.hash = this.path + "#" + this.name;
 		window.location.reload();
 	}
 
@@ -38,11 +38,19 @@ export default class Test extends Base {
 	}
 
 	should_run(){
-		return !window.location.hash || this.match();
+		const parts = window.location.hash.substring(1).split("#");
+		this.path = parts[0];
+
+		// console.log("test hash", parts[1]);
+		return (parts.length < 2) || this.match(parts[1]);
 	}
 
-	match(){
-		return decodeURI(window.location.hash.substring(1)) === this.name;
+	match(test){
+		return decodeURI(test) === this.name;
+
+
+		// this doesn't work with hash routing...
+		// return decodeURI(window.location.hash.substring(1)) === this.name;
 	}
 
 	assign(){
@@ -70,10 +78,12 @@ Object.assign(Test, {
 				Test.reset();
 			})
 		});
-		document.body.appendChild(controls.el);
+		// document.body.appendChild(controls.el);
 	},
 	reset(){
-		window.location.href = window.location.href.split('#')[0];
+		const parts = window.location.href.split("#");
+		parts.pop(); // remove last part, the test hash
+		window.location.href = parts.join("#");
 	},
 	init(){
 		Test.controls();

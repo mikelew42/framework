@@ -1,4 +1,7 @@
 import Base from "../../core/Base/Base.js";
+import Socket from "../../ext/Socket/Socket.js";
+
+const socket = Socket.singleton();
 
 export default class File extends Base {
 
@@ -6,15 +9,18 @@ export default class File extends Base {
 		if (!this.name)
 			throw "Must provide file.name";
 
+
+		// this trailing / is sometimes necessary, and sometimes it ads a double slash...???
 		if (this.path)
-			this.path = this.path + "/";
+			this.path = this.path.split("#")[0] + "/"; // remove secondary hash part, if using test router
+		console.log(this.path);
 
 		// pass `meta: import.meta` for script-relative file
 		if (this.meta){
 			this.url = this.meta.resolve("./" + (this.path ?? "") + this.name);
 			this.full = new URL(this.url).pathname;
 		} else {
-			this.full = window.location.pathname + (this.path ?? "") + this.name;
+			this.full = (window.location.pathname == "/" ? "" : window.location.pathname)  + (this.path ?? "") + this.name;
 			this.url = window.location.origin + this.full;
 		}
 
@@ -48,10 +54,23 @@ export default class File extends Base {
 
 			} else if (response.statusText == "Not Found"){
 				// create an empty json file
-				this.data = {};
+				this.data = this.data || {};
 				this.save();
 				// TODO: we need to this._res() to allow saving, even when the file doesn't exist
 				// for now, we just refresh, and the saving will happen on the next pass...
+
+					// I have no idea what this comment means...
+					// I'm thinking that this .save() call is not awaited at all, so we're not even sure the socket is ready..
+					// unless no Files or Components are used until app.ready?  hard to say...
+					// Maybe ALL socket requests could await this.ready?
+						// just to prevent quick-before-socket-connection saves?
+
+				/**
+				 * The problem here, is that the saving doesn't have a response.
+				 * I'm not sure we really need to wait for the response, but the thing is, the file.ready never resolves for these newly written files.
+				 * Can we just this.res?
+				 */
+				this._res();
 
 			} else {
 				throw "Fetch response not ok: " + response.statusText;

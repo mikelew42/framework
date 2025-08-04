@@ -158,6 +158,142 @@
 							"type": "file"
 						},
 						{
+							"name": "component.json",
+							"path": "framework/ext/Component",
+							"full": "framework/ext/Component/component.json",
+							"type": "file"
+						},
+						{
+							"name": "Component.page.js",
+							"path": "framework/ext/Component",
+							"full": "framework/ext/Component/Component.page.js",
+							"type": "file"
+						},
+						{
+							"name": "deep",
+							"path": "framework/ext/Component",
+							"full": "framework/ext/Component/deep",
+							"type": "dir",
+							"children": [
+								{
+									"name": "5",
+									"path": "framework/ext/Component/deep",
+									"full": "framework/ext/Component/deep/5",
+									"type": "dir",
+									"children": [
+										{
+											"name": "deep.json",
+											"path": "framework/ext/Component/deep/5",
+											"full": "framework/ext/Component/deep/5/deep.json",
+											"type": "file"
+										}
+									]
+								},
+								{
+									"name": "6",
+									"path": "framework/ext/Component/deep",
+									"full": "framework/ext/Component/deep/6",
+									"type": "dir",
+									"children": [
+										{
+											"name": "1",
+											"path": "framework/ext/Component/deep/6",
+											"full": "framework/ext/Component/deep/6/1",
+											"type": "dir",
+											"children": [
+												{
+													"name": "deep.json",
+													"path": "framework/ext/Component/deep/6/1",
+													"full": "framework/ext/Component/deep/6/1/deep.json",
+													"type": "file"
+												}
+											]
+										},
+										{
+											"name": "2",
+											"path": "framework/ext/Component/deep/6",
+											"full": "framework/ext/Component/deep/6/2",
+											"type": "dir",
+											"children": [
+												{
+													"name": "deep.json",
+													"path": "framework/ext/Component/deep/6/2",
+													"full": "framework/ext/Component/deep/6/2/deep.json",
+													"type": "file"
+												}
+											]
+										},
+										{
+											"name": "3",
+											"path": "framework/ext/Component/deep/6",
+											"full": "framework/ext/Component/deep/6/3",
+											"type": "dir",
+											"children": [
+												{
+													"name": "deep.json",
+													"path": "framework/ext/Component/deep/6/3",
+													"full": "framework/ext/Component/deep/6/3/deep.json",
+													"type": "file"
+												}
+											]
+										},
+										{
+											"name": "deep.json",
+											"path": "framework/ext/Component/deep/6",
+											"full": "framework/ext/Component/deep/6/deep.json",
+											"type": "file"
+										}
+									]
+								},
+								{
+									"name": "7",
+									"path": "framework/ext/Component/deep",
+									"full": "framework/ext/Component/deep/7",
+									"type": "dir",
+									"children": [
+										{
+											"name": "deep.json",
+											"path": "framework/ext/Component/deep/7",
+											"full": "framework/ext/Component/deep/7/deep.json",
+											"type": "file"
+										}
+									]
+								},
+								{
+									"name": "8",
+									"path": "framework/ext/Component/deep",
+									"full": "framework/ext/Component/deep/8",
+									"type": "dir",
+									"children": [
+										{
+											"name": "deep.json",
+											"path": "framework/ext/Component/deep/8",
+											"full": "framework/ext/Component/deep/8/deep.json",
+											"type": "file"
+										}
+									]
+								},
+								{
+									"name": "deep.json",
+									"path": "framework/ext/Component/deep",
+									"full": "framework/ext/Component/deep/deep.json",
+									"type": "file"
+								}
+							]
+						},
+						{
+							"name": "Deep.js",
+							"path": "framework/ext/Component",
+							"full": "framework/ext/Component/Deep.js",
+							"type": "file"
+						},
+						{
+							"name": "Deep.page.js",
+							"path": "framework/ext/Component",
+							"full": "framework/ext/Component/Deep.page.js",
+							"type": "file"
+						},
+						{
 							"name": "DirComponent.js",
 							"path": "framework/ext/Component",
 							"full": "framework/ext/Component/DirComponent.js",
@@ -222,6 +358,18 @@
 							"type": "file"
 						},
 						{
+							"name": "Directory3.js",
+							"path": "framework/ext/Directory",
+							"full": "framework/ext/Directory/Directory3.js",
+							"type": "file"
+						},
+						{
+							"name": "Directory3.page.js",
+							"path": "framework/ext/Directory",
+							"full": "framework/ext/Directory/Directory3.page.js",
+							"type": "file"
+						},
+						{
 							"name": "File.js",
 							"path": "framework/ext/Directory",
 							"full": "framework/ext/Directory/File.js",
@@ -237,6 +385,12 @@
 							"name": "test.page.js",
 							"path": "framework/ext/Directory",
 							"full": "framework/ext/Directory/test.page.js",
+							"type": "file"
+						},
+						{
+							"name": "test2.page.js",
+							"path": "framework/ext/Directory",
+							"full": "framework/ext/Directory/test2.page.js",
 							"type": "file"
 						}
 					]
@@ -291,6 +445,46 @@
 							"name": "List.js",
 							"path": "framework/ext/List",
 							"full": "framework/ext/List/List.js",
+							"type": "file"
+						}
+					]
+				},
+				{
+					"name": "Note",
+					"path": "framework/ext",
+					"full": "framework/ext/Note",
+					"type": "dir",
+					"children": [
+						{
+							"name": "Note.js",
+							"path": "framework/ext/Note",
+							"full": "framework/ext/Note/Note.js",
+							"type": "file"
+						}
+					]
+				},
+				{
+					"name": "Router",
+					"path": "framework/ext",
+					"full": "framework/ext/Router",
+					"type": "dir",
+					"children": [
+						{
+							"name": "index.html",
+							"path": "framework/ext/Router",
+							"full": "framework/ext/Router/index.html",
+							"type": "file"
+						},
+						{
+							"name": "Router.js",
+							"path": "framework/ext/Router",
+							"full": "framework/ext/Router/Router.js",
+							"type": "file"
+						},
+						{
+							"name": "Router.page.js",
+							"path": "framework/ext/Router",
+							"full": "framework/ext/Router/Router.page.js",
 							"type": "file"
 						}
 					]
@@ -409,6 +603,12 @@
 					"name": "underscore.js",
 					"path": "framework/lib",
 					"full": "framework/lib/underscore.js",
+					"type": "file"
+				},
+				{
+					"name": "util.js",
+					"path": "framework/lib",
+					"full": "framework/lib/util.js",
 					"type": "file"
 				}
 			]

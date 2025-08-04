@@ -4,7 +4,10 @@ import Directory from "./ext/Directory/Directory.js";
 
 View.stylesheet("/framework/framework.css");
 
-const app = window.app = new App({
+// this helps avoid dual apps
+// if the root /index.html creates the root /app.js, then window.app already exists, and we just use that...
+// not sure how well this will work
+const app = window.app = window.app || new App({
     initialize(){
 		this.initialize_google_icon_font();
         this.initialize_socket();
@@ -22,7 +25,7 @@ const app = window.app = new App({
 
     initialize_socket(){
         if (window.location.hostname == "localhost"){
-            this.socket = new Socket();
+            this.socket = Socket.singleton();
         } else {
             this.socket = { ready: Promise.resolve() };
         }

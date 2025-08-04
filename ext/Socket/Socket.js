@@ -1,21 +1,45 @@
 import Events from "../../core/Events/Events.js";
 
 export default class Socket extends Events {
+	static singleton(){
+		if (!this._instance){
+			this._instance = new this();
+		}
+		return this._instance;
+	}
 	initialize(){
-		const protocol = window.location.protocol === "https:" ? "wss" : "ws";
-		this.ws = new WebSocket(protocol + "://" + window.location.host);
+		this.protocol = window.location.protocol === "https:" ? "wss" : "ws";
+		this.requests = [];
+		this.fails = 0;
+
+		this.connect();
+	}
+	connect(){
+		this.ws = new WebSocket(this.protocol + "://" + window.location.host);
 		this.ws.addEventListener("open", () => this.open());
 		this.ws.addEventListener("message", res => this.message(res));
+		this.ws.addEventListener("close", () => {
+			console.log("Socket closed, reconnecting...");
+			// setTimeout(() => this.connect(), 0);
+			// this.connect(); // strangely this works.  
+		});
+		this.ws.addEventListener("error", err => {
+			console.log("Socket error:", err, this.fails + " fails.");
 
+			if (this.fails <= 3){
+				console.log("Attempting to reconnect in 1 second.");
+				this.fails++;
+				setTimeout(() => this.connect(), 1000);
+			}
+		});
+	
 		this.ready = new Promise((res, rej) => {
 			this._ready = res;
 		});
-
-		this.requests = [];
 	}
 	open(){
 		console.log("%cSocket connected.", "color: green; font-weight: bold;");
-		this.rpc("log", "connected!");
+		// this.rpc("log", "connected!");
 		this._ready();
 	}
 	// message recieved handler
@@ -81,6 +105,10 @@ export default class Socket extends Events {
 	
 	log(){
 		console.log(...arguments);
+	}
+
+	rm(dir){
+		return this.request({ method: "rm", args: [ dir ] }); 
 	}
 }
 
