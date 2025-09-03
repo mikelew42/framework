@@ -11,7 +11,7 @@ const app = window.app = window.app || new App({
     initialize(){
 		this.initialize_google_icon_font();
         this.initialize_socket();
-        this.initialize_directory();
+        // this.initialize_directory();
 		this.initialize_ready();
 	},
 

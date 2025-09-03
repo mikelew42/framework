@@ -76,4 +76,4 @@ export default class Events extends Base {
   }
 }
 
-export { Base }
+export { Base, Events }

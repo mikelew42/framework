@@ -20,7 +20,7 @@ export default class Dir extends Base {
 			this.url = this.meta.resolve("./" + (this.path ?? "") + this.name);
 			this.full = new URL(this.url).pathname;
 		} else {
-			this.full = window.location.pathname + (this.path ?? "") + this.name;
+			this.full = (this.path ?? "") + this.name;
 			this.url = window.location.origin + this.full;
 		}
 

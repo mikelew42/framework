@@ -1,7 +1,20 @@
 import Base from "../../core/Base/Base.js";
 import Socket from "../../ext/Socket/Socket.js";
+import is from "../../lib/is.js";
 
 const socket = Socket.singleton();
+
+/**
+ * 
+ * Pass in multiple "path/strings", split them and concat them all.
+ */
+// function parts(){
+// 	const ret = [];
+// 	for (const arg of arguments){
+// 		ret.push(...arg.split("/").filter(Boolean));
+// 	}
+// 	return ret;
+// }
 
 export default class File extends Base {
 
@@ -10,20 +23,41 @@ export default class File extends Base {
 			throw "Must provide file.name";
 
 
-		// this trailing / is sometimes necessary, and sometimes it ads a double slash...???
-		if (this.path)
-			this.path = this.path.split("#")[0] + "/"; // remove secondary hash part, if using test router
-		console.log(this.path);
+		// 2 variants: user path and window path
+		// if window path, we need to chop off the fake part
+		// if user path, we need to concat the parts, after chop
 
-		// pass `meta: import.meta` for script-relative file
-		if (this.meta){
-			this.url = this.meta.resolve("./" + (this.path ?? "") + this.name);
-			this.full = new URL(this.url).pathname;
-		} else {
-			this.full = (window.location.pathname == "/" ? "" : window.location.pathname)  + (this.path ?? "") + this.name;
-			this.url = window.location.origin + this.full;
+		const parts = window.location.pathname.split("/").filter(Boolean);
+
+		// if /path/fake
+		if (!window.location.pathname.endsWith("/")){
+			parts.pop(); // remove last part, which is the fake.page.js part
 		}
 
+		if (this.path){
+			console.log("parts", parts, "this.path", this.path);
+			this.path = parts.concat(this.path.split("/").filter(Boolean));
+			console.log("new path", this.path);
+		}
+
+		
+		// window.location.pathname might be
+			//  "/"
+			//  "/fake"
+			//  "/real/" 
+
+		
+		
+		// pass `meta: import.meta` for script-relative file
+		// if (this.meta){
+		// 	this.url = this.meta.resolve("./" + (this.path ?? "") + this.name);
+		// 	this.full = new URL(this.url).pathname;
+		// } else {
+			this.full = (this.path ?? "") + this.name;
+			this.url = window.location.origin + "/" + this.full;
+		// }
+		console.log("File (", this.path, this.name, this.full,   ") => ", this.url);
+		
 		// if (this.path)
 		// 	console.log("path", this.path);
 		// console.log("full", this.full);
@@ -44,6 +78,7 @@ export default class File extends Base {
 		this.fetch();
 	}
 
+	// fetching is relative to the current URL, not this file
 	fetch(){
 		console.log("fetching file", this.url);
 		fetch(this.url).then(response => {
@@ -58,6 +93,12 @@ export default class File extends Base {
 				this.save();
 				// TODO: we need to this._res() to allow saving, even when the file doesn't exist
 				// for now, we just refresh, and the saving will happen on the next pass...
+
+
+				//	Maybe I was going to await this.ready before saving?
+				//  Or maybe the component needs this to resolve, so it can resolve, so it can work? (await component.ready)
+				//  Before this resolves, the component waits
+				//  I'm not sure if this._res() below even gets called? I think this.save() might trigger a reload?
 
 					// I have no idea what this comment means...
 					// I'm thinking that this .save() call is not awaited at all, so we're not even sure the socket is ready..

@@ -214,6 +214,11 @@ export default class View extends Base {
 		return this;
 	}
 
+	off(event, cb){
+		this.el.removeEventListener(event, cb);
+		return this;
+	}
+
 	// this might mess up the normal capturing?
 	// this would be called synchronously... it might work though
 	// load(src){
@@ -223,8 +228,31 @@ export default class View extends Base {
 	// 	restor captor
 	// }
 
-	empty(){
+	// returns index of self relative to parentNode.children
+	index(){
+		return Array.prototype.indexOf.call(this.el.parentNode.children, this.el);
+	}
+
+	insert(el, index){
+		// can content be an array? can you not insert multiple?
+		// maybe insert(index, ...content) is better?
+		// but upgrading all inputs ("str", num, capturing fns, views, and elements)
+		// to viable dom-worthy values is going to be tricky...
+		if (el.el)
+			el = el.el; // if you pass in a view
+
+		if (index >= this.el.children.length){
+			this.append(el);
+		} else {
+			this.el.insertBefore(el, this.el.children[index]);
+		}
+
+		return this;
+	}
+
+	empty(...args){
 		this.el.innerHTML = "";
+		this.append(...args);
 		return this;
 	}
 
@@ -272,6 +300,31 @@ export default class View extends Base {
 	remove(){
 		this.el.parentNode?.removeChild(this.el);
 		return this;
+	}
+
+	replace(view){
+		this.el.replaceWith(view.el ? view.el : view);
+		return this;
+	}
+
+	buffer(){
+		this._buffer_clone = this.el.cloneNode(true);
+		// these should be switched, but we'll have to lookup index?
+		this.el.replaceWith(this._buffer_clone);
+		return this;
+	}
+
+	flush(){
+		this._buffer_clone.replaceWith(this.el);
+		delete this._buffer_clone;
+		return this;
+	}
+
+	// this might be prone to recapturing
+	clone(){
+		return new this.constructor({
+			el: this.el.cloneNode(true)
+		});
 	}
 
 	static set_captor(view){

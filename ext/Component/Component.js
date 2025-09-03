@@ -75,7 +75,7 @@ export default class Component {
 	load_file(){
 		this.file = new this.File(this.file || {
 			name: this.name + ".json",
-			path: this.path || (window.location.hash ? window.location.hash.substring(1) : "")
+			path: this.path
 		});
 	}
 

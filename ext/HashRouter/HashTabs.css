@@ -1,0 +1,37 @@
+.tabs {
+    margin-bottom: 1em;
+
+    .buttons {
+        .button { padding: 1em; cursor: pointer; }
+        .button.active { font-weight: bold; }
+    }
+
+    .contents {
+        padding: 2em;
+    }
+
+    &.horizontal {
+        > .buttons { display: flex; }
+        > .buttons > .button { padding: 1em 2em; }
+        > .buttons > .button:last-child { }
+        > .contents { }
+    }
+
+    &.vertical {
+        display: flex;
+        > .buttons { min-width: 10em; }
+        > .contents { flex-grow: 1; }
+    }
+
+    &.white {
+        > .buttons > .button.active { background: white; }
+        > .buttons > .button:not(.active):hover { background: #ddd; }
+        > .contents { background: white; }
+    }
+    
+    &.light {
+        > .buttons > .button.active { background: #eee; }
+        > .buttons > .button:not(.active):hover { background: #ddd; }
+        > .contents { background: #eee; }
+    }
+}

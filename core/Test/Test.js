@@ -6,7 +6,7 @@ View.stylesheet("/framework/core/Test/test.delete.css");
 export default class Test extends Base {
 
 	render(){
-		this.view = div.c(this.name.split(" ").join("-") + " test", {
+		this.view = div.c("test " + this.name, {
 			name: div(this.name).click(this.activate.bind(this)),
 			container: div()
 		});
@@ -17,7 +17,7 @@ export default class Test extends Base {
 	}
 
 	activate(){
-		window.location.hash = this.path + "#" + this.name;
+		window.location.hash = this.name;
 		window.location.reload();
 	}
 
@@ -28,7 +28,7 @@ export default class Test extends Base {
 		this.view.ac("ran");
 
 		if (this.value)
-			this.value(this.arg); // if this returns a promise, then await it before closing console group
+			this.value(this);
 		else 
 			console.warn("no test.fn");
 
@@ -38,19 +38,11 @@ export default class Test extends Base {
 	}
 
 	should_run(){
-		const parts = window.location.hash.substring(1).split("#");
-		this.path = parts[0];
-
-		// console.log("test hash", parts[1]);
-		return (parts.length < 2) || this.match(parts[1]);
+		return !window.location.hash || this.match();
 	}
 
-	match(test){
-		return decodeURI(test) === this.name;
-
-
-		// this doesn't work with hash routing...
-		// return decodeURI(window.location.hash.substring(1)) === this.name;
+	match(){
+		return decodeURI(window.location.hash.substring(1)) === this.name;
 	}
 
 	assign(){
@@ -60,7 +52,6 @@ export default class Test extends Base {
 
 export function test(name, value, arg){
 	return new Test({ name, value, arg }).render();
-	// Test.captor.add({});
 }
 
 Object.assign(Test, {
@@ -81,9 +72,7 @@ Object.assign(Test, {
 		// document.body.appendChild(controls.el);
 	},
 	reset(){
-		const parts = window.location.href.split("#");
-		parts.pop(); // remove last part, the test hash
-		window.location.href = parts.join("#");
+		window.location.href = window.location.href.split('#')[0];
 	},
 	init(){
 		Test.controls();

@@ -3,8 +3,8 @@ import Deep from "./Deep.js";
 
 Test.controls();
 
-app.$main.style("flex-direction", "column");
-View.set_captor(app.$main);
+// app.$main.style("flex-direction", "column");
+// View.set_captor(app.$main);
 
 test("create an instance", async t => {
 

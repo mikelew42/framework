@@ -4,7 +4,7 @@
 *:last-child { margin-bottom: 0; }
 
 html { height: 100%; }
-body { min-height: 100%; background: #ddd; margin: 0; padding: 0; display: flex; }
+body { min-height: 100%; background: #ddd; margin: 0; padding: 0; font-family: Verdana; }
 
 @media (min-width: 1333px) {
     body {
@@ -44,7 +44,7 @@ h2, h3 { line-height: 1.6em; }
 .sidenav .nav .nav-item { text-decoration: none; font-weight: 500; color: var(--bg); padding: 0.7em 1.8em; display: block; }
 .sidenav .nav .nav-item:hover { background: #eee; }
 
-.page-framework {}
+.page-framework {  }
 .page-framework .sidenav .logobar {}
 .page-framework .sidenav .logobar:hover { background: white; }
 .page-framework .sidenav .logobar .logo { padding: 0.25em 0.5em; height: 2em; }

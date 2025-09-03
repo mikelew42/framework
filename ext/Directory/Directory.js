@@ -1,7 +1,7 @@
 import Base from '../../core/Base/Base.js';
 import { div, View, icon } from "../../core/View/View.js";
-import Dir from "./Dir.js";
-import File from "./File.js";
+// import Dir from "./Dir.js";
+// import File from "./File.js";
 
 View.stylesheet("/framework/ext/Directory/Directory.css");
 
@@ -30,7 +30,7 @@ export default class Directory extends Base {
     fetched(data){
         this.files = data.files.filter(this.filter.bind(this)).sort(this.compare);
 
-        console.log(this.files);
+        // console.log(this.files);
         this.update();
 
         this.resolve(this);
@@ -204,22 +204,25 @@ export default class Directory extends Base {
     }
 
     render_file(fd){
+        // console.log(fd);
         div.c("file", fd.label).click(() => {
-            window.location.hash = "/" + (fd.hash || fd.full).replace(".page.js", "");
-            window.location.reload();
+            // window.location.hash = "/" + (fd.hash || fd.full).replace(".page.js", "");
+            // window.location.reload();
+            window.location.assign("/" + fd.full.replace(".page.js", ""));
         })
     }
 
     render_dir(fd){
+        // console.log(fd);
         const dir = div.c("dir", dir =>{
             dir.bar = div.c("bar", {
                 name: div(fd.name).click(() => {
-                    if (fd.real){
+                    // if (fd.real){
                         window.location.assign("/" + fd.full + "/");
-                    } else if (fd.default){
-                        window.location.hash = "/" + (fd.hash || fd.full) + "/";
-                        window.location.reload();
-                    }
+                    // } else if (fd.default){
+                        // window.location.hash = "/" + (fd.hash || fd.full) + "/";
+                        // window.location.reload();
+                    // }
                 })
             })
 
@@ -249,6 +252,8 @@ export default class Directory extends Base {
         } else if (fd.page){
             dir.ac("page");
         }
+
+        return dir;
     }
 
     render_files(files){
