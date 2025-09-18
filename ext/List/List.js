@@ -45,8 +45,8 @@ export default class List extends Base {
     changed(){
 		if (this.update && !this.updating){
 			this.updating = setTimeout(() => {
+                this.update();
 				this.updating = false;
-				this.update();
 			}, 0);
 		}
     }
@@ -97,9 +97,11 @@ export default class List extends Base {
     //      but siblings are checked, the whole thing runs through
     // .walk() => return false could stop the whole thing
 
-    append(child){
-        this.adopt(child);
-        this.children.push(child);
+    append(...args){
+        for (const arg of args){
+            this.adopt(arg);
+            this.children.push(arg);
+        }
         this.changed();
         return this;
     }
@@ -111,7 +113,7 @@ export default class List extends Base {
             // the problem there, is that then you can't add one list to two others... only 1 parent?
             child.parent = this;
             if (this === child)
-                console.error("Uh oh");
+                console.warn("Add list to itself?");
         }
         return this;
     }
@@ -198,6 +200,7 @@ export default class List extends Base {
     }
 
     // like each, but the returned value gets set as the new child value
+    // sort of like map, but "in place"
     revalue(fn){
         return this.each((child, i) => {
             this.children[i] = fn.call(this, child, i, this);

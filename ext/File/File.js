@@ -73,7 +73,7 @@ export default class File extends Base {
 		this.ready = Promise.all([
 				this.constructor.socket.ready,
 				new Promise(res => this._res = res) // resolved when load()
-			]).then(() => this); // for file = await new File().ready()
+			]).then(() => this); // for file = await new File().ready
 
 		this.fetch();
 	}

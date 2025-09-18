@@ -47,3 +47,19 @@ export default class Page extends List {
         return this.$preview;
     }
 }
+/**
+
+
+page(pg => {
+    // content here?    
+});
+
+
+page({
+    title: "Title Case Title",
+    props,
+    preview(){},
+    content(){}
+}).add(subs)
+
+ */

@@ -21,10 +21,10 @@ export default class Directory extends Base {
 
         fetch(this.url || "/directory.json").then(res => res.json()).then(this.fetched.bind(this));
 
-        window.addEventListener('hashchange', function() {
-            // Reload the page on back/forward
-            window.location.reload();
-		});
+        // window.addEventListener('hashchange', function() {
+        //     // Reload the page on back/forward
+        //     window.location.reload();
+		// });
     }
 
     fetched(data){
@@ -106,6 +106,8 @@ export default class Directory extends Base {
             // 1) search for index.html or index.js before filtering children
             if (fd.children.find(child => child.name === "index.html")){
                 fd.real = true;
+            } else if (fd.children.find(child => child.name === "page.js")){
+                fd.newway = true;
             } else if (  fd.children.find( child => { 
                     if (child.name === `${fd.name}.page.js`){
                         child.skip = true;
@@ -121,7 +123,7 @@ export default class Directory extends Base {
             fd.children = fd.children.filter(this.filter.bind(this)).sort(this.compare);
 
             // 3) now we can return true
-            if (fd.real || fd.default || fd.children.length){
+            if (fd.real || fd.default || fd.children.length || fd.newway){
                 return true;
             }
         }

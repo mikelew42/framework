@@ -1,8 +1,7 @@
-import { el, div, View, p, Base } from "../../core/core.js";
+import { el, div, View, p, Base, App } from "../../core/App/App.js";
 import HashRouter from "./HashRouter.js";
 
-// this doesn't seem to always block FOUC, we might need to await all the stylesheets
-View.stylesheet(new URL('HashTabs.css', import.meta.url).pathname);
+App.stylesheet(import.meta, "HashTabs.css");
 
 class HashTab extends Base {
     instantiate(...args){

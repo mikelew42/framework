@@ -59,13 +59,10 @@ export default class View extends Base {
 			if (arg && arg.el){
 				arg.parent = this;
 				this.el.appendChild(arg.el);
+			} else if (is.fn(arg?.render)){
+				this.append_fn(() => arg.render(this));
 			} else if (is.pojo(arg)){
 				this.append_pojo(arg);
-			} else if (is.obj(arg)){
-				if (!arg.render)
-					console.error("maybe not");
-				else
-					this.append_fn(() => arg.render(this));
 			} else if (is.arr(arg)){
 				this.append.apply(this, arg);
 			} else if (is.fn(arg)){

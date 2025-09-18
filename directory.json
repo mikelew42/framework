@@ -38,9 +38,27 @@
 							"type": "file"
 						},
 						{
-							"name": "App.page.js",
+							"name": "content.page.js",
 							"path": "framework/core/App",
-							"full": "framework/core/App/App.page.js",
+							"full": "framework/core/App/content.page.js",
+							"type": "file"
+						},
+						{
+							"name": "exported.page.js",
+							"path": "framework/core/App",
+							"full": "framework/core/App/exported.page.js",
+							"type": "file"
+						},
+						{
+							"name": "exported_fn.page.js",
+							"path": "framework/core/App",
+							"full": "framework/core/App/exported_fn.page.js",
+							"type": "file"
+						},
+						{
+							"name": "page.js",
+							"path": "framework/core/App",
+							"full": "framework/core/App/page.js",
 							"type": "file"
 						}
 					]
@@ -132,6 +150,12 @@
 					]
 				}
 			]
+		},
+		{
+			"name": "core.js",
+			"path": "./framework/",
+			"full": "framework/core.js",
+			"type": "file"
 		},
 		{
 			"name": "directory.json",
@@ -448,15 +472,15 @@
 							"type": "file"
 						},
 						{
-							"name": "Draggable.page.js",
-							"path": "framework/ext/Draggable",
-							"full": "framework/ext/Draggable/Draggable.page.js",
-							"type": "file"
-						},
-						{
 							"name": "Movable.js",
 							"path": "framework/ext/Draggable",
 							"full": "framework/ext/Draggable/Movable.js",
+							"type": "file"
+						},
+						{
+							"name": "page.js",
+							"path": "framework/ext/Draggable",
+							"full": "framework/ext/Draggable/page.js",
 							"type": "file"
 						},
 						{
@@ -518,12 +542,6 @@
 							"type": "file"
 						},
 						{
-							"name": "HashRouter.page.js",
-							"path": "framework/ext/HashRouter",
-							"full": "framework/ext/HashRouter/HashRouter.page.js",
-							"type": "file"
-						},
-						{
 							"name": "HashTabs.css",
 							"path": "framework/ext/HashRouter",
 							"full": "framework/ext/HashRouter/HashTabs.css",
@@ -533,6 +551,12 @@
 							"name": "HashTabs.js",
 							"path": "framework/ext/HashRouter",
 							"full": "framework/ext/HashRouter/HashTabs.js",
+							"type": "file"
+						},
+						{
+							"name": "page.js",
+							"path": "framework/ext/HashRouter",
+							"full": "framework/ext/HashRouter/page.js",
 							"type": "file"
 						}
 					]
@@ -550,15 +574,15 @@
 							"type": "file"
 						},
 						{
-							"name": "List.page.js",
-							"path": "framework/ext/List",
-							"full": "framework/ext/List/List.page.js",
-							"type": "file"
-						},
-						{
 							"name": "List.View.js",
 							"path": "framework/ext/List",
 							"full": "framework/ext/List/List.View.js",
+							"type": "file"
+						},
+						{
+							"name": "page.js",
+							"path": "framework/ext/List",
+							"full": "framework/ext/List/page.js",
 							"type": "file"
 						},
 						{
@@ -817,6 +841,12 @@
 							"name": "BaseThing.js",
 							"path": "framework/ext/Thing",
 							"full": "framework/ext/Thing/BaseThing.js",
+							"type": "file"
+						},
+						{
+							"name": "page.js",
+							"path": "framework/ext/Thing",
+							"full": "framework/ext/Thing/page.js",
 							"type": "file"
 						},
 						{

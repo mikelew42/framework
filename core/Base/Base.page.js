@@ -43,3 +43,12 @@ test("extend the class", t => {
     const test = new Test(); // initialize is "called automatically"
 
 });
+
+/**
+ * You CAN override initialize() via new Base({ initialize(){} });
+ * You CANNOT override instantiate() via new Base({ instantiate() {} });
+ * 
+ * Also, providing examples of basic JavaScript principles:
+ * - how this works: initialize(){ this? } vs initialize: () => { this? }
+ * - extension, inheritance, instanceof, prototype, static, props, constructor, etc
+ */

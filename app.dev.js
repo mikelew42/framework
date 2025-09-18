@@ -9,10 +9,11 @@ View.stylesheet("/framework/framework.css");
 // not sure how well this will work
 const app = window.app = window.app || new App({
     initialize(){
-		this.initialize_google_icon_font();
         this.initialize_socket();
+        this.initialize_body();
+		// this.font("Material Icons");
         // this.initialize_directory();
-		this.initialize_ready();
+		// this.initialize_ready();
 	},
 
     initialize_directory() {
@@ -26,34 +27,12 @@ const app = window.app = window.app || new App({
     initialize_socket(){
         if (window.location.hostname == "localhost"){
             this.socket = Socket.singleton();
-        } else {
-            this.socket = { ready: Promise.resolve() };
+			this.loaders.push(this.socket.ready);
         }
     },
 
-    initialize_ready(){
-		this.ready = Promise.all([
-            this.socket.ready, 
-            new Promise(resolve => {
-                if (document.readyState === "complete"){
-                    this.initialize_body();
-                    resolve(this);
-                } else {
-                    window.addEventListener("load", () => {
-                        // console.log("window.load");
-                        this.initialize_body();
-                        resolve(this);
-                    });
-                }
-		})]);
-	},
-
     initialize_body(){
 		this.$body = View.body().init().ac("page-framework");
-	},
-    
-	initialize_google_icon_font(){
-		View.stylesheet("https://fonts.googleapis.com/icon?family=Material+Icons");
 	},
 
     sidenav(){
