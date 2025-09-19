@@ -1,4 +1,4 @@
-import { app, el, div, test, View, is } from "../../app.dev.js";
+import { app, el, div, test, View, is } from "/app.js";
 import Draggable from "./Draggable.js";
 import Movable from "./Movable.js";
 import Previewable from "./Previewable.js";
@@ -137,24 +137,7 @@ List3.View = class List3View extends _List.View {
 el("h1", "Draggable");
 
 el("style", `
-    .drag-handle { cursor: pointer; }
-    .debug .dragging { outline: 1px solid blue; opacity: 0.8; }
-    .dragging > .list > .list-bar { background: #b6b6ffff; }
-    .drag-placeholder { opacity: 0.5; position: absolute; width: 100%; }
-    .drag-placeholder-wrapper { position: relative; }
-    .debug .drag-raw-target { box-shadow: inset 0 0 0 2px red; }
-    .debug .drag-index, .debug .dragging.drag-index { outline: 4px solid purple; }
 
-    .debug .drag-target { outline: 3px solid green; }
-    
-    .test-wrap { position: relative; }
-    .test-wrap > * { padding: 1em; outline: 1px solid black; }
-
-    .spaced .list-children > *:not(:empty):not(:last-child) { margin-bottom: 1em; }
-
-    .mousemovetarget { box-shadow: inset 0 0 0 4px orange; }
-
-    .list > .list-children { padding: 0.5em 2em; }
 `);
 
 test("Sortable.List spaced", t => {

@@ -51,4 +51,9 @@ test("extend the class", t => {
  * Also, providing examples of basic JavaScript principles:
  * - how this works: initialize(){ this? } vs initialize: () => { this? }
  * - extension, inheritance, instanceof, prototype, static, props, constructor, etc
+ * 
+ * 
+ * Why can't we override constructor?
+ * The problem is something like, you can't call this.method() then super.constructor() or whatever.  Basically, the base constructor has to come first, which is a silly limitation.
+ * So we use instantiate?  What if we don't need instantiate?  It's sometimes helpful...
  */

@@ -10,7 +10,7 @@ export default class Note extends Component {
     load_file(){
         // new() passes parent, not path
         if (!this.path && this.parent){
-            this.path = this.parent.path + this.parent.id + "/";
+            this.path = (this.parent.path ? this.parent.path + "/" : "") + this.parent.id + "/";
         }
 
         this.dir = new Dir({
@@ -30,7 +30,7 @@ export default class Note extends Component {
     }
 
     async initialize(){
-        console.log("note.iniitalize");
+        console.group("note.initalize", this.id);
         // if (!this.get("order")){
         //     this.set("order", []); 
         // } // we can now add optional default data to the file
@@ -43,8 +43,12 @@ export default class Note extends Component {
                 parent: this
             }));
         }
+        
+        console.groupEnd();
 
         await Promise.all(this.notes.map(note => note.ready));
+
+        console.log("note.ready", this.id);
     }
 
     async new(){

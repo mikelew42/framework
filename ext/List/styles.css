@@ -1,4 +1,4 @@
-.list { font-family: Verdana; }
+.list { }
 .list-bar { display: flex; align-items: center; background: #ddd;}
 .list-bar > * { padding: 0.5em 1em; }
 .list-name {}

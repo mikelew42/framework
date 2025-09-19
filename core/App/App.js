@@ -11,51 +11,56 @@ export default class App extends Base {
 
 	async instantiate(...args){
 		this.assign(...args);
-
-		this.instantiate_root();
-		this.instantiate_page();
-		this.initialize();
-		this.render();
-		
+		this.initialize_app(); // 1
+	}
+	
+	async initialize_app(){ // 1
+		this.initialize_root(); // 2
+		this.initialize_page(); // 3
+		this.initialize(); // 4
 		await this.ready;
-		this.inject();
+		this.inject(); // 6
 	}
 
-	render(){}
-
-	inject(){
-        // inject root into body
-        this.$body.append(this.$root);
-	}
-
-    instantiate_root(){
+	initialize_root(){ // 2
 		this.$body = View.body();
-        this.$root = div().attr("id", "root"); //.append_to(this.$body);
-        View.set_captor(this.$root);
-    }
-
-	initialize(){}
-    
-    async instantiate_page(){
-        // "/" -> "/home.page.js"
-        // "/path/" -> "/path/page.js"
-        // "/path/sub" -> "/path/sub.page.js"
+		this.$root = div().attr("id", "root"); //.append_to(this.$body);
+		View.set_captor(this.$root);
+	}
+	
+	async initialize_page(){ // 3
+		// "/" -> "/home.page.js"
+		// "/path/" -> "/path/page.js"
+		// "/path/sub" -> "/path/sub.page.js"
 		const mod = await import(App.path_to_page_url(window.location.pathname));
-        
+		
 		// after page is requested, we initialize the app
 		// this requests all the styles+fonts+sockets+files
 		// in the imported page, we (probably) import the app, which has a delayed export when its ready
 		// by this point in this method, we must be ready?
-
-        // the page.js can, but doesn't need to export a default
-        this.page = mod.default;
-
-        // render the page
-        if (this.page){
-            this.$root.append(this.page);
+		
+		// the page.js can, but doesn't need to export a default
+		this.page = mod.default;
+		
+		// render the page
+		if (this.page){
+			this.$root.append(this.page);
 			// this.$root is not in the body yet
-        }
-    }
+		}
+	}
+
+	initialize(){ // 4
+		this.render();
+	}
+	
+	render(){}
+
+	inject(){ // 6
+        // inject root into body
+        this.$body.append(this.$root);
+	}
+
+
 
 	// loads a predefined font (see Font class below)
 	font(name){

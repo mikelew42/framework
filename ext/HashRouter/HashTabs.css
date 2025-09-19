@@ -2,7 +2,7 @@
     margin-bottom: 1em;
 
     .buttons {
-        .button { padding: 1em; cursor: pointer; }
+        .button { padding: 1em; cursor: pointer; margin-bottom: 0; margin-right: 0; }
         .button.active { font-weight: bold; }
     }
 

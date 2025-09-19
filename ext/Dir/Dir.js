@@ -21,13 +21,16 @@ export default class Dir extends Base {
 			this.full = new URL(this.url).pathname;
 		} else {
 			this.full = (this.path ?? "") + this.name;
-			this.url = window.location.origin + this.full;
+			this.url = window.location.origin + "/" + this.full + "/";
 		}
 
-		// console.log("path", this.path);
-		// console.log("full", this.full);
-		// console.log("url", this.url);
+		console.log("dir.name", this.name);
+		console.log("dir.path", this.path);
+		console.log("dir.full", this.full);
+		console.log("dir.url", this.url);
+		// debugger;
 
+			// don't think we're using this.url?
 
 		if (!this.constructor.socket)
 			this.constructor.socket = socket;
@@ -40,7 +43,7 @@ export default class Dir extends Base {
 				new Promise(res => this._res = res) // resolved when load()
 			]).then(() => this); // for file = await new File().ready()
 
-		this.load();
+		this.load(); // this is needed to mkdir
 	}
 
 	async load(){
@@ -75,7 +78,5 @@ export default class Dir extends Base {
 
 
 function remove_ext(name){
-	const parts = name.split(".");
-	parts.pop();
-	return parts;
+	return name.split(".")[0];
 }

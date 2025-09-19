@@ -53,7 +53,7 @@ export default class File extends Base {
 		// 	this.url = this.meta.resolve("./" + (this.path ?? "") + this.name);
 		// 	this.full = new URL(this.url).pathname;
 		// } else {
-			this.full = (this.path ?? "") + this.name;
+			this.full = (this.path ? this.path.join("/") + "/" : "") + this.name;
 			this.url = window.location.origin + "/" + this.full;
 		// }
 		console.log("File (", this.path, this.name, this.full,   ") => ", this.url);

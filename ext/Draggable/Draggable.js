@@ -1,6 +1,9 @@
 import Base from "../../core/Base/Base.js";
 import View from "../../core/View/View.js";
+import App from "../../core/App/App.js";
 import is from "../../lib/is.js";
+
+App.stylesheet(import.meta, "styles.css");
 /**
  * 		draggable({ 
 				handle: this.bar,

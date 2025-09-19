@@ -2,8 +2,10 @@ import Base from "../../core/Base/Base.js";
 import { View, el, div } from "../../core/View/View.js";
 import is from "../../lib/is.js";
 import ListView from "./List.View.js";
-// not sure this is a good idea:
-View.stylesheet("/framework/ext/List/styles.css");
+import App from "../../core/App/App.js";
+
+
+App.stylesheet(import.meta, "styles.css");
 
 
 export default class List extends Base {

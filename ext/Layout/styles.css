@@ -1,0 +1,6 @@
+.layout { background: rgba(0,0,0,0.1); padding: 2em; position: relative; min-width: 300px; border: 1px solid rgba(0,0,0,0.1); }
+.layout:hover { background: rgba(0,0,0,0.2); }
+
+.layout > .toolbar { display: none; position: absolute; font-size: 0.5em; top: 0; left: 0; }
+
+.layout:hover > .toolbar { display: block; }

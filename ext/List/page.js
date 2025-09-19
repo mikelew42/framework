@@ -1,14 +1,14 @@
-import { app, el, div, test, View } from "../../app.dev.js";
+import { app, el, div, test, View } from "/app.js";
 import List from "./List.js";
 
-
+app.$root.ac("pad");
 function animals(){
     const list = new List();
     for (const animal of ["antelope", "bear", "cat", "dog", "elephant", 
         "frog", "giraffe", "hippo", "iguana", "jaguar",  "koala", "lion",
         "monkey", "newt", "owl", "pig", "quail", "rabbit", "sheep",
         "tiger", "urchin", "vulture", "wolf", "xerus", "yak", "zebra"]){
-            list.append(animal);
+            list.append(div(animal));
     }
     return list;
 }

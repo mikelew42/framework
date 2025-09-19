@@ -2,36 +2,35 @@
 
 * { box-sizing: border-box; margin-top: 0; }
 *:last-child { margin-bottom: 0; }
+/*
+This didn't work, bummer.  Non-layer'd styles (root-of-file) take precedence, no matter what?
+
+@layer override { *:last-child { margin-bottom: 0; } }
+@layer base, override;
+*/
 
 html { height: 100%; }
 body { min-height: 100%; margin: 0; padding: 0; }
 
 #root { min-height: 100vh; }
 
-/* @media (min-width: 1333px) {
-    body {
-        font-size: 1.2vw;
-    }
-}
 
-@media (min-width: 1666px) {
-    body {
-        font-size: 20px;
-    }
-} */
+p { line-height: 2; margin-bottom: 1em; }
 
-p { line-height: 2;}
-
-h1 { font-size: 3em; margin-bottom: 1em; font-weight: 900; line-height: 1.4;}
+h1 { font-size: 3em; margin-bottom: 0.75em; font-weight: 900; line-height: 1.4;}
 h2, h3 { line-height: 1.6em; }
 
 #main { flex: 1; }
 #main.pad { padding: clamp(1em, 3%, 3em); }
 
+.flex { display: flex; }
+.flex-1 { flex: 1; }
+.flex-v { flex-direction: column; }
 .flex-h-center { justify-content: center; }
 .flex-v-center { align-items: center; }
 
-.flex { display: flex; }
+.mb-1 { margin-bottom: 1em; }
+
 
 #main .card { background: white; max-width: 1042px; flex: 5; padding: clamp(2em, 6%, 5em) clamp(3em, 7%, 6em); }
 

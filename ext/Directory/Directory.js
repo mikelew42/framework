@@ -216,7 +216,7 @@ export default class Directory extends Base {
 
     render_dir(fd){
         // console.log(fd);
-        const dir = div.c("dir", dir =>{
+        const dir = div.c("dir", dir => {
             dir.bar = div.c("bar", {
                 name: div(fd.name).click(() => {
                     // if (fd.real){
@@ -228,23 +228,7 @@ export default class Directory extends Base {
                 })
             })
 
-            if (fd.children.length){
-                dir.ac("has-icon");
-                dir.bar.prepend(icon("arrow_right").click(() => {
-                    dir.children.toggle();
-                }));
-                dir.children = div.c("children", () => {
-                    this.render_files(fd.children || []);
-                });
-
-                // console.log("hash", window.location.hash.substring(1), "fd.hash", fd.hash, "fd.full", fd.full);
-                // hide all but active
-                if (  window.location.hash.substring(1) !== ("/" + (fd.hash || fd.full) + "/")  ){
-                    dir.children.hide();
-                } else {
-                    dir.ac("active");
-                }
-            }
+            this.render_dir_children(dir, fd);
         });
 
         if (fd.real){
@@ -256,6 +240,26 @@ export default class Directory extends Base {
         }
 
         return dir;
+    }
+
+    render_dir_children(dir, fd){
+        if (fd.children.length){
+            dir.ac("has-icon");
+            dir.bar.prepend(icon("arrow_right").click(() => {
+                dir.children.toggle();
+            }));
+            dir.children = div.c("children", () => {
+                this.render_files(fd.children || []);
+            });
+
+            // console.log("hash", window.location.hash.substring(1), "fd.hash", fd.hash, "fd.full", fd.full);
+            // hide all but active
+            if (  window.location.hash.substring(1) !== ("/" + (fd.hash || fd.full) + "/")  ){
+                dir.children.hide();
+            } else {
+                dir.ac("active");
+            }
+        }
     }
 
     render_files(files){

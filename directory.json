@@ -494,6 +494,12 @@
 							"path": "framework/ext/Draggable",
 							"full": "framework/ext/Draggable/Sortable.js",
 							"type": "file"
+						},
+						{
+							"name": "styles.css",
+							"path": "framework/ext/Draggable",
+							"full": "framework/ext/Draggable/styles.css",
+							"type": "file"
 						}
 					]
 				},
@@ -557,6 +563,32 @@
 							"name": "page.js",
 							"path": "framework/ext/HashRouter",
 							"full": "framework/ext/HashRouter/page.js",
+							"type": "file"
+						}
+					]
+				},
+				{
+					"name": "Layout",
+					"path": "framework/ext",
+					"full": "framework/ext/Layout",
+					"type": "dir",
+					"children": [
+						{
+							"name": "Layout.js",
+							"path": "framework/ext/Layout",
+							"full": "framework/ext/Layout/Layout.js",
+							"type": "file"
+						},
+						{
+							"name": "page.js",
+							"path": "framework/ext/Layout",
+							"full": "framework/ext/Layout/page.js",
+							"type": "file"
+						},
+						{
+							"name": "styles.css",
+							"path": "framework/ext/Layout",
+							"full": "framework/ext/Layout/styles.css",
 							"type": "file"
 						}
 					]
@@ -764,15 +796,15 @@
 					"type": "dir",
 					"children": [
 						{
-							"name": "Page.js",
+							"name": "Page.class.js",
 							"path": "framework/ext/Page",
-							"full": "framework/ext/Page/Page.js",
+							"full": "framework/ext/Page/Page.class.js",
 							"type": "file"
 						},
 						{
-							"name": "Page.page.js",
+							"name": "page.js",
 							"path": "framework/ext/Page",
-							"full": "framework/ext/Page/Page.page.js",
+							"full": "framework/ext/Page/page.js",
 							"type": "file"
 						}
 					]
@@ -872,18 +904,6 @@
 			"type": "file"
 		},
 		{
-			"name": "framework.page.js",
-			"path": "./framework/",
-			"full": "framework/framework.page.js",
-			"type": "file"
-		},
-		{
-			"name": "index.html",
-			"path": "./framework/",
-			"full": "framework/index.html",
-			"type": "file"
-		},
-		{
 			"name": "lib",
 			"path": "./framework/",
 			"full": "framework/lib",
@@ -932,6 +952,12 @@
 					"type": "file"
 				}
 			]
+		},
+		{
+			"name": "page.js",
+			"path": "./framework/",
+			"full": "framework/page.js",
+			"type": "file"
 		},
 		{
 			"name": "README.md",

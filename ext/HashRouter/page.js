@@ -1,14 +1,8 @@
-import { app, el, div, test, View, p, Base } from "../../app.dev.js";
+import { app, el, div, test, View, p, Base } from "/app.js";
 import HashRouter from "./HashRouter.js";
 import Tabs, { tabs, tab } from "./HashTabs.js";
-import Socket from "/framework/ext/Socket/Socket.js";
 
-
-Socket.singleton();
-
-    
-View.body().init().ac("type1");
-
+app.$root.ac("pad flex flex-v");
 el("style", `
     * { margin:0; padding: 0; box-sizing: border-box; }
     body { background: #eee; }

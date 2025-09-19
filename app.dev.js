@@ -2,6 +2,9 @@ import { View, Base, Events, App, el, div, h1, h2, h3, p, is, icon, Test, test }
 import Socket from "./ext/Socket/Socket.js";
 import Directory from "./ext/Directory/Directory.js";
 
+
+console.warn("Using /framework/app.dev.js");
+
 View.stylesheet("/framework/framework.css");
 
 // this helps avoid dual apps
