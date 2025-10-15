@@ -11,6 +11,8 @@ export default class Note extends Component {
         // new() passes parent, not path
         if (!this.path && this.parent){
             this.path = (this.parent.path ? this.parent.path + "/" : "") + this.parent.id + "/";
+        } else if (!this.path && window.location.pathname){
+            this.path = window.location.pathname;
         }
 
         this.dir = new Dir({

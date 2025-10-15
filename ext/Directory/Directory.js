@@ -91,15 +91,15 @@ export default class Directory extends Base {
             return false;
         }
 
-        if (window.location.pathname.length > 1){
-            const parts = fd.full.split("/").filter(Boolean);
-            parts.shift(); // remove "framework" path part
-            fd.hash = parts.join("/")
-        }
+        // if (window.location.pathname.length > 1){
+        //     const parts = fd.full.split("/").filter(Boolean);
+        //     parts.shift(); // remove "framework" path part
+        //     fd.hash = parts.join("/")
+        // }
 
-        if (window.location.hash.substring(1) !== (  "/" + (fd.hash || fd.full) + "/")){
-            fd.active = true;
-        }
+        // if (window.location.hash.substring(1) !== (  "/" + (fd.hash || fd.full) + "/")){
+        //     fd.active = true;
+        // }
 
         if (fd.type === "dir" && fd.children && fd.children.length){
 

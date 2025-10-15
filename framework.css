@@ -12,8 +12,6 @@ This didn't work, bummer.  Non-layer'd styles (root-of-file) take precedence, no
 html { height: 100%; }
 body { min-height: 100%; margin: 0; padding: 0; }
 
-#root { min-height: 100vh; }
-
 
 p { line-height: 2; margin-bottom: 1em; }
 

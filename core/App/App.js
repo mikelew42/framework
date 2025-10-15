@@ -158,6 +158,7 @@ Font.fonts = {
 	}
 };
 
+// this needs to be import.meta.resolve("framework.css") for it to work on a CDN
 App.stylesheet("/framework/framework.css");
 
 export { View, Base, Events, App, el, div, h1, h2, h3, p, is, icon, Test, test };

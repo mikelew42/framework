@@ -9,6 +9,13 @@ export default class Page {
 
     instantiate(){
         this.pages = new List({ parent: this });
+
+        // don't auto init?
+        // app could initialize the page AFTER import but before rendering
+        // what if the page awaits some data, and it doesn't arrive before render?
+        // we could either try to render the container, and async append
+        // or, we try to create an async render support in the app?
+        // await page.ready; then app.$root.append(page);?
         this.initialize();
     }
 

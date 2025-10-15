@@ -3,12 +3,20 @@ import Component from "./Component.js";
 
 Test.controls();
 
-app.$main.style("flex-direction", "column");
+app.$root.style("flex-direction", "column");
 
 test("create an instance", async t => {
 
     const comp = await new Component().ready;
-    comp.set("test", "prop");
+    comp.set("test", "prop4");
+
+});
+test("create a relative instance", async t => {
+
+    const comp = await new Component({
+        path: "framework/ext/Component"
+    }).ready;
+    comp.set("test", "prop5");
 
 });
 

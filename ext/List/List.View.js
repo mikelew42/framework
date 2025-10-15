@@ -1,4 +1,4 @@
-import { app, el, div, test, View } from "../../app.dev.js";
+import { el, div, test, View } from "../../core/App/App.js";
 
 export default class ListView extends View {
     initialize(){

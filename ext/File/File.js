@@ -27,16 +27,16 @@ export default class File extends Base {
 		// if window path, we need to chop off the fake part
 		// if user path, we need to concat the parts, after chop
 
-		const parts = window.location.pathname.split("/").filter(Boolean);
+		// const parts = window.location.pathname.split("/").filter(Boolean);
 
 		// if /path/fake
-		if (!window.location.pathname.endsWith("/")){
-			parts.pop(); // remove last part, which is the fake.page.js part
-		}
+		// if (!window.location.pathname.endsWith("/")){
+		// 	parts.pop(); // remove last part, which is the fake.page.js part
+		// }
 
 		if (this.path){
-			console.log("parts", parts, "this.path", this.path);
-			this.path = parts.concat(this.path.split("/").filter(Boolean));
+			console.log("file.path", this.path);
+			this.path = this.path.split("/").filter(Boolean);
 			console.log("new path", this.path);
 		}
 

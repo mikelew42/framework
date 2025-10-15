@@ -24,10 +24,7 @@ export default class Dir extends Base {
 			this.url = window.location.origin + "/" + this.full + "/";
 		}
 
-		console.log("dir.name", this.name);
-		console.log("dir.path", this.path);
-		console.log("dir.full", this.full);
-		console.log("dir.url", this.url);
+		console.log("dir (path, name, full, url) - (", this.path, this.name, this.full, this.url, ")");
 		// debugger;
 
 			// don't think we're using this.url?

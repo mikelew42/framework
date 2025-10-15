@@ -188,12 +188,6 @@
 							"type": "file"
 						},
 						{
-							"name": "Component.page.js",
-							"path": "framework/ext/Component",
-							"full": "framework/ext/Component/Component.page.js",
-							"type": "file"
-						},
-						{
 							"name": "deep",
 							"path": "framework/ext/Component",
 							"full": "framework/ext/Component/deep",
@@ -205,6 +199,20 @@
 									"full": "framework/ext/Component/deep/5",
 									"type": "dir",
 									"children": [
+										{
+											"name": "1",
+											"path": "framework/ext/Component/deep/5",
+											"full": "framework/ext/Component/deep/5/1",
+											"type": "dir",
+											"children": [
+												{
+													"name": "deep.json",
+													"path": "framework/ext/Component/deep/5/1",
+													"full": "framework/ext/Component/deep/5/1/deep.json",
+													"type": "file"
+												}
+											]
+										},
 										{
 											"name": "deep.json",
 											"path": "framework/ext/Component/deep/5",
@@ -318,23 +326,15 @@
 							"type": "file"
 						},
 						{
-							"name": "Deepdeep",
-							"path": "framework/ext/Component",
-							"full": "framework/ext/Component/Deepdeep",
-							"type": "dir",
-							"children": [
-								{
-									"name": "deep.json",
-									"path": "framework/ext/Component/Deepdeep",
-									"full": "framework/ext/Component/Deepdeep/deep.json",
-									"type": "file"
-								}
-							]
-						},
-						{
 							"name": "DirComponent.js",
 							"path": "framework/ext/Component",
 							"full": "framework/ext/Component/DirComponent.js",
+							"type": "file"
+						},
+						{
+							"name": "page.js",
+							"path": "framework/ext/Component",
+							"full": "framework/ext/Component/page.js",
 							"type": "file"
 						}
 					]
@@ -349,6 +349,26 @@
 							"name": "Dir.js",
 							"path": "framework/ext/Dir",
 							"full": "framework/ext/Dir/Dir.js",
+							"type": "file"
+						}
+					]
+				},
+				{
+					"name": "Dir2",
+					"path": "framework/ext",
+					"full": "framework/ext/Dir2",
+					"type": "dir",
+					"children": [
+						{
+							"name": "Dir2.js",
+							"path": "framework/ext/Dir2",
+							"full": "framework/ext/Dir2/Dir2.js",
+							"type": "file"
+						},
+						{
+							"name": "page.js",
+							"path": "framework/ext/Dir2",
+							"full": "framework/ext/Dir2/page.js",
 							"type": "file"
 						}
 					]
@@ -429,6 +449,26 @@
 							"name": "test2.page.js",
 							"path": "framework/ext/Directory",
 							"full": "framework/ext/Directory/test2.page.js",
+							"type": "file"
+						}
+					]
+				},
+				{
+					"name": "Directory2",
+					"path": "framework/ext",
+					"full": "framework/ext/Directory2",
+					"type": "dir",
+					"children": [
+						{
+							"name": "Directory2.js",
+							"path": "framework/ext/Directory2",
+							"full": "framework/ext/Directory2/Directory2.js",
+							"type": "file"
+						},
+						{
+							"name": "page.js",
+							"path": "framework/ext/Directory2",
+							"full": "framework/ext/Directory2/page.js",
 							"type": "file"
 						}
 					]
@@ -531,6 +571,32 @@
 							"name": "test1.ext",
 							"path": "framework/ext/File",
 							"full": "framework/ext/File/test1.ext",
+							"type": "file"
+						}
+					]
+				},
+				{
+					"name": "HashPage",
+					"path": "framework/ext",
+					"full": "framework/ext/HashPage",
+					"type": "dir",
+					"children": [
+						{
+							"name": "HashPage.css",
+							"path": "framework/ext/HashPage",
+							"full": "framework/ext/HashPage/HashPage.css",
+							"type": "file"
+						},
+						{
+							"name": "HashPage.js",
+							"path": "framework/ext/HashPage",
+							"full": "framework/ext/HashPage/HashPage.js",
+							"type": "file"
+						},
+						{
+							"name": "page.js",
+							"path": "framework/ext/HashPage",
+							"full": "framework/ext/HashPage/page.js",
 							"type": "file"
 						}
 					]
