@@ -23,6 +23,9 @@ el("style", `
 
 el("h1", "class HashRouter");
 
+
+// before you can use hash tabs, you have to call this...?
+// maybe not - get_captor() automatically does this...
 const router = HashRouter.singleton();
 
 

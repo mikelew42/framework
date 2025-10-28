@@ -32,7 +32,13 @@ export default class App extends Base {
 		// "/" -> "/home.page.js"
 		// "/path/" -> "/path/page.js"
 		// "/path/sub" -> "/path/sub.page.js"
-		const mod = await import(App.path_to_page_url(window.location.pathname));
+
+		// previously: const mod = await import(App.path_to_page_url(window.location.pathname));
+		
+		var mod = import(App.path_to_page_url(window.location.pathname));
+		this.loaders.push(mod); // make sure app.inject() doesn't happen before page runs
+			// wouldn't normally happen, but could, if all fonts/stylesheets are cached and load faster than the page
+		mod = await mod;
 		
 		// after page is requested, we initialize the app
 		// this requests all the styles+fonts+sockets+files
@@ -55,6 +61,8 @@ export default class App extends Base {
 	
 	render(){}
 
+	// could app.ready fulfill before page runs, if all things are cached?
+	// line 38-41 should fix this
 	inject(){ // 6
         // inject root into body
         this.$body.append(this.$root);

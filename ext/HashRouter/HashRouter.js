@@ -44,8 +44,10 @@ export default class HashRouter extends Events {
         // don't try to capture the root router
         this.get_captured && HashRouter.get_captor().add(this);
 
+        // we only do this if parent has been set?, which would happen if captured
+        // this should generally always happen if not root
         if (this.parent){
-            this.router = this.parent.router; // not sure we need this
+            this.router = this.parent.router; // not sure we need this, doesn't seem to be used anywhere
             
             // match -> activate, so we need to initialize (render) first
             this.capture(() => {
@@ -63,6 +65,7 @@ export default class HashRouter extends Events {
         // console.log("HashRouter: remainder", this.remainder);
         
         window.addEventListener("hashchange", e => {
+            console.log("hashchange");
             this.rematch();
         });
     }
@@ -95,24 +98,26 @@ export default class HashRouter extends Events {
 
             this.routes.forEach(route => route.match());
         
-        } else if (this.active){
+        } else {
             this._deactivate();
         }
     }
 
     _deactivate(){
-        this.active = false;
-        delete this.remainder;
-        // this.routes.forEach(route => route.deactivate());
-        // console.log("deactivate route", this.full());
-        this.deactivate();
+        if (this.active){
+            console.log("deactivate route", this.full());
+            this.active = false;
+            delete this.remainder;
+            this.deactivate();
+            this.routes.forEach(route => route._deactivate());
+        }
     }
 
     _activate(){
-        // console.group("activate route", this.full());
+        console.group("activate route", this.full());
         this.active = true;
         this.activate(this);
-        // console.groupEnd();
+        console.groupEnd();
     }
 
     activate(){}
@@ -150,9 +155,9 @@ export default class HashRouter extends Events {
     }
 
     go(){
-        if (this.parent){
+        if (this.parent){ // not root
             window.location.hash = this.full();
-        } else {
+        } else { // root
             this.reset();
         }
     }
@@ -175,3 +180,29 @@ export default class HashRouter extends Events {
 
 HashRouter.previous_captors = [];
 HashRouter.prototype.get_captured = true;
+
+/**
+
+Do we still have AI?
+
+Woohoo!
+
+Alt + \ doesn't work?
+
+Well, it worked outside thsi comment.
+
+Anyway, so HashRouter has a strange pattern:
+
+We capture the initialize.  Which means, you'd want to render within initialize.
+
+And the route.add(path, cb) method uses cb as ACTIVATE, not render...
+
+So if you want to add sub routes, and render things in them, they only render when the route activates.  Which is lazy-routing...
+
+But you might want pre/auto-rendering, and then do something else on activate.
+
+So that's pretty confusing.  
+
+But, I'm not sure the HashRouter is ever really used standalone, so maybe it's fine.
+ */
+

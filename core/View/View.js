@@ -156,7 +156,10 @@ export default class View extends Base {
 	}
 
 	tc(cls){
-		return this.toggle_class(cls);
+		const classes = cls.split(" ");
+		for (const clas of classes)
+			this.toggle_class(clas);
+		return this;
 	}
 
 	html(value){

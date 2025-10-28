@@ -602,6 +602,40 @@
 					]
 				},
 				{
+					"name": "HashPager",
+					"path": "framework/ext",
+					"full": "framework/ext/HashPager",
+					"type": "dir",
+					"children": [
+						{
+							"name": "2",
+							"path": "framework/ext/HashPager",
+							"full": "framework/ext/HashPager/2",
+							"type": "dir",
+							"children": [
+								{
+									"name": "page.js",
+									"path": "framework/ext/HashPager/2",
+									"full": "framework/ext/HashPager/2/page.js",
+									"type": "file"
+								}
+							]
+						},
+						{
+							"name": "HashPager.js",
+							"path": "framework/ext/HashPager",
+							"full": "framework/ext/HashPager/HashPager.js",
+							"type": "file"
+						},
+						{
+							"name": "page.js",
+							"path": "framework/ext/HashPager",
+							"full": "framework/ext/HashPager/page.js",
+							"type": "file"
+						}
+					]
+				},
+				{
 					"name": "HashRouter",
 					"path": "framework/ext",
 					"full": "framework/ext/HashRouter",

@@ -1,8 +1,8 @@
 import { app, h2, el, div, test, View, p, Base } from "/app.js";
 import HashRouter from "../HashRouter/HashRouter.js";
-import HashPage from "./HashPage.js";
+import HashPage, { page } from "./HashPage.js";
 
-app.$root.ac("pad flex flex-v");
+app.$root.ac("pad");
 // el("style", `
 //     * { margin:0; padding: 0; box-sizing: border-box; }
 //     body { background: #eee; }
@@ -22,8 +22,12 @@ app.$root.ac("pad flex flex-v");
 // `);
 
 el("h1", "class HashPage");
-
 const root = new HashPage();
+// debugger;
+page("test", tpg => {
+    p("this is inside test page?");
+});
+
 
 root.view.content.append(() => {
     p("In order to get the layout to split properly, we need all columns in the same flex container.");
@@ -53,3 +57,28 @@ function lorem(){
     p("Lorem ipsum dolor sit amet consectetur. Non pellentesque cum ipsum pretium nibh id elementum nunc sagittis. Id auctor neque donec ultrices lectus facilisis at vulputate. Nisl eget sapien sit tellus.")
 }
 
+/**
+ * These root (root.one, root.two) hash pages are hackily captured, via no parent and line 30 in HashPage.js.
+ * 
+ * The sub pages, are captured via HashRoute capturing.
+ * 
+ * We need to think about capturing in a consistent way, and allowing the root page to have other non-page hash routes, like hash tabs.
+ * 
+ * And so we want something more like:
+ * 
+ * page(pg => {
+ *      section("Title", sec => {
+ *          
+ *      });
+ *      page("Subpage", sub => {});
+ * });
+ 
+
+And we need a Pager to manage the columns:
+- hide on mobile/small
+- equalize width
+- maybe ToC-ize (remove content, leaving headers as ToC nav)
+    => just ac("toc") and use CSS to hide .section > .content
+
+
+ */
