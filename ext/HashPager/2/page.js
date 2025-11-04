@@ -1,6 +1,30 @@
 import { app, h2, el, div, test, View, p, Base } from "/app.js";
 // import HashRouter from "../../HashRouter/HashRouter.js";
-import HashPager, { page } from "../HashPager.js";
+import _HashPager, { page } from "../HashPager.js";
+
+class HashPager extends _HashPager {
+    render(){
+        // this has to be here, so that it's ready for children
+        this.view = div.c("page page-" + this.slug, {
+            header: h2(this.label),
+            buttons: div()
+        }).append_to(_HashPager.pager.view.pages).hide();
+
+        // !!! this.content is a function that can create sub pages
+        this.capture(() => {
+            this.view.append(this.content);
+        });
+
+        this.button = div.c("button", this.label).click(() => {
+            // debugger;
+            this.route.go();
+        });
+        debugger;
+        if (this.parent.view)
+            this.button.append_to(this.parent.view.buttons);
+    }
+}
+
 
 app.$root.ac("pad");
 el("style", `
@@ -29,6 +53,13 @@ el("style", `
 `);
 
 el("h1", "class HashPager");
+
+
+// wow taht wasn't easy to figure out...
+// this is the only way to extend this whole thing?
+_HashPager.pager = new HashPager({ get_captured: false, label: "pager" });
+_HashPager.pager.initialize_pager();
+_HashPager.set_captor(_HashPager.pager);
 // const root = new HashPager();
 // debugger;
 

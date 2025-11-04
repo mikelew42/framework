@@ -9,7 +9,7 @@ import Test, { test } from "../Test/Test.js";
 
 export default class App extends Base {
 
-	async instantiate(...args){
+	instantiate(...args){
 		this.assign(...args);
 		this.initialize_app(); // 1
 	}
@@ -17,7 +17,9 @@ export default class App extends Base {
 	async initialize_app(){ // 1
 		this.initialize_root(); // 2
 		this.initialize_page(); // 3
-		this.initialize(); // 4
+		// this.loaders.push(this.initialize_page());
+		await this.initialize_page(); // finish this first
+		this.initialize(); // 4 ???
 		await this.ready;
 		this.inject(); // 6
 	}
@@ -35,10 +37,10 @@ export default class App extends Base {
 
 		// previously: const mod = await import(App.path_to_page_url(window.location.pathname));
 		
-		var mod = import(App.path_to_page_url(window.location.pathname));
-		this.loaders.push(mod); // make sure app.inject() doesn't happen before page runs
+		var mod = import(App.path_to_page_url(window.location.pathname)); // !! mod is promise...
+		// this.loaders.push(mod); // make sure app.inject() doesn't happen before page runs
 			// wouldn't normally happen, but could, if all fonts/stylesheets are cached and load faster than the page
-		mod = await mod;
+		mod = await mod; // !! mod becomes the module
 		
 		// after page is requested, we initialize the app
 		// this requests all the styles+fonts+sockets+files

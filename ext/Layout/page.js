@@ -32,8 +32,11 @@ div.c("card", () => {
     p("And then make sure the min-width (breakpoint) is on the flex items, not children.")
 
     h3("flex: 1 1 auto");
-    p("Works better for wrapping (with content that has own min-width).  Setting a % basis ruins that.")
-    p("However, you don't get even columns without using a %.");
+    // p("Works better for wrapping (with content that has own min-width).  Setting a % basis ruins that.")
+    // p("However, you don't get even columns without using a %.");
+    p("I had a problem before with min-width on child blocks not being obeyed?");
+    p("The problem was the .layout { min-width: 300px; } part.  And it was working as it should?");
+    p("The blocks would overlap, and I think it was because the min-width on the parent was overriding the min-width of the children, so that the children would poke through the parent.")
 });
 
 const layout1 = new Layout().flex().wrap();

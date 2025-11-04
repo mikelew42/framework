@@ -136,15 +136,15 @@
 					"type": "dir",
 					"children": [
 						{
-							"name": "View.js",
+							"name": "page.js",
 							"path": "framework/core/View",
-							"full": "framework/core/View/View.js",
+							"full": "framework/core/View/page.js",
 							"type": "file"
 						},
 						{
-							"name": "View.page.js",
+							"name": "View.js",
 							"path": "framework/core/View",
-							"full": "framework/core/View/View.page.js",
+							"full": "framework/core/View/View.js",
 							"type": "file"
 						}
 					]
@@ -721,6 +721,20 @@
 							"name": "styles.css",
 							"path": "framework/ext/List",
 							"full": "framework/ext/List/styles.css",
+							"type": "file"
+						}
+					]
+				},
+				{
+					"name": "Lorem",
+					"path": "framework/ext",
+					"full": "framework/ext/Lorem",
+					"type": "dir",
+					"children": [
+						{
+							"name": "Lorem.js",
+							"path": "framework/ext/Lorem",
+							"full": "framework/ext/Lorem/Lorem.js",
 							"type": "file"
 						}
 					]

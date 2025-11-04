@@ -54,6 +54,8 @@ page("Test", tpg => {
 // root.one = root.add("One", one => {
 page("One", one => {
     h2("Page One");
+    p("Yo, what up Eric?");
+    app.checklist("One", "Two", "Three", "Four")
     lorem();
     page("A", () => p("You are on Sub One - A"));
     page("B", () => p("You are on Sub One - B"));

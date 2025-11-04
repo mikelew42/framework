@@ -19,7 +19,7 @@ export default class Socket extends Events {
 		this.ws.addEventListener("open", () => this.open());
 		this.ws.addEventListener("message", res => this.message(res));
 		this.ws.addEventListener("close", () => {
-			console.log("Socket closed, reconnecting...");
+			console.log("Socket closed");
 			// setTimeout(() => this.connect(), 0);
 			// this.connect(); // strangely this works.  
 		});

@@ -141,7 +141,7 @@ class HashPager extends Base {
             page = label;
             page.parent = this;
         } else {
-            page = new HashPager({ label, content, parent: this });
+            page = new this.constructor({ label, content, parent: this });
         }
 
         this.pages.push(page);
@@ -205,7 +205,7 @@ class HashPager extends Base {
                 // Add the current page
                 // Note: We are using 'this.add' which is conceptually adding the page
                 // to the parent, but here it just logs/stores it flatly.
-                this.add(new HashPager({
+                this.add(new this.constructor({
                     label: title,
                     slug: "" + i, // !!! major problem if router tries to use numeric path
                     content
@@ -216,9 +216,9 @@ class HashPager extends Base {
         return this;
     }
 
-    static set_captor(tabs){
+    static set_captor(pager){
         this.previous_captors.push(this.captor);
-        this.captor = tabs;
+        this.captor = pager;
     }
 
     static restore_captor(){
@@ -251,9 +251,11 @@ export default HashPager;
 
 function page(name, fn){
     if (is.fn(name)){
-        return new HashPager({ content: name });
+        return new (HashPager.get_captor().constructor)({ content: name })
+        // return new HashPager({ content: name });
     } else {
-        return new HashPager({ label: name, content: fn });
+        return new (HashPager.get_captor().constructor)({ label: name, content: fn })
+        // return new HashPager({ label: name, content: fn });
     }
 }
 
