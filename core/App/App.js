@@ -10,38 +10,36 @@ import Test, { test } from "../Test/Test.js";
 export default class App {
 	constructor(...args){
 		Object.assign(this, ...args);
-		this.instantiate2();
+		this.instantiate();
 	}
+
+	async instantiate(){ // 4
+        // request additional assets first
+        this.load();
+
+		// perform pre-render config
+		this.config();
+        
+        // render before requesting the page.js
+        this.render();
+        
+        // await page.js completion before awaiting dynamic this.loaders
+        await this.load_page();
+
+        // wait for all the loaders before injecting
+        await this.loaded;
+
+        // put the app in the dom
+        this.inject();
+
+        // app.ready!
+        this.ready.resolve();
+    }
+
+	config(){}
 	
-	async instantiate(){ // 1
-		this.load();
-		this.initialize_root(); // 2
-		await this.initialize_page(); // finish this first
-		await this.loaded;
-		this.inject(); // 6
-		this.ready.resolve(); // app.ready!
-	}
-
-	async instantiate2(){ // 1
-		this.load();
-		// this.render();
-		this.initialize_root(); // 2
-		await this.load_page(); // finish this first
-		await this.loaded;
-		this.inject(); // 6
-		this.ready.resolve(); // app.ready!
-	}
-
-	async instantiate3(){
-		await this.load();
-		this.inject();
-	}
-
 	load(){
 		this.load_framework();
-		// this.font("Montserrat");
-        // this.font("Material Icons");
-		// this.stylesheet(import.meta, "lew42.css");
 	}
 	
 	load_framework(){
@@ -65,21 +63,13 @@ export default class App {
 
 		View.set_captor(this.$root);
 	}
-
-	initialize_root(){ // 2
-		this.$body = View.body();
-		this.$root = div().attr("id", "root"); //.append_to(this.$body);
-		View.set_captor(this.$root);
-	}
 	
 	async load_page(){ // 3
-		// "/" -> "/home.page.js"
+		// "/" -> "/page.js"
 		// "/path/" -> "/path/page.js"
 		// "/path/sub" -> "/path/sub.page.js"
 
-		let mod = import(App.path_to_page_url(window.location.pathname));
-		this.loaders.push(mod); // mod is a promise
-		mod = await mod; // mod becomes the module
+		const mod = await import(App.path_to_page_url(window.location.pathname));
 		
 		// the page.js can, but doesn't need to export a default
 		this.page = mod.default;

@@ -1,4 +1,4 @@
-.directory { display: flex; flex-direction: column; padding: 1em 0 1.5em; font-size:0.85em; font-weight: 500; min-width: 12em; }
+.directory { display: flex; flex-direction: column; padding: 1em 0 1.5em; font-weight: 500; min-width: 12em; }
 .directory .file .bar, .directory .dir .bar { display: flex; align-items: stretch;}
 .directory .dir .bar .icon { 
     margin-left: 0.5em; 
