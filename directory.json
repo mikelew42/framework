@@ -8,12 +8,6 @@
 			"children": []
 		},
 		{
-			"name": "app.dev.js",
-			"path": "./framework/",
-			"full": "framework/app.dev.js",
-			"type": "file"
-		},
-		{
 			"name": "app.js",
 			"path": "./framework/",
 			"full": "framework/app.js",
@@ -144,12 +138,6 @@
 					]
 				}
 			]
-		},
-		{
-			"name": "core.js",
-			"path": "./framework/",
-			"full": "framework/core.js",
-			"type": "file"
 		},
 		{
 			"name": "directory.json",
@@ -346,12 +334,6 @@
 							"type": "file"
 						},
 						{
-							"name": "DirComponent.js",
-							"path": "framework/ext/Component",
-							"full": "framework/ext/Component/DirComponent.js",
-							"type": "file"
-						},
-						{
 							"name": "page.js",
 							"path": "framework/ext/Component",
 							"full": "framework/ext/Component/page.js",
@@ -482,15 +464,9 @@
 							"type": "file"
 						},
 						{
-							"name": "File.page.js",
+							"name": "page.js",
 							"path": "framework/ext/File",
-							"full": "framework/ext/File/File.page.js",
-							"type": "file"
-						},
-						{
-							"name": "File2.js",
-							"path": "framework/ext/File",
-							"full": "framework/ext/File/File2.js",
+							"full": "framework/ext/File/page.js",
 							"type": "file"
 						},
 						{
@@ -498,6 +474,20 @@
 							"path": "framework/ext/File",
 							"full": "framework/ext/File/test1.ext",
 							"type": "file"
+						},
+						{
+							"name": "test2",
+							"path": "framework/ext/File",
+							"full": "framework/ext/File/test2",
+							"type": "dir",
+							"children": [
+								{
+									"name": "test2.ext",
+									"path": "framework/ext/File/test2",
+									"full": "framework/ext/File/test2/test2.ext",
+									"type": "file"
+								}
+							]
 						}
 					]
 				},
@@ -752,6 +742,90 @@
 											"type": "dir",
 											"children": [
 												{
+													"name": "1",
+													"path": "framework/ext/Module/mod/8/1",
+													"full": "framework/ext/Module/mod/8/1/1",
+													"type": "dir",
+													"children": [
+														{
+															"name": "module.json",
+															"path": "framework/ext/Module/mod/8/1/1",
+															"full": "framework/ext/Module/mod/8/1/1/module.json",
+															"type": "file"
+														}
+													]
+												},
+												{
+													"name": "2",
+													"path": "framework/ext/Module/mod/8/1",
+													"full": "framework/ext/Module/mod/8/1/2",
+													"type": "dir",
+													"children": [
+														{
+															"name": "module.json",
+															"path": "framework/ext/Module/mod/8/1/2",
+															"full": "framework/ext/Module/mod/8/1/2/module.json",
+															"type": "file"
+														}
+													]
+												},
+												{
+													"name": "3",
+													"path": "framework/ext/Module/mod/8/1",
+													"full": "framework/ext/Module/mod/8/1/3",
+													"type": "dir",
+													"children": [
+														{
+															"name": "module.json",
+															"path": "framework/ext/Module/mod/8/1/3",
+															"full": "framework/ext/Module/mod/8/1/3/module.json",
+															"type": "file"
+														}
+													]
+												},
+												{
+													"name": "4",
+													"path": "framework/ext/Module/mod/8/1",
+													"full": "framework/ext/Module/mod/8/1/4",
+													"type": "dir",
+													"children": [
+														{
+															"name": "module.json",
+															"path": "framework/ext/Module/mod/8/1/4",
+															"full": "framework/ext/Module/mod/8/1/4/module.json",
+															"type": "file"
+														}
+													]
+												},
+												{
+													"name": "5",
+													"path": "framework/ext/Module/mod/8/1",
+													"full": "framework/ext/Module/mod/8/1/5",
+													"type": "dir",
+													"children": [
+														{
+															"name": "module.json",
+															"path": "framework/ext/Module/mod/8/1/5",
+															"full": "framework/ext/Module/mod/8/1/5/module.json",
+															"type": "file"
+														}
+													]
+												},
+												{
+													"name": "6",
+													"path": "framework/ext/Module/mod/8/1",
+													"full": "framework/ext/Module/mod/8/1/6",
+													"type": "dir",
+													"children": [
+														{
+															"name": "module.json",
+															"path": "framework/ext/Module/mod/8/1/6",
+															"full": "framework/ext/Module/mod/8/1/6/module.json",
+															"type": "file"
+														}
+													]
+												},
+												{
 													"name": "module.json",
 													"path": "framework/ext/Module/mod/8/1",
 													"full": "framework/ext/Module/mod/8/1/module.json",
@@ -773,6 +847,62 @@
 									"full": "framework/ext/Module/mod/9",
 									"type": "dir",
 									"children": [
+										{
+											"name": "1",
+											"path": "framework/ext/Module/mod/9",
+											"full": "framework/ext/Module/mod/9/1",
+											"type": "dir",
+											"children": [
+												{
+													"name": "1",
+													"path": "framework/ext/Module/mod/9/1",
+													"full": "framework/ext/Module/mod/9/1/1",
+													"type": "dir",
+													"children": [
+														{
+															"name": "module.json",
+															"path": "framework/ext/Module/mod/9/1/1",
+															"full": "framework/ext/Module/mod/9/1/1/module.json",
+															"type": "file"
+														}
+													]
+												},
+												{
+													"name": "2",
+													"path": "framework/ext/Module/mod/9/1",
+													"full": "framework/ext/Module/mod/9/1/2",
+													"type": "dir",
+													"children": [
+														{
+															"name": "module.json",
+															"path": "framework/ext/Module/mod/9/1/2",
+															"full": "framework/ext/Module/mod/9/1/2/module.json",
+															"type": "file"
+														}
+													]
+												},
+												{
+													"name": "3",
+													"path": "framework/ext/Module/mod/9/1",
+													"full": "framework/ext/Module/mod/9/1/3",
+													"type": "dir",
+													"children": [
+														{
+															"name": "module.json",
+															"path": "framework/ext/Module/mod/9/1/3",
+															"full": "framework/ext/Module/mod/9/1/3/module.json",
+															"type": "file"
+														}
+													]
+												},
+												{
+													"name": "module.json",
+													"path": "framework/ext/Module/mod/9/1",
+													"full": "framework/ext/Module/mod/9/1/module.json",
+													"type": "file"
+												}
+											]
+										},
 										{
 											"name": "module.json",
 											"path": "framework/ext/Module/mod/9",
@@ -796,12 +926,6 @@
 							"type": "file"
 						},
 						{
-							"name": "Module.page.js",
-							"path": "framework/ext/Module",
-							"full": "framework/ext/Module/Module.page.js",
-							"type": "file"
-						},
-						{
 							"name": "module.styles.css",
 							"path": "framework/ext/Module",
 							"full": "framework/ext/Module/module.styles.css",
@@ -811,6 +935,12 @@
 							"name": "Module0.js",
 							"path": "framework/ext/Module",
 							"full": "framework/ext/Module/Module0.js",
+							"type": "file"
+						},
+						{
+							"name": "page.js",
+							"path": "framework/ext/Module",
+							"full": "framework/ext/Module/page.js",
 							"type": "file"
 						}
 					]
