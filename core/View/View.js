@@ -189,6 +189,54 @@ export default class View extends Base {
 		}
 	}
 
+	backtick_append(...args){
+		for (const arg of args){
+			if (is.str(arg))
+				this.backticks(arg);
+			else
+				this.append(arg);
+		}
+		return this;
+	}
+
+	// Author: Gemini 2.5 Flash
+	backticks(text){
+		const regex = /`([^`]+)`/g;
+		let parts = [];
+		let lastIndex = 0;
+		let match;
+
+		// 1. Iterate through all matches
+		while ((match = regex.exec(text)) !== null) {
+			const fullMatch = match[0]; // e.g., '`code segment`'
+			const capturedContent = match[1]; // e.g., 'code segment'
+			const matchStart = match.index;
+			const matchEnd = matchStart + fullMatch.length;
+
+			// 2. Capture the preceding plain text
+			const precedingText = text.substring(lastIndex, matchStart);
+			if (precedingText) {
+				parts.push(precedingText);
+			}
+
+			// 3. Create and push the 'code' element
+			const codeElement = el("code", capturedContent);
+			parts.push(codeElement);
+
+			// 4. Update the index for the next segment
+			lastIndex = matchEnd;
+		}
+
+		// 5. Capture any remaining text after the last match
+		const remainingText = text.substring(lastIndex);
+		if (remainingText) {
+			parts.push(remainingText);
+		}
+
+		this.append(parts);
+		return this;
+	}
+
 	attr(name, value){
 		// set
 		if (is.def(value) && value !== this.el.getAttribute(name)){ // see comment in html()
@@ -309,7 +357,6 @@ export default class View extends Base {
 
 	buffer(){
 		this._buffer_clone = this.el.cloneNode(true);
-		// these should be switched, but we'll have to lookup index?
 		this.el.replaceWith(this._buffer_clone);
 		return this;
 	}
@@ -348,6 +395,12 @@ export default class View extends Base {
 			},
 			div(){
 				return new View().append(...arguments);
+			},
+			p(){
+				return new View({ tag: "p" }).backtick_append(...arguments);
+			},
+			style(){
+				return new View({ tag: "style" }).append(...arguments).append_to(document.head);
 			}
 		};
 
@@ -359,7 +412,12 @@ export default class View extends Base {
 			return new View().ac(classes).append(...args);
 		};
 
-		["p", "h1", "h2", "h3"].forEach(tag => {
+		fns.p.c = function(classes, ...args){
+			return new View({ tag: "p" }).ac(classes).backtick_append(...args);
+		};
+		
+		
+		["h1", "h2", "h3", "pre", "code"].forEach(tag => {
 			fns[tag] = function(){
 				return new View({ tag }).append(...arguments);
 			};
@@ -397,7 +455,7 @@ export function icon(name){
 	return el.c("span", "material-icons icon", name);
 }
 
-export const { el, div, p, h1, h2, h3 } = View.elements();
+export const { el, div, p, h1, h2, h3, style, pre, code } = View.elements();
 export { View, is, Base };
 
 View.previous_captors = [];

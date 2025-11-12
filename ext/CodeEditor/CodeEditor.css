@@ -1,0 +1,12 @@
+.code-editor { max-width: none; margin-bottom: 2em;  background: #aaa; box-shadow: 5px 10px 20px rgba(0, 0, 0, 0.2); border-radius: 4px; overflow: hidden; }
+
+.code-editor .wrapper { position: relative;}
+.code-editor .error { color: var(--prim); position: absolute; right: 0.6em; top: 0.55em; user-select: none; }
+.editor-textarea { field-sizing: content; padding: 1.5em 2em 2em; tab-size: 4; font-size: 1em;  background: var(--bg);
+    color: #eee;
+    border: 0;
+    outline: none;
+    resize: none;
+    width: 100%; 
+}
+.code-editor .viewport { min-height: 3.6em; padding: 1.5em 2em 2em; background: #f0f0f0; }

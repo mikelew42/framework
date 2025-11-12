@@ -1,13 +1,10 @@
-import Base from '../../core/Base/Base.js';
-import { div, View, icon } from "../../core/View/View.js";
-// import Dir from "./Dir.js";
-// import File from "./File.js";
+import { App, div, View, icon } from "../../core/App/App.js";
 
-View.stylesheet("/framework/ext/Directory/Directory.css");
+App.stylesheet(import.meta, "Directory.css");
 
-export default class Directory extends Base {
-	instantiate(...args){
-		this.assign(...args);
+export default class Directory {
+	constructor(...args){
+		Object.assign(this, ...args);
 		this.initialize();
 	}
     
@@ -18,8 +15,11 @@ export default class Directory extends Base {
 			this.resolve = res;
 		});
 
+        this.filter = this.filter.bind(this);
+        this.fetched = this.fetched.bind(this);
 
-        fetch(this.url || "/directory.json").then(res => res.json()).then(this.fetched.bind(this));
+
+        fetch(this.url || "/directory.json").then(res => res.json()).then(this.fetched);
 
         // window.addEventListener('hashchange', function() {
         //     // Reload the page on back/forward
@@ -28,59 +28,12 @@ export default class Directory extends Base {
     }
 
     fetched(data){
-        this.files = data.files.filter(this.filter.bind(this)).sort(this.compare);
+        this.files = data.files.filter(this.filter).sort(this.compare);
 
         // console.log(this.files);
         this.update();
 
         this.resolve(this);
-    }
-
-    load(){
-        const container = View.captor; // thx Ultron
-
-        if (window.location.hash) {
-            // await this.ready; // make sure data is loaded  ??? wtf, we don't actually match anything
-            var url = window.location.hash.substring(1); // removes the #
-
-            if (url.split("#").length > 1)
-                url = url.split("#")[0]; // remove second hash part, if any
-            console.log("url", url);
-
-            // /one/two/
-            function pathop(path){
-                const parts = path.split("/").filter(Boolean); // ["one", "two"]
-                const name = parts[parts.length - 1]; // "two"
-                return path + name + ".page.js"; // "/one/two/two.page.js"
-            }
-
-            const css_class = "page-" + url.replace(/^\//, "").replace(/\/$/, "").replace(/\//g, "-");
-            
-            if (url.endsWith("/")) {
-                url = pathop(url);
-            } else {
-                url += ".page.js";
-            }
-
-            
-            if (window.location.pathname.length > 1){
-                url = "/framework" + url;
-            }
-
-            console.group(url);
-            
-            // let the calling code finish rendering
-            setTimeout(() => {
-                this.app.$body.ac(css_class);
-                View.set_captor(container);
-                import(url).then(() => {
-                    console.groupEnd();
-                    View.restore_captor();
-                });
-            }, 0);
-        }
-
-        return container;
     }
 
     filter(fd){
@@ -91,17 +44,9 @@ export default class Directory extends Base {
             return false;
         }
 
-        // if (window.location.pathname.length > 1){
-        //     const parts = fd.full.split("/").filter(Boolean);
-        //     parts.shift(); // remove "framework" path part
-        //     fd.hash = parts.join("/")
-        // }
-
-        // if (window.location.hash.substring(1) !== (  "/" + (fd.hash || fd.full) + "/")){
-        //     fd.active = true;
-        // }
-
         if (fd.type === "dir" && fd.children && fd.children.length){
+
+            fd.children.forEach(child => child.parent = fd);
 
             // 1) search for index.html or index.js before filtering children
             if (fd.children.find(child => child.name === "index.html")){
@@ -120,7 +65,7 @@ export default class Directory extends Base {
             }
 
             // 2) filter children
-            fd.children = fd.children.filter(this.filter.bind(this)).sort(this.compare);
+            fd.children = fd.children.filter(this.filter).sort(this.compare);
 
             // 3) now we can return true
             if (fd.real || fd.default || fd.children.length || fd.newway){
@@ -135,13 +80,6 @@ export default class Directory extends Base {
         }
 
         return false;
-
-        // if (fd.type === "dir" && fd.)
-
-        // for (const str of ["index.html", "index.js", ".css"]){
-        //     if (fd.name.includes(str)) return false;
-        // }
-        // return ![".git"].contains(fd.name) !== ".git";
     }
 
     compare(a, b){
@@ -151,25 +89,66 @@ export default class Directory extends Base {
     }
 
     
-    // not used
     match(){
-		var full = window.location.hash.substring(2); // removes the # and /
-        
-        if (!full.endsWith("/")) {
-            full += ".page.js";
-        }
-		var match;
-		for (const fd of this.files){
-			match = this.search_fd(fd, full);
-			if (match) break;
-		}
+        if (window.location.pathname === "/"){
 
-		if (!match){
-			console.log("no match");
-		} else {
-            import("/" + full);
-		}
-	}
+        } else if (window.location.pathname.endsWith("/")){
+            // look for /page.js or /index.html
+            const parts = window.location.pathname.split("/").filter(Boolean);
+            this.match_a(parts, this.files);
+
+        } else {
+            // look for /<name>.page.js
+            const parts = window.location.pathname.split("/").filter(Boolean);
+            this.match_b(parts, this.files);
+            
+        }
+    }
+
+    match_a(parts, files){
+        if (parts.length){
+            for (const fd of files){
+                if (parts[0] === fd.name){
+                    fd.active = true;
+                    // console.log("matched_a", parts[0], fd);
+
+                    if (parts[1] && fd.children && fd.children.length){
+                        this.match_a(parts.slice(1), fd.children)
+                    } else {
+                        // console.log("matched_a_node", parts[0], fd)
+                        fd.active_node = true;
+                    }
+                }
+            }
+        }
+    }
+
+    match_b(parts, files){
+        if (parts.length > 1){
+            for (const fd of files){
+                
+                if (parts[0] === fd.name){
+                    fd.active = true;
+                    console.log("matched_b", parts[0], fd);
+
+                    if (fd.children && fd.children.length){
+                        this.match_b(parts.slice(1), fd.children);
+                    } else {
+                        console.warn("huh?");
+                    }
+                }
+            }
+        } else if (parts.length === 1) {
+            for (const fd of files){
+                if ( (parts[0] + ".page.js") === fd.name ){
+                    fd.active_node = true;
+                    console.log("matched_b_node", parts[0], fd);
+                }
+            }
+        } else {
+            console.warn("huh???");
+        }
+    }
 
     /**
 	 * fd is file data object {
@@ -206,25 +185,16 @@ export default class Directory extends Base {
     }
 
     render_file(fd){
-        // console.log(fd);
-        div.c("file", fd.label).click(() => {
-            // window.location.hash = "/" + (fd.hash || fd.full).replace(".page.js", "");
-            // window.location.reload();
+        div.c("file" + (fd.active_node ? " active active-node" : ""), fd.label).click(() => {
             window.location.assign("/" + fd.full.replace(".page.js", ""));
         })
     }
 
     render_dir(fd){
-        // console.log(fd);
-        const dir = div.c("dir", dir => {
+        const dir = div.c("dir" + (fd.active ? " active" : "") + (fd.active_node ? " active-node" : ""), dir => {
             dir.bar = div.c("bar", {
                 name: div(fd.name).click(() => {
-                    // if (fd.real){
-                        window.location.assign("/" + fd.full + "/");
-                    // } else if (fd.default){
-                        // window.location.hash = "/" + (fd.hash || fd.full) + "/";
-                        // window.location.reload();
-                    // }
+                    window.location.assign("/" + fd.full + "/");
                 })
             })
 
@@ -245,20 +215,17 @@ export default class Directory extends Base {
     render_dir_children(dir, fd){
         if (fd.children.length){
             dir.ac("has-icon");
-            dir.bar.prepend(icon("arrow_right").click(() => {
-                dir.children.toggle();
-            }));
+            dir.bar.prepend(
+                div.c("icon-wrap", dir.icon = icon("arrow_right")).click(() => {
+                    dir.tc("expand");
+                })
+            );
             dir.children = div.c("children", () => {
                 this.render_files(fd.children || []);
             });
 
-            // console.log("hash", window.location.hash.substring(1), "fd.hash", fd.hash, "fd.full", fd.full);
-            // hide all but active
-            if (  window.location.hash.substring(1) !== ("/" + (fd.hash || fd.full) + "/")  ){
-                dir.children.hide();
-            } else {
-                dir.ac("active");
-            }
+            if (fd.active)
+                dir.ac("expand");
         }
     }
 
@@ -273,6 +240,7 @@ export default class Directory extends Base {
     }
 
     update(){
+        this.match();
         for (const view of this.views){
             view.empty();
             view.append(() => {

@@ -14,7 +14,7 @@ export default class List extends Base {
 		this.assign(...args);
         this.immediate?.();
 
-        // why do you need to pass in children?
+        // why do you need to pass in children? for cloning?
         if (this.children){
             this.set_children(this.children);
         } else {

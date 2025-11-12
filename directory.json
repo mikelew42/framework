@@ -76,24 +76,12 @@
 							"type": "file"
 						},
 						{
-							"name": "Base.page.js",
+							"name": "page.js",
 							"path": "framework/core/Base",
-							"full": "framework/core/Base/Base.page.js",
+							"full": "framework/core/Base/page.js",
 							"type": "file"
 						}
 					]
-				},
-				{
-					"name": "core.js",
-					"path": "framework/core",
-					"full": "framework/core/core.js",
-					"type": "file"
-				},
-				{
-					"name": "core.page.js",
-					"path": "framework/core",
-					"full": "framework/core/core.page.js",
-					"type": "file"
 				},
 				{
 					"name": "Events",
@@ -108,6 +96,12 @@
 							"type": "file"
 						}
 					]
+				},
+				{
+					"name": "page.js",
+					"path": "framework/core",
+					"full": "framework/core/page.js",
+					"type": "file"
 				},
 				{
 					"name": "Test",
@@ -169,6 +163,32 @@
 			"full": "framework/ext",
 			"type": "dir",
 			"children": [
+				{
+					"name": "CodeEditor",
+					"path": "framework/ext",
+					"full": "framework/ext/CodeEditor",
+					"type": "dir",
+					"children": [
+						{
+							"name": "CodeEditor.css",
+							"path": "framework/ext/CodeEditor",
+							"full": "framework/ext/CodeEditor/CodeEditor.css",
+							"type": "file"
+						},
+						{
+							"name": "CodeEditor.js",
+							"path": "framework/ext/CodeEditor",
+							"full": "framework/ext/CodeEditor/CodeEditor.js",
+							"type": "file"
+						},
+						{
+							"name": "page.js",
+							"path": "framework/ext/CodeEditor",
+							"full": "framework/ext/CodeEditor/page.js",
+							"type": "file"
+						}
+					]
+				},
 				{
 					"name": "Component",
 					"path": "framework/ext",
@@ -354,37 +374,11 @@
 					]
 				},
 				{
-					"name": "Dir2",
-					"path": "framework/ext",
-					"full": "framework/ext/Dir2",
-					"type": "dir",
-					"children": [
-						{
-							"name": "Dir2.js",
-							"path": "framework/ext/Dir2",
-							"full": "framework/ext/Dir2/Dir2.js",
-							"type": "file"
-						},
-						{
-							"name": "page.js",
-							"path": "framework/ext/Dir2",
-							"full": "framework/ext/Dir2/page.js",
-							"type": "file"
-						}
-					]
-				},
-				{
 					"name": "Directory",
 					"path": "framework/ext",
 					"full": "framework/ext/Directory",
 					"type": "dir",
 					"children": [
-						{
-							"name": "Dir.js",
-							"path": "framework/ext/Directory",
-							"full": "framework/ext/Directory/Dir.js",
-							"type": "file"
-						},
 						{
 							"name": "Directory.css",
 							"path": "framework/ext/Directory",
@@ -398,77 +392,9 @@
 							"type": "file"
 						},
 						{
-							"name": "Directory.page.js",
-							"path": "framework/ext/Directory",
-							"full": "framework/ext/Directory/Directory.page.js",
-							"type": "file"
-						},
-						{
-							"name": "Directory2.js",
-							"path": "framework/ext/Directory",
-							"full": "framework/ext/Directory/Directory2.js",
-							"type": "file"
-						},
-						{
-							"name": "Directory2.page.js",
-							"path": "framework/ext/Directory",
-							"full": "framework/ext/Directory/Directory2.page.js",
-							"type": "file"
-						},
-						{
-							"name": "Directory3.js",
-							"path": "framework/ext/Directory",
-							"full": "framework/ext/Directory/Directory3.js",
-							"type": "file"
-						},
-						{
-							"name": "Directory3.page.js",
-							"path": "framework/ext/Directory",
-							"full": "framework/ext/Directory/Directory3.page.js",
-							"type": "file"
-						},
-						{
-							"name": "File.js",
-							"path": "framework/ext/Directory",
-							"full": "framework/ext/Directory/File.js",
-							"type": "file"
-						},
-						{
-							"name": "FrameworkDirectory.js",
-							"path": "framework/ext/Directory",
-							"full": "framework/ext/Directory/FrameworkDirectory.js",
-							"type": "file"
-						},
-						{
-							"name": "test.page.js",
-							"path": "framework/ext/Directory",
-							"full": "framework/ext/Directory/test.page.js",
-							"type": "file"
-						},
-						{
-							"name": "test2.page.js",
-							"path": "framework/ext/Directory",
-							"full": "framework/ext/Directory/test2.page.js",
-							"type": "file"
-						}
-					]
-				},
-				{
-					"name": "Directory2",
-					"path": "framework/ext",
-					"full": "framework/ext/Directory2",
-					"type": "dir",
-					"children": [
-						{
-							"name": "Directory2.js",
-							"path": "framework/ext/Directory2",
-							"full": "framework/ext/Directory2/Directory2.js",
-							"type": "file"
-						},
-						{
 							"name": "page.js",
-							"path": "framework/ext/Directory2",
-							"full": "framework/ext/Directory2/page.js",
+							"path": "framework/ext/Directory",
+							"full": "framework/ext/Directory/page.js",
 							"type": "file"
 						}
 					]

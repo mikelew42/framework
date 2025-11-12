@@ -8,6 +8,6 @@ const app = window.app = new App();
 // and if you don't do it here, you probably want to await app.ready once imported.
 
 
-export default await app.ready;
+export default app;
 
 export * from "./core/App/App.js";

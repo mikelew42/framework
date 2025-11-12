@@ -1,11 +1,31 @@
-.directory { display: flex; flex-direction: column; padding: 1em 0 1.5em; font-size:0.85em; font-weight: 500; background: white; max-width: 500px;min-width: 12em; }
-.directory .file .bar, .directory .dir .bar { display: flex; align-items: center;}
-.directory .dir .bar .icon { margin-left: 0.5em; visibility: hidden; width: 1em; font-size: 1.2em; user-select: none; }
+.directory { display: flex; flex-direction: column; padding: 1em 0 1.5em; font-size:0.85em; font-weight: 500; min-width: 12em; }
+.directory .file .bar, .directory .dir .bar { display: flex; align-items: stretch;}
+.directory .dir .bar .icon { 
+    margin-left: 0.5em; 
+    /* visibility: hidden;  */
+    width: 1em; 
+    font-size: 1.2em; 
+    user-select: none; 
+}
+
+.directory .dir.expand > .children { display: block; }
+
+.directory .active-node.file, .directory .dir.active-node > .bar > .name { text-decoration: underline;
+    text-decoration-color: var(--prim);
+    text-underline-offset: 0.35em;
+    text-decoration-thickness: 0.15em;
+    font-weight: bold;
+}
+
+.directory .icon-wrap { display: flex; align-items: center; }
+
+.directory .dir .bar .icon-wrap:hover { background: rgba(0,0,0,0.1); }
+
 .directory .file, .directory .dir .name { padding: 0.75em 2em 0.75em 2.15em; flex: 1; }
 .directory .dir.has-icon > .bar > .name { padding-left: 0.4em; }
 .directory .file:hover, .directory .dir .bar:hover { background: #eee; cursor: pointer; }
 .directory .name {}
-.directory .children { padding-left: 1.6em;}
+.directory .children { padding-left: 1.6em; display: none;}
 .directory:hover .dir .bar .icon {visibility: visible;  }
 
 .card .directory { background: rgba(0,0,0,0.1); }

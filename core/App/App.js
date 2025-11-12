@@ -7,21 +7,63 @@ import Test, { test } from "../Test/Test.js";
 // Maybe this should be View.stylesheet()?
 // We might not want to import App for all the things...
 
-export default class App extends Base {
-
-	instantiate(...args){
-		this.assign(...args);
-		this.initialize_app(); // 1
+export default class App {
+	constructor(...args){
+		Object.assign(this, ...args);
+		this.instantiate2();
 	}
 	
-	async initialize_app(){ // 1
+	async instantiate(){ // 1
+		this.load();
 		this.initialize_root(); // 2
-		this.initialize_page(); // 3
-		// this.loaders.push(this.initialize_page());
 		await this.initialize_page(); // finish this first
-		this.initialize(); // 4 ???
-		await this.ready;
+		await this.loaded;
 		this.inject(); // 6
+		this.ready.resolve(); // app.ready!
+	}
+
+	async instantiate2(){ // 1
+		this.load();
+		// this.render();
+		this.initialize_root(); // 2
+		await this.load_page(); // finish this first
+		await this.loaded;
+		this.inject(); // 6
+		this.ready.resolve(); // app.ready!
+	}
+
+	async instantiate3(){
+		await this.load();
+		this.inject();
+	}
+
+	load(){
+		this.load_framework();
+		// this.font("Montserrat");
+        // this.font("Material Icons");
+		// this.stylesheet(import.meta, "lew42.css");
+	}
+	
+	load_framework(){
+		this.stylesheet(import.meta, "../../framework.css");
+	}
+
+	render(){
+		this.$body = View.body();
+		this.$app = div.c("app", $app => {
+			$app.header = div.c("header", () => {});
+			$app.main = div.c("main", (main) => {
+				main.left = div.c("left");
+				main.bg = div.c("bg", () => {
+					this.$root = div.c("root");
+					// $app.footer = div.c("footer");
+				});
+				// main.right = div.c("right");
+			});
+			// $app.footer = div.c("footer");
+		});
+
+		View.set_captor(this.$root);
 	}
 
 	initialize_root(){ // 2
@@ -30,22 +72,14 @@ export default class App extends Base {
 		View.set_captor(this.$root);
 	}
 	
-	async initialize_page(){ // 3
+	async load_page(){ // 3
 		// "/" -> "/home.page.js"
 		// "/path/" -> "/path/page.js"
 		// "/path/sub" -> "/path/sub.page.js"
 
-		// previously: const mod = await import(App.path_to_page_url(window.location.pathname));
-		
-		var mod = import(App.path_to_page_url(window.location.pathname)); // !! mod is promise...
-		// this.loaders.push(mod); // make sure app.inject() doesn't happen before page runs
-			// wouldn't normally happen, but could, if all fonts/stylesheets are cached and load faster than the page
-		mod = await mod; // !! mod becomes the module
-		
-		// after page is requested, we initialize the app
-		// this requests all the styles+fonts+sockets+files
-		// in the imported page, we (probably) import the app, which has a delayed export when its ready
-		// by this point in this method, we must be ready?
+		let mod = import(App.path_to_page_url(window.location.pathname));
+		this.loaders.push(mod); // mod is a promise
+		mod = await mod; // mod becomes the module
 		
 		// the page.js can, but doesn't need to export a default
 		this.page = mod.default;
@@ -57,20 +91,9 @@ export default class App extends Base {
 		}
 	}
 
-	initialize(){ // 4
-		this.render();
+	inject(){
+        this.$body.append(this.$app);
 	}
-	
-	render(){}
-
-	// could app.ready fulfill before page runs, if all things are cached?
-	// line 38-41 should fix this
-	inject(){ // 6
-        // inject root into body
-        this.$body.append(this.$root);
-	}
-
-
 
 	// loads a predefined font (see Font class below)
 	font(name){
@@ -93,8 +116,19 @@ export default class App extends Base {
 		return this.constructor.stylesheet(meta, url);
 	}
 
-	get ready() {
-		return Promise.all(this.constructor.stylesheets.concat(this.loaders))
+	get ready(){
+		if (!this._ready){
+			let resolve;
+			this._ready = new Promise((res) => {
+				resolve = res;
+			});
+			this._ready.resolve = resolve;
+		}
+		return this._ready;
+	}
+
+	get loaded(){
+		return Promise.all(this.constructor.stylesheets.concat(this.loaders));
 	}
 
 	/**
@@ -111,7 +145,7 @@ export default class App extends Base {
 
 		const prom = new Promise((res, rej) => {
 			View.stylesheet(url).on("load", () => {
-				res();
+				res(); // if a stylesheet fails to load, the app won't render?  should probably render an error message
 			});
 		});
 		
@@ -121,12 +155,9 @@ export default class App extends Base {
 	}
 
 	static path_to_page_url(path){
-		// "/" -> "/home.page.js"
-		if (path === "/"){
-			return "/home.page.js";
-
+		// "/" -> "/page.js"
 		// "/path/" -> "/path/page.js"
-		} else if (path.endsWith("/")){
+		if (path.endsWith("/")){
 			return path + "page.js";
 		
 		// "/sub" -> "/sub.page.js" or
@@ -169,6 +200,7 @@ Font.fonts = {
 };
 
 // this needs to be import.meta.resolve("framework.css") for it to work on a CDN
-App.stylesheet("/framework/framework.css");
+// App.stylesheet(import.meta, "../../framework.css");
 
 export { View, Base, Events, App, el, div, h1, h2, h3, p, is, icon, Test, test };
+export * from "../View/View.js";
