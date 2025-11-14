@@ -1,4 +1,4 @@
-import { App, div, View, icon } from "../../core/App/App.js";
+import { App, div, View, el, icon } from "../../core/App/App.js";
 
 App.stylesheet(import.meta, "Directory.css");
 
@@ -185,9 +185,10 @@ export default class Directory {
     }
 
     render_file(fd){
-        div.c("file" + (fd.active_node ? " active active-node" : ""), fd.label).click(() => {
-            window.location.assign("/" + fd.full.replace(".page.js", ""));
-        })
+        el.c("a", "file" + (fd.active_node ? " active active-node" : ""), fd.label).attr("href", "/" + fd.full.replace(".page.js", ""))
+        // .click(() => {
+        //     window.location.assign("/" + fd.full.replace(".page.js", ""));
+        // })
     }
 
     render_dir(fd){

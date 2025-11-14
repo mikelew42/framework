@@ -1,12 +1,12 @@
 import is from "../../lib/is.js";
 import Base from "../Base/Base.js";
 
-export default class View extends Base {
+export default class View {
 
 	tag = "div";
 	// capture = true; // this is set on View.prototype at end of file
 
-	instantiate(...args){
+	constructor(...args){
 		this.assign(...args);
 		this.prerender();
 		this.initialize();
@@ -92,6 +92,15 @@ export default class View extends Base {
 				// DOM, str, undefined, null, etc
 				this.el.prepend(arg);
 			}
+		}
+		return this;
+	}
+
+	prepend_to(view){
+		if (is.dom(view)){
+			view.prepend(this.el);
+		} else {
+			view.prepend(this);
 		}
 		return this;
 	}
@@ -383,8 +392,28 @@ export default class View extends Base {
 		View.captor = View.previous_captors.pop();
 	}
 
-	static stylesheet(url){
-		return new View({ tag: "link" }).attr("rel", "stylesheet").attr("href", url).append_to(document.head);
+	/**
+	 * View.stylesheet("path/file.css")
+	 * or
+	 * View.stylesheet(import.meta, "path/file.css")
+	 */
+	static stylesheet(meta, url){
+		if (is.str(meta)){ // stylesheet("/styles.css");
+			url = meta;
+		} else { // stylesheet(import.meta, "file.css");
+			url = new URL(url, meta.url).pathname;
+		}
+
+		const prom = new Promise((res, rej) => {
+			new View({ tag: "link" }).attr("rel", "stylesheet").attr("href", url)
+				.append_to(document.head).on("load", () => {
+					res(); // if a stylesheet fails to load, the app won't render?  should probably render an error message
+				});
+		});
+		
+		this.stylesheets.push(prom);
+
+		return prom;
 	}
 
 	static elements(){
@@ -449,7 +478,13 @@ export default class View extends Base {
 			return View._body;
 		}
 	}
+
+	assign(...args){
+		return Object.assign(this, ...args);
+	}
 }
+
+View.stylesheets = [];
 
 export function icon(name){
 	return el.c("span", "material-icons icon", name);

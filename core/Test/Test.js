@@ -1,6 +1,6 @@
 import View, { el, div, Base, is } from "../View/View.js";
 
-View.stylesheet("/framework/core/Test/test.delete.css");
+View.stylesheet(import.meta, "Test.css");
 
 
 export default class Test extends Base {

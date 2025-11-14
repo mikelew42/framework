@@ -1,49 +1,52 @@
 import Base from "../Base/Base.js";
 import Events from "../Events/Events.js";
-import { el, div, View, h1, h2, h3, p, is, icon } from "../View/View.js";
+import { el, div, View, h1, h2, h3, p, is, icon, pre } from "../View/View.js";
 import Test, { test } from "../Test/Test.js";
 
-// App.stylesheet() in class definitions
-// Maybe this should be View.stylesheet()?
-// We might not want to import App for all the things...
-
 export default class App {
+
 	constructor(...args){
-		Object.assign(this, ...args);
+		this.assign(...args);
 		this.instantiate();
 	}
 
-	async instantiate(){ // 4
-        // request additional assets first
-        this.load();
-
-		// perform pre-render config
+	async instantiate(){
 		this.config();
-        
-        // render before requesting the page.js
-        this.render();
-        
-        // await page.js completion before awaiting dynamic this.loaders
-        await this.load_page();
-
-        // wait for all the loaders before injecting
-        await this.loaded;
-
-        // put the app in the dom
-        this.inject();
-
-        // app.ready!
-        this.ready.resolve();
-    }
-
-	config(){}
-	
-	load(){
-		this.load_framework();
+		await this.load();
+		this.initialize();
 	}
-	
-	load_framework(){
+
+	// initial setup, requests, render app
+	config(){
+		this.config_framework();
+		
+		// render *before* loading the page
+		this.render();
+	}
+
+	// request and await the page, and then all the loaders
+	async load(){
+		// wait until page module has finished
+		await this.load_page();
+
+		// page module can add additional loaders
+		await this.loaded;
+	}
+
+	initialize(){
+		// put the app in the dom
+		this.inject();
+
+		// app.ready!
+		this.ready.resolve();
+	}
+
+	config_framework(){
 		this.stylesheet(import.meta, "../../framework.css");
+	}
+
+	assign(...args){
+		return Object.assign(this, ...args);
 	}
 
 	render(){
@@ -52,7 +55,7 @@ export default class App {
 			$app.header = div.c("header", () => {});
 			$app.main = div.c("main", (main) => {
 				main.left = div.c("left");
-				main.bg = div.c("bg", () => {
+				main.background = div.c("background", () => {
 					this.$root = div.c("root");
 					// $app.footer = div.c("footer");
 				});
@@ -69,15 +72,22 @@ export default class App {
 		// "/path/" -> "/path/page.js"
 		// "/path/sub" -> "/path/sub.page.js"
 
-		const mod = await import(App.path_to_page_url(window.location.pathname));
-		
-		// the page.js can, but doesn't need to export a default
-		this.page = mod.default;
-		
-		// render the page
-		if (this.page){
-			this.$root.append(this.page);
-			// this.$root is not in the body yet
+		try {
+			const mod = await import(App.path_to_page_url(window.location.pathname));
+			
+			// the page.js can, but doesn't need to export a default
+			this.page = mod.default;
+			
+			// render the page
+			if (this.page){
+				this.$root.append(this.page);
+				// this.$root is not in the body yet
+			}
+		} catch (error){
+			this.$root.ac("page").append(() => {
+				h1("Page Load Error");
+				pre.c("error", error.message);
+			});
 		}
 	}
 
@@ -103,7 +113,7 @@ export default class App {
 	}
 
 	stylesheet(meta, url){
-		return this.constructor.stylesheet(meta, url);
+		return View.stylesheet(meta, url);
 	}
 
 	get ready(){
@@ -118,30 +128,11 @@ export default class App {
 	}
 
 	get loaded(){
-		return Promise.all(this.constructor.stylesheets.concat(this.loaders));
+		return Promise.all(View.stylesheets.concat(this.loaders));
 	}
 
-	/**
-	 * App.stylesheet("path/file.css")
-	 * or
-	 * App.stylesheet(import.meta, "path/file.css")
-	 */
 	static stylesheet(meta, url){
-		if (is.str(meta)){ // stylesheet("/styles.css");
-			url = meta;
-		} else { // stylesheet(import.meta, "file.css");
-			url = new URL(url, meta.url).pathname;
-		}
-
-		const prom = new Promise((res, rej) => {
-			View.stylesheet(url).on("load", () => {
-				res(); // if a stylesheet fails to load, the app won't render?  should probably render an error message
-			});
-		});
-		
-		this.stylesheets.push(prom);
-
-		return prom;
+		return View.stylesheet(meta, url);
 	}
 
 	static path_to_page_url(path){
@@ -158,7 +149,6 @@ export default class App {
 	}
 }
 
-App.stylesheets = [];
 App.prototype.loaders = [];
 
 class Font extends Base {
