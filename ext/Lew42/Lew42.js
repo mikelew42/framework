@@ -25,7 +25,7 @@ export default class Lew42 extends App {
 
     config_favicon(){
         el("link").attr("rel", "icon").attr("type", "image/png")
-            .attr("href", this.base + "assets/img/favicon.png")
+            .attr("href", App.meta_to_url(import.meta, "favicon.png"))
             .prepend_to(document.head);
     }
 
@@ -99,7 +99,9 @@ export default class Lew42 extends App {
     }
 
     logo(){
-        return el("a", el.c("img", "logo-img").attr("src", this.base + "assets/img/mlogo.png")).attr("href", this.base);
+        return el("a", 
+            el.c("img", "logo-img").attr("src", App.meta_to_url(import.meta, "mlogo.png"))
+        ).attr("href", "/");
     }
 
     header(){

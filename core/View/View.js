@@ -400,7 +400,7 @@ export default class View {
 		if (is.str(meta)){ // stylesheet("/styles.css");
 			url = meta;
 		} else { // stylesheet(import.meta, "file.css");
-			url = new URL(url, meta.url).href;
+			url = new URL(url, meta.url).pathname;
 		}
 
 		const prom = new Promise((res, rej) => {

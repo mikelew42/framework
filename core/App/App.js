@@ -146,6 +146,10 @@ export default class App {
 			return path + ".page.js";
 		}
 	}
+
+	static meta_to_url(meta, url){
+		return new URL(url, meta.url).href;
+	}
 }
 
 App.prototype.loaders = [];
