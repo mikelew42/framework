@@ -491,7 +491,7 @@ export function icon(name){
 }
 
 export const { el, div, p, h1, h2, h3, style, pre, code } = View.elements();
-export { View, is, Base };
+export { View, is };
 
 View.previous_captors = [];
 View.prototype.capture = true;
