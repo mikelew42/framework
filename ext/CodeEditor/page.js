@@ -1,4 +1,4 @@
-import { app, el, div, h1, test, View, p, Base, code } from "../../../app.js";
+import { app, el, div, h1, test, View, p, code } from "../../../app.js";
 import CodeEditor from "./CodeEditor.js"
 app.$root.ac("page");
 

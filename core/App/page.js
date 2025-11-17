@@ -1,4 +1,4 @@
-import app, { el, div, View, h1, h2, h3, p, is, Base, test, Test } from "../../../app.js";
+import app, { el, div, View, h1, h2, h3, p, is, test, Test } from "../../../app.js";
 
 import exported from "./exported.page.js";
 import exported_fn from "./exported_fn.page.js";

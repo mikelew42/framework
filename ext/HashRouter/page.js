@@ -1,4 +1,4 @@
-import { app, el, div, test, View, p, Base } from "/app.js";
+import { app, el, div, test, View, p } from "/app.js";
 import HashRouter from "./HashRouter.js";
 import Tabs, { tabs, tab } from "./HashTabs.js";
 

@@ -1,4 +1,4 @@
-import { app, h2, el, div, test, View, p, Base } from "/app.js";
+import { app, h2, el, div, test, View, p } from "/app.js";
 import HashRouter from "../HashRouter/HashRouter.js";
 import HashPager, { page } from "./HashPager.js";
 

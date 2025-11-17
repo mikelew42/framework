@@ -1,10 +1,13 @@
-import View, { el, div, Base, is } from "../View/View.js";
+import View, { el, div, is } from "../View/View.js";
 
 View.stylesheet(import.meta, "Test.css");
 
 
-export default class Test extends Base {
-
+export default class Test {
+	constructor(...args){
+		Object.assign(this, ...args);
+	}
+	
 	render(){
 		this.view = div.c("test", {
 			name: div(this.name).click(this.activate.bind(this)),

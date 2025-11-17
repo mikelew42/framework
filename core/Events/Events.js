@@ -1,9 +1,16 @@
-import Base from "../Base/Base.js";
+export default class Events {
 
-export default class Events extends Base {
-    instantiate(...args) {
-        this.events = {};
+    constructor(...args){
         this.assign(...args);
+        this.instantiate();
+    }
+
+    assign(...args){
+        return Object.assign(this, ...args);
+    }
+
+    instantiate() {
+        this.events = {};
         this.initialize();
     }
 
@@ -76,4 +83,4 @@ export default class Events extends Base {
     }
 }
 
-export { Base, Events }
+export { Events }

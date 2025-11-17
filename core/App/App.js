@@ -1,4 +1,3 @@
-import Base from "../Base/Base.js";
 import Events from "../Events/Events.js";
 import { el, div, View, h1, h2, h3, p, is, icon, pre } from "../View/View.js";
 import Test, { test } from "../Test/Test.js";
@@ -151,8 +150,9 @@ export default class App {
 
 App.prototype.loaders = [];
 
-class Font extends Base {
-	initialize(){
+class Font {
+	constructor(...args){
+		Object.assign(this, ...args);
 		this.fontface = new FontFace(this.name, `url(${this.url})`, this.options);
 	}
 	async load(){

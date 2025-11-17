@@ -1,4 +1,4 @@
-import app, { el, div, View, h1, h2, h3, p, is, Base, test, Test } from "/app.js";
+import app, { el, div, View, h1, h2, h3, p, is, test, Test } from "/app.js";
 import Component from "./Component.js";
 
 Test.controls();
