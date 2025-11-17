@@ -1,4 +1,5 @@
 .directory { display: flex; flex-direction: column; padding: 1em 0 1.5em; font-weight: 500; min-width: 12em; }
+.directory a { display: block; text-decoration: none; font-weight: 500; color: var(--bg); }
 .directory .file .bar, .directory .dir .bar { display: flex; align-items: stretch;}
 .directory .dir .bar .icon { 
     margin-left: 0.5em; 
@@ -21,7 +22,7 @@
 
 .directory .dir .bar .icon-wrap:hover { background: rgba(0,0,0,0.1); }
 
-.directory .file, .directory .dir .name { padding: 0.75em 2em 0.75em 2.15em; flex: 1; }
+.directory .file, .directory .dir .name { padding: 0.5em 2em 0.5em 2.15em; flex: 1; }
 .directory .dir.has-icon > .bar > .name { padding-left: 0.4em; }
 .directory .file:hover, .directory .dir .bar:hover { background: #eee; cursor: pointer; }
 .directory .name {}

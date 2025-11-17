@@ -18,8 +18,16 @@ export default class Directory {
         this.filter = this.filter.bind(this);
         this.fetched = this.fetched.bind(this);
 
+        if (!this.url){
+            if (this.app.base){
+                this.url = this.app.base + "directory.json";
+            } else {
+                this.url = "/directory.json";
+            }
+        }
 
-        fetch(this.url || "/directory.json").then(res => res.json()).then(this.fetched);
+
+        fetch(this.url).then(res => res.json()).then(this.fetched);
 
         // window.addEventListener('hashchange', function() {
         //     // Reload the page on back/forward
@@ -90,16 +98,20 @@ export default class Directory {
 
     
     match(){
+        let parts = window.location.pathname.split("/").filter(Boolean);
+
+        if (this.app.base.length > 1){
+            parts = parts.slice(1);
+        }
+
         if (window.location.pathname === "/"){
 
         } else if (window.location.pathname.endsWith("/")){
             // look for /page.js or /index.html
-            const parts = window.location.pathname.split("/").filter(Boolean);
             this.match_a(parts, this.files);
 
         } else {
             // look for /<name>.page.js
-            const parts = window.location.pathname.split("/").filter(Boolean);
             this.match_b(parts, this.files);
             
         }
@@ -185,7 +197,7 @@ export default class Directory {
     }
 
     render_file(fd){
-        el.c("a", "file" + (fd.active_node ? " active active-node" : ""), fd.label).attr("href", "/" + fd.full.replace(".page.js", ""))
+        el.c("a", "file" + (fd.active_node ? " active active-node" : ""), fd.label).attr("href", this.app.base + fd.full.replace(".page.js", ""))
         // .click(() => {
         //     window.location.assign("/" + fd.full.replace(".page.js", ""));
         // })
@@ -194,9 +206,7 @@ export default class Directory {
     render_dir(fd){
         const dir = div.c("dir" + (fd.active ? " active" : "") + (fd.active_node ? " active-node" : ""), dir => {
             dir.bar = div.c("bar", {
-                name: div(fd.name).click(() => {
-                    window.location.assign("/" + fd.full + "/");
-                })
+                name: el("a", fd.name).attr("href", this.app.base + fd.full + "/")
             })
 
             this.render_dir_children(dir, fd);

@@ -1,8 +1,11 @@
-import app, { el, div, View, h1, h2, h3, p, is, test, Test } from "/app.js";
-import HashRouter from "/framework/ext/HashRouter/HashRouter.js";
+import app, { el, div, View, h1, h2, h3, p, is, Base, test, Test } from "../../../app.js";
 
 import exported from "./exported.page.js";
 import exported_fn from "./exported_fn.page.js";
+
+app.$root.ac("page");
+
+h1("class App");
 
 // el("style", `
 //     body { font-family: "Montserrat"; }

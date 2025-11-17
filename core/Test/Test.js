@@ -6,7 +6,7 @@ View.stylesheet(import.meta, "Test.css");
 export default class Test extends Base {
 
 	render(){
-		this.view = div.c("test " + this.name, {
+		this.view = div.c("test", {
 			name: div(this.name).click(this.activate.bind(this)),
 			container: div()
 		});

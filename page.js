@@ -1,4 +1,4 @@
-import app, { App, el, div, View, h1, h2, h3, p, is, Base, icon, test } from "/app.js";
+import app, { App, el, div, View, h1, h2, h3, p, is, Base, icon, test } from "../app.js";
 
 // app.$body.style("background", "#eee").style("font-family", "'Courier New', Courier");
 
