@@ -1,10 +1,11 @@
-import { app, el, div, test, View, is } from "/app.js";
+import { app, el, div, test, View, is } from "../../../app.js";
 import Draggable from "./Draggable.js";
 import Movable from "./Movable.js";
 import Previewable from "./Previewable.js";
 import Sortable from "./Sortable.js";
 import __List from "../List/List.js";
 
+app.$root.ac("page");
 
 class _List extends __List {
 

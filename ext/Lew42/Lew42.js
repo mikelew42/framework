@@ -84,7 +84,7 @@ export default class Lew42 extends App {
         this.$app = div.c("app", $app => {
             $app.header = this.header();
             $app.main = div.c("main", (main) => {
-                main.left = div.c("left", this.sidenav());
+                main.left = div.c("left shadow", this.sidenav());
                 main.background = div.c("background", () => {
                     this.$root = div.c("root");
                     $app.footer = this.footer();
@@ -103,7 +103,7 @@ export default class Lew42 extends App {
     }
 
     header(){
-        return this.$header = div.c("header", {
+        return this.$header = div.c("header shadow", {
             logo: this.logo(),
             breadcrumbs: this.breadcrumbs(),
             btns: div(() => {

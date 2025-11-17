@@ -1,4 +1,4 @@
-import { App, div, el, View, icon, code } from "../../core/App/App.js";
+import { App, div, el, View, icon, code, h1, h2, h3, p, style, pre } from "../../core/App/App.js";
 
 App.stylesheet(import.meta, "CodeEditor.css");
 
@@ -11,7 +11,10 @@ export default class CodeEditor {
 
     render(){
         this.view = div.c("code-editor", view => {
-            view.layout = div.c("layout", () => {
+            view.layout = div.c("", () => {
+                
+                this.viewport = div.c("viewport", { content: div() });
+
                 this.wrapper = div.c("wrapper flex", () => {
                     this.textarea = el.c("textarea", "editor-textarea", this.code)
                         .attr("spellcheck", "false").on("input", this.update);
@@ -21,7 +24,6 @@ export default class CodeEditor {
                     }).hide();
                 });
 
-                this.viewport = div.c("viewport", { content: div() })
             });
 
         });
