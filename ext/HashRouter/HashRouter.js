@@ -1,4 +1,4 @@
-import { el, div, test, Base, Events, is } from "../../core/App/App.js";
+import { el, div, test,  Events, is } from "../../core/App/App.js";
 
 export default class HashRouter extends Events {
     

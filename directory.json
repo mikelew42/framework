@@ -8,12 +8,6 @@
 			"children": []
 		},
 		{
-			"name": "app.js",
-			"path": "./framework/",
-			"full": "framework/app.js",
-			"type": "file"
-		},
-		{
 			"name": "core",
 			"path": "./framework/",
 			"full": "framework/core",
@@ -104,9 +98,9 @@
 					"type": "dir",
 					"children": [
 						{
-							"name": "test.delete.css",
+							"name": "Test.css",
 							"path": "framework/core/Test",
-							"full": "framework/core/Test/test.delete.css",
+							"full": "framework/core/Test/Test.css",
 							"type": "file"
 						},
 						{
@@ -610,6 +604,38 @@
 					]
 				},
 				{
+					"name": "Lew42",
+					"path": "framework/ext",
+					"full": "framework/ext/Lew42",
+					"type": "dir",
+					"children": [
+						{
+							"name": "favicon.png",
+							"path": "framework/ext/Lew42",
+							"full": "framework/ext/Lew42/favicon.png",
+							"type": "file"
+						},
+						{
+							"name": "Lew42.css",
+							"path": "framework/ext/Lew42",
+							"full": "framework/ext/Lew42/Lew42.css",
+							"type": "file"
+						},
+						{
+							"name": "Lew42.js",
+							"path": "framework/ext/Lew42",
+							"full": "framework/ext/Lew42/Lew42.js",
+							"type": "file"
+						},
+						{
+							"name": "mlogo.png",
+							"path": "framework/ext/Lew42",
+							"full": "framework/ext/Lew42/mlogo.png",
+							"type": "file"
+						}
+					]
+				},
+				{
 					"name": "List",
 					"path": "framework/ext",
 					"full": "framework/ext/List",
@@ -972,38 +998,18 @@
 							"type": "file"
 						},
 						{
-							"name": "page.js",
+							"name": "Page.js",
 							"path": "framework/ext/Page",
-							"full": "framework/ext/Page/page.js",
+							"full": "framework/ext/Page/Page.js",
 							"type": "file"
 						}
 					]
 				},
 				{
-					"name": "Router",
+					"name": "page.js",
 					"path": "framework/ext",
-					"full": "framework/ext/Router",
-					"type": "dir",
-					"children": [
-						{
-							"name": "index.html",
-							"path": "framework/ext/Router",
-							"full": "framework/ext/Router/index.html",
-							"type": "file"
-						},
-						{
-							"name": "Router.js",
-							"path": "framework/ext/Router",
-							"full": "framework/ext/Router/Router.js",
-							"type": "file"
-						},
-						{
-							"name": "Router.page.js",
-							"path": "framework/ext/Router",
-							"full": "framework/ext/Router/Router.page.js",
-							"type": "file"
-						}
-					]
+					"full": "framework/ext/page.js",
+					"type": "file"
 				},
 				{
 					"name": "Savable",
@@ -1162,6 +1168,12 @@
 					]
 				},
 				{
+					"name": "page.js",
+					"path": "framework/ux",
+					"full": "framework/ux/page.js",
+					"type": "file"
+				},
+				{
 					"name": "Tabs",
 					"path": "framework/ux",
 					"full": "framework/ux/Tabs",
@@ -1180,12 +1192,6 @@
 							"type": "file"
 						}
 					]
-				},
-				{
-					"name": "ux.page.js",
-					"path": "framework/ux",
-					"full": "framework/ux/ux.page.js",
-					"type": "file"
 				}
 			]
 		}

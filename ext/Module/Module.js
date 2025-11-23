@@ -3,7 +3,7 @@ import Socket from "../../ext/Socket/Socket.js";
 import File from "../File/File.js";
 import Dir from "../Dir/Dir.js";
 // import is from "../../lib/is.js";
-import { App, el, div, View, h1, h2, h3, p, is, Base, icon } from "../../core/App/App.js";
+import { App, el, div, View, h1, h2, h3, p, is,  icon } from "../../core/App/App.js";
 // import draggable from "./draggable.js";
 
 View.stylesheet("/framework/ext/Module/module.styles.css");
