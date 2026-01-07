@@ -86,6 +86,26 @@
 					]
 				},
 				{
+					"name": "Page",
+					"path": "framework/core",
+					"full": "framework/core/Page",
+					"type": "dir",
+					"children": [
+						{
+							"name": "Page.class.js",
+							"path": "framework/core/Page",
+							"full": "framework/core/Page/Page.class.js",
+							"type": "file"
+						},
+						{
+							"name": "page.js",
+							"path": "framework/core/Page",
+							"full": "framework/core/Page/page.js",
+							"type": "file"
+						}
+					]
+				},
+				{
 					"name": "page.js",
 					"path": "framework/core",
 					"full": "framework/core/page.js",
@@ -441,6 +461,100 @@
 							"name": "styles.css",
 							"path": "framework/ext/Draggable",
 							"full": "framework/ext/Draggable/styles.css",
+							"type": "file"
+						}
+					]
+				},
+				{
+					"name": "Draggable2",
+					"path": "framework/ext",
+					"full": "framework/ext/Draggable2",
+					"type": "dir",
+					"children": [
+						{
+							"name": "Draggable.js",
+							"path": "framework/ext/Draggable2",
+							"full": "framework/ext/Draggable2/Draggable.js",
+							"type": "file"
+						},
+						{
+							"name": "Movable.js",
+							"path": "framework/ext/Draggable2",
+							"full": "framework/ext/Draggable2/Movable.js",
+							"type": "file"
+						},
+						{
+							"name": "page.js",
+							"path": "framework/ext/Draggable2",
+							"full": "framework/ext/Draggable2/page.js",
+							"type": "file"
+						},
+						{
+							"name": "Previewable.js",
+							"path": "framework/ext/Draggable2",
+							"full": "framework/ext/Draggable2/Previewable.js",
+							"type": "file"
+						},
+						{
+							"name": "Sortable.js",
+							"path": "framework/ext/Draggable2",
+							"full": "framework/ext/Draggable2/Sortable.js",
+							"type": "file"
+						},
+						{
+							"name": "styles.css",
+							"path": "framework/ext/Draggable2",
+							"full": "framework/ext/Draggable2/styles.css",
+							"type": "file"
+						}
+					]
+				},
+				{
+					"name": "Draggable3",
+					"path": "framework/ext",
+					"full": "framework/ext/Draggable3",
+					"type": "dir",
+					"children": [
+						{
+							"name": "Constraints.js",
+							"path": "framework/ext/Draggable3",
+							"full": "framework/ext/Draggable3/Constraints.js",
+							"type": "file"
+						},
+						{
+							"name": "Draggable.js",
+							"path": "framework/ext/Draggable3",
+							"full": "framework/ext/Draggable3/Draggable.js",
+							"type": "file"
+						},
+						{
+							"name": "Movable.js",
+							"path": "framework/ext/Draggable3",
+							"full": "framework/ext/Draggable3/Movable.js",
+							"type": "file"
+						},
+						{
+							"name": "page.js",
+							"path": "framework/ext/Draggable3",
+							"full": "framework/ext/Draggable3/page.js",
+							"type": "file"
+						},
+						{
+							"name": "Previewable.js",
+							"path": "framework/ext/Draggable3",
+							"full": "framework/ext/Draggable3/Previewable.js",
+							"type": "file"
+						},
+						{
+							"name": "Sortable.js",
+							"path": "framework/ext/Draggable3",
+							"full": "framework/ext/Draggable3/Sortable.js",
+							"type": "file"
+						},
+						{
+							"name": "styles.css",
+							"path": "framework/ext/Draggable3",
+							"full": "framework/ext/Draggable3/styles.css",
 							"type": "file"
 						}
 					]

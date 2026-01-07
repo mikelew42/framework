@@ -1,20 +1,8 @@
 import Events from "../../core/Events/Events.js";
 import View from "../../core/View/View.js";
 import App from "../../core/App/App.js";
-import is from "../../lib/is.js";
 
 App.stylesheet(import.meta, "styles.css");
-/**
- * 		draggable({ 
-				handle: this.bar,
-				view: this,
-                container: this.children,
-				start: this.dragstart.bind(this),
-				move: this.drag.bind(this), // dragmove?
-				end: this.dragend.bind(this),
-				drop: this.drop.bind(this),
-				targets: ".selector" || [views]
- */
 
 export default class Draggable extends Events {
 
@@ -33,12 +21,8 @@ export default class Draggable extends Events {
         if (!this.handle)
             this.handle = this.view;
 
-        if (!this.container){
-            if (this.view.children){
-                this.container = this.view.children;
-            } else {
-                // console.error("No container?") // no need for a container
-            }
+        if (!this.container && this.view.children){
+            this.container = this.view.children;
         }
 
         this.pointerdown = this.pointerdown.bind(this);
@@ -51,7 +35,7 @@ export default class Draggable extends Events {
 
     pointerdown(e){
         document.addEventListener("pointermove", this.pointermove);
-		document.addEventListener("pointerup", this.pointerup);
+        document.addEventListener("pointerup", this.pointerup);
 
         this.view?.ac("dragging").style("pointer-events", "none");
         this.dragging = true;
@@ -94,57 +78,34 @@ export default class Draggable extends Events {
     }
 
     drop_check(e){
-        console.warn("TODO: drop_check()");
-        // if this.targets is ".selector" string, test e.target?
-        // if this.targets is [view, arr], e.target -> view and then this.targets.includes? 
+        return false;
     }
 
-    drop(e){
-        console.warn("TODO: drop()");
-        // if e.target is a zone
-            // potentially this.sort()?
-    }
+    drop(e){}
     
-    // we need to climb the dom tree, so child dom elements don't have
-    // to all be registered...
     static lookup(el){
-        const log = false;
-        log && console.group("lookup", el);
         while (el) {
             const draggable = Draggable.registry.get(el);
             if (draggable) {
-                log && console.log("draggable found:", draggable); 
-                log && console.groupEnd();
                 return draggable;
-            } else {
-                el = el.parentElement;
-                log && console.log("draggable not found, climbing, parent:", el)
             }
+            el = el.parentElement;
         }
-        log && console.warn("lookup failed");
-        log && console.groupEnd();
         return undefined;
     }
 
-    // finds the first draggable in the container?
-    // what if there are multiple draggables within?
-    // is this the right logic to treat the views as sort-indexed?
     static lookdown(el){
-        const log = false;
-        log && console.group("lookdown", el);
-
         const draggable = Draggable.registry.get(el);
         
         if (draggable) {
-            log && console.log("draggable found:", draggable); 
-            log && console.groupEnd();
             return draggable;
-        } else if (el.children.length) {
-            log && console.log("todo: iterate children");
         }
-
-        log && console.warn("lookup failed");
-        log && console.groupEnd();
+        
+        for (let i = 0; i < el.children.length; i++){
+            const result = Draggable.lookdown(el.children[i]);
+            if (result) return result;
+        }
+        
         return undefined;
     }
 

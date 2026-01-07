@@ -21,8 +21,8 @@ pre, code, textarea { font-family: Consolas, 'Courier New', Monaco, monospace; }
 .flex-v-center { align-items: center; }
 .gap { gap: 1em; }
 
-.layout { display: flex; flex-wrap: wrap; }
-.layout > * { flex: 1 1 300px; }
+/* .layout { display: flex; flex-wrap: wrap; }
+.layout > * { flex: 1 1 300px; } */
 
 .mb-1 { margin-bottom: 1em; }
 
@@ -50,7 +50,9 @@ pre, code, textarea { font-family: Consolas, 'Courier New', Monaco, monospace; }
 
 .center.squeeze, .root.page { margin-left: auto; margin-right: auto; }
 
-.bg-light, .root.page, .root.light { background: #eee; }
+.bg-light, .root.light { background: #eee; }
+
+.root.page, .white { background: white; }
 
 
 .root.pad, .root.page { padding: 4% 3%; transition: padding 0.3s; }

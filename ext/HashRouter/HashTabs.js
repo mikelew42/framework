@@ -1,4 +1,4 @@
-import Base from "../../core/Base/Base..js";
+import Base from "../../core/Base/Base.js";
 import { el, div, View, p, App } from "../../core/App/App.js";
 import HashRouter from "./HashRouter.js";
 

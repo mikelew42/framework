@@ -1,6 +1,6 @@
 import View, { el, div, is } from "../View/View.js";
 
-View.stylesheet(import.meta, "Test.css");
+// View.stylesheet(import.meta, "Test.css");
 
 
 export default class Test {

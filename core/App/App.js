@@ -83,7 +83,8 @@ export default class App {
 				// this.$root is not in the body yet
 			}
 		} catch (error){
-			this.$root.ac("page").append(() => {
+			// this runs on any page error...
+			this.$root.append(() => {
 				h1("Page Load Error");
 				pre.c("error", error.message);
 			});

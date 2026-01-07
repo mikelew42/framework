@@ -1,4 +1,4 @@
-import Base from "../../core/Base/Base..js";
+import Base from "../../core/Base/Base.js";
 import { App, el, div, View, h1, h2, h3, icon, p, is, test } from "/framework/core/App/App.js";
 
 App.stylesheet(import.meta, "styles.css");

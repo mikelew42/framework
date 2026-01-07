@@ -14,6 +14,8 @@ export default class Events {
         this.initialize();
     }
 
+    initialize(){}
+
     on(event, listener) {
         if (!this.events[event]) {
             this.events[event] = [];

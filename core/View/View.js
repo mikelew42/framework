@@ -86,7 +86,7 @@ export default class View {
 			} else if (is.arr(arg)){
 				this.prepend.apply(this, arg);
 			} else if (is.fn(arg)){
-				this.prepend_fn(arg);
+				this.prepend_fn(arg); // this will be tricky, this fn does not exist right now
 			} else {
 				// DOM, str, undefined, null, etc
 				this.el.prepend(arg);
