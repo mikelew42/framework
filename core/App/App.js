@@ -4,27 +4,28 @@ import Test, { test } from "../Test/Test.js";
 
 export default class App {
 
-	constructor(...args){
+	constructor(...args) {
+		this.loaders = [];
 		this.assign(...args);
 		this.instantiate();
 	}
 
-	async instantiate(){
+	async instantiate() {
 		this.config();
 		await this.load();
 		this.initialize();
 	}
 
 	// initial setup, requests, render app
-	config(){
+	config() {
 		this.config_framework();
-		
+
 		// render *before* loading the page
 		this.render();
 	}
 
 	// request and await the page, and then all the loaders
-	async load(){
+	async load() {
 		// wait until page module has finished
 		await this.load_page();
 
@@ -32,7 +33,7 @@ export default class App {
 		await this.loaded;
 	}
 
-	initialize(){
+	initialize() {
 		// put the app in the dom
 		this.inject();
 
@@ -40,18 +41,18 @@ export default class App {
 		this.ready.resolve();
 	}
 
-	config_framework(){
+	config_framework() {
 		this.stylesheet(import.meta, "../../framework.css");
 	}
 
-	assign(...args){
+	assign(...args) {
 		return Object.assign(this, ...args);
 	}
 
-	render(){
+	render() {
 		this.$body = View.body();
 		this.$app = div.c("app", $app => {
-			$app.header = div.c("header", () => {});
+			$app.header = div.c("header", () => { });
 			$app.main = div.c("main", (main) => {
 				main.left = div.c("left");
 				main.background = div.c("background", () => {
@@ -65,24 +66,24 @@ export default class App {
 
 		View.set_captor(this.$root);
 	}
-	
-	async load_page(){ // 3
+
+	async load_page() { // 3
 		// "/" -> "/page.js"
 		// "/path/" -> "/path/page.js"
 		// "/path/sub" -> "/path/sub.page.js"
 
 		try {
 			const mod = await import(App.path_to_page_url(window.location.pathname));
-			
+
 			// the page.js can, but doesn't need to export a default
 			this.page = mod.default;
-			
+
 			// render the page
-			if (this.page){
+			if (this.page) {
 				this.$root.append(this.page);
 				// this.$root is not in the body yet
 			}
-		} catch (error){
+		} catch (error) {
 			// this runs on any page error...
 			this.$root.append(() => {
 				h1("Page Load Error");
@@ -91,17 +92,17 @@ export default class App {
 		}
 	}
 
-	inject(){
-        this.$body.append(this.$app);
+	inject() {
+		this.$body.append(this.$app);
 	}
 
 	// loads a predefined font (see Font class below)
-	font(name){
+	font(name) {
 		if (!Font.fonts[name])
 			throw "Unknown font";
 
-		if (Font.fonts[name].font){
-			console.warn("font already loaded");	
+		if (Font.fonts[name].font) {
+			console.warn("font already loaded");
 			return;
 		}
 
@@ -112,12 +113,12 @@ export default class App {
 		return loaded; // allow await app.font(...)
 	}
 
-	stylesheet(meta, url){
+	stylesheet(meta, url) {
 		return View.stylesheet(meta, url);
 	}
 
-	get ready(){
-		if (!this._ready){
+	get ready() {
+		if (!this._ready) {
 			let resolve;
 			this._ready = new Promise((res) => {
 				resolve = res;
@@ -127,40 +128,38 @@ export default class App {
 		return this._ready;
 	}
 
-	get loaded(){
+	get loaded() {
 		return Promise.all(View.stylesheets.concat(this.loaders));
 	}
 
-	static stylesheet(meta, url){
+	static stylesheet(meta, url) {
 		return View.stylesheet(meta, url);
 	}
 
-	static path_to_page_url(path){
+	static path_to_page_url(path) {
 		// "/" -> "/page.js"
 		// "/path/" -> "/path/page.js"
-		if (path.endsWith("/")){
+		if (path.endsWith("/")) {
 			return path + "page.js";
-		
-		// "/sub" -> "/sub.page.js" or
-		// "/path/sub" -> "/path/sub.page.js"
+
+			// "/sub" -> "/sub.page.js" or
+			// "/path/sub" -> "/path/sub.page.js"
 		} else {
 			return path + ".page.js";
 		}
 	}
 
-	static meta_to_url(meta, url){
+	static meta_to_url(meta, url) {
 		return new URL(url, meta.url).href;
 	}
 }
 
-App.prototype.loaders = [];
-
 class Font {
-	constructor(...args){
+	constructor(...args) {
 		Object.assign(this, ...args);
 		this.fontface = new FontFace(this.name, `url(${this.url})`, this.options);
 	}
-	async load(){
+	async load() {
 		await this.fontface.load();
 		document.fonts.add(this.fontface);
 	}
