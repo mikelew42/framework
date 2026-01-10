@@ -1,20 +1,20 @@
 import Events from "../../core/Events/Events.js";
 
 export default class Socket extends Events {
-	static singleton(){
-		if (!this._instance){
+	static singleton() {
+		if (!this._instance) {
 			this._instance = new this();
 		}
 		return this._instance;
 	}
-	initialize(){
+	initialize() {
 		this.protocol = window.location.protocol === "https:" ? "wss" : "ws";
 		this.requests = [];
 		this.fails = 0;
 
 		this.connect();
 	}
-	connect(){
+	connect() {
 		this.ws = new WebSocket(this.protocol + "://" + window.location.host);
 		this.ws.addEventListener("open", () => this.open());
 		this.ws.addEventListener("message", res => this.message(res));
@@ -26,30 +26,30 @@ export default class Socket extends Events {
 		this.ws.addEventListener("error", err => {
 			console.log("Socket error:", err, this.fails + " fails.");
 
-			if (this.fails <= 3){
+			if (this.fails <= 3) {
 				console.log("Attempting to reconnect in 1 second.");
 				this.fails++;
 				setTimeout(() => this.connect(), 1000);
 			}
 		});
-	
+
 		this.ready = new Promise((res, rej) => {
 			this._ready = res;
 		});
 	}
-	open(){
+	open() {
 		console.log("%cSocket connected.", "color: green; font-weight: bold;");
 		// this.rpc("log", "connected!");
 		this._ready();
 	}
 	// message recieved handler
-	message(res){
+	message(res) {
 		// debugger;
 		// console.log(res);
 		const data = JSON.parse(res.data);
 
 		// does the index exist
-		if (data?.index in this.requests){
+		if (data?.index in this.requests) {
 			this.requests[data.index](data);
 		} else {
 			data.args = data.args || [];
@@ -58,20 +58,19 @@ export default class Socket extends Events {
 				this[data.method](...data.args);
 		}
 	}
-	reload(){
+	reload() {
 		if (!window.$BLOCKRELOAD)
 			window.location.reload();
 		// debugger;
 	}
 
-	async send(obj){
-		// console.log("sending", obj);
-		return this.ready.then(() => {
-			this.ws.send(JSON.stringify(obj));
-		});
+	async send(obj) {
+		console.log("sending", obj);
+		await this.ready;
+		this.ws.send(JSON.stringify(obj));
 	}
 
-	async request(obj){
+	async request(obj) {
 		this.response = new Promise(resolve => {
 			obj.index = this.requests.push(resolve) - 1;
 		});
@@ -83,32 +82,32 @@ export default class Socket extends Events {
 		return this.response;
 	}
 
-	rpc(method, ...args){
+	rpc(method, ...args) {
 		this.send({ method, args })
 	}
 
-	ls(dir){
-		return this.request({ method: "ls", args: [ dir ] });
+	ls(dir) {
+		return this.request({ method: "ls", args: [dir] });
 	}
 
 	// ls_response(data){
 	// 	new FSView({ data })
 	// }
 
-	cmd(res){
+	cmd(res) {
 		console.log("cmd response:", res);
 	}
 
-	write(filename, data){
+	write(filename, data) {
 		this.rpc("write", filename, data);
 	}
-	
-	log(){
+
+	log() {
 		console.log(...arguments);
 	}
 
-	rm(dir){
-		return this.request({ method: "rm", args: [ dir ] }); 
+	rm(dir) {
+		return this.request({ method: "rm", args: [dir] });
 	}
 }
 

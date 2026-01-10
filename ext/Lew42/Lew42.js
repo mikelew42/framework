@@ -6,7 +6,7 @@ import Directory from "../Directory/Directory.js";
 import "../Lorem/Lorem.js";
 
 export default class Lew42 extends App {
-    config(){
+    config() {
         this.assign(this.settings);
 
         this.config_framework();
@@ -23,37 +23,37 @@ export default class Lew42 extends App {
         this.render();
     }
 
-    config_favicon(){
+    config_favicon() {
         el("link").attr("rel", "icon").attr("type", "image/png")
             .attr("href", App.meta_to_url(import.meta, "favicon.png"))
             .prepend_to(document.head);
     }
 
-    config_base(){
-        if (this.base){
+    config_base() {
+        if (this.base) {
             this.base = "/" + this.base + "/";
         } else {
             this.base = "/";
         }
     }
 
-    instantiate_socket(){
+    instantiate_socket() {
         // what if the socket fails to ready? the page won't inject...
-        if (window.location.hostname == "localhost"){
+        if (window.location.hostname == "localhost") {
             this.socket = Socket.singleton();
-            this.loaders.push(this.socket.ready);
+            // this.loaders.push(this.socket.ready);
         }
     }
-    
+
     instantiate_directory() {
         this.directory = new Directory({ app: this });
         this.loaders.push(this.directory.ready);
     }
 
-    initialize_navstate(){
+    initialize_navstate() {
         this.navstate = JSON.parse(localStorage.getItem("navstate"));
 
-        if (this.navstate === null){
+        if (this.navstate === null) {
             this.navstate = true;
             localStorage.setItem("navstate", "true");
             console.log("navstate was null, now = true");
@@ -67,19 +67,19 @@ export default class Lew42 extends App {
                 localStorage.setItem("navstate", JSON.stringify(this.navstate));
                 this.$header.toggle();
                 this.$sidenav.toggle();
-                this?.$footer.toggle();
+                this.$footer?.toggle()
             }
         });
 
-        if (this.navstate === false){
+        if (this.navstate === false) {
             this.$header.hide();
             this.$sidenav.hide();
-            this?.$footer.toggle();
+            this.$footer?.toggle()
             console.log("navstate === false");
         }
     }
 
-    render(){
+    render() {
         this.$body = View.body();
         this.$app = div.c("app", $app => {
             $app.header = this.header();
@@ -98,13 +98,13 @@ export default class Lew42 extends App {
         View.set_captor(this.$root);
     }
 
-    logo(){
-        return el("a", 
+    logo() {
+        return el("a",
             el.c("img", "logo-img").attr("src", App.meta_to_url(import.meta, "mlogo.png"))
         ).attr("href", "/");
     }
 
-    header(){
+    header() {
         return this.$header = div.c("header shadow", {
             logo: this.logo(),
             breadcrumbs: this.breadcrumbs(),
@@ -117,21 +117,21 @@ export default class Lew42 extends App {
         });
     }
 
-    footer(){
+    footer() {
         return this.$footer = div.c("footer bg flex", {
             logo: this.logo(),
         });
     }
 
-    checkbox(){
+    checkbox() {
         return div.c("checkbox").html(`<svg width="31" height="25" viewBox="0 0 31 25" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M2.07812 13.4771L10.0525 21.4514L29.2032 2.30078" stroke="white" stroke-width="3.9293"/>
             </svg>`);
     }
 
-    checklist(...args){
+    checklist(...args) {
         return div.c("checklist", checklist => {
-            for (const arg of args){
+            for (const arg of args) {
                 div.c("checklist-item", {
                     checkbox: this.checkbox(),
                     bar: div(arg)
@@ -140,7 +140,7 @@ export default class Lew42 extends App {
         });
     }
 
-    breadcrumbs(){
+    breadcrumbs() {
         const parts = window.location.pathname.split('/').filter(Boolean);
         let path = "/";
 
@@ -149,16 +149,16 @@ export default class Lew42 extends App {
                 path += part;
 
                 // /no/trailing slash?
-                if ( (i < (parts.length - 1)) || window.location.pathname.endsWith("/") )
+                if ((i < (parts.length - 1)) || window.location.pathname.endsWith("/"))
                     path += "/";
 
-                div.c("crumb" + (i === (parts.length - 1) ? " active-node" : ""), el("a", part).attr("href", path) );
+                div.c("crumb" + (i === (parts.length - 1) ? " active-node" : ""), el("a", part).attr("href", path));
             });
         });
 
     }
 
-    sidenav(){
+    sidenav() {
         return this.$sidenav = div.c("sidenav", () => {
             this.directory.render();
         });

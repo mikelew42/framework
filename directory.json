@@ -3,151 +3,151 @@
 		{
 			"name": ".git",
 			"path": "./framework/",
-			"full": "framework/.git",
 			"type": "dir",
+			"full": "framework/.git",
 			"children": []
 		},
 		{
 			"name": "core",
 			"path": "./framework/",
-			"full": "framework/core",
 			"type": "dir",
+			"full": "framework/core",
 			"children": [
 				{
 					"name": "App",
 					"path": "framework/core",
-					"full": "framework/core/App",
 					"type": "dir",
+					"full": "framework/core/App",
 					"children": [
 						{
 							"name": "App.js",
 							"path": "framework/core/App",
-							"full": "framework/core/App/App.js",
-							"type": "file"
+							"type": "file",
+							"full": "framework/core/App/App.js"
 						},
 						{
 							"name": "content.page.js",
 							"path": "framework/core/App",
-							"full": "framework/core/App/content.page.js",
-							"type": "file"
+							"type": "file",
+							"full": "framework/core/App/content.page.js"
 						},
 						{
 							"name": "exported.page.js",
 							"path": "framework/core/App",
-							"full": "framework/core/App/exported.page.js",
-							"type": "file"
+							"type": "file",
+							"full": "framework/core/App/exported.page.js"
 						},
 						{
 							"name": "exported_fn.page.js",
 							"path": "framework/core/App",
-							"full": "framework/core/App/exported_fn.page.js",
-							"type": "file"
+							"type": "file",
+							"full": "framework/core/App/exported_fn.page.js"
 						},
 						{
 							"name": "page.js",
 							"path": "framework/core/App",
-							"full": "framework/core/App/page.js",
-							"type": "file"
+							"type": "file",
+							"full": "framework/core/App/page.js"
 						}
 					]
 				},
 				{
 					"name": "Base",
 					"path": "framework/core",
-					"full": "framework/core/Base",
 					"type": "dir",
+					"full": "framework/core/Base",
 					"children": [
 						{
 							"name": "Base.js",
 							"path": "framework/core/Base",
-							"full": "framework/core/Base/Base.js",
-							"type": "file"
+							"type": "file",
+							"full": "framework/core/Base/Base.js"
 						},
 						{
 							"name": "page.js",
 							"path": "framework/core/Base",
-							"full": "framework/core/Base/page.js",
-							"type": "file"
+							"type": "file",
+							"full": "framework/core/Base/page.js"
 						}
 					]
 				},
 				{
 					"name": "Events",
 					"path": "framework/core",
-					"full": "framework/core/Events",
 					"type": "dir",
+					"full": "framework/core/Events",
 					"children": [
 						{
 							"name": "Events.js",
 							"path": "framework/core/Events",
-							"full": "framework/core/Events/Events.js",
-							"type": "file"
+							"type": "file",
+							"full": "framework/core/Events/Events.js"
 						}
 					]
 				},
 				{
 					"name": "Page",
 					"path": "framework/core",
-					"full": "framework/core/Page",
 					"type": "dir",
+					"full": "framework/core/Page",
 					"children": [
 						{
 							"name": "Page.class.js",
 							"path": "framework/core/Page",
-							"full": "framework/core/Page/Page.class.js",
-							"type": "file"
+							"type": "file",
+							"full": "framework/core/Page/Page.class.js"
 						},
 						{
 							"name": "page.js",
 							"path": "framework/core/Page",
-							"full": "framework/core/Page/page.js",
-							"type": "file"
+							"type": "file",
+							"full": "framework/core/Page/page.js"
 						}
 					]
 				},
 				{
 					"name": "page.js",
 					"path": "framework/core",
-					"full": "framework/core/page.js",
-					"type": "file"
+					"type": "file",
+					"full": "framework/core/page.js"
 				},
 				{
 					"name": "Test",
 					"path": "framework/core",
-					"full": "framework/core/Test",
 					"type": "dir",
+					"full": "framework/core/Test",
 					"children": [
 						{
 							"name": "Test.css",
 							"path": "framework/core/Test",
-							"full": "framework/core/Test/Test.css",
-							"type": "file"
+							"type": "file",
+							"full": "framework/core/Test/Test.css"
 						},
 						{
 							"name": "Test.js",
 							"path": "framework/core/Test",
-							"full": "framework/core/Test/Test.js",
-							"type": "file"
+							"type": "file",
+							"full": "framework/core/Test/Test.js"
 						}
 					]
 				},
 				{
 					"name": "View",
 					"path": "framework/core",
-					"full": "framework/core/View",
 					"type": "dir",
+					"full": "framework/core/View",
 					"children": [
 						{
 							"name": "page.js",
 							"path": "framework/core/View",
-							"full": "framework/core/View/page.js",
-							"type": "file"
+							"type": "file",
+							"full": "framework/core/View/page.js"
 						},
 						{
 							"name": "View.js",
 							"path": "framework/core/View",
-							"full": "framework/core/View/View.js",
-							"type": "file"
+							"type": "file",
+							"full": "framework/core/View/View.js"
 						}
 					]
 				}
@@ -156,444 +156,444 @@
 		{
 			"name": "directory.json",
 			"path": "./framework/",
-			"full": "framework/directory.json",
-			"type": "file"
+			"type": "file",
+			"full": "framework/directory.json"
 		},
 		{
 			"name": "ext",
 			"path": "./framework/",
-			"full": "framework/ext",
 			"type": "dir",
+			"full": "framework/ext",
 			"children": [
 				{
 					"name": "CodeEditor",
 					"path": "framework/ext",
-					"full": "framework/ext/CodeEditor",
 					"type": "dir",
+					"full": "framework/ext/CodeEditor",
 					"children": [
 						{
 							"name": "CodeEditor.css",
 							"path": "framework/ext/CodeEditor",
-							"full": "framework/ext/CodeEditor/CodeEditor.css",
-							"type": "file"
+							"type": "file",
+							"full": "framework/ext/CodeEditor/CodeEditor.css"
 						},
 						{
 							"name": "CodeEditor.js",
 							"path": "framework/ext/CodeEditor",
-							"full": "framework/ext/CodeEditor/CodeEditor.js",
-							"type": "file"
+							"type": "file",
+							"full": "framework/ext/CodeEditor/CodeEditor.js"
 						},
 						{
 							"name": "page.js",
 							"path": "framework/ext/CodeEditor",
-							"full": "framework/ext/CodeEditor/page.js",
-							"type": "file"
+							"type": "file",
+							"full": "framework/ext/CodeEditor/page.js"
 						}
 					]
 				},
 				{
 					"name": "Component",
 					"path": "framework/ext",
-					"full": "framework/ext/Component",
 					"type": "dir",
+					"full": "framework/ext/Component",
 					"children": [
 						{
 							"name": "Component.js",
 							"path": "framework/ext/Component",
-							"full": "framework/ext/Component/Component.js",
-							"type": "file"
+							"type": "file",
+							"full": "framework/ext/Component/Component.js"
 						},
 						{
 							"name": "component.json",
 							"path": "framework/ext/Component",
-							"full": "framework/ext/Component/component.json",
-							"type": "file"
+							"type": "file",
+							"full": "framework/ext/Component/component.json"
 						},
 						{
 							"name": "deep",
 							"path": "framework/ext/Component",
-							"full": "framework/ext/Component/deep",
 							"type": "dir",
+							"full": "framework/ext/Component/deep",
 							"children": [
 								{
 									"name": "5",
 									"path": "framework/ext/Component/deep",
-									"full": "framework/ext/Component/deep/5",
 									"type": "dir",
+									"full": "framework/ext/Component/deep/5",
 									"children": [
 										{
 											"name": "1",
 											"path": "framework/ext/Component/deep/5",
-											"full": "framework/ext/Component/deep/5/1",
 											"type": "dir",
+											"full": "framework/ext/Component/deep/5/1",
 											"children": [
 												{
 													"name": "deep.json",
 													"path": "framework/ext/Component/deep/5/1",
-													"full": "framework/ext/Component/deep/5/1/deep.json",
-													"type": "file"
+													"type": "file",
+													"full": "framework/ext/Component/deep/5/1/deep.json"
 												}
 											]
 										},
 										{
 											"name": "deep.json",
 											"path": "framework/ext/Component/deep/5",
-											"full": "framework/ext/Component/deep/5/deep.json",
-											"type": "file"
+											"type": "file",
+											"full": "framework/ext/Component/deep/5/deep.json"
 										}
 									]
 								},
 								{
 									"name": "6",
 									"path": "framework/ext/Component/deep",
-									"full": "framework/ext/Component/deep/6",
 									"type": "dir",
+									"full": "framework/ext/Component/deep/6",
 									"children": [
 										{
 											"name": "1",
 											"path": "framework/ext/Component/deep/6",
-											"full": "framework/ext/Component/deep/6/1",
 											"type": "dir",
+											"full": "framework/ext/Component/deep/6/1",
 											"children": [
 												{
 													"name": "deep.json",
 													"path": "framework/ext/Component/deep/6/1",
-													"full": "framework/ext/Component/deep/6/1/deep.json",
-													"type": "file"
+													"type": "file",
+													"full": "framework/ext/Component/deep/6/1/deep.json"
 												}
 											]
 										},
 										{
 											"name": "2",
 											"path": "framework/ext/Component/deep/6",
-											"full": "framework/ext/Component/deep/6/2",
 											"type": "dir",
+											"full": "framework/ext/Component/deep/6/2",
 											"children": [
 												{
 													"name": "deep.json",
 													"path": "framework/ext/Component/deep/6/2",
-													"full": "framework/ext/Component/deep/6/2/deep.json",
-													"type": "file"
+													"type": "file",
+													"full": "framework/ext/Component/deep/6/2/deep.json"
 												}
 											]
 										},
 										{
 											"name": "3",
 											"path": "framework/ext/Component/deep/6",
-											"full": "framework/ext/Component/deep/6/3",
 											"type": "dir",
+											"full": "framework/ext/Component/deep/6/3",
 											"children": [
 												{
 													"name": "deep.json",
 													"path": "framework/ext/Component/deep/6/3",
-													"full": "framework/ext/Component/deep/6/3/deep.json",
-													"type": "file"
+													"type": "file",
+													"full": "framework/ext/Component/deep/6/3/deep.json"
 												}
 											]
 										},
 										{
 											"name": "deep.json",
 											"path": "framework/ext/Component/deep/6",
-											"full": "framework/ext/Component/deep/6/deep.json",
-											"type": "file"
+											"type": "file",
+											"full": "framework/ext/Component/deep/6/deep.json"
 										}
 									]
 								},
 								{
 									"name": "7",
 									"path": "framework/ext/Component/deep",
-									"full": "framework/ext/Component/deep/7",
 									"type": "dir",
+									"full": "framework/ext/Component/deep/7",
 									"children": [
 										{
 											"name": "deep.json",
 											"path": "framework/ext/Component/deep/7",
-											"full": "framework/ext/Component/deep/7/deep.json",
-											"type": "file"
+											"type": "file",
+											"full": "framework/ext/Component/deep/7/deep.json"
 										}
 									]
 								},
 								{
 									"name": "8",
 									"path": "framework/ext/Component/deep",
-									"full": "framework/ext/Component/deep/8",
 									"type": "dir",
+									"full": "framework/ext/Component/deep/8",
 									"children": [
 										{
 											"name": "deep.json",
 											"path": "framework/ext/Component/deep/8",
-											"full": "framework/ext/Component/deep/8/deep.json",
-											"type": "file"
+											"type": "file",
+											"full": "framework/ext/Component/deep/8/deep.json"
 										}
 									]
 								},
 								{
 									"name": "deep.json",
 									"path": "framework/ext/Component/deep",
-									"full": "framework/ext/Component/deep/deep.json",
-									"type": "file"
+									"type": "file",
+									"full": "framework/ext/Component/deep/deep.json"
 								}
 							]
 						},
 						{
 							"name": "Deep.js",
 							"path": "framework/ext/Component",
-							"full": "framework/ext/Component/Deep.js",
-							"type": "file"
+							"type": "file",
+							"full": "framework/ext/Component/Deep.js"
 						},
 						{
 							"name": "Deep.page.js",
 							"path": "framework/ext/Component",
-							"full": "framework/ext/Component/Deep.page.js",
-							"type": "file"
+							"type": "file",
+							"full": "framework/ext/Component/Deep.page.js"
 						},
 						{
 							"name": "page.js",
 							"path": "framework/ext/Component",
-							"full": "framework/ext/Component/page.js",
-							"type": "file"
+							"type": "file",
+							"full": "framework/ext/Component/page.js"
 						}
 					]
 				},
 				{
 					"name": "Dir",
 					"path": "framework/ext",
-					"full": "framework/ext/Dir",
 					"type": "dir",
+					"full": "framework/ext/Dir",
 					"children": [
 						{
 							"name": "Dir.js",
 							"path": "framework/ext/Dir",
-							"full": "framework/ext/Dir/Dir.js",
-							"type": "file"
+							"type": "file",
+							"full": "framework/ext/Dir/Dir.js"
 						}
 					]
 				},
 				{
 					"name": "Directory",
 					"path": "framework/ext",
-					"full": "framework/ext/Directory",
 					"type": "dir",
+					"full": "framework/ext/Directory",
 					"children": [
 						{
 							"name": "Directory.css",
 							"path": "framework/ext/Directory",
-							"full": "framework/ext/Directory/Directory.css",
-							"type": "file"
+							"type": "file",
+							"full": "framework/ext/Directory/Directory.css"
 						},
 						{
 							"name": "Directory.js",
 							"path": "framework/ext/Directory",
-							"full": "framework/ext/Directory/Directory.js",
-							"type": "file"
+							"type": "file",
+							"full": "framework/ext/Directory/Directory.js"
 						},
 						{
 							"name": "page.js",
 							"path": "framework/ext/Directory",
-							"full": "framework/ext/Directory/page.js",
-							"type": "file"
+							"type": "file",
+							"full": "framework/ext/Directory/page.js"
 						}
 					]
 				},
 				{
 					"name": "Document",
 					"path": "framework/ext",
-					"full": "framework/ext/Document",
 					"type": "dir",
+					"full": "framework/ext/Document",
 					"children": [
 						{
 							"name": "BaseDocument.js",
 							"path": "framework/ext/Document",
-							"full": "framework/ext/Document/BaseDocument.js",
-							"type": "file"
+							"type": "file",
+							"full": "framework/ext/Document/BaseDocument.js"
 						},
 						{
 							"name": "Document.js",
 							"path": "framework/ext/Document",
-							"full": "framework/ext/Document/Document.js",
-							"type": "file"
+							"type": "file",
+							"full": "framework/ext/Document/Document.js"
 						},
 						{
 							"name": "ServerDocument.js",
 							"path": "framework/ext/Document",
-							"full": "framework/ext/Document/ServerDocument.js",
-							"type": "file"
+							"type": "file",
+							"full": "framework/ext/Document/ServerDocument.js"
 						}
 					]
 				},
 				{
 					"name": "Draggable",
 					"path": "framework/ext",
-					"full": "framework/ext/Draggable",
 					"type": "dir",
+					"full": "framework/ext/Draggable",
 					"children": [
 						{
 							"name": "Draggable.js",
 							"path": "framework/ext/Draggable",
-							"full": "framework/ext/Draggable/Draggable.js",
-							"type": "file"
+							"type": "file",
+							"full": "framework/ext/Draggable/Draggable.js"
 						},
 						{
 							"name": "Movable.js",
 							"path": "framework/ext/Draggable",
-							"full": "framework/ext/Draggable/Movable.js",
-							"type": "file"
+							"type": "file",
+							"full": "framework/ext/Draggable/Movable.js"
 						},
 						{
 							"name": "page.js",
 							"path": "framework/ext/Draggable",
-							"full": "framework/ext/Draggable/page.js",
-							"type": "file"
+							"type": "file",
+							"full": "framework/ext/Draggable/page.js"
 						},
 						{
 							"name": "Previewable.js",
 							"path": "framework/ext/Draggable",
-							"full": "framework/ext/Draggable/Previewable.js",
-							"type": "file"
+							"type": "file",
+							"full": "framework/ext/Draggable/Previewable.js"
 						},
 						{
 							"name": "Sortable.js",
 							"path": "framework/ext/Draggable",
-							"full": "framework/ext/Draggable/Sortable.js",
-							"type": "file"
+							"type": "file",
+							"full": "framework/ext/Draggable/Sortable.js"
 						},
 						{
 							"name": "styles.css",
 							"path": "framework/ext/Draggable",
-							"full": "framework/ext/Draggable/styles.css",
-							"type": "file"
+							"type": "file",
+							"full": "framework/ext/Draggable/styles.css"
 						}
 					]
 				},
 				{
 					"name": "Draggable2",
 					"path": "framework/ext",
-					"full": "framework/ext/Draggable2",
 					"type": "dir",
+					"full": "framework/ext/Draggable2",
 					"children": [
 						{
 							"name": "Draggable.js",
 							"path": "framework/ext/Draggable2",
-							"full": "framework/ext/Draggable2/Draggable.js",
-							"type": "file"
+							"type": "file",
+							"full": "framework/ext/Draggable2/Draggable.js"
 						},
 						{
 							"name": "Movable.js",
 							"path": "framework/ext/Draggable2",
-							"full": "framework/ext/Draggable2/Movable.js",
-							"type": "file"
+							"type": "file",
+							"full": "framework/ext/Draggable2/Movable.js"
 						},
 						{
 							"name": "page.js",
 							"path": "framework/ext/Draggable2",
-							"full": "framework/ext/Draggable2/page.js",
-							"type": "file"
+							"type": "file",
+							"full": "framework/ext/Draggable2/page.js"
 						},
 						{
 							"name": "Previewable.js",
 							"path": "framework/ext/Draggable2",
-							"full": "framework/ext/Draggable2/Previewable.js",
-							"type": "file"
+							"type": "file",
+							"full": "framework/ext/Draggable2/Previewable.js"
 						},
 						{
 							"name": "Sortable.js",
 							"path": "framework/ext/Draggable2",
-							"full": "framework/ext/Draggable2/Sortable.js",
-							"type": "file"
+							"type": "file",
+							"full": "framework/ext/Draggable2/Sortable.js"
 						},
 						{
 							"name": "styles.css",
 							"path": "framework/ext/Draggable2",
-							"full": "framework/ext/Draggable2/styles.css",
-							"type": "file"
+							"type": "file",
+							"full": "framework/ext/Draggable2/styles.css"
 						}
 					]
 				},
 				{
 					"name": "Draggable3",
 					"path": "framework/ext",
-					"full": "framework/ext/Draggable3",
 					"type": "dir",
+					"full": "framework/ext/Draggable3",
 					"children": [
 						{
 							"name": "Constraints.js",
 							"path": "framework/ext/Draggable3",
-							"full": "framework/ext/Draggable3/Constraints.js",
-							"type": "file"
+							"type": "file",
+							"full": "framework/ext/Draggable3/Constraints.js"
 						},
 						{
 							"name": "Draggable.js",
 							"path": "framework/ext/Draggable3",
-							"full": "framework/ext/Draggable3/Draggable.js",
-							"type": "file"
+							"type": "file",
+							"full": "framework/ext/Draggable3/Draggable.js"
 						},
 						{
 							"name": "Movable.js",
 							"path": "framework/ext/Draggable3",
-							"full": "framework/ext/Draggable3/Movable.js",
-							"type": "file"
+							"type": "file",
+							"full": "framework/ext/Draggable3/Movable.js"
 						},
 						{
 							"name": "page.js",
 							"path": "framework/ext/Draggable3",
-							"full": "framework/ext/Draggable3/page.js",
-							"type": "file"
+							"type": "file",
+							"full": "framework/ext/Draggable3/page.js"
 						},
 						{
 							"name": "Previewable.js",
 							"path": "framework/ext/Draggable3",
-							"full": "framework/ext/Draggable3/Previewable.js",
-							"type": "file"
+							"type": "file",
+							"full": "framework/ext/Draggable3/Previewable.js"
 						},
 						{
 							"name": "Sortable.js",
 							"path": "framework/ext/Draggable3",
-							"full": "framework/ext/Draggable3/Sortable.js",
-							"type": "file"
+							"type": "file",
+							"full": "framework/ext/Draggable3/Sortable.js"
 						},
 						{
 							"name": "styles.css",
 							"path": "framework/ext/Draggable3",
-							"full": "framework/ext/Draggable3/styles.css",
-							"type": "file"
+							"type": "file",
+							"full": "framework/ext/Draggable3/styles.css"
 						}
 					]
 				},
 				{
 					"name": "File",
 					"path": "framework/ext",
-					"full": "framework/ext/File",
 					"type": "dir",
+					"full": "framework/ext/File",
 					"children": [
 						{
 							"name": "File.js",
 							"path": "framework/ext/File",
-							"full": "framework/ext/File/File.js",
-							"type": "file"
+							"type": "file",
+							"full": "framework/ext/File/File.js"
 						},
 						{
 							"name": "page.js",
 							"path": "framework/ext/File",
-							"full": "framework/ext/File/page.js",
-							"type": "file"
+							"type": "file",
+							"full": "framework/ext/File/page.js"
 						},
 						{
 							"name": "test1.ext",
 							"path": "framework/ext/File",
-							"full": "framework/ext/File/test1.ext",
-							"type": "file"
+							"type": "file",
+							"full": "framework/ext/File/test1.ext"
 						},
 						{
 							"name": "test2",
 							"path": "framework/ext/File",
-							"full": "framework/ext/File/test2",
 							"type": "dir",
+							"full": "framework/ext/File/test2",
 							"children": [
 								{
 									"name": "test2.ext",
 									"path": "framework/ext/File/test2",
-									"full": "framework/ext/File/test2/test2.ext",
-									"type": "file"
+									"type": "file",
+									"full": "framework/ext/File/test2/test2.ext"
 								}
 							]
 						}
@@ -602,586 +602,586 @@
 				{
 					"name": "HashPage",
 					"path": "framework/ext",
-					"full": "framework/ext/HashPage",
 					"type": "dir",
+					"full": "framework/ext/HashPage",
 					"children": [
 						{
 							"name": "HashPage.css",
 							"path": "framework/ext/HashPage",
-							"full": "framework/ext/HashPage/HashPage.css",
-							"type": "file"
+							"type": "file",
+							"full": "framework/ext/HashPage/HashPage.css"
 						},
 						{
 							"name": "HashPage.js",
 							"path": "framework/ext/HashPage",
-							"full": "framework/ext/HashPage/HashPage.js",
-							"type": "file"
+							"type": "file",
+							"full": "framework/ext/HashPage/HashPage.js"
 						},
 						{
 							"name": "page.js",
 							"path": "framework/ext/HashPage",
-							"full": "framework/ext/HashPage/page.js",
-							"type": "file"
+							"type": "file",
+							"full": "framework/ext/HashPage/page.js"
 						}
 					]
 				},
 				{
 					"name": "HashPager",
 					"path": "framework/ext",
-					"full": "framework/ext/HashPager",
 					"type": "dir",
+					"full": "framework/ext/HashPager",
 					"children": [
 						{
 							"name": "2",
 							"path": "framework/ext/HashPager",
-							"full": "framework/ext/HashPager/2",
 							"type": "dir",
+							"full": "framework/ext/HashPager/2",
 							"children": [
 								{
 									"name": "page.js",
 									"path": "framework/ext/HashPager/2",
-									"full": "framework/ext/HashPager/2/page.js",
-									"type": "file"
+									"type": "file",
+									"full": "framework/ext/HashPager/2/page.js"
 								}
 							]
 						},
 						{
 							"name": "HashPager.js",
 							"path": "framework/ext/HashPager",
-							"full": "framework/ext/HashPager/HashPager.js",
-							"type": "file"
+							"type": "file",
+							"full": "framework/ext/HashPager/HashPager.js"
 						},
 						{
 							"name": "page.js",
 							"path": "framework/ext/HashPager",
-							"full": "framework/ext/HashPager/page.js",
-							"type": "file"
+							"type": "file",
+							"full": "framework/ext/HashPager/page.js"
 						}
 					]
 				},
 				{
 					"name": "HashRouter",
 					"path": "framework/ext",
-					"full": "framework/ext/HashRouter",
 					"type": "dir",
+					"full": "framework/ext/HashRouter",
 					"children": [
 						{
 							"name": "HashRouter.js",
 							"path": "framework/ext/HashRouter",
-							"full": "framework/ext/HashRouter/HashRouter.js",
-							"type": "file"
+							"type": "file",
+							"full": "framework/ext/HashRouter/HashRouter.js"
 						},
 						{
 							"name": "HashTabs.css",
 							"path": "framework/ext/HashRouter",
-							"full": "framework/ext/HashRouter/HashTabs.css",
-							"type": "file"
+							"type": "file",
+							"full": "framework/ext/HashRouter/HashTabs.css"
 						},
 						{
 							"name": "HashTabs.js",
 							"path": "framework/ext/HashRouter",
-							"full": "framework/ext/HashRouter/HashTabs.js",
-							"type": "file"
+							"type": "file",
+							"full": "framework/ext/HashRouter/HashTabs.js"
 						},
 						{
 							"name": "page.js",
 							"path": "framework/ext/HashRouter",
-							"full": "framework/ext/HashRouter/page.js",
-							"type": "file"
+							"type": "file",
+							"full": "framework/ext/HashRouter/page.js"
 						}
 					]
 				},
 				{
 					"name": "Layout",
 					"path": "framework/ext",
-					"full": "framework/ext/Layout",
 					"type": "dir",
+					"full": "framework/ext/Layout",
 					"children": [
 						{
 							"name": "Layout.js",
 							"path": "framework/ext/Layout",
-							"full": "framework/ext/Layout/Layout.js",
-							"type": "file"
+							"type": "file",
+							"full": "framework/ext/Layout/Layout.js"
 						},
 						{
 							"name": "page.js",
 							"path": "framework/ext/Layout",
-							"full": "framework/ext/Layout/page.js",
-							"type": "file"
+							"type": "file",
+							"full": "framework/ext/Layout/page.js"
 						},
 						{
 							"name": "styles.css",
 							"path": "framework/ext/Layout",
-							"full": "framework/ext/Layout/styles.css",
-							"type": "file"
+							"type": "file",
+							"full": "framework/ext/Layout/styles.css"
 						}
 					]
 				},
 				{
 					"name": "Lew42",
 					"path": "framework/ext",
-					"full": "framework/ext/Lew42",
 					"type": "dir",
+					"full": "framework/ext/Lew42",
 					"children": [
 						{
 							"name": "favicon.png",
 							"path": "framework/ext/Lew42",
-							"full": "framework/ext/Lew42/favicon.png",
-							"type": "file"
+							"type": "file",
+							"full": "framework/ext/Lew42/favicon.png"
 						},
 						{
 							"name": "Lew42.css",
 							"path": "framework/ext/Lew42",
-							"full": "framework/ext/Lew42/Lew42.css",
-							"type": "file"
+							"type": "file",
+							"full": "framework/ext/Lew42/Lew42.css"
 						},
 						{
 							"name": "Lew42.js",
 							"path": "framework/ext/Lew42",
-							"full": "framework/ext/Lew42/Lew42.js",
-							"type": "file"
+							"type": "file",
+							"full": "framework/ext/Lew42/Lew42.js"
 						},
 						{
 							"name": "mlogo.png",
 							"path": "framework/ext/Lew42",
-							"full": "framework/ext/Lew42/mlogo.png",
-							"type": "file"
+							"type": "file",
+							"full": "framework/ext/Lew42/mlogo.png"
 						}
 					]
 				},
 				{
 					"name": "List",
 					"path": "framework/ext",
-					"full": "framework/ext/List",
 					"type": "dir",
+					"full": "framework/ext/List",
 					"children": [
 						{
 							"name": "List.js",
 							"path": "framework/ext/List",
-							"full": "framework/ext/List/List.js",
-							"type": "file"
+							"type": "file",
+							"full": "framework/ext/List/List.js"
 						},
 						{
 							"name": "List.View.js",
 							"path": "framework/ext/List",
-							"full": "framework/ext/List/List.View.js",
-							"type": "file"
+							"type": "file",
+							"full": "framework/ext/List/List.View.js"
 						},
 						{
 							"name": "page.js",
 							"path": "framework/ext/List",
-							"full": "framework/ext/List/page.js",
-							"type": "file"
+							"type": "file",
+							"full": "framework/ext/List/page.js"
 						},
 						{
 							"name": "styles.css",
 							"path": "framework/ext/List",
-							"full": "framework/ext/List/styles.css",
-							"type": "file"
+							"type": "file",
+							"full": "framework/ext/List/styles.css"
 						}
 					]
 				},
 				{
 					"name": "Lorem",
 					"path": "framework/ext",
-					"full": "framework/ext/Lorem",
 					"type": "dir",
+					"full": "framework/ext/Lorem",
 					"children": [
 						{
 							"name": "Lorem.js",
 							"path": "framework/ext/Lorem",
-							"full": "framework/ext/Lorem/Lorem.js",
-							"type": "file"
+							"type": "file",
+							"full": "framework/ext/Lorem/Lorem.js"
 						}
 					]
 				},
 				{
 					"name": "Module",
 					"path": "framework/ext",
-					"full": "framework/ext/Module",
 					"type": "dir",
+					"full": "framework/ext/Module",
 					"children": [
 						{
 							"name": "draggable.js",
 							"path": "framework/ext/Module",
-							"full": "framework/ext/Module/draggable.js",
-							"type": "file"
+							"type": "file",
+							"full": "framework/ext/Module/draggable.js"
 						},
 						{
 							"name": "mod",
 							"path": "framework/ext/Module",
-							"full": "framework/ext/Module/mod",
 							"type": "dir",
+							"full": "framework/ext/Module/mod",
 							"children": [
 								{
 									"name": "10",
 									"path": "framework/ext/Module/mod",
-									"full": "framework/ext/Module/mod/10",
 									"type": "dir",
+									"full": "framework/ext/Module/mod/10",
 									"children": [
 										{
 											"name": "module.json",
 											"path": "framework/ext/Module/mod/10",
-											"full": "framework/ext/Module/mod/10/module.json",
-											"type": "file"
+											"type": "file",
+											"full": "framework/ext/Module/mod/10/module.json"
 										}
 									]
 								},
 								{
 									"name": "11",
 									"path": "framework/ext/Module/mod",
-									"full": "framework/ext/Module/mod/11",
 									"type": "dir",
+									"full": "framework/ext/Module/mod/11",
 									"children": [
 										{
 											"name": "module.json",
 											"path": "framework/ext/Module/mod/11",
-											"full": "framework/ext/Module/mod/11/module.json",
-											"type": "file"
+											"type": "file",
+											"full": "framework/ext/Module/mod/11/module.json"
 										}
 									]
 								},
 								{
 									"name": "12",
 									"path": "framework/ext/Module/mod",
-									"full": "framework/ext/Module/mod/12",
 									"type": "dir",
+									"full": "framework/ext/Module/mod/12",
 									"children": [
 										{
 											"name": "module.json",
 											"path": "framework/ext/Module/mod/12",
-											"full": "framework/ext/Module/mod/12/module.json",
-											"type": "file"
+											"type": "file",
+											"full": "framework/ext/Module/mod/12/module.json"
 										}
 									]
 								},
 								{
 									"name": "7",
 									"path": "framework/ext/Module/mod",
-									"full": "framework/ext/Module/mod/7",
 									"type": "dir",
+									"full": "framework/ext/Module/mod/7",
 									"children": [
 										{
 											"name": "module.json",
 											"path": "framework/ext/Module/mod/7",
-											"full": "framework/ext/Module/mod/7/module.json",
-											"type": "file"
+											"type": "file",
+											"full": "framework/ext/Module/mod/7/module.json"
 										}
 									]
 								},
 								{
 									"name": "8",
 									"path": "framework/ext/Module/mod",
-									"full": "framework/ext/Module/mod/8",
 									"type": "dir",
+									"full": "framework/ext/Module/mod/8",
 									"children": [
 										{
 											"name": "1",
 											"path": "framework/ext/Module/mod/8",
-											"full": "framework/ext/Module/mod/8/1",
 											"type": "dir",
+											"full": "framework/ext/Module/mod/8/1",
 											"children": [
 												{
 													"name": "1",
 													"path": "framework/ext/Module/mod/8/1",
-													"full": "framework/ext/Module/mod/8/1/1",
 													"type": "dir",
+													"full": "framework/ext/Module/mod/8/1/1",
 													"children": [
 														{
 															"name": "module.json",
 															"path": "framework/ext/Module/mod/8/1/1",
-															"full": "framework/ext/Module/mod/8/1/1/module.json",
-															"type": "file"
+															"type": "file",
+															"full": "framework/ext/Module/mod/8/1/1/module.json"
 														}
 													]
 												},
 												{
 													"name": "2",
 													"path": "framework/ext/Module/mod/8/1",
-													"full": "framework/ext/Module/mod/8/1/2",
 													"type": "dir",
+													"full": "framework/ext/Module/mod/8/1/2",
 													"children": [
 														{
 															"name": "module.json",
 															"path": "framework/ext/Module/mod/8/1/2",
-															"full": "framework/ext/Module/mod/8/1/2/module.json",
-															"type": "file"
+															"type": "file",
+															"full": "framework/ext/Module/mod/8/1/2/module.json"
 														}
 													]
 												},
 												{
 													"name": "3",
 													"path": "framework/ext/Module/mod/8/1",
-													"full": "framework/ext/Module/mod/8/1/3",
 													"type": "dir",
+													"full": "framework/ext/Module/mod/8/1/3",
 													"children": [
 														{
 															"name": "module.json",
 															"path": "framework/ext/Module/mod/8/1/3",
-															"full": "framework/ext/Module/mod/8/1/3/module.json",
-															"type": "file"
+															"type": "file",
+															"full": "framework/ext/Module/mod/8/1/3/module.json"
 														}
 													]
 												},
 												{
 													"name": "4",
 													"path": "framework/ext/Module/mod/8/1",
-													"full": "framework/ext/Module/mod/8/1/4",
 													"type": "dir",
+													"full": "framework/ext/Module/mod/8/1/4",
 													"children": [
 														{
 															"name": "module.json",
 															"path": "framework/ext/Module/mod/8/1/4",
-															"full": "framework/ext/Module/mod/8/1/4/module.json",
-															"type": "file"
+															"type": "file",
+															"full": "framework/ext/Module/mod/8/1/4/module.json"
 														}
 													]
 												},
 												{
 													"name": "5",
 													"path": "framework/ext/Module/mod/8/1",
-													"full": "framework/ext/Module/mod/8/1/5",
 													"type": "dir",
+													"full": "framework/ext/Module/mod/8/1/5",
 													"children": [
 														{
 															"name": "module.json",
 															"path": "framework/ext/Module/mod/8/1/5",
-															"full": "framework/ext/Module/mod/8/1/5/module.json",
-															"type": "file"
+															"type": "file",
+															"full": "framework/ext/Module/mod/8/1/5/module.json"
 														}
 													]
 												},
 												{
 													"name": "6",
 													"path": "framework/ext/Module/mod/8/1",
-													"full": "framework/ext/Module/mod/8/1/6",
 													"type": "dir",
+													"full": "framework/ext/Module/mod/8/1/6",
 													"children": [
 														{
 															"name": "module.json",
 															"path": "framework/ext/Module/mod/8/1/6",
-															"full": "framework/ext/Module/mod/8/1/6/module.json",
-															"type": "file"
+															"type": "file",
+															"full": "framework/ext/Module/mod/8/1/6/module.json"
 														}
 													]
 												},
 												{
 													"name": "module.json",
 													"path": "framework/ext/Module/mod/8/1",
-													"full": "framework/ext/Module/mod/8/1/module.json",
-													"type": "file"
+													"type": "file",
+													"full": "framework/ext/Module/mod/8/1/module.json"
 												}
 											]
 										},
 										{
 											"name": "module.json",
 											"path": "framework/ext/Module/mod/8",
-											"full": "framework/ext/Module/mod/8/module.json",
-											"type": "file"
+											"type": "file",
+											"full": "framework/ext/Module/mod/8/module.json"
 										}
 									]
 								},
 								{
 									"name": "9",
 									"path": "framework/ext/Module/mod",
-									"full": "framework/ext/Module/mod/9",
 									"type": "dir",
+									"full": "framework/ext/Module/mod/9",
 									"children": [
 										{
 											"name": "1",
 											"path": "framework/ext/Module/mod/9",
-											"full": "framework/ext/Module/mod/9/1",
 											"type": "dir",
+											"full": "framework/ext/Module/mod/9/1",
 											"children": [
 												{
 													"name": "1",
 													"path": "framework/ext/Module/mod/9/1",
-													"full": "framework/ext/Module/mod/9/1/1",
 													"type": "dir",
+													"full": "framework/ext/Module/mod/9/1/1",
 													"children": [
 														{
 															"name": "module.json",
 															"path": "framework/ext/Module/mod/9/1/1",
-															"full": "framework/ext/Module/mod/9/1/1/module.json",
-															"type": "file"
+															"type": "file",
+															"full": "framework/ext/Module/mod/9/1/1/module.json"
 														}
 													]
 												},
 												{
 													"name": "2",
 													"path": "framework/ext/Module/mod/9/1",
-													"full": "framework/ext/Module/mod/9/1/2",
 													"type": "dir",
+													"full": "framework/ext/Module/mod/9/1/2",
 													"children": [
 														{
 															"name": "module.json",
 															"path": "framework/ext/Module/mod/9/1/2",
-															"full": "framework/ext/Module/mod/9/1/2/module.json",
-															"type": "file"
+															"type": "file",
+															"full": "framework/ext/Module/mod/9/1/2/module.json"
 														}
 													]
 												},
 												{
 													"name": "3",
 													"path": "framework/ext/Module/mod/9/1",
-													"full": "framework/ext/Module/mod/9/1/3",
 													"type": "dir",
+													"full": "framework/ext/Module/mod/9/1/3",
 													"children": [
 														{
 															"name": "module.json",
 															"path": "framework/ext/Module/mod/9/1/3",
-															"full": "framework/ext/Module/mod/9/1/3/module.json",
-															"type": "file"
+															"type": "file",
+															"full": "framework/ext/Module/mod/9/1/3/module.json"
 														}
 													]
 												},
 												{
 													"name": "module.json",
 													"path": "framework/ext/Module/mod/9/1",
-													"full": "framework/ext/Module/mod/9/1/module.json",
-													"type": "file"
+													"type": "file",
+													"full": "framework/ext/Module/mod/9/1/module.json"
 												}
 											]
 										},
 										{
 											"name": "module.json",
 											"path": "framework/ext/Module/mod/9",
-											"full": "framework/ext/Module/mod/9/module.json",
-											"type": "file"
+											"type": "file",
+											"full": "framework/ext/Module/mod/9/module.json"
 										}
 									]
 								},
 								{
 									"name": "module.json",
 									"path": "framework/ext/Module/mod",
-									"full": "framework/ext/Module/mod/module.json",
-									"type": "file"
+									"type": "file",
+									"full": "framework/ext/Module/mod/module.json"
 								}
 							]
 						},
 						{
 							"name": "Module.js",
 							"path": "framework/ext/Module",
-							"full": "framework/ext/Module/Module.js",
-							"type": "file"
+							"type": "file",
+							"full": "framework/ext/Module/Module.js"
 						},
 						{
 							"name": "module.styles.css",
 							"path": "framework/ext/Module",
-							"full": "framework/ext/Module/module.styles.css",
-							"type": "file"
+							"type": "file",
+							"full": "framework/ext/Module/module.styles.css"
 						},
 						{
 							"name": "Module0.js",
 							"path": "framework/ext/Module",
-							"full": "framework/ext/Module/Module0.js",
-							"type": "file"
+							"type": "file",
+							"full": "framework/ext/Module/Module0.js"
 						},
 						{
 							"name": "page.js",
 							"path": "framework/ext/Module",
-							"full": "framework/ext/Module/page.js",
-							"type": "file"
+							"type": "file",
+							"full": "framework/ext/Module/page.js"
 						}
 					]
 				},
 				{
 					"name": "Note",
 					"path": "framework/ext",
-					"full": "framework/ext/Note",
 					"type": "dir",
+					"full": "framework/ext/Note",
 					"children": [
 						{
 							"name": "Note.js",
 							"path": "framework/ext/Note",
-							"full": "framework/ext/Note/Note.js",
-							"type": "file"
+							"type": "file",
+							"full": "framework/ext/Note/Note.js"
 						}
 					]
 				},
 				{
 					"name": "Page",
 					"path": "framework/ext",
-					"full": "framework/ext/Page",
 					"type": "dir",
+					"full": "framework/ext/Page",
 					"children": [
 						{
 							"name": "Page.class.js",
 							"path": "framework/ext/Page",
-							"full": "framework/ext/Page/Page.class.js",
-							"type": "file"
+							"type": "file",
+							"full": "framework/ext/Page/Page.class.js"
 						},
 						{
 							"name": "Page.js",
 							"path": "framework/ext/Page",
-							"full": "framework/ext/Page/Page.js",
-							"type": "file"
+							"type": "file",
+							"full": "framework/ext/Page/Page.js"
 						}
 					]
 				},
 				{
 					"name": "page.js",
 					"path": "framework/ext",
-					"full": "framework/ext/page.js",
-					"type": "file"
+					"type": "file",
+					"full": "framework/ext/page.js"
 				},
 				{
 					"name": "Savable",
 					"path": "framework/ext",
-					"full": "framework/ext/Savable",
 					"type": "dir",
+					"full": "framework/ext/Savable",
 					"children": [
 						{
 							"name": "Savable.js",
 							"path": "framework/ext/Savable",
-							"full": "framework/ext/Savable/Savable.js",
-							"type": "file"
+							"type": "file",
+							"full": "framework/ext/Savable/Savable.js"
 						}
 					]
 				},
 				{
 					"name": "Socket",
 					"path": "framework/ext",
-					"full": "framework/ext/Socket",
 					"type": "dir",
+					"full": "framework/ext/Socket",
 					"children": [
 						{
 							"name": "Socket.js",
 							"path": "framework/ext/Socket",
-							"full": "framework/ext/Socket/Socket.js",
-							"type": "file"
+							"type": "file",
+							"full": "framework/ext/Socket/Socket.js"
 						}
 					]
 				},
 				{
 					"name": "Thing",
 					"path": "framework/ext",
-					"full": "framework/ext/Thing",
 					"type": "dir",
+					"full": "framework/ext/Thing",
 					"children": [
 						{
 							"name": "BaseThing.js",
 							"path": "framework/ext/Thing",
-							"full": "framework/ext/Thing/BaseThing.js",
-							"type": "file"
+							"type": "file",
+							"full": "framework/ext/Thing/BaseThing.js"
 						},
 						{
 							"name": "page.js",
 							"path": "framework/ext/Thing",
-							"full": "framework/ext/Thing/page.js",
-							"type": "file"
+							"type": "file",
+							"full": "framework/ext/Thing/page.js"
 						},
 						{
 							"name": "ServerThing.js",
 							"path": "framework/ext/Thing",
-							"full": "framework/ext/Thing/ServerThing.js",
-							"type": "file"
+							"type": "file",
+							"full": "framework/ext/Thing/ServerThing.js"
 						},
 						{
 							"name": "Thing.js",
 							"path": "framework/ext/Thing",
-							"full": "framework/ext/Thing/Thing.js",
-							"type": "file"
+							"type": "file",
+							"full": "framework/ext/Thing/Thing.js"
 						}
 					]
 				}
@@ -1190,120 +1190,120 @@
 		{
 			"name": "framework.css",
 			"path": "./framework/",
-			"full": "framework/framework.css",
-			"type": "file"
+			"type": "file",
+			"full": "framework/framework.css"
 		},
 		{
 			"name": "lib",
 			"path": "./framework/",
-			"full": "framework/lib",
 			"type": "dir",
+			"full": "framework/lib",
 			"children": [
 				{
 					"name": "ammo.wasm.js",
 					"path": "framework/lib",
-					"full": "framework/lib/ammo.wasm.js",
-					"type": "file"
+					"type": "file",
+					"full": "framework/lib/ammo.wasm.js"
 				},
 				{
 					"name": "ammo.wasm.wasm",
 					"path": "framework/lib",
-					"full": "framework/lib/ammo.wasm.wasm",
-					"type": "file"
+					"type": "file",
+					"full": "framework/lib/ammo.wasm.wasm"
 				},
 				{
 					"name": "backbone.js",
 					"path": "framework/lib",
-					"full": "framework/lib/backbone.js",
-					"type": "file"
+					"type": "file",
+					"full": "framework/lib/backbone.js"
 				},
 				{
 					"name": "is.js",
 					"path": "framework/lib",
-					"full": "framework/lib/is.js",
-					"type": "file"
+					"type": "file",
+					"full": "framework/lib/is.js"
 				},
 				{
 					"name": "three.js",
 					"path": "framework/lib",
-					"full": "framework/lib/three.js",
-					"type": "file"
+					"type": "file",
+					"full": "framework/lib/three.js"
 				},
 				{
 					"name": "underscore.js",
 					"path": "framework/lib",
-					"full": "framework/lib/underscore.js",
-					"type": "file"
+					"type": "file",
+					"full": "framework/lib/underscore.js"
 				},
 				{
 					"name": "util.js",
 					"path": "framework/lib",
-					"full": "framework/lib/util.js",
-					"type": "file"
+					"type": "file",
+					"full": "framework/lib/util.js"
 				}
 			]
 		},
 		{
 			"name": "page.js",
 			"path": "./framework/",
-			"full": "framework/page.js",
-			"type": "file"
+			"type": "file",
+			"full": "framework/page.js"
 		},
 		{
 			"name": "README.md",
 			"path": "./framework/",
-			"full": "framework/README.md",
-			"type": "file"
+			"type": "file",
+			"full": "framework/README.md"
 		},
 		{
 			"name": "ux",
 			"path": "./framework/",
-			"full": "framework/ux",
 			"type": "dir",
+			"full": "framework/ux",
 			"children": [
 				{
 					"name": "Explorer",
 					"path": "framework/ux",
-					"full": "framework/ux/Explorer",
 					"type": "dir",
+					"full": "framework/ux/Explorer",
 					"children": [
 						{
 							"name": "Explorer.js",
 							"path": "framework/ux/Explorer",
-							"full": "framework/ux/Explorer/Explorer.js",
-							"type": "file"
+							"type": "file",
+							"full": "framework/ux/Explorer/Explorer.js"
 						},
 						{
 							"name": "Explorer.page.js",
 							"path": "framework/ux/Explorer",
-							"full": "framework/ux/Explorer/Explorer.page.js",
-							"type": "file"
+							"type": "file",
+							"full": "framework/ux/Explorer/Explorer.page.js"
 						}
 					]
 				},
 				{
 					"name": "page.js",
 					"path": "framework/ux",
-					"full": "framework/ux/page.js",
-					"type": "file"
+					"type": "file",
+					"full": "framework/ux/page.js"
 				},
 				{
 					"name": "Tabs",
 					"path": "framework/ux",
-					"full": "framework/ux/Tabs",
 					"type": "dir",
+					"full": "framework/ux/Tabs",
 					"children": [
 						{
 							"name": "Tabs.css",
 							"path": "framework/ux/Tabs",
-							"full": "framework/ux/Tabs/Tabs.css",
-							"type": "file"
+							"type": "file",
+							"full": "framework/ux/Tabs/Tabs.css"
 						},
 						{
 							"name": "Tabs.js",
 							"path": "framework/ux/Tabs",
-							"full": "framework/ux/Tabs/Tabs.js",
-							"type": "file"
+							"type": "file",
+							"full": "framework/ux/Tabs/Tabs.js"
 						}
 					]
 				}
