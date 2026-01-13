@@ -1,4 +1,4 @@
-import is from "../../lib/is.js";
+import is from "./lib/is.js";
 
 export default class View {
 

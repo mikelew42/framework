@@ -1,6 +1,4 @@
-import Events from "../Events/Events.js";
-import { el, div, View, h1, h2, h3, p, is, icon, pre } from "../View/View.js";
-import Test, { test } from "../Test/Test.js";
+import { el, div, View, h1, h2, h3, p, is, icon, pre } from "./View.js";
 
 export default class App {
 
@@ -187,4 +185,4 @@ Font.fonts = {
 // App.stylesheet(import.meta, "../../framework.css");
 
 export { Events, App, Test, test };
-export * from "../View/View.js";
+export * from "./View.js";
