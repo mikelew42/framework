@@ -1,4 +1,5 @@
 import { el, div, View, h1, h2, h3, p, is, icon, pre } from "./View.js";
+import Socket from "./Socket.js";
 
 export default class App {
 
@@ -16,6 +17,8 @@ export default class App {
 
 	// initial setup, requests, render app
 	config() {
+		this.socket = Socket.singleton();
+
 		this.config_framework();
 
 		// render *before* loading the page
@@ -40,7 +43,7 @@ export default class App {
 	}
 
 	config_framework() {
-		this.stylesheet(import.meta, "../../framework.css");
+		this.stylesheet(import.meta, "./framework.css");
 	}
 
 	assign(...args) {
@@ -181,8 +184,4 @@ Font.fonts = {
 	}
 };
 
-// this needs to be import.meta.resolve("framework.css") for it to work on a CDN
-// App.stylesheet(import.meta, "../../framework.css");
-
-export { Events, App, Test, test };
 export * from "./View.js";
