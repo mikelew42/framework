@@ -3,9 +3,8 @@
 		{
 			"name": ".git",
 			"path": "./framework/",
-			"type": "dir",
-			"full": "framework/.git",
-			"children": []
+			"type": "file",
+			"full": "framework/.git"
 		},
 		{
 			"name": "core",
