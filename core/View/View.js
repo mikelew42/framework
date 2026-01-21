@@ -445,7 +445,7 @@ export default class View {
 		};
 		
 		
-		["h1", "h2", "h3", "pre", "code"].forEach(tag => {
+		["h1", "h2", "h3", "h4", "span", "ul", "ol", "li", "pre", "code", "button", "a", "section", "nav"].forEach(tag => {
 			fns[tag] = function(){
 				return new View({ tag }).append(...arguments);
 			};
@@ -472,8 +472,7 @@ export default class View {
 					return this;
 				}
 			});
-
-			// View.set_captor(View._body); // this might backfire, if you're trying to get View.body() inside another view, for example..
+			
 			return View._body;
 		}
 	}
@@ -489,7 +488,7 @@ export function icon(name){
 	return el.c("span", "material-icons icon", name);
 }
 
-export const { el, div, p, h1, h2, h3, style, pre, code } = View.elements();
+export const { el, div, p, style, h1, h2, h3, h4, span, ul, ol, li, pre, code, button, a, section, nav } = View.elements();
 export { View, is };
 
 View.previous_captors = [];

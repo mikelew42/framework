@@ -2,9 +2,7 @@
 	--prim: #FF6157;
 	--bg: #42404B;
 	--main-header-height: 2.6em;
-}
 
-:root { 
     --base-lightness: 25%;
     --bg-hue: 250deg;
     --bg-sat: 10%;
@@ -24,27 +22,9 @@
 .bg-minus-20 { background: var(--bg-minus-20); }
 
 
-html {scrollbar-color: rgba(0,0,0,0.2) transparent;}
+html { scrollbar-color: rgba(0,0,0,0.2) transparent;}
 
-body { color: var(--bg); background: #ddd; font-family: Montserrat; height: 100%; font-weight: 500; }
-
-
-/* 
-@media (min-width: 1333px) {
-    html {
-        font-size: 1.2vw;
-    }
-
-	
-}
-
-@media (min-width: 1666px) {
-    html {
-        font-size: 20px;
-    }
-} */
-
-body { font-size: clamp(16px, 1.2vw, 20px); }
+body { color: var(--bg); background: #ddd; font-family: Montserrat; height: 100%; font-weight: 500; font-size: clamp(16px, 1.2vw, 20px); }
 
 .app {  display: flex; flex: 1 1 100%; flex-direction: column; height: 100%;  }
 
@@ -188,7 +168,54 @@ button.prim:hover, .button.prim:hover { background: color-mix(in srgb, var(--pri
 .min-w-400 { min-width: 400px; }
 
 
+/* some leftovers from framework... */
 
+
+p { line-height: 2; margin: 2em 0; }
+
+h1 { font-size: 3em; margin: 0.6em 0; font-weight: 900; line-height: 1.4;}
+h2, h3 { line-height: 1.4em; margin: 1em 0; }
+
+pre, code, textarea { font-family: Consolas, 'Courier New', Monaco, monospace; }
+
+.material-icons {
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    word-wrap: normal;
+    direction: ltr;
+    -webkit-font-feature-settings: 'liga';
+    -webkit-font-smoothing: antialiased;
+}
+
+.material-icons { font-size: 1.5em;}
+
+.pad { padding: 1em; }
+
+.squeeze, .root.page { max-width: 60em; }
+
+.center.squeeze, .root.page { margin-left: auto; margin-right: auto; }
+
+.bg-light, .root.light { background: #eee; }
+
+.root.page, .white { background: white; }
+
+
+.root.pad, .root.page { padding: 4% 3%; transition: padding 0.3s; }
+
+@media (min-width: 900px){
+	.root.pad, .root.page { padding: 3em 4em; }
+}
+
+/* 
+
+Use .viz from framework.css
 
 .ux, .ux * { background: rgba(0,0,0,0.05); outline: 1px solid rgba(0,0,0,0.1); }
-.ux:hover, .ux *:hover { background: rgba(0,0,0,0.1); outline: 1px solid rgba(0,0,0,0.2); }
+.ux:hover, .ux *:hover { background: rgba(0,0,0,0.1); outline: 1px solid rgba(0,0,0,0.2); } */

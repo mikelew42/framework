@@ -88,6 +88,7 @@ export default class App {
 			this.$root.append(() => {
 				h1("Page Load Error");
 				pre.c("error", error.message);
+				console.error(error);
 			});
 		}
 	}
