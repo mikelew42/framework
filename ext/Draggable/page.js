@@ -1,11 +1,30 @@
-import { app, el, div, test, View, is } from "../../../app.js";
+import app, { el, div, test, View, is, p  } from "../../../app.js";
 import Draggable from "./Draggable.js";
 import Movable from "./Movable.js";
 import Previewable from "./Previewable.js";
 import Sortable from "./Sortable.js";
 import __List from "../List/List.js";
 
+import Rewidth, { rewidth } from "./Rewidth.js";
+
 app.$root.ac("page");
+
+
+test("Rewidth", t => {
+    div.c("viewport", viewport => {
+        viewport.handle = div.c("handle");
+        p("This is some content");
+
+        new Rewidth({
+            view: viewport.handle,
+            viewport: viewport
+        });
+    });
+});
+
+test("rewidth", t => {
+    rewidth("This is some content");
+});
 
 class _List extends __List {
 

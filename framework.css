@@ -1,32 +1,35 @@
 @layer base, theme, util, ovr;
 
 @layer base {
-    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    *, *::before, *::after { box-sizing: border-box; }
 
     /* html { scroll-behavior: smooth; } */
-    body { line-height: 1.5; font-family: system-ui, -apple-system, sans-serif; -webkit-font-smoothing: antialiased; }
+    body { margin: 0; line-height: 1.5; font-family: system-ui, -apple-system, sans-serif; -webkit-font-smoothing: antialiased; overflow-wrap: break-word; }
     
     img, picture, video, canvas, svg { display: block; max-width: 100%; }
-    input, button, textarea, select { font: inherit; }
+    input, button, textarea, select { font: inherit; } /* not just font-family, also font-size, etc. */
     p, h1, h2, h3, h4, h5, h6 { overflow-wrap: break-word; }
 
     pre { overflow-x: auto; }
     
     ul, ol { padding-left: 1.2em; }
+
+    input:not([type="checkbox"], [type="radio"], [type="submit"], [type="color"], [type="button"], [type="reset"]), select, textarea {
+        width: 100%;
+    }
 }        
 
 @layer theme {
     :root {
-        --prim: #FF6157;
+        --prim: #5a57ff;
 	    --bg: #42404B;
         
-        --column: 20em;
-        --radius: 0.25em;
+        --column: 14em;
     }
     
-    html { height: 100%;scrollbar-color: rgba(0, 0, 0, 0.2) transparent; }
+    html { height: 100%; scrollbar-color: rgba(0, 0, 0, 0.2) transparent; }
     
-    body { height: 100%; font-size: clamp(16px, 2vw, 20px); }
+    body { height: 100%; font-size: clamp(16px, 2vw, 20px); accent-color: var(--prim); }
 
     .app { height: 100%; background: #ddd; /* overflow-x: hidden; overflow-y: scroll; */}
 
@@ -34,32 +37,40 @@
 
     section { margin-bottom: 3em;}
     
-    h1, h2, h3, h4, h5, h6 { line-height: 1.2; margin: 1em 0; }
+    /* h1, h2, h3, h4, h5, h6 { line-height: 1.2; margin: 1em 0; } */
 
     pre, code { font-family: Consolas, 'Courier New', Monaco, monospace; }
 
-    input, textarea, select { width: 100%;padding: 0.25em 0.5em; border-radius: var(--radius); }
+    input:not([type="checkbox"], [type="radio"], [type="submit"], [type="color"], [type="button"], [type="reset"]), select, textarea {
+        padding: 0.25em 0.5em;
+    }
 
-    .btn, button { padding: 0.25em 1em; cursor: pointer; border-radius: var(--radius); border-color: rgba(0,0,0,0.2); }
+    .btn, button { padding: 0.25em 1em; cursor: pointer; }
     button.bg, .btn.bg { background: var(--bg); color: white; }
     button.prim, .btn.prim { background: var(--prim); color: white; }
 
-    .dark { color: white; background: var(--bg); }
 }
 
 @layer util {
 
     .pad { padding: 1em; }
-    .mb-1 { margin-bottom: 1em; }
+    .all-pad > * { padding: 1em; }
+    .mb { margin-bottom: 1em; }
     
     .flex { display: flex; }
-    .flex.wrap, .flex.auto { flex-wrap: wrap; }
+    .flex.wrap, .flex.auto, .flex.three { flex-wrap: wrap; }
     .flex.auto > * { flex: 1 1 var(--column); }
     .flex-1 { flex: 1; }
     .flex.all-1 > * { flex: 1; }
     .flex.v { flex-direction: column; }
     .flex.h-center { justify-content: center; }
-    .flex.v-center { align-items: center; }
+    .flex.v-center { align-items: center; align-content: center; }
+    .flex.split { justify-content: space-between; }
+    .flex.three > * { flex: 1 1 calc(((var(--column) * 3) - 100%) * 999); }
+    .flex > * { margin: 0; }
+
+    .grid { display: grid; }
+    .grid.auto { grid-template-columns: repeat(auto-fit, minmax(var(--column), 1fr)); }
     
     .gap { gap: 1em; }
 
@@ -75,9 +86,29 @@
         outline: 1px solid rgba(0, 0, 0, 0.4);
     }
 
+    .dark { /* Can't easily have .dark.viz on same el */
+        .viz, .viz * {
+            background: rgba(255, 255, 255, 0.2);
+            outline: 1px solid rgba(255, 255, 255, 0.4);
+        }
+
+        .viz:hover, .viz *:hover {
+            background: rgba(255, 255, 255, 0.4);
+            outline: 1px solid rgba(255, 255, 255, 0.8);
+        }
+    }
 }
 
 @layer ovr {
+
+    .mb-0 { margin-bottom: 0; }
+    .ml-auto { margin-left: auto; }
+    .mr-auto { margin-right: auto; }
+    .mx-auto { margin-left: auto; margin-right: auto; }
+
     :first-child { margin-top: 0; }
     :last-child { margin-bottom: 0; }
+
+    .dark { color: white; background: var(--bg); }
+    .light { background: #eee; color: var(--bg); }
 }

@@ -323,12 +323,21 @@ export default class View {
 
 		// set with "prop", "value"
 		} else if (prop && is.def(value)) {
-			this.el.style[prop] = value;
+
+			if (prop.startsWith("--")){
+				this.el.style.setProperty(prop, value);
+			} else {
+				this.el.style[prop] = value;
+			}
 			return this;
 
 		// get with "prop"
 		} else if (prop) {
-			return this.el.style[prop];
+			if (prop.startsWith("--")){
+				return this.el.style.getPropertyValue(prop);
+			} else {
+				return this.el.style[prop];
+			}
 
 		// get all
 		} else if (!arguments.length){

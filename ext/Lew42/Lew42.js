@@ -1,4 +1,7 @@
 import { App, div, el, View, icon, code } from "../../core/App/App.js";
+import CodeEditor from "../CodeEditor/CodeEditor.js";
+
+CodeEditor.setup(code);
 
 import Socket from "../Socket/Socket.js";
 import Directory from "../Directory/Directory.js";
@@ -81,7 +84,7 @@ export default class Lew42 extends App {
 
     render() {
         this.$body = View.body();
-        this.$app = div.c("app", $app => {
+        this.$app = div.c("lew42 app", $app => {
             $app.header = this.header();
             $app.main = div.c("main", (main) => {
                 main.left = div.c("left shadow", this.sidenav());
@@ -112,7 +115,7 @@ export default class Lew42 extends App {
                 icon("menu").ac("menu");
                 icon("close").ac("close");
             }).click(() => {
-                View.body().tc("menu-open");
+                this.$app.tc("menu-open");
             })
         });
     }
@@ -166,3 +169,4 @@ export default class Lew42 extends App {
 }
 
 export * from "../../core/App/App.js";
+export * from "../Draggable/Rewidth.js";

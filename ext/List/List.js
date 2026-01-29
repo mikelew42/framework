@@ -14,13 +14,10 @@ export default class List extends Base {
 		this.assign(...args);
         this.immediate?.();
 
-        // why do you need to pass in children? for cloning?
-        if (this.children){
-            this.set_children(this.children);
-        } else {
-            this.set_children([]);
-        }
-		this.initialize();
+        // children might be passed during cloning
+        this.set_children(this.children || []);
+
+        this.initialize();
 	}
 
     set_children(children){

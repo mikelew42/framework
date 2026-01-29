@@ -94,7 +94,7 @@ export default class Draggable extends Events {
     }
 
     drop_check(e){
-        console.warn("TODO: drop_check()");
+        // console.warn("TODO: drop_check()");
         // if this.targets is ".selector" string, test e.target?
         // if this.targets is [view, arr], e.target -> view and then this.targets.includes? 
     }

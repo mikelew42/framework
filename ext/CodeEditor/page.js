@@ -1,5 +1,8 @@
-import { app, el, div, h1, test, View, p, code } from "../../../app.js";
-import CodeEditor from "./CodeEditor.js"
+import app, { el, div, h1, test, View, p, code } from "../../../app.js";
+import CodeEditor from "./CodeEditor.js";
+
+CodeEditor.setup(code);
+
 app.$root.ac("page");
 
 h1("class CodeEditor");

@@ -451,6 +451,12 @@
 							"full": "framework/ext/Draggable/Previewable.js"
 						},
 						{
+							"name": "Rewidth.js",
+							"path": "framework/ext/Draggable",
+							"type": "file",
+							"full": "framework/ext/Draggable/Rewidth.js"
+						},
+						{
 							"name": "Sortable.js",
 							"path": "framework/ext/Draggable",
 							"type": "file",
