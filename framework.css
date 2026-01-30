@@ -73,6 +73,18 @@
     .grid.auto { grid-template-columns: repeat(auto-fit, minmax(var(--column), 1fr)); }
     
     .gap { gap: 1em; }
+    .gap-2em { gap: 2em; }
+
+    .zoom-25 { zoom: 0.25; }
+    .zoom-50 { zoom: 0.5; }
+    .zoom-75 { zoom: 0.75; }
+    .zoom-100 { zoom: 1; }
+    .zoom-125 { zoom: 1.25; }
+    .zoom-150 { zoom: 1.5; }
+    .zoom-175 { zoom: 1.75; }
+    .zoom-200 { zoom: 2; }
+
+    .cap { text-transform: capitalize; }
 
     textarea.auto { field-sizing: content;}
 

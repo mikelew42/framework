@@ -26,21 +26,12 @@ export default class Directory {
             }
         }
 
-
         fetch(this.url).then(res => res.json()).then(this.fetched);
-
-        // window.addEventListener('hashchange', function() {
-        //     // Reload the page on back/forward
-        //     window.location.reload();
-		// });
     }
 
     fetched(data){
         this.files = data.files.filter(this.filter).sort(this.compare);
-
-        // console.log(this.files);
         this.update();
-
         this.resolve(this);
     }
 
@@ -96,69 +87,98 @@ export default class Directory {
         return a.name.localeCompare(b.name);
     }
 
-    
-    match(){
-        let parts = window.location.pathname.split("/").filter(Boolean);
+    /**
+     * Convert "page-name" or "page_name" to "Page Name"
+     */
+    to_title(str) {
+        return str.replace(/[-_]/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+    }
 
-        if (this.app.base.length > 1){
+    /**
+     * Get a subtree of files starting from root_path
+     * @param {string} root_path - Path like "/styles/" or "/topic/sub/"
+     * @returns {Array} - Array of file/dir objects
+     */
+    get_subtree(root_path) {
+        if (!root_path || root_path === "/") return this.files;
+        
+        const parts = root_path.split("/").filter(Boolean);
+        
+        // Handle app.base prefix
+        if (this.app.base.length > 1) {
+            const base_parts = this.app.base.split("/").filter(Boolean);
+            // Remove base prefix from parts if present
+            if (parts[0] === base_parts[0]) {
+                parts.shift();
+            }
+        }
+        
+        let current = this.files;
+        
+        for (const part of parts) {
+            const found = current.find(f => f.name === part && f.type === "dir");
+            if (found && found.children) {
+                current = found.children;
+            } else {
+                return []; // Path not found
+            }
+        }
+        return current;
+    }
+
+    /**
+     * Mark active states on files based on current_path
+     * Sets: active, active_ancestor, active_page
+     */
+    mark_active(files, current_path) {
+        // Clear all active states first
+        this.clear_active(files);
+        
+        let parts = current_path.split("/").filter(Boolean);
+        
+        // Handle app.base prefix
+        if (this.app.base.length > 1) {
             parts = parts.slice(1);
         }
-
-        if (window.location.pathname === "/"){
-
-        } else if (window.location.pathname.endsWith("/")){
-            // look for /page.js or /index.html
-            this.match_a(parts, this.files);
-
-        } else {
-            // look for /<name>.page.js
-            this.match_b(parts, this.files);
-            
-        }
+        
+        const is_dir_path = current_path.endsWith("/");
+        this._mark_recursive(files, parts, 0, is_dir_path);
     }
 
-    match_a(parts, files){
-        if (parts.length){
-            for (const fd of files){
-                if (parts[0] === fd.name){
-                    fd.active = true;
-                    // console.log("matched_a", parts[0], fd);
-
-                    if (parts[1] && fd.children && fd.children.length){
-                        this.match_a(parts.slice(1), fd.children)
-                    } else {
-                        // console.log("matched_a_node", parts[0], fd)
-                        fd.active_node = true;
-                    }
-                }
+    clear_active(files) {
+        for (const fd of files) {
+            fd.active = false;
+            fd.active_ancestor = false;
+            fd.active_page = false;
+            if (fd.children?.length) {
+                this.clear_active(fd.children);
             }
         }
     }
 
-    match_b(parts, files){
-        if (parts.length > 1){
-            for (const fd of files){
-                
-                if (parts[0] === fd.name){
+    _mark_recursive(files, parts, depth, is_dir_path) {
+        if (depth >= parts.length) return;
+        
+        for (const fd of files) {
+            if (fd.type === "dir" && parts[depth] === fd.name) {
+                // Check if this is the final destination (dir path like /topic/)
+                if (depth === parts.length - 1 && is_dir_path) {
+                    fd.active_page = true;
                     fd.active = true;
-                    console.log("matched_b", parts[0], fd);
-
-                    if (fd.children && fd.children.length){
-                        this.match_b(parts.slice(1), fd.children);
-                    } else {
-                        console.warn("huh?");
-                    }
+                } else if (fd.children?.length) {
+                    // This is an ancestor
+                    fd.active_ancestor = true;
+                    fd.active = true;
+                    this._mark_recursive(fd.children, parts, depth + 1, is_dir_path);
+                }
+            } else if (fd.type === "file" && fd.page) {
+                // Check for .page.js files (path like /topic/sub-page)
+                const page_name = fd.name.replace(".page.js", "");
+                if (depth === parts.length - 1 && parts[depth] === page_name && !is_dir_path) {
+                    fd.active_page = true;
+                    fd.active = true;
                 }
             }
-        } else if (parts.length === 1) {
-            for (const fd of files){
-                if ( (parts[0] + ".page.js") === fd.name ){
-                    fd.active_node = true;
-                    console.log("matched_b_node", parts[0], fd);
-                }
-            }
-        } else {
-            console.warn("huh???");
         }
     }
 
@@ -170,7 +190,6 @@ export default class Directory {
 	 * 		full: "path/to/file.ext" || "path/to/dirname",
 	 * 		children: [] // if dir
 	 * }
-	 * 
 	 */
 	search_fd(fd, full){
 		var found;
@@ -186,28 +205,52 @@ export default class Directory {
 		return false;
 	}
 
-    render(){
+    /**
+     * Render directory navigation
+     * @param {string} root_path - Optional path to filter subtree (e.g., "/styles/")
+     * @param {string} current_path - Optional path to determine active states (defaults to window.location.pathname)
+     * @returns {View} - The directory view element
+     */
+    render(root_path = null, current_path = window.location.pathname) {
         const $dir = div.c("directory");
-        this.views.push($dir);
+        
+        // Store view with its render options
+        const view_config = { 
+            el: $dir, 
+            root_path, 
+            current_path 
+        };
+        this.views.push(view_config);
 
-        if (this.files) // directory.json loads quickly sometimes
-            this.update();
+        if (this.files) {
+            this.update_view(view_config);
+        }
 
         return $dir;
     }
 
     render_file(fd){
-        el.c("a", "file" + (fd.active_node ? " active active-node" : ""), fd.label).attr("href", this.app.base + fd.full.replace(".page.js", ""))
-        // .click(() => {
-        //     window.location.assign("/" + fd.full.replace(".page.js", ""));
-        // })
+        const classes = ["file"];
+        if (fd.active) classes.push("active");
+        if (fd.active_page) classes.push("active-page");
+        
+        const label = this.to_title(fd.label || fd.name.replace(".page.js", ""));
+        
+        el.c("a", classes.join(" "), label)
+            .attr("href", this.app.base + fd.full.replace(".page.js", ""));
     }
 
     render_dir(fd){
-        const dir = div.c("dir" + (fd.active ? " active" : "") + (fd.active_node ? " active-node" : ""), dir => {
+        const classes = ["dir"];
+        if (fd.active) classes.push("active");
+        if (fd.active_ancestor) classes.push("active-ancestor");
+        if (fd.active_page) classes.push("active-page");
+        
+        const dir = div.c(classes.join(" "), dir => {
+            const label = this.to_title(fd.name);
             dir.bar = div.c("bar", {
-                name: el("a", fd.name).attr("href", this.app.base + fd.full + "/")
-            })
+                name: el("a", label).attr("href", this.app.base + fd.full + "/")
+            });
 
             this.render_dir_children(dir, fd);
         });
@@ -235,8 +278,10 @@ export default class Directory {
                 this.render_files(fd.children || []);
             });
 
-            if (fd.active)
+            // Auto-expand if active or ancestor
+            if (fd.active || fd.active_ancestor) {
                 dir.ac("expand");
+            }
         }
     }
 
@@ -250,13 +295,40 @@ export default class Directory {
         }
     }
 
+    /**
+     * Update a single view with its specific root_path and current_path
+     */
+    update_view(view_config) {
+        const { el, root_path, current_path } = view_config;
+        
+        // Get the appropriate subtree
+        const files = this.get_subtree(root_path);
+        
+        // Mark active states
+        this.mark_active(files, current_path);
+        
+        el.empty();
+        el.append(() => {
+            this.render_files(files);
+        });
+    }
+
+    /**
+     * Update all registered views
+     */
     update(){
-        this.match();
         for (const view of this.views){
-            view.empty();
-            view.append(() => {
-                this.render_files(this.files);
-            });
+            // Handle both old-style (direct element) and new-style (config object) views
+            if (view.el) {
+                this.update_view(view);
+            } else {
+                // Legacy support: view is the element itself
+                this.mark_active(this.files, window.location.pathname);
+                view.empty();
+                view.append(() => {
+                    this.render_files(this.files);
+                });
+            }
         }
     }
 }

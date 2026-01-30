@@ -143,6 +143,12 @@
 							"full": "framework/core/View/page.js"
 						},
 						{
+							"name": "ResizeObserver.js",
+							"path": "framework/core/View",
+							"type": "file",
+							"full": "framework/core/View/ResizeObserver.js"
+						},
+						{
 							"name": "View.js",
 							"path": "framework/core/View",
 							"type": "file",
@@ -157,6 +163,84 @@
 			"path": "./framework/",
 			"type": "file",
 			"full": "framework/directory.json"
+		},
+		{
+			"name": "dum",
+			"path": "./framework/",
+			"type": "dir",
+			"full": "framework/dum",
+			"children": [
+				{
+					"name": "dum.css",
+					"path": "framework/dum",
+					"type": "file",
+					"full": "framework/dum/dum.css"
+				},
+				{
+					"name": "dum.js",
+					"path": "framework/dum",
+					"type": "file",
+					"full": "framework/dum/dum.js"
+				},
+				{
+					"name": "image",
+					"path": "framework/dum",
+					"type": "dir",
+					"full": "framework/dum/image",
+					"children": [
+						{
+							"name": "image.js",
+							"path": "framework/dum/image",
+							"type": "file",
+							"full": "framework/dum/image/image.js"
+						},
+						{
+							"name": "page.js",
+							"path": "framework/dum/image",
+							"type": "file",
+							"full": "framework/dum/image/page.js"
+						}
+					]
+				},
+				{
+					"name": "list",
+					"path": "framework/dum",
+					"type": "dir",
+					"full": "framework/dum/list",
+					"children": [
+						{
+							"name": "animals.js",
+							"path": "framework/dum/list",
+							"type": "file",
+							"full": "framework/dum/list/animals.js"
+						},
+						{
+							"name": "page.js",
+							"path": "framework/dum/list",
+							"type": "file",
+							"full": "framework/dum/list/page.js"
+						},
+						{
+							"name": "users.js",
+							"path": "framework/dum/list",
+							"type": "file",
+							"full": "framework/dum/list/users.js"
+						}
+					]
+				},
+				{
+					"name": "page.js",
+					"path": "framework/dum",
+					"type": "file",
+					"full": "framework/dum/page.js"
+				},
+				{
+					"name": "readme.md",
+					"path": "framework/dum",
+					"type": "file",
+					"full": "framework/dum/readme.md"
+				}
+			]
 		},
 		{
 			"name": "ext",

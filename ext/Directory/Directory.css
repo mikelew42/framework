@@ -11,7 +11,7 @@
 
 .directory .dir.expand > .children { display: block; }
 
-.directory .active-node.file, .directory .dir.active-node > .bar > .name { text-decoration: underline;
+.directory .active-page.file, .directory .dir.active-page > .bar > .name { text-decoration: underline;
     text-decoration-color: var(--prim);
     text-underline-offset: 0.35em;
     text-decoration-thickness: 0.15em;

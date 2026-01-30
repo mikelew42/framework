@@ -346,6 +346,9 @@ export default class View {
 			throw "whaaaat";
 		}
 	}
+	compute(){
+		return getComputedStyle(this.el);
+	}
 	hide(){
 		this.el.style.display = "none";
 		return this;
@@ -389,6 +392,13 @@ export default class View {
 		return new this.constructor({
 			el: this.el.cloneNode(true)
 		});
+	}
+
+	repeat(n){
+		for (let i = 0; i < n; i++){
+			this.clone();
+		}
+		return this;
 	}
 
 	static set_captor(view){
