@@ -7,5 +7,10 @@ export default {
             p("This is an exported page?");
             // debugger; // this shouldn't appear yet
         });
+    },
+    preview(){
+        div.c("page-preview", () => {
+            p("This is the page preview.");
+        });
     }
 }

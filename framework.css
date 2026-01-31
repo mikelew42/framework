@@ -84,7 +84,8 @@
     .zoom-175 { zoom: 1.75; }
     .zoom-200 { zoom: 2; }
 
-    .cap { text-transform: capitalize; }
+    .capitalize { text-transform: capitalize; }
+    .uppercase { text-transform: uppercase; }
 
     textarea.auto { field-sizing: content;}
 

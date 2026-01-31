@@ -43,6 +43,12 @@
 							"full": "framework/core/App/exported_fn.page.js"
 						},
 						{
+							"name": "imported.page.js",
+							"path": "framework/core/App",
+							"type": "file",
+							"full": "framework/core/App/imported.page.js"
+						},
+						{
 							"name": "page.js",
 							"path": "framework/core/App",
 							"type": "file",
@@ -1207,10 +1213,10 @@
 							"full": "framework/ext/Page/Page.class.js"
 						},
 						{
-							"name": "Page.js",
+							"name": "page.js",
 							"path": "framework/ext/Page",
 							"type": "file",
-							"full": "framework/ext/Page/Page.js"
+							"full": "framework/ext/Page/page.js"
 						}
 					]
 				},

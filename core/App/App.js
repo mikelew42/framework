@@ -2,6 +2,9 @@ import Events from "../Events/Events.js";
 import { el, div, View, h1, h2, h3, p, is, icon, pre, a } from "../View/View.js";
 import Test, { test } from "../Test/Test.js";
 
+// this needs to load immediately, so the layers are properly defined
+View.stylesheet(import.meta, "../../framework.css");
+
 export default class App {
 
 	constructor(...args) {
@@ -42,7 +45,8 @@ export default class App {
 	}
 
 	config_framework() {
-		this.stylesheet(import.meta, "../../framework.css");
+		// I think this should be done immediately (see above)
+		// this.stylesheet(import.meta, "../../framework.css");
 	}
 
 	assign(...args) {
