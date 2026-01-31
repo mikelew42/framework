@@ -1,5 +1,5 @@
 
-@layer theme {
+/* @layer theme { this loads before framework.css, defining only one layer */
 
 
 .drag-handle { cursor: pointer; }
@@ -25,4 +25,4 @@
 .viewport > .handle { position: absolute; right: 0; top: 0; bottom: 0; width: 0.5em; cursor: col-resize; background: rgba(0,0,0,0.2); }
 .viewport.mb { margin-bottom: 3em; }
 
-}
+/* } */

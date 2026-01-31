@@ -1,5 +1,6 @@
 import app, { div, h1, h2, h3, p, a, button, section, code } from "/app.js";
 import { image } from "./image/image.js";
+import { contact } from "./contact.js";
 import dum from "./dum.js";
 
 app.$root.ac("page");
@@ -27,6 +28,14 @@ section(() => {
         dum(image.c("ar-16-9"), h3(), p());
     }
 });`, code => eval(code));
+
+});
+
+section(() => {
+
+    h3("Contact Form");
+    code.eval(
+`contact();`, code => eval(code));
 
 });
 

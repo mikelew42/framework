@@ -1,5 +1,7 @@
 import { View, div } from "/framework/core/View/View.js";
 import "/framework/ext/Lorem/Lorem.js"; // adds .filler() to View.prototype
+import { image } from "./image/image.js";
+import { contact } from "./contact.js";
 
 // Default filler amounts per tag
 const fill_map = {
@@ -28,6 +30,9 @@ function dum(...args) {
 		}
 	});
 }
+
+dum.image = image;
+dum.contact = contact;
 
 dum.c = function(classes, ...args) {
 	return dum(...args).ac(classes);

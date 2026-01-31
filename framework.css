@@ -70,7 +70,7 @@
     .flex > * { margin: 0; }
 
     .grid { display: grid; }
-    .grid.auto { grid-template-columns: repeat(auto-fit, minmax(var(--column), 1fr)); }
+    .grid.auto { grid-template-columns: repeat(auto-fit, minmax(min(var(--column), 100%), 1fr)); }
     
     .gap { gap: 1em; }
     .gap-2em { gap: 2em; }
@@ -121,6 +121,6 @@
     :first-child { margin-top: 0; }
     :last-child { margin-bottom: 0; }
 
-    .dark { color: white; background: var(--bg); }
+    .dark, .all-dark > * { color: white; background: var(--bg); }
     .light { background: #eee; color: var(--bg); }
 }

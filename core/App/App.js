@@ -1,5 +1,5 @@
 import Events from "../Events/Events.js";
-import { el, div, View, h1, h2, h3, p, is, icon, pre } from "../View/View.js";
+import { el, div, View, h1, h2, h3, p, is, icon, pre, a } from "../View/View.js";
 import Test, { test } from "../Test/Test.js";
 
 export default class App {

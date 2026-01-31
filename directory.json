@@ -171,6 +171,12 @@
 			"full": "framework/dum",
 			"children": [
 				{
+					"name": "contact.js",
+					"path": "framework/dum",
+					"type": "file",
+					"full": "framework/dum/contact.js"
+				},
+				{
 					"name": "dum.css",
 					"path": "framework/dum",
 					"type": "file",

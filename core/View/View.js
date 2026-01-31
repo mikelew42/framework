@@ -257,6 +257,10 @@ export default class View {
 		}
 	}
 
+	href(url){
+		return this.attr("href", url);
+	}
+
 	click(cb){
 		if (!cb) console.error("must provide a callback");
 		return this.on("click", cb);
@@ -426,6 +430,7 @@ export default class View {
 			new View({ tag: "link" }).attr("rel", "stylesheet").attr("href", url)
 				.append_to(document.head).on("load", () => {
 					res(); // if a stylesheet fails to load, the app won't render?  should probably render an error message
+					console.log("stylesheet loaded", url);
 				});
 		});
 		
@@ -464,7 +469,7 @@ export default class View {
 		};
 		
 		
-		["h1", "h2", "h3", "h4", "span", "ul", "ol", "li", "pre", "code", "button", "a", "section", "nav"].forEach(tag => {
+		["h1", "h2", "h3", "h4", "h5", "h6", "span", "ul", "ol", "li", "pre", "code", "button", "a", "section", "nav", "footer", "header", "main", "article", "aside", "form", "label", "input", "textarea", "select", "option", "fieldset", "legend", "img", "video", "audio", "iframe", "table", "thead", "tbody", "tr", "th", "td", "blockquote", "cite", "dfn", "em", "i", "kbd", "mark", "q", "s", "samp", "small", "strong", "u", "br", "hr", "b", "abbr", "del", "ins", "sub", "sup", "time", "meter", "progress", "data", "details", "summary", "figure", "figcaption", "mark"].forEach(tag => {
 			fns[tag] = function(){
 				return new View({ tag }).append(...arguments);
 			};
@@ -507,7 +512,7 @@ export function icon(name){
 	return el.c("span", "material-icons icon", name);
 }
 
-export const { el, div, p, style, h1, h2, h3, h4, span, ul, ol, li, pre, code, button, a, section, nav } = View.elements();
+export const { el, div, p, style, h1, h2, h3, h4, h5, h6, span, ul, ol, li, pre, code, button, a, section, nav, footer, header, main, article, aside, form, label, input, textarea, select, option, fieldset, legend, img, video, audio, iframe, table, thead, tbody, tr, th, td, blockquote, cite, dfn, em, i, kbd, mark, q, s, samp, small, strong, u, br, hr, b, abbr, del, ins, sub, sup, time, meter, progress, data, details, summary, figure, figcaption } = View.elements();
 export { View, is };
 
 View.previous_captors = [];
