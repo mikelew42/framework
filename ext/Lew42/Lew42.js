@@ -2,7 +2,7 @@ import View from "../../core/View/View.js";
 View.inspect = true;
 import { App, div, el, icon, code } from "../../core/App/App.js";
 import CodeEditor from "../CodeEditor/CodeEditor.js";
-import Inspector from "../Inspector/Inspector.js";
+// import Inspector from "../Inspector/Inspector.js";
 
 CodeEditor.setup(code);
 
@@ -25,7 +25,7 @@ export default class Lew42 extends App {
 
         this.instantiate_directory();
         this.instantiate_socket();
-        this.instantiate_inspector();
+        // this.instantiate_inspector();
 
         this.render();
     }
@@ -100,9 +100,9 @@ export default class Lew42 extends App {
                     this.$root = div.c("root");
                     $app.footer = this.footer();
                 });
-                main.right = div.c("right shadow", () => {
-                    this.$inspector = this.inspector.render();
-                });
+                // main.right = div.c("right shadow", () => {
+                //     this.$inspector = this.inspector.render();
+                // });
             });
             // $app.footer = div.c("footer");
         });
