@@ -21,7 +21,8 @@
 
 .list > .list-children { padding: 0.5em 2em; }
 
-.viewport { position: relative; background: rgba(0, 0, 0, 0.1); padding: 1em; }
+.viewport { position: relative; padding: 1em; }
+.viewport:not(.dark) {background: rgba(0, 0, 0, 0.1);}
 .viewport > .handle { position: absolute; right: 0; top: 0; bottom: 0; width: 0.5em; cursor: col-resize; background: rgba(0,0,0,0.2); }
 .viewport.mb { margin-bottom: 3em; }
 

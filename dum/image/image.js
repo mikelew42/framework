@@ -1,4 +1,4 @@
-import { View } from "/framework/core/View/View.js";
+import { View, el } from "/framework/core/View/View.js";
 
 View.stylesheet(import.meta, "../dum.css");
 
@@ -9,11 +9,15 @@ View.stylesheet(import.meta, "../dum.css");
  *   image.c("ar-16-9")         - with aspect ratio class
  *   image.c("ar-1 featured")   - multiple classes
  */
-function image(...args) {
+function image2(...args) {
 	return new View()
 		.ac("dum dum-img")
 		.append(svg())
 		.append(...args);
+}
+
+function image() {
+    return el.c("img", "dum-img").attr("src", "/assets/img/1000x500.png");
 }
 
 image.c = function(classes, ...args) {

@@ -8,6 +8,7 @@ export default class View {
 	constructor(...args){
 		this.assign(...args);
 		this.prerender();
+		this.constructor.register(this);
 		this.initialize();
 	}
 
@@ -66,6 +67,8 @@ export default class View {
 				this.append.apply(this, arg);
 			} else if (is.fn(arg)){
 				this.append_fn(arg);
+			} else if (is.promise(arg)){
+				this.append_promise(arg);
 			} else {
 				// DOM, str, undefined, null, etc
 				this.el.append(arg);
@@ -108,6 +111,15 @@ export default class View {
 		View.set_captor(this);
 		const return_value = fn.call(this, this);
 		View.restore_captor();
+
+		if (is.def(return_value))
+			this.append(return_value);
+
+		return this;
+	}
+
+	async append_promise(promise){
+		const return_value = await promise;
 
 		if (is.def(return_value))
 			this.append(return_value);
@@ -279,14 +291,51 @@ export default class View {
 		return this;
 	}
 
-	// this might mess up the normal capturing?
-	// this would be called synchronously... it might work though
-	// load(src){
-	// 	set this as captor
-	// 	const mod = await import(src);
-	// 	console.log("loaded script", src, mod);
-	// 	restor captor
-	// }
+	/* If we have root-level content, we need to capture in series.
+	 * however, if we use default export (fn or .render), we could have .load()
+	 * work in parallel, and .lazy() work in series. 
+	 * 
+	 * I'm thinking this should NOT be async, so that we can
+	 * use div.c("thing").load(import.meta, "thing.js") inside
+	 * a capture fn.  I suppose load could be async.  But the 
+	 * problem was, view.append(div().load()) was trying to append
+	 * a promise.
+	 * 
+	 * Now that I have append_promise, maybe taht's fine?
+	 * The problem there, is that they will resolve in random
+	 * order, and append in random order. 
+	 * */
+	load(meta, url){
+		if (is.str(meta)){ // .load("/file.js");
+			url = meta;
+		} else { // .load(import.meta, "file.js");
+			url = new URL(url, meta.url).href;
+		}
+		
+		this.append_promise(import(url).then(mod => mod.default));
+		return this;
+	}
+
+	/*
+	 *  Use .lazy() to capture in series.
+	 * */
+	lazy(meta, url){
+		if (is.str(meta)){ // .load("/file.js");
+			url = meta;
+		} else { // .load(import.meta, "file.js");
+			url = new URL(url, meta.url).href;
+		}
+
+		// promise chain, might be perf issue en masse
+		View.lazy = View.lazy.then(async () => {
+			View.set_captor(this);
+			let mod = await import(url);
+			if (is.def(mod.default))
+				this.append(mod.default);
+			View.restore_captor();
+		}); // we have to capture in series, so wait for the last one
+		return this;
+	}
 
 	// returns index of self relative to parentNode.children
 	index(){
@@ -405,6 +454,43 @@ export default class View {
 		return this;
 	}
 
+	ctrl(classes){
+		div.c("class-ctrls", () => {
+			for (const cls of classes.split(" ")){
+				el("label", 
+					el("input", input => {
+						if (this.hc(cls))
+							input.attr("checked", true);
+					})
+						.attr("type", "checkbox"), 
+					" " + cls
+				).style("cursor", "pointer").click(e => {
+					if (e.target.tagName !== 'INPUT') return;
+					this.tc(cls);
+				});
+			}
+		});
+
+		// maybe return the .class-ctrls, breaking chaining?
+		return this;
+	}
+
+	static lookup(el){
+		return this.registry.get(el);
+	}
+
+	static register(view){
+		if (this.inspect){
+			// console.log("registering view");
+			this.registry.set(view.el, view);
+		}
+	}
+
+	static get registry(){
+		if (!this._registry) this._registry = new WeakMap();
+		return this._registry;
+	}
+
 	static set_captor(view){
 		View.previous_captors.push(View.captor);
 		View.captor = view;
@@ -507,9 +593,35 @@ export default class View {
 }
 
 View.stylesheets = [];
+View.lazy = Promise.resolve();
 
 export function icon(name){
 	return el.c("span", "material-icons icon", name);
+}
+
+export function append(...args){
+	View.captor.append(...args);
+}
+
+export async function load(meta, url){
+	if (is.str(meta)){ // .load("/file.js");
+		url = meta;
+	} else { // .load(import.meta, "file.js");
+		url = new URL(url, meta.url).href;
+	}
+
+	const placeholder = div.c("load");
+
+	const mod = await import(url);
+
+	if (mod.default?.el){
+		// no extra div.load
+		placeholder.replace(mod.default);
+	} else {
+		// if a function or other is exported, .replace doesn't work
+		placeholder.append(mod.default);
+	}
+
 }
 
 export const { el, div, p, style, h1, h2, h3, h4, h5, h6, span, ul, ol, li, pre, code, button, a, section, nav, footer, header, main, article, aside, form, label, input, textarea, select, option, fieldset, legend, img, video, audio, iframe, table, thead, tbody, tr, th, td, blockquote, cite, dfn, em, i, kbd, mark, q, s, samp, small, strong, u, br, hr, b, abbr, del, ins, sub, sup, time, meter, progress, data, details, summary, figure, figcaption } = View.elements();

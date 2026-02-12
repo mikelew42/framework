@@ -91,7 +91,8 @@ export default class Directory {
      * Convert "page-name" or "page_name" to "Page Name"
      */
     to_title(str) {
-        return str.replace(/[-_]/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+        return str;
+        // return str.replace(/[-_]/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
     }
 
     /**

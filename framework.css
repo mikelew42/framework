@@ -23,27 +23,53 @@
     :root {
         --prim: #5a57ff;
 	    --bg: #42404B;
+        --subtle: rgba(0,0,0,0.5);
         
         --column: 14em;
     }
     
+    :focus-visible {
+        /* outline: 2px solid var(--prim); don't do this, it messes with the outline's border radius??? */
+        outline-color: var(--prim);
+        outline-offset: 3px;
+        outline-width: 2px; /* doesn't seem to have an effect */
+    }
+
     html { height: 100%; scrollbar-color: rgba(0, 0, 0, 0.2) transparent; }
     
     body { height: 100%; font-size: clamp(16px, 2vw, 20px); accent-color: var(--prim); }
 
     .app { height: 100%; background: #ddd; /* overflow-x: hidden; overflow-y: scroll; */}
 
-    .page { max-width: 50em; background: #fff; padding: 3em 4em;}
+    .page { max-width: 60em; background: #fff; padding: 4rem;}
 
-    section { margin-bottom: 3em;}
+    /*  section { margin-bottom: 3em;} no bueno */
+    /* section.mb { margin-bottom: 3em;}
+    @layer util .mb overrides this theme layer mb */
+
+    
+    .page > section { margin: 3em 0;}
     
     /* h1, h2, h3, h4, h5, h6 { line-height: 1.2; margin: 1em 0; } */
 
+    hr { margin: 3em 0; }
+
     pre, code { font-family: Consolas, 'Courier New', Monaco, monospace; }
 
-    input:not([type="checkbox"], [type="radio"], [type="submit"], [type="color"], [type="button"], [type="reset"]), select, textarea {
+    input:not([type="checkbox"], [type="radio"], [type="color"]), select, textarea {
         padding: 0.25em 0.5em;
+        border: 1px solid var(--subtle); /* adding a border affects input[type=submit] height and bg + hover, for some reason */
     }
+
+    fieldset > p:first-of-type {
+        margin-top: 0;
+    }
+
+    select {     appearance: none;
+    background: field no-repeat 100%;
+    background-size: 0.5em;
+    background-origin: content-box;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='60' height='40' fill='%23555'><polygon points='0,0 60,0 30,40'/></svg>"); }
 
     .btn, button { padding: 0.25em 1em; cursor: pointer; }
     button.bg, .btn.bg { background: var(--bg); color: white; }
@@ -63,6 +89,7 @@
     .flex-1 { flex: 1; }
     .flex.all-1 > * { flex: 1; }
     .flex.v { flex-direction: column; }
+    .flex.reverse { flex-direction: row-reverse; }
     .flex.h-center { justify-content: center; }
     .flex.v-center { align-items: center; align-content: center; }
     .flex.split { justify-content: space-between; }
@@ -71,7 +98,9 @@
 
     .grid { display: grid; }
     .grid.auto { grid-template-columns: repeat(auto-fit, minmax(min(var(--column), 100%), 1fr)); }
-    
+    .grid.three { grid-template-columns: repeat(auto-fit, 
+		minmax(clamp(100% / 3 - 1rem, (var(--column) - 100%) * 999, 100%), 1fr)); }
+
     .gap { gap: 1em; }
     .gap-2em { gap: 2em; }
 
@@ -83,6 +112,7 @@
     .zoom-150 { zoom: 1.5; }
     .zoom-175 { zoom: 1.75; }
     .zoom-200 { zoom: 2; }
+    .zoom-responsive { zoom: clamp(0.5, calc(100vw / 40em), 1); }
 
     .capitalize { text-transform: capitalize; }
     .uppercase { text-transform: uppercase; }

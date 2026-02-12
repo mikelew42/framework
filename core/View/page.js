@@ -1,10 +1,27 @@
-import app, { el, div, View, h1, h2, h3, p, is, test, Test } from "../../../app.js";
-
+import app, { el, div, View, h1, h2, h3, p, is, test, Test, load } from "/app.js";
+app.inject();
 app.$root.ac("page");
 
 h1("class View");
 
 Test.controls();
+
+test("prom", async t => {
+    div("one");
+    div(Promise.resolve("two"));
+    div("three");
+    div("four", async d => {
+        div("inside four");
+        await Promise.resolve();
+        return div("inside four #2");
+    });
+});
+
+test("load", t => {
+    p("Before load.");
+    load("./file.js");
+    p("After load.");
+});
 
 
 test("create a view using new", t => {

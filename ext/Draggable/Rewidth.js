@@ -46,6 +46,7 @@ export function rewidth(...args){
 
 rewidth.c = function(cls, ...args){
     return div.c("viewport", viewport => {
+        viewport.ac(cls);
         viewport.append(...args);
         viewport.handle = div.c("handle");
 
@@ -53,5 +54,5 @@ rewidth.c = function(cls, ...args){
             view: viewport.handle,
             viewport: viewport
         });
-    }).ac(cls);
+    });
 }

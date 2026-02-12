@@ -35,7 +35,12 @@ dum.image = image;
 dum.contact = contact;
 
 dum.c = function(classes, ...args) {
-	return dum(...args).ac(classes);
+    // add classes first, so dum.c("class", dm => {}) has class already (was necessary for the view.ctrl() toggle)
+	return dum().ac(classes).append(dum => {
+		for (const view of args) {
+			dum.append(fill(view));
+		}
+	});
 };
 
 export { dum, fill, fill_map };

@@ -1,0 +1,56 @@
+/* Inspector Container */
+.inspector { padding: 1em; min-width: 14em; }
+.inspector h3 { margin: 0 0 .5em; }
+
+/* Inspect Toggle Button */
+.inspector .inspect-btn {
+	padding: .5em 1em;
+	background: var(--bg-2, #333);
+	border: 1px solid var(--border, #555);
+	border-radius: 4px;
+	cursor: pointer;
+	color: white;
+	margin-bottom: 1em;
+}
+.inspector .inspect-btn:hover { background: var(--bg-3, #444); }
+.inspector .inspect-btn.active {
+	background: var(--accent, #4af);
+	color: var(--bg, #111);
+}
+
+/* Inspector Content */
+.inspector-content { display: flex; flex-direction: column; gap: .5em; }
+
+/* Inspector Panels (hidden by default, shown via inspector-active) */
+.inspector-panel { display: none; }
+.inspector-panel.inspector-active { display: block; }
+.inspector-panel h4 { margin: 0 0 .5em; font-size: 1em; }
+.inspector-panel h5 { margin: .5em 0 .25em; font-size: .85em; opacity: .7; }
+
+/* Class Controls Section */
+.inspector .class-section { margin-top: .5em; }
+.inspector .class-ctrls { display: flex; flex-direction: column; gap: .25em; }
+.inspector .class-ctrls label { display: flex; align-items: center; gap: .5em; font-size: .9em; }
+
+/* Navigation */
+.inspector-nav { margin-bottom: .5em; }
+.inspector .nav-btn {
+	padding: .25em .5em;
+	background: var(--bg-2, #333);
+	border: 1px solid var(--border, #555);
+	border-radius: 4px;
+	cursor: pointer;
+	color: white;
+	font-size: .85em;
+}
+.inspector .nav-btn:hover { background: var(--bg-3, #444); }
+
+/* Raw element info */
+.inspector .label { opacity: .6; }
+.inspector .tag { font-family: monospace; font-weight: bold; }
+.inspector .raw-classes { font-family: monospace; font-size: .85em; word-break: break-all; }
+.inspector .empty { opacity: .5; font-style: italic; }
+
+/* Hover/Selected Outlines */
+.inspector-hover { outline: 2px dashed var(--accent, #4af) !important; outline-offset: 2px; }
+.inspector-selected { outline: 2px solid var(--accent, #4af) !important; outline-offset: 2px; }

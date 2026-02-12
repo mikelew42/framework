@@ -1,4 +1,4 @@
-import { App, div, el, View, icon, code, h1, h2, h3, p, style, pre } from "../../core/App/App.js";
+import { App, div, el, View, icon, p, style, h1, h2, h3, h4, h5, h6, span, ul, ol, li, pre, code, button, a, section, nav, footer, header, main, article, aside, form, label, input, textarea, select, option, fieldset, legend, img, video, audio, iframe, table, thead, tbody, tr, th, td, blockquote, cite, dfn, em, i, kbd, mark, q, s, samp, small, strong, u, br, hr, b, abbr, del, ins, sub, sup, time, meter, progress, data, details, summary, figure, figcaption } from "../../core/App/App.js";
 import Draggable from "../Draggable/Draggable.js";
 
 App.stylesheet(import.meta, "CodeEditor.css");
