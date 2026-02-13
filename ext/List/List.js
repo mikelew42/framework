@@ -5,7 +5,7 @@ import ListView from "./List.View.js";
 import App from "../../core/App/App.js";
 
 
-App.stylesheet(import.meta, "styles.css");
+App.stylesheet(import.meta, "List.css");
 
 
 export default class List extends Base {

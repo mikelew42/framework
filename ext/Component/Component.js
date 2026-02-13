@@ -66,12 +66,14 @@ export default class Component {
 				await this.initialize();
 				return this;
 			});
-			
+		
+		// assume if data is present, it's from a parent component
 		}  else {
 			this.saver = this.parent.saver;
-		}// assume if data is present, it's from a parent component
+		}
 	}
   
+	// override point
 	load_file(){
 		this.file = new this.File(this.file || {
 			name: this.name + ".json",

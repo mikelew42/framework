@@ -467,6 +467,13 @@
 							"path": "framework/ext/Component",
 							"type": "file",
 							"full": "framework/ext/Component/page.js"
+						},
+						{
+							"name": "tests",
+							"path": "framework/ext/Component",
+							"type": "dir",
+							"full": "framework/ext/Component/tests",
+							"children": []
 						}
 					]
 				},
@@ -543,6 +550,12 @@
 					"full": "framework/ext/Draggable",
 					"children": [
 						{
+							"name": "Draggable.css",
+							"path": "framework/ext/Draggable",
+							"type": "file",
+							"full": "framework/ext/Draggable/Draggable.css"
+						},
+						{
 							"name": "Draggable.js",
 							"path": "framework/ext/Draggable",
 							"type": "file",
@@ -579,10 +592,18 @@
 							"full": "framework/ext/Draggable/Sortable.js"
 						},
 						{
-							"name": "styles.css",
+							"name": "test",
 							"path": "framework/ext/Draggable",
-							"type": "file",
-							"full": "framework/ext/Draggable/styles.css"
+							"type": "dir",
+							"full": "framework/ext/Draggable/test",
+							"children": [
+								{
+									"name": "page.js",
+									"path": "framework/ext/Draggable/test",
+									"type": "file",
+									"full": "framework/ext/Draggable/test/page.js"
+								}
+							]
 						}
 					]
 				},
@@ -823,6 +844,12 @@
 					"full": "framework/ext/List",
 					"children": [
 						{
+							"name": "List.css",
+							"path": "framework/ext/List",
+							"type": "file",
+							"full": "framework/ext/List/List.css"
+						},
+						{
 							"name": "List.js",
 							"path": "framework/ext/List",
 							"type": "file",
@@ -839,12 +866,6 @@
 							"path": "framework/ext/List",
 							"type": "file",
 							"full": "framework/ext/List/page.js"
-						},
-						{
-							"name": "styles.css",
-							"path": "framework/ext/List",
-							"type": "file",
-							"full": "framework/ext/List/styles.css"
 						}
 					]
 				},

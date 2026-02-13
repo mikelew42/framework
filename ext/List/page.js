@@ -1,4 +1,4 @@
-import { app, el, div, test, View } from "/app.js";
+import app, { el, div, test, View } from "/app.js";
 import List from "./List.js";
 
 app.$root.ac("pad");

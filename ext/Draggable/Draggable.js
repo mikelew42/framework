@@ -3,7 +3,7 @@ import View from "../../core/View/View.js";
 import App from "../../core/App/App.js";
 import is from "../../lib/is.js";
 
-App.stylesheet(import.meta, "styles.css");
+View.stylesheet(import.meta, "Draggable.css");
 /**
  * 		draggable({ 
 				handle: this.bar,

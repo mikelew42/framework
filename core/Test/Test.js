@@ -1,6 +1,7 @@
 import View, { el, div, is } from "../View/View.js";
+import { rewidth } from "../../ext/Draggable/Rewidth.js";
 
-// View.stylesheet(import.meta, "Test.css");
+View.stylesheet(import.meta, "Test.css");
 
 
 export default class Test {
@@ -11,7 +12,7 @@ export default class Test {
 	render(){
 		this.view = div.c("test", {
 			name: div(this.name).click(this.activate.bind(this)),
-			container: div()
+			container: rewidth()
 		});
 
 		this.should_run() && this.run();

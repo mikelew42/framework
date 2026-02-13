@@ -2,13 +2,13 @@ import is from "../../lib/is.js";
 
 export default class View {
 
-	tag = "div";
+	// tag = "div"; // this prevents Extension.prototype.tag = "other" 
 	// capture = true; // this is set on View.prototype at end of file
 
 	constructor(...args){
 		this.assign(...args);
 		this.prerender();
-		this.constructor.register(this);
+		// this.constructor.register(this);
 		this.initialize();
 	}
 
@@ -46,7 +46,7 @@ export default class View {
 		var cls = this.constructor;
 
 		while (cls !== View){
-			this.ac(cls.name.replace("View", "").toLowerCase());
+			this.ac(cls.name.replace("View", "").split(/(?=[A-Z])/).join("-").toLowerCase());
 			cls = Object.getPrototypeOf(cls);
 		}
 
