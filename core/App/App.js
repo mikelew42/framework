@@ -154,8 +154,8 @@ export default class App {
 		}
 	}
 
-	static meta_to_url(meta, url) {
-		return new URL(url, meta.url).href;
+	static meta_path(meta, path) {
+		return new URL(path, meta.url).href;
 	}
 }
 
@@ -191,5 +191,6 @@ Font.fonts = {
 // this needs to be import.meta.resolve("framework.css") for it to work on a CDN
 // App.stylesheet(import.meta, "../../framework.css");
 
-export { Events, App, Test, test };
+export { Events, App };
+export * from "../Test/Test.js";
 export * from "../View/View.js";

@@ -1,4 +1,5 @@
 import Events from "../../core/Events/Events.js";
+import util from "../../lib/util.js";
 
 export default class Socket extends Events {
 	static singleton() {
@@ -15,32 +16,34 @@ export default class Socket extends Events {
 		this.connect();
 	}
 	connect() {
+		this.ready = util.promise();
 		this.ws = new WebSocket(this.protocol + "://" + window.location.host);
 		this.ws.addEventListener("open", () => this.open());
 		this.ws.addEventListener("message", res => this.message(res));
 		this.ws.addEventListener("close", () => {
-			console.log("Socket closed");
-			// setTimeout(() => this.connect(), 0);
-			// this.connect(); // strangely this works.  
+			console.warn("Socket closed, attempting reconnect");
+			// this will refresh .ready (and won't resolve unless reconnected),
+			// which will prevent subsequent send()s until reconnected.
+			this.connect();
 		});
 		this.ws.addEventListener("error", err => {
-			console.log("Socket error:", err, this.fails + " fails.");
+			console.warn("Socket error:", err, this.fails + " fails.");
 
 			if (this.fails <= 3) {
-				console.log("Attempting to reconnect in 1 second.");
 				this.fails++;
-				setTimeout(() => this.connect(), 1000);
+				console.warn(`Attempting to reconnect in ${this.fails} second(s).`);
+				setTimeout(() => this.connect(), 1000 * this.fails);
+			} else {
+				console.error("Socket error, giving up.");
+				this.ready.reject(err);
 			}
 		});
 
-		this.ready = new Promise((res, rej) => {
-			this._ready = res;
-		});
 	}
 	open() {
 		console.log("%cSocket connected.", "color: green; font-weight: bold;");
 		// this.rpc("log", "connected!");
-		this._ready();
+		this.ready.resolve();
 	}
 	// message recieved handler
 	message(res) {
@@ -65,21 +68,24 @@ export default class Socket extends Events {
 	}
 
 	async send(obj) {
-		console.log("sending", obj);
+		// console.trace("sending", obj);
 		await this.ready;
 		this.ws.send(JSON.stringify(obj));
 	}
 
 	async request(obj) {
-		this.response = new Promise(resolve => {
+		let response = new Promise(resolve => {
 			obj.index = this.requests.push(resolve) - 1;
 		});
 
-		await this.ready;
-		this.ws.send(JSON.stringify(obj));
+		await this.send(obj);
 
 
-		return this.response;
+		return response;
+	}
+
+	async async_rpc(method, ...args){
+		return this.request({ method, args });
 	}
 
 	rpc(method, ...args) {

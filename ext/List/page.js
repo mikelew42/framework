@@ -35,11 +35,11 @@ test("new List", t => {
 
     // list.find()
     
-    const list2 = list.map(item => item.toString().toUpperCase());
-    list2.log();
+    // const list2 = list.map(item => item.toString().toUpperCase());
+    // list2.log();
 
     list.log();
-    console.log(list.children === list2.children); // false, but same items
+    // console.log(list.children === list2.children); // false, but same items
 });
 
 test("animals", t => {

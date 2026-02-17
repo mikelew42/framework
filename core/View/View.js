@@ -500,23 +500,31 @@ export default class View {
 		View.captor = View.previous_captors.pop();
 	}
 
+	static meta_path(meta, path){
+		return new URL(path, meta.url).href;
+	}
+
+	static url(meta, path){
+		if (is.str(meta)){ // url("/file.js");
+			return meta;
+		} else { // url(import.meta, "file.js");
+			return View.meta_path(meta, path);
+		}
+	}
+
 	/**
 	 * View.stylesheet("path/file.css")
 	 * or
 	 * View.stylesheet(import.meta, "path/file.css")
 	 */
 	static stylesheet(meta, url){
-		if (is.str(meta)){ // stylesheet("/styles.css");
-			url = meta;
-		} else { // stylesheet(import.meta, "file.css");
-			url = new URL(url, meta.url).href;
-		}
+		url = View.url(meta, url);
 
 		const prom = new Promise((res, rej) => {
 			new View({ tag: "link" }).attr("rel", "stylesheet").attr("href", url)
 				.append_to(document.head).on("load", () => {
 					res(); // if a stylesheet fails to load, the app won't render?  should probably render an error message
-					console.log("stylesheet loaded", url);
+					// console.log("stylesheet loaded", url);
 				});
 		});
 		

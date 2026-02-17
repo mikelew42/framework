@@ -15,6 +15,7 @@ test("create an instance", async t => {
     }).ready;
     console.log("file1", file);
 
+	t.assert(file.data.prop1 === "one", "prop1 should be one");
     if (!file.data.prop1){
         file.data.prop1 = "one";
         file.save();
@@ -26,6 +27,11 @@ test("specify path", async t => {
         name: "test2.ext",
         path: "framework/ext/File/test2"
     }).ready;
+	t.assert(file.data.prop1 === "one", "prop1 should be one");
+    if (!file.data.prop1){
+        file.data.prop1 = "one";
+        file.save();
+    }
 });
 
 function noop(){

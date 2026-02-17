@@ -8,22 +8,33 @@ import App from "../../core/App/App.js";
 App.stylesheet(import.meta, "List.css");
 
 
-export default class List extends Base {
-    
-	instantiate(...args){
+export default class List {
+	constructor(...args){
 		this.assign(...args);
-        this.immediate?.();
-
-        // children might be passed during cloning
-        this.set_children(this.children || []);
-
-        this.initialize();
+		this.instantiate();
+		this.initialize();
 	}
 
-    set_children(children){
-        this.children = children;
-        this.each(child => this.adopt(child));
-    }
+	assign(...args){
+		return Object.assign(this, ...args);
+	}
+    
+	instantiate(){
+		this.instantiate_list();
+	}
+	
+	instantiate_list(){
+		this.immediate?.();
+	
+		// children might be passed during cloning
+		// this.set_children(this.children || []);
+		this.children = this.children || [];
+	}
+
+    // set_children(children){
+    //     this.children = children;
+    //     this.each(child => this.adopt(child));
+    // }
 
     initialize(){}
 
@@ -143,7 +154,7 @@ export default class List extends Base {
 
 
     insert(child, index){
-        this.adopt(child);
+        // this.adopt(child);
         this.children.splice(index, 0, child);
         this.changed();
         return this;

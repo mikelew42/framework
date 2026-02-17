@@ -1,4 +1,4 @@
-import app, { el, div, View, h1, h2, h3, p, is, test, Test } from "/app.js";
+import app, { el, div, View, h1, h2, h3, p, is, test, Test, assert } from "/app.js";
 import Component from "./Component.js";
 
 Test.controls();
@@ -12,7 +12,7 @@ test("create an instance", async t => {
         path: "framework/ext/Component/tests"
     }).ready;
     comp.set("test", "prop4");
-
+	// assert(comp.get("test") === "prop4");
 });
 test("create a relative instance", async t => {
 
@@ -20,7 +20,7 @@ test("create a relative instance", async t => {
         path: "framework/ext/Component"
     }).ready;
     comp.set("test", "prop5");
-
+	// assert(comp.get("test") === "prop5"); don't think assert will work for async?
 });
 
 

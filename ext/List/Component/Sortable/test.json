@@ -1,0 +1,25 @@
+{
+    "name": "test",
+    "type": "FileComponent",
+    "sortable_list": {
+        "name": "sortable-list",
+        "type": "SortableListComponent",
+        "children": [
+            {
+                "name": "Step 1",
+                "type": "SortableListComponent",
+                "children": []
+            },
+            {
+                "name": "Step 2",
+                "type": "SortableListComponent",
+                "children": []
+            },
+            {
+                "name": "Step 3",
+                "type": "SortableListComponent",
+                "children": []
+            }
+        ]
+    }
+}

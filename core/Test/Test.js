@@ -7,11 +7,21 @@ View.stylesheet(import.meta, "Test.css");
 export default class Test {
 	constructor(...args){
 		Object.assign(this, ...args);
+
+		// console.log("test fn.toString()", this.value.toString());
+		this.assertion_count = 0;
+
+		// const regex = /assert\s*\(\s*(.+?)\s*\)/g;
+		const regex = /assert\s*\(\s*([\s\S]+?)\s*\)(?=\s*;?\s*$|;)/gm;
+		this.assertion_conditions = [...this.value.toString().matchAll(regex)].map(match => match[1]);
+
+		// console.log(this.assertion_conditions);
+
 	}
 	
 	render(){
 		this.view = div.c("test", {
-			name: div(this.name).click(this.activate.bind(this)),
+			name: div().backtick_append(this.name).click(this.activate.bind(this)),
 			container: rewidth()
 		});
 
@@ -27,7 +37,7 @@ export default class Test {
 
 	run(){
 		console.group(this.name);
-		// Test.set_captor(this);
+		Test.set_captor(this);
 		View.set_captor(this.view.container);
 		this.view.ac("ran");
 
@@ -36,7 +46,7 @@ export default class Test {
 		else 
 			console.warn("no test.fn");
 
-		// Test.restore_captor();
+		Test.restore_captor();
 		View.restore_captor();
 		console.groupEnd();
 	}
@@ -51,6 +61,26 @@ export default class Test {
 
 	assign(){
 		return Object.assign(this, ...arguments);
+	}
+
+	assert(condition, message){
+		const condition_code = this.assertion_conditions[this.assertion_count];
+		
+		if (!message)
+			message = condition_code;
+
+		if (!is.bool(condition))
+			message += " = " + condition;
+
+		if (condition){
+			console.log("Assertion:", message || condition_code, " Passed");
+			this.view.container.append(div.c("test-assert passed", message || condition_code || "Assertion passed."));
+		} else {
+			console.error("Assertion:", message || condition_code || "Assertion failed.", "Failed");
+			this.view.container.append(div.c("test-assert failed", message || condition_code || "Assertion failed."));
+		}
+		this.assertion_count++;
+		return condition; // if (assert(whatever)) ??
 	}
 }
 
@@ -85,4 +115,8 @@ Object.assign(Test, {
 	}
 });
 
+export { Test };
+export function assert(condition, message){
+	return Test.captor.assert(condition, message);
+}
 // Test.init();

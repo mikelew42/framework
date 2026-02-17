@@ -1,0 +1,12 @@
+{
+    "type": "FileComponent",
+    "name": "parent",
+    "child": {
+        "type": "Component0",
+        "name": "child",
+        "one": 1,
+        "two": {
+            "three": 3
+        }
+    }
+}

@@ -132,6 +132,10 @@ export default class Component {
 		return Object.assign(this, ...args);
 	}
 
+	/**
+	 * Updating is entirely in the Deep class, right now, and updates the view.
+	 * Not sure why we were debouncing the update?
+	 */
 	changed(){
 		this.save();
 

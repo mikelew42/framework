@@ -1,0 +1,16 @@
+{
+    "name": "test",
+    "type": "FileComponent",
+    "list": {
+        "name": "list",
+        "type": "ListComponent",
+        "children": [
+            "something"
+        ]
+    },
+    "my_arr": [
+        1,
+        true,
+        "three"
+    ]
+}

@@ -1,11 +1,9 @@
-import { app, el, div, test, View, p } from "/app.js";
+import app, { el, div, test, View, p } from "/app.js";
 import HashRouter from "./HashRouter.js";
 import Tabs, { tabs, tab } from "./HashTabs.js";
 
-app.$root.ac("pad flex flex-v");
+app.$root.ac("pad");
 el("style", `
-    * { margin:0; padding: 0; box-sizing: border-box; }
-    body { background: #eee; }
         
     .card { padding: 1em; max-width: 20em; background: white; margin-bottom: 1em;  }    
     
