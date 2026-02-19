@@ -18,7 +18,7 @@ export default class FileComponent extends Component0 {
 			this.data = this.file.data;
 			this.saver = this.file;
 
-			this.instantiate_children();
+			this.instantiate_data();
 		}
 		
 		return this;
@@ -30,22 +30,4 @@ export default class FileComponent extends Component0 {
 			path: this.path
 		}, ...args);
 	}
-
-	instantiate_children(){
-		for (const name in this.data){
-			const data = this.data[name];
-			if (data?.type){
-				const Type = this.constructor.types.find(t => t.name === data.type);
-				if (Type){
-					const instance = new Type({ parent: this, data, name });
-					this[name] = instance;
-				} else {
-					console.warn("Component type not found:", data.type);
-				}
-			}
-		}
-	}
 }
-
-FileComponent.types = [];
-FileComponent.types.push(FileComponent, Component0);

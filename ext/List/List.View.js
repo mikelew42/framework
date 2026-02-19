@@ -18,7 +18,7 @@ export default class ListView extends View {
 
 	update(){
 		// debugger;
-		this.children.buffer();
+		// this.children.buffer();
 		this.children.empty(() => {
 			this.list.each(child => {
 				this.render_child(child);
@@ -30,7 +30,7 @@ export default class ListView extends View {
 				// }
 			});
 		});
-		this.children.flush();
+		// this.children.flush();
 	}
 
 	render_child(child){

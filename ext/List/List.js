@@ -53,6 +53,7 @@ export default class List {
     }
 
     changed(){
+		// debugger;
 		if (this.update && !this.updating){
 			this.updating = setTimeout(() => {
                 this.update();
@@ -154,7 +155,7 @@ export default class List {
 
 
     insert(child, index){
-        // this.adopt(child);
+        this.adopt(child);
         this.children.splice(index, 0, child);
         this.changed();
         return this;

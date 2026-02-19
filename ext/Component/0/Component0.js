@@ -15,10 +15,11 @@ export default class Component0 {
 
     instantiate() {
 		this.instantiate_component();
+		this.instantiate_data();
     }
 
 	instantiate_component(){
-        this.name = this.name || util.slug(this.type);
+        this.name = this.name || util.slug(this.constructor.name);
 		this.type = this.constructor.name;
 
         // this.constructor.track(this);
@@ -26,10 +27,11 @@ export default class Component0 {
 		if (this.parent)
 			this.setup();
 
+		// base component doesn't need to load?
 		this.ready = this.load();
 	}
 
-    initialize() {}
+    initialize(){}
 
 	/**
 	 * Are these base components always attached to a FileComponent or LocalComponent?
@@ -61,20 +63,17 @@ export default class Component0 {
 			for (const prop in name){
 				this.set(prop, name[prop]); // requires debounce
 			}
-		} else if (value?.setup){
-			value.setup(this, name);
-			this.changed();
 		} else {
 			const current = this.data[name];
 
-			if (current?.set){
-				console.warn("set(name, value) ?") // not sure this is used
-				current.set(value);
-			} else {
-				if (current !== value){
-					this.data[name] = value;	
-					this.changed();
+			if (current !== value){
+				this.data[name] = value;
+
+				if (value?.setup){
+					value.setup(this, name);
 				}
+
+				this.changed();
 			}
 		}
 
@@ -88,11 +87,7 @@ export default class Component0 {
 	}
 	
 	get(name){
-		const value = this.data[name];
-		if (value?.get)
-			return value.get(); // ? what type of instance is this?
-		else
-			return value;
+		return this.data[name];
 	}
 
 	/**
@@ -106,8 +101,29 @@ export default class Component0 {
 		if (name)
 			this.name = name;
 		
-		this.parent.data[this.name] = this.data;
 		this.saver = this.parent.saver;
+	}
+
+	instantiate_data(){
+		for (const name in this.data){
+			const data = this.data[name];
+			if (data?.type){
+				const Type = this.constructor.get_Type(data.type);
+				// this[name] = new Type({ data, name, parent: this });
+				this.data[name] = new Type({ data, name, parent: this });
+			}
+		}
+	}
+
+	/**
+	 * This is important.  The JSON data gets instantiated, and those instances
+	 * live in the data object.  When we save, the root data object (which holds
+	 * all the nested data objects) gets JSON.stringified.  These instances use 
+	 * this method to only pass their .data.
+	 */
+	toJSON(){
+		// debugger;
+		return this.data;
 	}
 
 	async delete(){
@@ -125,4 +141,12 @@ export default class Component0 {
 	static get instances(){
 		return this._instances || (this._instances = []);
 	}
+
+	// get_Type("Thing") => returns class Thing
+	static get_Type(type){
+		return this.types.find(t => t.name === type);
+	}
 }
+
+Component0.types = [];
+Component0.types.push(Component0);
