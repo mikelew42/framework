@@ -11,6 +11,8 @@ test("Sortable.List spaced", t => {
 		t.view.tc("debug");
 	});
 	const list = new Sortable.List({ name: "Root" });
+
+	list.append(new Sortable.View().append("Item 0"));
 	list.append(new Sortable.List({ name: "Step 1" }));
 	list.append(new Sortable.List({ name: "Step 2" }));
 	list.append(new Sortable.List({ name: "Step 3" }));

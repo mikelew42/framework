@@ -53,6 +53,8 @@ export default class Draggable extends Events {
 		document.addEventListener("pointermove", this.pointermove);
 		document.addEventListener("pointerup", this.pointerup);
 
+		// can this be css?
+		// i believe this has to do with the pointermove e.target not being the dragged element
 		this.view?.ac("dragging").style("pointer-events", "none");
 		this.dragging = true;
 

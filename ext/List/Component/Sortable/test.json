@@ -6,51 +6,43 @@
         "type": "SortableListComponent",
         "children": [
             {
-                "name": "Step 3",
-                "type": "SortableListComponent",
-                "children": [
-                    {
-                        "name": "Step 2",
-                        "type": "SortableListComponent",
-                        "children": [
-                            {
-                                "name": "Step 5",
-                                "type": "SortableListComponent",
-                                "children": []
-                            }
-                        ]
-                    },
-                    {
-                        "name": "Step 6",
-                        "type": "SortableListComponent",
-                        "children": []
-                    },
-                    {
-                        "name": "Step 4",
-                        "type": "SortableListComponent",
-                        "children": []
-                    }
-                ]
-            },
-            {
-                "name": "Step 0",
-                "type": "SortableListComponent",
-                "children": []
-            },
-            {
-                "name": "Step 1",
-                "type": "SortableListComponent",
-                "children": []
-            },
-            {
                 "name": "Step 5",
                 "type": "SortableListComponent",
                 "children": []
             },
             {
-                "name": "Step 7",
+                "name": "Step 6",
                 "type": "SortableListComponent",
                 "children": []
+            },
+            {
+                "name": "Step 2",
+                "type": "SortableListComponent",
+                "children": [
+                    {
+                        "name": "Step 0",
+                        "type": "SortableListComponent",
+                        "children": [
+                            {
+                                "name": "Step 1",
+                                "type": "SortableListComponent",
+                                "children": [
+                                    {
+                                        "name": "Step 4",
+                                        "type": "SortableListComponent",
+                                        "children": [
+                                            {
+                                                "name": "Step 3",
+                                                "type": "SortableListComponent",
+                                                "children": []
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
             }
         ]
     }

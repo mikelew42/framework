@@ -259,8 +259,10 @@ export default class View {
 
 	attr(name, value){
 		// set
-		if (is.def(value) && value !== this.el.getAttribute(name)){ // see comment in html()
-			this.el.setAttribute(name, value);
+		if (is.def(value)){ // see comment in html()
+			if (value !== this.el.getAttribute(name)){
+				this.el.setAttribute(name, value);
+			}
 			return this;
 
 		// get

@@ -25,7 +25,7 @@ export default class Component0 {
         // this.constructor.track(this);
 
 		if (this.parent)
-			this.setup();
+			this.setup(this.parent);
 
 		// base component doesn't need to load?
 		this.ready = this.load();
@@ -95,13 +95,16 @@ export default class Component0 {
 	 * new Component({ parent }) => setup()
 	 */
 	setup(parent, name){
-		if (parent)
-			this.parent = parent;
-
+		console.log("setup", this, name, parent);
 		if (name)
 			this.name = name;
-		
-		this.saver = this.parent.saver;
+
+		if (parent){
+			this.parent = parent;
+			this.saver = this.parent.saver;
+		} else {
+			console.warn("must provide parent");
+		}
 	}
 
 	instantiate_data(){

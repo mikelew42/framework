@@ -40,7 +40,7 @@ export default class List {
 
     render(){
         if (!this.constructor.View)
-            throw "Need List.View class";
+            throw `Need ${this.constructor.name}.View class`;
 
         if (!this.views){
             this.views = new List({ list: this });
@@ -152,9 +152,9 @@ export default class List {
             });
         }
     }
-
-
+	
     insert(child, index){
+        if (index == null) index = this.children.length;
         this.adopt(child);
         this.children.splice(index, 0, child);
         this.changed();

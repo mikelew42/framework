@@ -782,6 +782,12 @@
 									"full": "framework/ext/Draggable/test/page.js"
 								}
 							]
+						},
+						{
+							"name": "todo.md",
+							"path": "framework/ext/Draggable",
+							"type": "file",
+							"full": "framework/ext/Draggable/todo.md"
 						}
 					]
 				},
@@ -1108,6 +1114,12 @@
 											"path": "framework/ext/List/Component/Sortable",
 											"type": "file",
 											"full": "framework/ext/List/Component/Sortable/page.js"
+										},
+										{
+											"name": "test.json",
+											"path": "framework/ext/List/Component/Sortable",
+											"type": "file",
+											"full": "framework/ext/List/Component/Sortable/test.json"
 										}
 									]
 								},
