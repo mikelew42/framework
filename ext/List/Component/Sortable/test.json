@@ -28,15 +28,14 @@
                                 "type": "SortableListComponent",
                                 "children": [
                                     {
+                                        "name": "Step 3",
+                                        "type": "SortableListComponent",
+                                        "children": []
+                                    },
+                                    {
                                         "name": "Step 4",
                                         "type": "SortableListComponent",
-                                        "children": [
-                                            {
-                                                "name": "Step 3",
-                                                "type": "SortableListComponent",
-                                                "children": []
-                                            }
-                                        ]
+                                        "children": []
                                     }
                                 ]
                             }

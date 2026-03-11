@@ -22,6 +22,7 @@ export default class ListComponent extends util.mixin(List, Component) {
 		for (let i = 0; i < this.children.length; i++){
 			const child = this.children[i];
 			if (child?.type){
+				// ListComponent.types[] must be the same as Component.types[], not sure that's best
 				const Type = this.constructor.get_Type(child.type);
 				this.children[i] = new Type({ data: child, name: child.name, parent: this });
 			}
@@ -29,7 +30,7 @@ export default class ListComponent extends util.mixin(List, Component) {
 	}
 	
     update(){
-		console.log("Update...");
+		// console.log("Update...");
 		// debugger;
         this.views && this.views.each(view => {
             view.update(this);
@@ -39,7 +40,7 @@ export default class ListComponent extends util.mixin(List, Component) {
 		console.log(this.children.map(c => c.name));
 		console.groupEnd();
 
-		console.log("Saving?");
+		// console.log("Saving?");
 		this.save();
     }
 
@@ -48,7 +49,7 @@ export default class ListComponent extends util.mixin(List, Component) {
 		// List.changed => update => save()
 
 		// Without this, Component's changed was overriding List's changed
-		console.log("changed?");
+		// console.log("changed?");
 		List.prototype.changed.call(this);
 	}
 
