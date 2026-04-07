@@ -1172,6 +1172,32 @@
 					]
 				},
 				{
+					"name": "Markdown",
+					"path": "framework/ext",
+					"type": "dir",
+					"full": "framework/ext/Markdown",
+					"children": [
+						{
+							"name": "example.md",
+							"path": "framework/ext/Markdown",
+							"type": "file",
+							"full": "framework/ext/Markdown/example.md"
+						},
+						{
+							"name": "Markdown.js",
+							"path": "framework/ext/Markdown",
+							"type": "file",
+							"full": "framework/ext/Markdown/Markdown.js"
+						},
+						{
+							"name": "page.js",
+							"path": "framework/ext/Markdown",
+							"type": "file",
+							"full": "framework/ext/Markdown/page.js"
+						}
+					]
+				},
+				{
 					"name": "Module",
 					"path": "framework/ext",
 					"type": "dir",
