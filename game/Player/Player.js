@@ -1,10 +1,9 @@
 import * as THREE from 'three';
 import RAPIER from '@dimforge/rapier3d-compat';
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
-import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader.js';
 
 /**
- * Player class - Manages the character mesh, physics body, animations, and actions.
+ * Player class - Base class for characters.
+ * Manages the physics body, common movement logic, and animation mixer.
  */
 export class Player {
     constructor(game) {
@@ -21,71 +20,34 @@ export class Player {
         this.maxSpeed = 5.0;
         this.jumpForce = 8.0;
         this.isGrounded = true;
-        this.soldierArrow = null;
-        this.jumpArrow = null;
+
+        this.spawnPoint = { x: 0, y: 5, z: 0 };
     }
 
-    async load(url = 'https://threejs.org/examples/models/gltf/Soldier.glb') {
-        const gltfLoader = new GLTFLoader();
-        const fbxLoader = new FBXLoader();
+    /**
+     * Override this in subclasses to load specific models and animations.
+     */
+    async load() {
+        // Base implementation does nothing or sets up a placeholder
+        return this;
+    }
+
+    /**
+     * Helper to create a standard capsule physics body.
+     */
+    createPhysicsBody(x, y, z, radius = 0.4, height = 0.4) {
+        const rigidBodyDesc = RAPIER.RigidBodyDesc.dynamic()
+            .setTranslation(x, y, z)
+            .setCanSleep(false)
+            .setLinearDamping(2.0);
+
+        this.body = this.game.world.createRigidBody(rigidBodyDesc);
+        this.body.setEnabledRotations(false, true, false, true);
+
+        const colliderDesc = RAPIER.ColliderDesc.capsule(height, radius);
+        this.game.world.createCollider(colliderDesc, this.body);
         
-        return new Promise((resolve) => {
-            gltfLoader.load(url, (gltf) => {
-                this.mesh = gltf.scene;
-                this.mesh.traverse(child => {
-                    if (child.isMesh) child.castShadow = true;
-                });
-                
-                this.game.scene.add(this.mesh);
-
-                // Physics Body
-                const rigidBodyDesc = RAPIER.RigidBodyDesc.dynamic()
-                    .setTranslation(0, 5, 0)
-                    .setCanSleep(false)
-                    .setLinearDamping(2.0);
-
-                this.body = this.game.world.createRigidBody(rigidBodyDesc);
-                this.body.setEnabledRotations(false, true, false, true);
-
-                const colliderDesc = RAPIER.ColliderDesc.capsule(0.4, 0.4);
-                this.game.world.createCollider(colliderDesc, this.body);
-
-                // Animations
-                this.mixer = new THREE.AnimationMixer(this.mesh);
-                gltf.animations.forEach(clip => {
-                    this.actions[clip.name] = this.mixer.clipAction(clip);
-                });
-
-                // Load Jump Animation
-                fbxLoader.load('/Jumping.fbx', (fbx) => {
-                    if (fbx.animations && fbx.animations.length > 0) {
-                        const clip = fbx.animations[0];
-                        clip.name = 'Jump';
-                        this.actions['Jump'] = this.mixer.clipAction(clip);
-                    }
-
-                    // Soldier Local Z+ (currently pointing backwards according to user)
-                    const soldierDir = new THREE.Vector3(0, 0, 1);
-                    const soldierOrigin = new THREE.Vector3(0, 1, 0);
-                    this.soldierArrow = new THREE.ArrowHelper(soldierDir, soldierOrigin, 2, 0xffff00); // Yellow
-                    this.mesh.add(this.soldierArrow);
-
-                    // Jump Animation Placeholder Arrow
-                    // This will help identify where the FBX animation thinks 'forward' is
-                    const jumpDir = new THREE.Vector3(0, 0, 1);
-                    const jumpOrigin = new THREE.Vector3(0, 1.5, 0); // Higher up
-                    this.jumpArrow = new THREE.ArrowHelper(jumpDir, jumpOrigin, 2, 0x00ffff); // Cyan
-                    this.mesh.add(this.jumpArrow);
-
-                    this.fadeToAction('Idle', 0);
-                    resolve(this);
-                }, undefined, (error) => {
-                    console.error('Error loading jump animation:', error);
-                    this.fadeToAction('Idle', 0);
-                    resolve(this);
-                });
-            });
-        });
+        return this.body;
     }
 
     fadeToAction(name, duration) {
@@ -163,13 +125,10 @@ export class Player {
         // Trigger jump animation if available
         const jumpAction = this.actions['Jump'];
         if (jumpAction) {
-            // Estimate air time: t = 2 * v0 / g
-            // Assuming mass ~1 and starting from grounded
             const v0 = this.jumpForce; 
             const g = 9.81;
             const estimatedAirTime = (2 * v0) / g;
             
-            // Scale animation to fit the jump duration
             const clipDuration = jumpAction.getClip().duration;
             jumpAction.setEffectiveTimeScale(clipDuration / estimatedAirTime);
             jumpAction.setLoop(THREE.LoopOnce);
@@ -179,14 +138,6 @@ export class Player {
         }
     }
 
-    setHP(val) {
-        this.hp = val;
-    }
-
-    getHP() {
-        return this.hp;
-    }
-
     update(delta) {
         if (this.mixer) this.mixer.update(delta);
         
@@ -194,17 +145,28 @@ export class Player {
             const translation = this.body.translation();
             this.mesh.position.set(translation.x, translation.y, translation.z);
 
-            // Simple grounded check: if vertical velocity is near zero and we are close to the ground
             const velocity = this.body.linvel();
             if (Math.abs(velocity.y) < 0.1 && translation.y < 1.2) {
                 if (!this.isGrounded) {
                     this.isGrounded = true;
-                    // If we were jumping, return to idle/walk based on movement
-                    // The move() method will handle animation state in next frame
                 }
             } else if (Math.abs(velocity.y) > 0.1) {
                 this.isGrounded = false;
             }
         }
     }
+
+    destroy() {
+        if (this.mesh) {
+            this.game.scene.remove(this.mesh);
+            // Dispose of geometries and materials if needed, though often mesh reuse is better
+        }
+        if (this.body) {
+            this.game.world.removeRigidBody(this.body);
+        }
+    }
+
+    setHP(val) { this.hp = val; }
+    getHP() { return this.hp; }
 }
+

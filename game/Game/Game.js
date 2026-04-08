@@ -1,8 +1,9 @@
 import * as THREE from 'three';
 import RAPIER from '@dimforge/rapier3d-compat';
-import { div, button, label, input, h2, span } from "/framework/core/View/View.js";
+import { div, button, label, input, h2, span, select, option } from "/framework/core/View/View.js";
 
-import { Player } from '../Player/Player.js';
+import { Soldier } from '../Player/Soldier.js';
+import { YBot } from '../Player/YBot.js';
 import { Controller } from '../Controller/Controller.js';
 import { OrbitCamera } from '../Camera/OrbitCamera.js';
 import { FollowCamera } from '../Camera/FollowCamera.js';
@@ -31,7 +32,7 @@ export class Game {
         this.clock = new THREE.Clock();
         
         // Components
-        this.player = new Player(this);
+        this.player = new YBot(this);
         this.controller = new Controller();
         
         // Camera System
@@ -163,6 +164,28 @@ export class Game {
         return camera;
     }
 
+    async switchPlayer(name) {
+        if (!this.player) return;
+
+        const pos = this.player.body ? this.player.body.translation() : { x: 0, y: 5, z: 0 };
+        this.player.destroy();
+
+        if (name === 'Soldier') {
+            this.player = new Soldier(this);
+        } else if (name === 'YBot') {
+            this.player = new YBot(this);
+        }
+
+        this.player.spawnPoint = { x: pos.x, y: pos.y + 0.5, z: pos.z }; // Spawn slightly above
+        await this.player.load();
+
+        // Update cameras to follow new player mesh
+        this.followCamera.update(0, this.player.mesh);
+        for (const vp of this.viewports) {
+            vp.camera.update(0, this.player.mesh);
+        }
+    }
+
     createSettingsUI() {
         const settingsBtn = button.c("settings-btn", "Settings");
         settingsBtn.style({
@@ -192,6 +215,7 @@ export class Game {
             };
 
             createToggle("Follow Camera", this.cameraMode === 'follow', (checked) => {
+                this.cameraMode = checked ? 'follow' : 'orbit';
                 this.activeCamera = checked ? this.followCamera : this.orbitCamera;
                 this.orbitCamera.setEnabled(this.cameraMode === 'orbit');
             });
@@ -210,6 +234,23 @@ export class Game {
                         timeScaleVal.el.textContent = this.timeScale.toFixed(2);
                     })
                     .style({ width: "100%", cursor: "pointer" });
+            }).style({ marginTop: "15px" });
+
+            div.c("setting-item", () => {
+                label("Character: ").style({ display: "block", color: "#fff", marginBottom: "5px" });
+                select().on("change", (e) => {
+                    this.switchPlayer(e.target.value);
+                }).append(
+                    option("Soldier").attr("value", "Soldier"),
+                    option("YBot").attr("value", "YBot").attr("selected", "selected")
+                ).style({
+                    width: "100%",
+                    padding: "5px",
+                    background: "#222",
+                    color: "#fff",
+                    border: "1px solid #444",
+                    borderRadius: "4px"
+                });
             }).style({ marginTop: "15px" });
         });
 
