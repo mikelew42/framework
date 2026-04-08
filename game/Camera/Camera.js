@@ -10,8 +10,10 @@ export class Camera {
         this.camera.position.set(5, 5, 10);
     }
 
-    onResize() {
-        this.camera.aspect = window.innerWidth / window.innerHeight;
+    onResize(width, height) {
+        width = width || window.innerWidth;
+        height = height || window.innerHeight;
+        this.camera.aspect = width / height;
         this.camera.updateProjectionMatrix();
     }
 

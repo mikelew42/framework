@@ -22,6 +22,7 @@ export class Controller {
         if (this.keys['s']) { moveDir.z += 1; isMoving = true; }
         if (this.keys['a']) { moveDir.x -= 1; isMoving = true; }
         if (this.keys['d']) { moveDir.x += 1; isMoving = true; }
+        if (this.keys[' ']) { player.jump(); }
 
         player.move(moveDir, delta);
     }
