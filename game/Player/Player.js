@@ -87,7 +87,7 @@ export class Player {
             this.body.applyImpulse(impulse, true);
 
             // Character orientation
-            const angle = Math.atan2(normalizedDir.x, normalizedDir.z) + Math.PI;
+            const angle = Math.atan2(normalizedDir.x, normalizedDir.z);
             this.mesh.rotation.y = angle;
 
             // Only transition to Walk if we're on the ground
