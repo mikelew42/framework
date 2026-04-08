@@ -265,7 +265,7 @@ export default class View {
 			}
 			return this;
 
-		// get
+		// get // we can't set attr to undefined...
 		} else {
 			return this.el.getAttribute(name);
 		}

@@ -3,6 +3,7 @@ import { rewidth } from "../../ext/Draggable/Rewidth.js";
 
 View.stylesheet(import.meta, "Test.css");
 
+window.fails = [];
 
 export default class Test {
 	constructor(...args){
@@ -73,11 +74,16 @@ export default class Test {
 			message += " = " + condition;
 
 		if (condition){
-			console.log("Assertion:", message || condition_code, " Passed");
+			console.log("Assertion:", message || condition_code, "Passed");
 			this.view.container.append(div.c("test-assert passed", message || condition_code || "Assertion passed."));
 		} else {
 			console.error("Assertion:", message || condition_code || "Assertion failed.", "Failed");
 			this.view.container.append(div.c("test-assert failed", message || condition_code || "Assertion failed."));
+			window.fails.push({
+				name: this.name,
+				condition: condition_code,
+				message: message
+			});
 		}
 		this.assertion_count++;
 		return condition; // if (assert(whatever)) ??
