@@ -68,34 +68,69 @@ export class Player {
         this.activeAction = nextAction;
     }
 
-    move(moveDir, delta) {
+    moveLocal(moveDir, delta, rightMouseDown, cameraYaw) {
         if (!this.body || !this.mesh) return;
 
-        const isMoving = Math.abs(moveDir.x) > 0 || Math.abs(moveDir.z) > 0;
+        // Mouse based rotation
+        if (rightMouseDown && cameraYaw !== null) {
+            // Camera theta is from target looking to camera. 
+            // We want character to face away from camera, so offset by PI.
+            this.mesh.rotation.y = cameraYaw + Math.PI;
+        } else if (!rightMouseDown) {
+            // A and D rotate the character when RMB is up
+            if (moveDir.x !== 0) {
+                this.mesh.rotation.y -= moveDir.x * 2.5 * delta;
+            }
+        }
+
+        const isMovingForward = Math.abs(moveDir.z) > 0;
+        const isStrafing = rightMouseDown && Math.abs(moveDir.x) > 0;
+        const isMoving = isMovingForward || isStrafing;
 
         if (isMoving) {
-            // Normalize direction vector
-            const length = Math.sqrt(moveDir.x ** 2 + moveDir.z ** 2);
-            const normalizedDir = { x: moveDir.x / length, z: moveDir.z / length };
+            const angle = this.mesh.rotation.y;
+            
+            // Forward is direction character is facing
+            const forwardX = Math.sin(angle);
+            const forwardZ = Math.cos(angle);
+            
+            // Right is 90 degrees offset (-PI/2)
+            const rightX = Math.sin(angle - Math.PI/2);
+            const rightZ = Math.cos(angle - Math.PI/2);
+            
+            let moveX = 0;
+            let moveZ = 0;
 
-            // Apply impulse based on direction
+            if (isMovingForward) {
+                // W gives z=-1, so -moveDir.z is +1. We move forward.
+                moveX += forwardX * -moveDir.z;
+                moveZ += forwardZ * -moveDir.z;
+            }
+            if (isStrafing) {
+                // D gives x=1, A gives x=-1. We move right/left.
+                moveX += rightX * moveDir.x;
+                moveZ += rightZ * moveDir.x;
+            }
+
+            // Normalize
+            const length = Math.sqrt(moveX * moveX + moveZ * moveZ);
+            if (length > 0) {
+                moveX /= length;
+                moveZ /= length;
+            }
+
+            // Apply impulse
             const impulse = { 
-                x: normalizedDir.x * this.force * delta * 60, 
+                x: moveX * this.force * delta * 60, 
                 y: 0, 
-                z: normalizedDir.z * this.force * delta * 60 
+                z: moveZ * this.force * delta * 60 
             };
             this.body.applyImpulse(impulse, true);
 
-            // Character orientation
-            const angle = Math.atan2(normalizedDir.x, normalizedDir.z);
-            this.mesh.rotation.y = angle;
-
-            // Only transition to Walk if we're on the ground
             if (this.isGrounded) {
                 this.fadeToAction('Walk', 0.2);
             }
         } else {
-            // Only transition to Idle if we're on the ground
             if (this.isGrounded) {
                 this.fadeToAction('Idle', 0.2);
             }

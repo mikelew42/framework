@@ -7,6 +7,7 @@ import { YBot } from '../Player/YBot.js';
 import { Controller } from '../Controller/Controller.js';
 import { OrbitCamera } from '../Camera/OrbitCamera.js';
 import { FollowCamera } from '../Camera/FollowCamera.js';
+import { HybridCamera } from '../Camera/HybridCamera.js';
 
 /**
  * Game class - A foundation for 3D physics-based games using Three.js and Rapier.
@@ -39,8 +40,9 @@ export class Game {
         this.viewports = [];
         this.orbitCamera = new OrbitCamera(this);
         this.followCamera = new FollowCamera(this);
-        this.activeCamera = this.orbitCamera;
-        this.cameraMode = 'orbit'; // 'orbit' or 'follow'
+        this.hybridCamera = new HybridCamera(this);
+        this.activeCamera = this.hybridCamera;
+        this.cameraMode = 'hybrid'; // 'orbit', 'follow', or 'hybrid'
         
         // Physics World
         this.world = null;
@@ -145,6 +147,8 @@ export class Game {
         let camera;
         if (cameraType === 'follow') {
             camera = new FollowCamera(this);
+        } else if (cameraType === 'hybrid') {
+            camera = new HybridCamera(this);
         } else {
             camera = new OrbitCamera(this, container);
         }
@@ -181,8 +185,9 @@ export class Game {
 
         // Update cameras to follow new player mesh
         this.followCamera.update(0, this.player.mesh);
+        this.hybridCamera.update(0, this.player.mesh, null);
         for (const vp of this.viewports) {
-            vp.camera.update(0, this.player.mesh);
+            vp.camera.update(0, this.player.mesh, null);
         }
     }
 
@@ -205,20 +210,28 @@ export class Game {
         const panel = div.c("settings-panel", () => {
             h2("Settings");
             
-            const createToggle = (labelStr, active, callback) => {
-                label.c("toggle", () => {
-                    input(() => { }).attr("type", "checkbox").attr("checked", active ? "checked" : null).on("change", (e) => {
-                        callback(e.target.checked);
-                    });
-                    span(" " + labelStr);
-                }).style({ display: "block", marginBottom: "10px", color: "#fff", cursor: "pointer" });
-            };
-
-            createToggle("Follow Camera", this.cameraMode === 'follow', (checked) => {
-                this.cameraMode = checked ? 'follow' : 'orbit';
-                this.activeCamera = checked ? this.followCamera : this.orbitCamera;
-                this.orbitCamera.setEnabled(this.cameraMode === 'orbit');
-            });
+            div.c("setting-item", () => {
+                label("Camera Mode: ").style({ display: "block", color: "#fff", marginBottom: "5px" });
+                select().on("change", (e) => {
+                    this.cameraMode = e.target.value;
+                    if (this.cameraMode === 'follow') this.activeCamera = this.followCamera;
+                    else if (this.cameraMode === 'orbit') this.activeCamera = this.orbitCamera;
+                    else if (this.cameraMode === 'hybrid') this.activeCamera = this.hybridCamera;
+                    
+                    this.orbitCamera.setEnabled(this.cameraMode === 'orbit');
+                }).append(
+                    option("Hybrid").attr("value", "hybrid").attr("selected", "selected"),
+                    option("Orbit").attr("value", "orbit"),
+                    option("Follow").attr("value", "follow")
+                ).style({
+                    width: "100%",
+                    padding: "5px",
+                    background: "#222",
+                    color: "#fff",
+                    border: "1px solid #444",
+                    borderRadius: "4px"
+                });
+            }).style({ marginBottom: "15px" });
 
             div.c("setting-item", () => {
                 label("Time Scale: ").style({ display: "block", color: "#fff", marginBottom: "5px" });
@@ -280,7 +293,7 @@ export class Game {
         const delta = this.clock.getDelta() * this.timeScale;
         
         // Update components
-        this.controller.update(delta, this.player);
+        this.controller.update(delta, this.player, this);
         this.player.update(delta);
         
         // Physics step with accumulator for consistent simulation at any time scale
@@ -295,11 +308,16 @@ export class Game {
         
         // Camera updates
         if (this.viewports.length === 0) {
-            this.activeCamera.update(delta, this.player.mesh);
+            this.activeCamera.update(delta, this.player.mesh, this.controller);
         } else {
             for (const vp of this.viewports) {
-                vp.camera.update(delta, this.player.mesh);
+                vp.camera.update(delta, this.player.mesh, this.controller);
             }
+        }
+        
+        // Reset controller mouse delta at end of frame
+        if (this.controller.reset) {
+            this.controller.reset();
         }
     }
 
