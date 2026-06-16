@@ -12,8 +12,17 @@ export default class Socket extends Events {
 		this.protocol = window.location.protocol === "https:" ? "wss" : "ws";
 		this.requests = [];
 		this.fails = 0;
+		this.ready = util.promise();
 
-		this.connect();
+		// Only a local dev server speaks this protocol. On a static host
+		// (production deploy) there's nothing to connect to, so don't even
+		// try — just stay disabled and let send()/request() no-op.
+		if (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") {
+			this.connect();
+		} else {
+			this.disabled = true;
+			this.ready.resolve();
+		}
 	}
 	connect() {
 		this.ready = util.promise();
@@ -68,12 +77,14 @@ export default class Socket extends Events {
 	}
 
 	async send(obj) {
+		if (this.disabled) return;
 		// console.trace("sending", obj);
 		await this.ready;
 		this.ws.send(JSON.stringify(obj));
 	}
 
 	async request(obj) {
+		if (this.disabled) return;
 		let response = new Promise(resolve => {
 			obj.index = this.requests.push(resolve) - 1;
 		});
