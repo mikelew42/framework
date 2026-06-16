@@ -176,6 +176,9 @@ test("Sortable.List spaced", t => {
 });
 
 test("Sortable.List", t => {
+	el("button", "Debug").click(() => {
+        t.view.tc("debug");
+    });
     const list = new Sortable.List({ name: "Root" });
     list.append(new Sortable.List({ name: "Step 1" }));
     list.append(new Sortable.List({ name: "Step 2" }));
