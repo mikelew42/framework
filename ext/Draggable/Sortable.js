@@ -135,7 +135,7 @@ export default class Sortable extends Movable {
     }
         
     preview(){
-        // console.group("preview");
+        console.warn("Sortable preview(), not used?");
 
         // is there no way to transition from/to same target, but index -> no index?
         // no index means no children, basically, so it's unlikely that 
@@ -199,7 +199,8 @@ export default class Sortable extends Movable {
 
 Sortable.Target = class SortableTarget extends Sortable {
 	preview(sortable, index){
-		if (index.el !== sortable.last_index?.el){
+		const target_changed = this !== sortable.last_target;
+		if (target_changed || index.el !== sortable.last_index?.el){
 			sortable.last_index = index;
 			// if index.el === null, this becomes an append
 			this.container.el.insertBefore(sortable.view.el, index.el);
