@@ -1,11 +1,13 @@
 import * as THREE from 'three';
 import RAPIER from '@dimforge/rapier3d-compat';
-import { div, button, label, input, h2, span } from "/framework/core/View/View.js";
+import { div, button, label, input, h2, span, select, option } from "/framework/core/View/View.js";
 
-import { Player } from '../Player/Player.js';
+import { Soldier } from '../Player/Soldier.js';
+import { YBot } from '../Player/YBot.js';
 import { Controller } from '../Controller/Controller.js';
 import { OrbitCamera } from '../Camera/OrbitCamera.js';
 import { FollowCamera } from '../Camera/FollowCamera.js';
+import { HybridCamera } from '../Camera/HybridCamera.js';
 
 /**
  * Game class - A foundation for 3D physics-based games using Three.js and Rapier.
@@ -23,6 +25,7 @@ export class Game {
         this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
         this.renderer.shadowMap.enabled = true;
         this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+        this.renderer.autoClear = true; // Default
         
         this.container.appendChild(this.renderer.domElement);
         
@@ -30,17 +33,22 @@ export class Game {
         this.clock = new THREE.Clock();
         
         // Components
-        this.player = new Player(this);
+        this.player = new YBot(this);
         this.controller = new Controller();
         
         // Camera System
+        this.viewports = [];
         this.orbitCamera = new OrbitCamera(this);
         this.followCamera = new FollowCamera(this);
-        this.activeCamera = this.orbitCamera;
-        this.cameraMode = 'orbit'; // 'orbit' or 'follow'
+        this.hybridCamera = new HybridCamera(this);
+        this.activeCamera = this.hybridCamera;
+        this.cameraMode = 'hybrid'; // 'orbit', 'follow', or 'hybrid'
         
         // Physics World
         this.world = null;
+        this.timeScale = 1.0;
+        this.physicsAccumulator = 0;
+        this.fixedTimeStep = 1 / 60;
         
         // Initialization
         this.initStarted = false;
@@ -55,8 +63,16 @@ export class Game {
     onResize() {
         if (!this.renderer) return;
         this.renderer.setSize(window.innerWidth, window.innerHeight);
-        this.orbitCamera.onResize();
-        this.followCamera.onResize();
+        
+        if (this.viewports.length === 0) {
+            this.orbitCamera.onResize();
+            this.followCamera.onResize();
+        } else {
+            for (const vp of this.viewports) {
+                const rect = vp.container.getBoundingClientRect();
+                vp.camera.onResize(rect.width, rect.height);
+            }
+        }
     }
 
     async init() {
@@ -78,19 +94,33 @@ export class Game {
     }
 
     setupLights() {
-        const ambientLight = new THREE.AmbientLight(0xffffff, 0.4);
+        // Higher ambient light for better visibility
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
         this.scene.add(ambientLight);
 
-        const pointLight = new THREE.PointLight(0x00f2ff, 1.5, 100);
-        pointLight.position.set(10, 20, 10);
-        pointLight.castShadow = true;
-        pointLight.shadow.mapSize.width = 1024;
-        pointLight.shadow.mapSize.height = 1024;
-        this.scene.add(pointLight);
+        // Main directional light (sun-like)
+        const sunLight = new THREE.DirectionalLight(0xffffff, 1.2);
+        sunLight.position.set(15, 30, 20);
+        sunLight.castShadow = true;
+        sunLight.shadow.mapSize.width = 2048;
+        sunLight.shadow.mapSize.height = 2048;
+        sunLight.shadow.camera.left = -50;
+        sunLight.shadow.camera.right = 50;
+        sunLight.shadow.camera.top = 50;
+        sunLight.shadow.camera.bottom = -50;
+        this.scene.add(sunLight);
+
+        const cyanLight = new THREE.PointLight(0x00f2ff, 1.5, 100);
+        cyanLight.position.set(10, 20, 10);
+        this.scene.add(cyanLight);
         
-        const secondaryLight = new THREE.PointLight(0xff0080, 1.0, 100);
-        secondaryLight.position.set(-10, 10, -10);
-        this.scene.add(secondaryLight);
+        const pinkLight = new THREE.PointLight(0xff0080, 1.0, 100);
+        pinkLight.position.set(-10, 10, -10);
+        this.scene.add(pinkLight);
+
+        // Hemisphere light for ground/sky color balance
+        const hemisphereLight = new THREE.HemisphereLight(0x00f2ff, 0xff0080, 0.3);
+        this.scene.add(hemisphereLight);
     }
 
     createGround() {
@@ -113,6 +143,54 @@ export class Game {
         this.world.createCollider(groundColliderDesc);
     }
 
+    addViewport(container, cameraType = 'orbit') {
+        let camera;
+        if (cameraType === 'follow') {
+            camera = new FollowCamera(this);
+        } else if (cameraType === 'hybrid') {
+            camera = new HybridCamera(this);
+        } else {
+            camera = new OrbitCamera(this, container);
+        }
+
+        this.viewports.push({ container, camera });
+        
+        // Ensure renderer fills the background if we have viewports
+        this.renderer.domElement.style.position = 'fixed';
+        this.renderer.domElement.style.top = '0';
+        this.renderer.domElement.style.left = '0';
+        this.renderer.domElement.style.width = '100%';
+        this.renderer.domElement.style.height = '100%';
+        this.renderer.domElement.style.zIndex = '1'; // Move to front
+        this.renderer.domElement.style.pointerEvents = 'none'; // Click through to containers
+        this.renderer.autoClear = false; // Essential for multi-viewport
+        
+        return camera;
+    }
+
+    async switchPlayer(name) {
+        if (!this.player) return;
+
+        const pos = this.player.body ? this.player.body.translation() : { x: 0, y: 5, z: 0 };
+        this.player.destroy();
+
+        if (name === 'Soldier') {
+            this.player = new Soldier(this);
+        } else if (name === 'YBot') {
+            this.player = new YBot(this);
+        }
+
+        this.player.spawnPoint = { x: pos.x, y: pos.y + 0.5, z: pos.z }; // Spawn slightly above
+        await this.player.load();
+
+        // Update cameras to follow new player mesh
+        this.followCamera.update(0, this.player.mesh);
+        this.hybridCamera.update(0, this.player.mesh, null);
+        for (const vp of this.viewports) {
+            vp.camera.update(0, this.player.mesh, null);
+        }
+    }
+
     createSettingsUI() {
         const settingsBtn = button.c("settings-btn", "Settings");
         settingsBtn.style({
@@ -132,20 +210,61 @@ export class Game {
         const panel = div.c("settings-panel", () => {
             h2("Settings");
             
-            const createToggle = (labelStr, active, callback) => {
-                label.c("toggle", () => {
-                    input(() => { }).attr("type", "checkbox").attr("checked", active ? "checked" : null).on("change", (e) => {
-                        callback(e.target.checked);
-                    });
-                    span(" " + labelStr);
-                }).style({ display: "block", marginBottom: "10px", color: "#fff", cursor: "pointer" });
-            };
+            div.c("setting-item", () => {
+                label("Camera Mode: ").style({ display: "block", color: "#fff", marginBottom: "5px" });
+                select().on("change", (e) => {
+                    this.cameraMode = e.target.value;
+                    if (this.cameraMode === 'follow') this.activeCamera = this.followCamera;
+                    else if (this.cameraMode === 'orbit') this.activeCamera = this.orbitCamera;
+                    else if (this.cameraMode === 'hybrid') this.activeCamera = this.hybridCamera;
+                    
+                    this.orbitCamera.setEnabled(this.cameraMode === 'orbit');
+                }).append(
+                    option("Hybrid").attr("value", "hybrid").attr("selected", "selected"),
+                    option("Orbit").attr("value", "orbit"),
+                    option("Follow").attr("value", "follow")
+                ).style({
+                    width: "100%",
+                    padding: "5px",
+                    background: "#222",
+                    color: "#fff",
+                    border: "1px solid #444",
+                    borderRadius: "4px"
+                });
+            }).style({ marginBottom: "15px" });
 
-            createToggle("Follow Camera", this.cameraMode === 'follow', (checked) => {
-                this.cameraMode = checked ? 'follow' : 'orbit';
-                this.activeCamera = checked ? this.followCamera : this.orbitCamera;
-                this.orbitCamera.setEnabled(this.cameraMode === 'orbit');
-            });
+            div.c("setting-item", () => {
+                label("Time Scale: ").style({ display: "block", color: "#fff", marginBottom: "5px" });
+                const timeScaleVal = span(this.timeScale.toFixed(2)).style({ color: "#00f2ff", marginLeft: "10px" });
+                input(() => { })
+                    .attr("type", "range")
+                    .attr("min", "0.1")
+                    .attr("max", "2.0")
+                    .attr("step", "0.1")
+                    .attr("value", this.timeScale)
+                    .on("input", (e) => {
+                        this.timeScale = parseFloat(e.target.value);
+                        timeScaleVal.el.textContent = this.timeScale.toFixed(2);
+                    })
+                    .style({ width: "100%", cursor: "pointer" });
+            }).style({ marginTop: "15px" });
+
+            div.c("setting-item", () => {
+                label("Character: ").style({ display: "block", color: "#fff", marginBottom: "5px" });
+                select().on("change", (e) => {
+                    this.switchPlayer(e.target.value);
+                }).append(
+                    option("Soldier").attr("value", "Soldier"),
+                    option("YBot").attr("value", "YBot").attr("selected", "selected")
+                ).style({
+                    width: "100%",
+                    padding: "5px",
+                    background: "#222",
+                    color: "#fff",
+                    border: "1px solid #444",
+                    borderRadius: "4px"
+                });
+            }).style({ marginTop: "15px" });
         });
 
         panel.style({
@@ -158,7 +277,8 @@ export class Game {
             border: "1px solid #333",
             borderRadius: "8px",
             zIndex: 1000,
-            display: "none"
+            display: "none",
+            color: "white"
         });
 
         settingsBtn.click(() => panel.toggle());
@@ -170,22 +290,69 @@ export class Game {
     update() {
         if (!this.world || !this.player) return;
 
-        const delta = this.clock.getDelta();
+        const delta = this.clock.getDelta() * this.timeScale;
         
         // Update components
-        this.controller.update(delta, this.player);
+        this.controller.update(delta, this.player, this);
         this.player.update(delta);
         
-        // Physics step
-        this.world.step();
+        // Physics step with accumulator for consistent simulation at any time scale
+        this.physicsAccumulator += delta;
+        const maxSteps = 10; // Prevent spiral of death
+        let steps = 0;
+        while (this.physicsAccumulator >= this.fixedTimeStep && steps < maxSteps) {
+            this.world.step();
+            this.physicsAccumulator -= this.fixedTimeStep;
+            steps++;
+        }
         
-        // Camera update
-        this.activeCamera.update(delta, this.player.mesh);
+        // Camera updates
+        if (this.viewports.length === 0) {
+            this.activeCamera.update(delta, this.player.mesh, this.controller);
+        } else {
+            for (const vp of this.viewports) {
+                vp.camera.update(delta, this.player.mesh, this.controller);
+            }
+        }
+        
+        // Reset controller mouse delta at end of frame
+        if (this.controller.reset) {
+            this.controller.reset();
+        }
     }
 
     animate() {
         requestAnimationFrame(() => this.animate());
         this.update();
-        this.renderer.render(this.scene, this.activeCamera.camera);
+
+        if (this.viewports.length === 0) {
+            this.renderer.autoClear = true;
+            this.renderer.render(this.scene, this.activeCamera.camera);
+        } else {
+            this.renderer.autoClear = false;
+            this.renderer.setScissorTest(false);
+            this.renderer.clear(); 
+            this.renderer.setScissorTest(true);
+            
+            const canvas = this.renderer.domElement;
+
+            for (const vp of this.viewports) {
+                const rect = vp.container.getBoundingClientRect();
+                
+                if (rect.width === 0 || rect.height === 0) continue;
+
+                // Convert to canvas coordinates (y is inverted)
+                const left = rect.left;
+                const bottom = canvas.clientHeight - rect.bottom;
+                const width = rect.width;
+                const height = rect.height;
+
+                this.renderer.setViewport(left, bottom, width, height);
+                this.renderer.setScissor(left, bottom, width, height);
+                
+                vp.camera.onResize(width, height);
+                this.renderer.render(this.scene, vp.camera.camera);
+            }
+        }
     }
 }

@@ -34,8 +34,8 @@ export default class Rewidth extends Draggable {
 
 export function rewidth(...args){
     return div.c("viewport", viewport => {
-        viewport.append(...args);
         viewport.handle = div.c("handle");
+        viewport.append(...args, viewport.handle);
 
         new Rewidth({
             view: viewport.handle,
@@ -47,8 +47,8 @@ export function rewidth(...args){
 rewidth.c = function(cls, ...args){
     return div.c("viewport", viewport => {
         viewport.ac(cls);
-        viewport.append(...args);
         viewport.handle = div.c("handle");
+        viewport.append(...args, viewport.handle);
 
         new Rewidth({
             view: viewport.handle,

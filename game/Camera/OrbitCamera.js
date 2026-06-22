@@ -5,10 +5,11 @@ import { Camera } from './Camera.js';
  * OrbitCamera class providing orbital controls around a target or scene.
  */
 export class OrbitCamera extends Camera {
-    constructor(game) {
+    constructor(game, element) {
         super(game);
         
-        this.controls = new OrbitControls(this.camera, game.renderer.domElement);
+        const targetElement = element || game.renderer.domElement;
+        this.controls = new OrbitControls(this.camera, targetElement);
         this.controls.enableDamping = true;
         this.controls.dampingFactor = 0.05;
         this.enabled = true;

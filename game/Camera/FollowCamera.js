@@ -7,7 +7,7 @@ import { Camera } from './Camera.js';
 export class FollowCamera extends Camera {
     constructor(game) {
         super(game);
-        this.relativeOffset = new THREE.Vector3(0.8, 2.2, 4.0); // side, height, distance
+        this.relativeOffset = new THREE.Vector3(0.8, 2.2, -4.0); // side, height, distance (negative Z is behind)
         this.lookOffset = new THREE.Vector3(0, 1.5, 0);
         this.lerpFactor = 0.1;
     }
