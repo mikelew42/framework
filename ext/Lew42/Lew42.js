@@ -46,7 +46,8 @@ export default class Lew42 extends App {
 
     instantiate_socket() {
         // what if the socket fails to ready? the page won't inject...
-        if (window.location.hostname == "localhost") {
+        const h = window.location.hostname;
+        if (h === "localhost" || h === "127.0.0.1" || h.endsWith(".localhost")) {
             this.socket = Socket.singleton();
             // this.loaders.push(this.socket.ready);
         }
