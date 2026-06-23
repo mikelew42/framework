@@ -17,7 +17,7 @@ export default class Socket extends Events {
 		// Only a local dev server speaks this protocol. On a static host
 		// (production deploy) there's nothing to connect to, so don't even
 		// try — just stay disabled and let send()/request() no-op.
-		if (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") {
+		if (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1" || window.location.hostname.endsWith(".localhost")) {
 			this.connect();
 		} else {
 			this.disabled = true;
