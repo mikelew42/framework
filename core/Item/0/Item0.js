@@ -27,18 +27,15 @@ export default class Item0 {
         return this;
     }
 
-    // Flush dirty keys to saver. Clears _dirty BEFORE the async send
-    // so any .set() calls that arrive mid-flight are not lost.
     save() {
         if (!this.saver) return;
         const keys = Object.keys(this._dirty);
         if (!keys.length) return;
         const patch = { ...this._dirty };
-        this._dirty = {};
+        this._dirty = {};  // clear BEFORE async send so mid-flight set()s aren't lost
         this.saver.save(this, patch);
     }
 
-    // Opt-in debounced save. Call after .set() when you want auto-persist.
     auto_save(ms = 500) {
         clearTimeout(this._save_timer);
         this._save_timer = setTimeout(() => this.save(), ms);

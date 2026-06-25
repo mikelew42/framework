@@ -32,16 +32,18 @@ export default class Test0 {
     // args are passed as second argument to each test function.
     // Use to swap out the class under test:
     //   Item0.test.run({ Item: Item1 })
-    run(args) {
+    async run(args) {
         this.results = [];
         if (this.value) {
             try {
-                this.value(this, args ?? {});
+                await this.value(this, args ?? {});
             } catch(e) {
                 this.fail(`Threw: ${e.message}`);
             }
         }
-        this.tests.each(child => child.run(args));
+        for (const child of this.tests.children) {
+            await child.run(args);
+        }
         return this;
     }
 
@@ -91,6 +93,7 @@ export default class Test0 {
 
     print() {
         console.log(this.summary());
+        if (typeof process !== 'undefined' && this.failed) process.exitCode = 1;
         return this;
     }
 }

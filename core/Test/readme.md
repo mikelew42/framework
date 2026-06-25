@@ -9,7 +9,11 @@ core/Test/
   0/
     Test0.js       ← new: Node-compatible, results as data, class-attached suites
     page.js
-  1/               ← planned: adds rendering (List0-based), Playwright runner
+  1/
+    Test1.js       ← browser-only: upgrades this.tests to List0, adds Test1.View renderer
+    Test1.css      ← monospace pass/fail styles
+    page.js        ← demo page (inline suite + Item3.test)
+    readme.md
 ```
 
 ---
@@ -51,7 +55,7 @@ Used by all existing `page.js` files. Stays as-is for backwards compat.
   Item0.test.run({ Item: Item1 });  // verify Item1 satisfies Item0's contract
   // test fn: (t, { Item = Item0 } = {}) => { const item = new Item(...) }
   ```
-- **`Test0.List`** is a minimal inline list (no View imports). Test1 upgrades it to a real `List0` subclass with `List0View`-based rendering.
+- **`Test0.List`** is a minimal inline list (no View imports). Test1 upgrades it to a real `List0` subclass with `Test1.View`-based rendering.
 
 ---
 
@@ -85,9 +89,10 @@ Then: `node --import ./scripts/loader.js Item0.test.js`
 
 ## Lean into List
 
-`Test0.List` will become a `List0` subclass in Test1. This gives:
-- `Test.List.View extends List0View` — custom renderer (pass/fail colors, collapsing, assertion details)
-- All List traversal methods (`each`, `find`, `walk`) on the test tree
+`Test1.List` is a real `List0` subclass (implemented in `1/Test1.js`). This gives:
+- All List traversal methods (`each`, `find`, `walk`, `map`, `clone`) on the test tree.
+- `Test1.View` handles rendering (pass/fail colors, assertion details, recursive child suites).
+- `Test1.List.View` is `null` — the list is never rendered directly; `Test1.View` owns rendering.
 
 Everything that is a sequence should visibly be a `List`.
 
@@ -118,9 +123,14 @@ When we get there: Playwright loads the page, Claude calls `page.evaluate(() => 
 **Incremental chokidar watcher (planned, not built):**
 When a `.js` file changes, run the corresponding `.test.js` via `spawn`. Exit code drives pass/fail. This can run as a separate terminal process alongside the app server.
 
+## Resolved
+
+- **Runner script location** — `scripts/` at repo root. `scripts/loader.mjs` maps `/framework/...` imports. Run any test with: `node --import ./scripts/loader.mjs path/to/Foo.test.js`. See `scripts/readme.md`.
+- **Exit code on failure** — `Test0.print()` sets `process.exitCode = 1` when any test fails (Node-safe: guards on `typeof process`). Zero exit = all green.
+- **`Item0.test.js` main-guard** — each `.test.js` file ends with `if (process.argv[1] === fileURLToPath(import.meta.url)) { Foo.test.run().print(); }` so importing the file doesn't auto-run the suite.
+- **`run()` is async** — `Test0.run()` is `async` and awaits each test function. Async test bodies (e.g., `auto_save` debounce tests) work correctly.
+
 ## Open Questions
 
-- Async tests: `run()` is currently synchronous. Need `async run()` for debounce-style tests (like `auto_save`). Add in Test0 or wait for Test1?
-- Where does the runner/watcher script live? `scripts/` at repo root (outside `public/`) feels right.
-- Playwright: does Claude start the browser session, or does the user? (Claude can use Bash to run `npx playwright` if Playwright is installed.)
-- Servex DevSocket: when built, what's the message shape for test results? Worth designing the interface now so Test0 results (plain `{pass, message}` objects) can flow through it without changes.
+- Playwright track: who starts the browser session? (Claude can run `npx playwright` if installed — defer until needed.)
+- Servex DevSocket integration: message shape for test results — defer until DevSocket exists.

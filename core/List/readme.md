@@ -18,17 +18,26 @@ When in doubt, use `List`. If you find yourself reaching for a plain array to ho
 
 ```
 core/List/
+  List.js          ← stable re-export (currently → List8)
   readme.md        ← this file
-  0/
-    List0.js       ← MVP: append/remove/each/walk/map/clone, parent chain, Symbol.iterator
-    List0.View.js  ← default view: bar + scrollable children
-    List.css
-    page.js
-  1/               ← (planned) filtered/sorted views, lazy rendering
-  2/               ← (planned) persistence via Item/Saver
+  0/  List0.js     ← MVP: append/remove/each/walk/map/clone, parent chain, Symbol.iterator
+  1/  List1.js     ← adds: on/off/emit, 'add' + 'remove' events on mutation
+  2/  List2.js     ← adds: derive(fn) / filter(fn) — reactive derived lists
+  3/  List3.js     ← adds: sort(compareFn) — sorted derived list
+  4/  List4.js     ← adds: transform(fn) — mapped derived list (source→transformed memo)
+  5/  List5.js     ← adds: derive_reactive(fn, keys?) / filter_reactive — re-evaluates on Item5 change events
+  6/  List6.js     ← adds: group_by(fn) / group_by_reactive(fn, keys?) — partitioned derived Maps
+  7/  List7.js     ← adds: sort_reactive(compareFn, keys?) — re-sorts when item's sort key changes
+  8/  List8.js     ← adds: index_by(keyFn, keys?) — live Map<key, item> for O(1) lookup
 ```
 
-**`List0` is the stable base.** Higher levels extend it without breaking the `List0` contract.
+Each level has a paired `*.test.js` (Node-runnable) and `page.js` (browser). All 9 levels (0–8) pass their inherited contracts. **`List.js` → List8** is the current stable default.
+
+**`List0` is the stable base.** All higher levels extend without breaking lower contracts — a class that imports `List2` will never break when `List3`, `List4` etc. are added.
+
+### Resolved questions
+
+- `changed()` / events — List1 adds `on/off/emit` as the explicit event layer. `changed()` from List0 still exists for view updates; they're complementary, not competing.
 
 ## Extending List0
 
@@ -49,4 +58,5 @@ Originally lived at `ext/List/List.js`. Moved to `core/List/0/` because List is 
 
 - Should `List0` fire a `changed` event on a proper event bus instead of calling `update()` directly?
 - `empty()` calls `set_children([])` which doesn't exist — needs fixing before being depended on.
-- `filter()` is stubbed out — useful enough to add at List0 level?
+- `group_by_reactive` (List6) returns a plain `Map`. Should there be an observable Map primitive so UIs can react to groups appearing/disappearing? A `List9` with reactive group membership would enable `for group of groups.each` + live group rows.
+- `List9`: persist derived list memberships across reload? Or just re-derive from source on load?

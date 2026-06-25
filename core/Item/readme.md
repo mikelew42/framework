@@ -24,6 +24,13 @@ Active Record for the framework. An `Item` wraps a plain data object, exposes
 
 ## Class Progression
 
+`core/Item/Item.js` re-exports the current blessed level (`→ Item9`). Consumers can import the stable default or pin to a specific level:
+
+```js
+import Item from "/framework/core/Item/Item.js";           // stable default (Item9)
+import Item3 from "/framework/core/Item/3/Item3.js";       // pinned version
+```
+
 Each level is independently usable and testable. Higher levels extend lower ones
 and never break contracts already established.
 
@@ -50,7 +57,7 @@ saver.save(item, patch)   // patch = { key: value, ... } — only the dirty keys
 
 ---
 
-### Item1 — Async load + saver lifecycle  *(planned)*
+### Item1 — Async load + saver lifecycle
 `core/Item/1/Item1.js`
 
 Adds a `ready` promise and an async `load()` hook. The saver gains `load(item)` and
@@ -65,18 +72,18 @@ item.save();
 
 **Saver contract (full):**
 ```js
-saver.load(item)            // → Promise; populates item.data
-saver.save(item, patch)     // persist patch (or full snapshot)
-saver.delete(item)          // remove from storage
+saver.load(item)            // → Promise; populates item.data (replaces, not merges)
+saver.save(item, patch)     // persist patch; Item1.save() always returns a Promise
+saver.delete(item)          // → Promise; remove from storage
 ```
 
-**open questions:**
-- Does `load()` always replace `item.data`, or merge? (Replace is simpler and predictable.)
-- Should `save()` also accept a full snapshot option for backends that prefer it?
+**Decisions made:**
+- `load()` replaces `item.data` (not merge) — simpler and predictable.
+- `save()` always returns a Promise (Item0 returned void).
 
 ---
 
-### Item2 — Children + parent chain  *(planned)*
+### Item2 — Children + parent chain
 `core/Item/2/Item2.js`
 
 Adds `item.items` (children array) and `item.add(child)` / `item.remove(child)`.
@@ -84,31 +91,156 @@ Children inherit `saver` from parent automatically.
 
 ```js
 const root = new Item2({ saver: new FileSaver({ path: "/data/project.json" }) });
-const child = new Item2({ parent: root });
-child.saver === root.saver; // true — inherited
-root.add(child);
+const child = new Item2();
+root.add(child);            // sets child.parent = root; child.saver === root.saver
 root.save();                // saves full tree: root.data includes children via toJSON
 ```
 
-For JSON-backed trees, the whole tree serializes in one write (root owns the file).
-For SQL-backed trees, children save individually to their own rows.
-
-**open questions:**
-- Does `add(child)` call `child.save()` immediately, or defer to the next `root.save()`?
-- `toJSON()` for Item2: return `{ ...this.data, items: this.items }` or keep items
-  inside data as a named key?
+**Decisions made:**
+- `add()` does NOT auto-save. Caller controls when to save.
+- `toJSON()` returns `{ ...this.data, items: this.items }` — JSON.stringify recurses naturally.
+- `this.items` is a plain array (not List0). List integration is a future concern.
 
 ---
 
-### Future levels *(not yet planned)*
+### Item3 — jspath, server delta, delta shape
+`core/Item/3/Item3.js`
 
-- **Item3** — delta streaming: sends deltas instead of full snapshots. Adds `apply_delta()`.
-- **Item4** — conflict resolution: `_dirty` skip for keys being actively edited locally
-  (the Notion bug fix — skip server echoes for keys in `_dirty`).
-- **FileSaver** — `save(item, patch)` over WebSocket RPC. Debounces internally.
-  `load(item)` fetches JSON from server.
-- **LocalStorageSaver** — same interface, browser `localStorage`.
-- **SQLiteSaver** — rows, not blobs. `save` maps patch keys to UPDATE columns.
+Adds path computation, server echo protection (Notion fix), and the delta shape builder.
+
+```js
+const root = new Item3({ data: { name: "project" } });
+const child = new Item3();
+root.add(child);
+
+root.path;           // "project"
+child.path;          // "project.0"
+
+child.set("title", "Step one");
+child.apply_server_delta({ title: "stale" }); // skipped — title is dirty
+child.apply_server_delta({ note: "from server" }); // applied — not dirty
+
+child.delta({ title: "Step one" });
+// → { jspath: "project.0", patch: { title: "Step one" }, ts: 1234567890 }
+```
+
+**Decisions made:**
+- `path` uses list index (not item name) — always unique, no collision with data keys.
+- `saver.save()` signature unchanged from Item1/2 — patch is still `{ key: value }`.
+- `delta()` is an inspector/builder only — no I/O, no state change.
+
+---
+
+### Item4 — Reactive children (List1)
+`core/Item/4/Item4.js`
+
+Upgrades `this.items` from a plain array to a `List1` subclass — all List0 traversal methods plus `on('add')` / `on('remove')` events.
+
+```js
+const tree = new Item4();
+const node = new Item4({ data: { label: "chapter 1" } });
+
+tree.items.on('add', (child, idx) => updateNav(child, idx));
+tree.items.on('remove', (child, idx) => removeNav(idx));
+
+tree.add(node);    // fires items 'add' event
+node.remove();     // fires items 'remove' event on tree.items
+```
+
+**Decisions made:**
+- `child.parent` is set to the Item4 (not the List). `Item4.List` overrides `adopt()` as a no-op so List1 doesn't stomp the parent.
+- Saver inheritance still walks `child.parent.saver` — the parent is the Item4, not the List, so the chain is unbroken.
+- `child.remove()` (no-arg) routes through `child.parent.remove(child)` — Item4.remove() handles the `undefined` arg case.
+- `toJSON()` returns `{ ...this.data, items: this.items.children }` — plain array, not the List wrapper.
+
+---
+
+### Item5 — Reactive field events
+`core/Item/5/Item5.js`
+
+Adds `on/off/emit` and reactive `'change'` events. `set(key, val)` emits `('change', key, val, old)` when the value actually changes.
+
+```js
+item.on('change', (key, val, old) => updateUI(key, val));
+item.set('title', 'Hello'); // → change fires
+item.set('title', 'Hello'); // → no-op, no event
+```
+
+---
+
+### Item6 — Once, save events, batch
+`core/Item/6/Item6.js`
+
+- `once(event, fn)` — auto-removes after first call
+- `on('save', fn)` — fires after every `save()` completes (even no-op saves)
+- `batch(fn)` — defers `'change'` events; fires net change (start→end) for each key
+
+```js
+item.batch(() => { item.set('x', 1); item.set('x', 2); });
+// 'change' fires once for x with final value 2
+```
+
+---
+
+### Item7 — Computed fields
+`core/Item/7/Item7.js`
+
+`compute(key, deps, fn)` registers a derived field. Recomputes on each `set()` that changes a dep, fires `'change'`, respects `batch()`.
+
+```js
+item.compute('total', ['price', 'qty'], (p, q) => p * q);
+item.set('qty', 5); // total recomputed, 'change' fires for 'total'
+```
+
+---
+
+### Item8 — Schema / Type Coercion
+`core/Item/8/Item8.js`
+
+`schema(def)` declares field types. `set(key, val)` auto-coerces the value before storing. Invalid coercions emit `'error'` and leave the field unchanged.
+
+```js
+item.schema({ price: Number, qty: Number, label: String, active: Boolean });
+item.schema({ percent: v => Math.min(100, Math.max(0, Number(v))) }); // custom coercer
+
+item.set('price', '9.99');   // → 9.99 (number)
+item.set('active', 'true'); // → true (boolean)
+item.set('price', 'oops');  // → 'error' fires, field unchanged
+
+item.on('error', (key, val, err) => showValidation(key, err.message));
+```
+
+Composes with `compute()` (Item7) and `batch()` (Item6) — coercion runs at `set()` time and integrates naturally.
+
+---
+
+### Item9 — History / Undo / Redo
+`core/Item/9/Item9.js`
+
+Adds a linear undo stack with `checkpoint()` / `undo()` / `redo()`. Snapshots are deep-cloned via `JSON.parse(JSON.stringify(data))`. `_restore()` uses `batch()` to emit all changed keys atomically.
+
+```js
+item.set('text', 'Hello');
+item.checkpoint();
+item.set('text', 'Hello world');
+item.checkpoint();
+
+item.undo();      // text = 'Hello'
+item.redo();      // text = 'Hello world'
+item.can_undo     // boolean
+item.can_redo     // boolean
+```
+
+`save()` calls `checkpoint()` automatically — undo() returns to the last-saved state.
+
+---
+
+### Savers (implemented, in ext/)
+
+- **FileSaver** — `save(item, patch)` over WebSocket RPC. Debounces internally. `load(item)` fetches JSON from server. Node-testable via Socket stub.
+- **LocalStorageSaver** — same interface, browser `localStorage`. Node-testable via localStorage stub.
+- **MemorySaver** — in-memory saver for tests. Tracks `save_count` and `deleted`.
+- **SQLiteSaver** — rows, not blobs. `save` maps patch keys to UPDATE columns. *(future)*
 
 ---
 
@@ -155,7 +287,7 @@ server broadcasts delta back to all clients including sender
 client receives echo → applies server delta → "foo" replaced with server value
 ```
 
-Fix (Item4): skip server deltas for keys that are in `this._dirty`:
+Fix (Item3): skip server deltas for keys that are in `this._dirty`:
 
 ```js
 apply_server_delta(patch) {
@@ -181,8 +313,8 @@ apply_server_delta(patch) {
 ## Open Questions
 
 1. **`ready` contract** — does `await item.ready` guarantee children are also loaded?
-   Or just the root item? (Probably just root; children have their own `ready`.)
-2. **`save()` return value** — should it return a Promise? (Yes for Item1+, no for Item0.)
+   Or just the root item? (Probably just root; children have their own `ready`.) — Decision deferred to Item2.
+2. **`save()` return value** — should it return a Promise? Decided: yes for Item1+, void for Item0.
 3. **Snapshot vs delta** — for FileSaver, send full file on every save (simple) or send
    patch and reconstruct server-side? Full snapshot is fine for Phase 1.
 4. **Op vocabulary** — for delta log: minimal (`set`/`delete`) or rich (`push`/`splice`)?

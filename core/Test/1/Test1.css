@@ -1,0 +1,37 @@
+details.t1-suite {
+    margin: 0.1em 0 0.1em 1em;
+    font-family: monospace;
+    font-size: 0.9em;
+}
+
+details.t1-suite > summary.t1-name {
+    font-weight: bold;
+    padding: 0.15em 0;
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+}
+
+details.t1-suite > summary.t1-name::before {
+    content: "▸ ";
+    display: inline-block;
+    transition: transform 0.1s;
+}
+
+details.t1-suite[open] > summary.t1-name::before {
+    content: "▾ ";
+}
+
+details.t1-suite.pass > summary.t1-name { color: green; }
+details.t1-suite.fail > summary.t1-name { color: red; }
+
+.t1-assert {
+    padding: 0.05em 0 0.05em 1.2em;
+    color: #555;
+}
+.t1-assert.pass::before { content: "· "; }
+.t1-assert.fail {
+    color: red;
+    font-weight: bold;
+}
+.t1-assert.fail::before { content: "✗ "; }

@@ -77,7 +77,37 @@ Item0.test
         t.assert(JSON.stringify(item) === '{"foo":"bar"}', 'JSON.stringify uses data');
     });
 
-// auto_save is async (setTimeout) — needs async run() support in Test1.
-// See core/Test/readme.md.
+Item0.test
+    .add("auto_save debounces multiple sets into one save", async t => {
+        const saver = new MemorySaver();
+        const item = new Item0({ saver });
+        item.set("a", 1);
+        item.auto_save(20);
+        item.set("b", 2);
+        item.auto_save(20);
+        t.assert(saver.saves.length === 0, "no save yet before timer fires");
+        await new Promise(r => setTimeout(r, 50));
+        t.assert(saver.saves.length === 1, "exactly one save fired");
+        t.assert(saver.saves[0].patch.b === 2, "latest value for b sent");
+    })
+    .add("auto_save reset resets the timer", async t => {
+        const saver = new MemorySaver();
+        const item = new Item0({ saver });
+        item.set("x", 1);
+        item.auto_save(30);
+        await new Promise(r => setTimeout(r, 15));
+        item.set("x", 2);
+        item.auto_save(30); // reset
+        await new Promise(r => setTimeout(r, 15));
+        t.assert(saver.saves.length === 0, "no save yet — timer was reset");
+        await new Promise(r => setTimeout(r, 25));
+        t.assert(saver.saves.length === 1, "save fires after reset timer");
+        t.assert(saver.saves[0].patch.x === 2, "final value sent");
+    });
+
+if (typeof process !== 'undefined' && process.argv[1] === (await import('url')).fileURLToPath(import.meta.url)) {
+    await Item0.test.run();
+    Item0.test.print();
+}
 
 export default Item0;

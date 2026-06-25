@@ -1,47 +1,67 @@
-import app, { el, div, h1 } from "/app.js";
+import app, { h1, p, div, el, pre } from "/app.js";
+import Test1 from "/framework/core/Test/1/Test1.js";
 import Item0 from "./Item0.test.js";
 
 app.$root.ac("page");
 
+h1("Item0 — get/set, dirty tracking, saver delegation");
+p("The base domain object. Wraps a `data` object with `get(key)` / `set(key, val)`, tracks dirty keys, and delegates persistence to a swappable `saver`. No async, no events — just the minimal shape every higher level builds on.");
+
 el("style", `
-    .t0-suite { margin: 0.5em 0 0.5em 1em; font-family: monospace; }
-    .t0-name { font-weight: bold; padding: 0.2em 0; }
-    .t0-name::before { content: "▸ "; }
-    .t0-assert { padding: 0.1em 0 0.1em 1.2em; font-size: 0.9em; }
-    .t0-assert.pass::before { content: "✓ "; color: green; }
-    .t0-assert.fail::before { content: "✗ "; color: red; }
-    .t0-suite.fail > .t0-name { color: red; }
-    .t0-suite.pass > .t0-name { color: green; }
+    .i0-demo { font-family: sans-serif; max-width: 32em; margin: 1em 0; }
+    .i0-row { display: flex; gap: 0.5em; align-items: center; margin: 0.4em 0; }
+    .i0-row label { width: 5em; font-size: 0.85em; color: #555; }
+    .i0-row input { flex: 1; padding: 0.3em; font-size: 0.9em; }
+    .i0-box { margin: 0.8em 0; padding: 0.5em 0.8em; background: #f5f5f5; border-radius: 4px; font-family: monospace; font-size: 0.85em; }
+    .i0-box .label { color: #888; font-size: 0.8em; margin-bottom: 0.3em; }
+    .i0-dirty { color: #a60; }
+    .i0-btns { display: flex; gap: 0.5em; margin: 0.5em 0; }
+    .i0-log { margin-top: 0.5em; font-family: monospace; font-size: 0.8em; color: #555; max-height: 5em; overflow: auto; }
 `);
 
-h1("Item0");
+const item = new Item0({ data: { name: 'Alice', role: 'editor' } });
 
-Item0.test.run();
+// Stub saver so we can show what gets sent
+const calls = [];
+item.saver = {
+    save(item, patch) { calls.unshift(`save(patch: ${JSON.stringify(patch)})`); refresh_log(); }
+};
 
-function render_suite(suite) {
-    div.c("t0-suite " + (suite.passed ? "pass" : "fail"), () => {
-        div.c("t0-name", suite.name || "");
-        suite.results.forEach(r => div.c("t0-assert " + (r.pass ? "pass" : "fail"), r.message));
-        suite.tests.each(child => render_suite(child));
+let data_el, dirty_el, log_el;
+
+div.c("i0-demo", () => {
+    for (const key of ['name', 'role']) {
+        div.c("i0-row", () => {
+            el("label", key);
+            const input = el("input");
+            input.el.value = item.get(key) || '';
+            input.el.addEventListener("input", () => {
+                item.set(key, input.el.value);
+                refresh();
+            });
+        });
+    }
+
+    data_el  = div.c("i0-box", () => { div.c("label", "item.data"); div(); });
+    dirty_el = div.c("i0-box", () => { div.c("label", "item._dirty"); div.c("i0-dirty"); });
+    log_el   = div.c("i0-log");
+
+    div.c("i0-btns", () => {
+        el("button", "save()").el.addEventListener("click", () => { item.save(); refresh(); });
+        el("button", "auto_save(500ms)").el.addEventListener("click", () => item.auto_save(500));
     });
+
+    refresh();
+});
+
+function refresh() {
+    data_el.el.children[1].textContent  = JSON.stringify(item.data);
+    dirty_el.el.children[1].textContent = JSON.stringify(item._dirty) || '{}';
+}
+function refresh_log() {
+    log_el.el.innerHTML = calls.slice(0, 8).map(c => `<div>${c}</div>`).join('');
 }
 
-render_suite(Item0.test);
-
-// auto_save is async — tested manually for now.
-// Remove once Test1 adds async run() support.
-import { test, assert } from "/app.js";
-
-test("auto_save debounces", async t => {
-    const saves = [];
-    const saver = { save(item, patch) { saves.push(patch); } };
-    const item = new Item0({ saver });
-    item.set("a", 1);
-    item.auto_save(50);
-    item.set("b", 2);
-    item.auto_save(50);
-    assert(saves.length === 0);
-    await new Promise(r => setTimeout(r, 100));
-    assert(saves.length === 1);
-    assert(saves[0].b === 2);
-});
+h1("Tests");
+await Item0.test.run();
+new Test1.View({ suite: Item0.test }).render();
