@@ -1,5 +1,5 @@
 import Item9 from '/framework/core/Item/9/Item9.js';
-import FileSaver from '/framework/ext/File/FileSaver.js';
+import FileSaver from '/framework/ext/Saver/FileSaver/FileSaver.js';
 
 export default class Store {
     constructor(opts = {}) {

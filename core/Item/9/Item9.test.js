@@ -1,6 +1,6 @@
 import Item8 from '../8/Item8.test.js';
 import Item9 from './Item9.js';
-import MemorySaver from '/framework/ext/MemorySaver/MemorySaver.js';
+import MemorySaver from '/framework/ext/Saver/MemorySaver/MemorySaver.js';
 import Test0 from '../../Test/0/Test0.js';
 
 Item9.test = new Test0({ class: Item9, _name: 'Item9' });

@@ -37,7 +37,7 @@ div.c("fw-page", () => {
         const cards = [
             ["/framework/core/Item/", "Item — domain objects", "Active Record pattern. Wraps a data object with get/set, dirty tracking, async load/save, events, computed fields, schema coercion, and undo/redo. 10 progressive levels (Item0–Item9)."],
             ["/framework/core/List/", "List — ordered collections", "The framework's collection primitive. Traversal, add/remove events, derived/filtered/sorted/grouped/indexed views — all reactive. 9 progressive levels (List0–List8)."],
-            ["/framework/ext/File/", "Savers — persistence backends", "Swappable backends: FileSaver (WebSocket JSON), MemorySaver (tests), LocalStorageSaver (browser), CollectionSaver (whole list → one file). Item never knows which one is in use."],
+            ["/framework/ext/Saver/", "Savers — persistence backends", "Swappable backends: FileSaver (WebSocket JSON), MemorySaver (tests), LocalStorageSaver (browser), ListSaver (whole list → one file). Item never knows which one is in use."],
             ["/framework/core/Test/", "Test — node + browser", "Test0 runs in Node (no DOM). Test1 adds a browser renderer with collapsible pass/fail trees. Suites attach to their class and inherit lower-level contracts."],
         ];
         cards.forEach(([href, title, desc]) => {
@@ -121,10 +121,10 @@ div.c("fw-page", () => {
 
     div.c("fw-grid", () => {
         const savers = [
-            ["/framework/ext/File/", "FileSaver", "Writes Item data to a JSON file on the local filesystem via WebSocket RPC. load() uses fetch(). Debounces concurrent writes."],
-            ["/framework/ext/CollectionSaver/", "CollectionSaver", "Persists a whole List as a JSON array to one file. load() instantiates each element as an Item. Debounced like FileSaver."],
-            ["/framework/ext/LocalStorageSaver/", "LocalStorageSaver", "Persists Item data to browser localStorage by key. Synchronous. Good for settings and lightweight state."],
-            ["/framework/ext/MemorySaver/", "MemorySaver", "In-memory ephemeral store. Tracks save_count and deleted flag for assertions. Used in all unit tests."],
+            ["/framework/ext/Saver/FileSaver/", "FileSaver", "Writes Item data to a JSON file on the local filesystem via WebSocket RPC. load() uses fetch(). Debounces concurrent writes."],
+            ["/framework/ext/Saver/ListSaver/", "ListSaver", "Persists a whole List as a JSON array to one file. load() instantiates each element as an Item. Debounced like FileSaver."],
+            ["/framework/ext/Saver/LocalStorageSaver/", "LocalStorageSaver", "Persists Item data to browser localStorage by key. Synchronous. Good for settings and lightweight state."],
+            ["/framework/ext/Saver/MemorySaver/", "MemorySaver", "In-memory ephemeral store. Tracks save_count and deleted flag for assertions. Used in all unit tests."],
         ];
         savers.forEach(([href, name, desc]) => {
             div.c("fw-card", () => {

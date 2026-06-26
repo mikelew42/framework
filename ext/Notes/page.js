@@ -1,4 +1,4 @@
-import app, { h1, div, el, p, CollectionSaver } from "/app.js";
+import app, { h1, div, el, p, ListSaver } from "/app.js";
 import Test1 from "/framework/core/Test/1/Test1.js";
 import NoteItem from "./NoteItem.test.js";
 import NoteList from "./NoteList.js";
@@ -24,10 +24,10 @@ el("style", `
     .notes-tags  { padding: 0.3em 0.7em; font-size: 0.75em; color: #666; border-top: 1px solid #f0f0f0; }
 `);
 
-h1("Notes — NoteItem (Item9) + NoteList (List7) + CollectionSaver");
-p("Data persists to /data/notes.json via CollectionSaver.");
+h1("Notes — NoteItem (Item9) + NoteList (List7) + ListSaver");
+p("Data persists to /data/notes.json via ListSaver.");
 
-const saver = new CollectionSaver({ path: '/data/notes.json', item_class: NoteItem });
+const saver = new ListSaver({ path: '/data/notes.json', item_class: NoteItem });
 const notes = new NoteList();
 
 await saver.load(notes);

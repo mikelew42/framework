@@ -1,4 +1,4 @@
-import app, { h1, div, el, p, CollectionSaver } from "/app.js";
+import app, { h1, div, el, p, ListSaver } from "/app.js";
 import Test1 from "/framework/core/Test/1/Test1.js";
 import TodoItem from "./TodoItem.test.js";
 import TodoList from "./TodoList.js";
@@ -22,10 +22,10 @@ el("style", `
     .todo-tabs button.active { font-weight: bold; text-decoration: underline; }
 `);
 
-h1("Todo App — Item7 + List4 + CollectionSaver");
-p("Data persists to /data/todos.json via CollectionSaver.");
+h1("Todo App — Item7 + List4 + ListSaver");
+p("Data persists to /data/todos.json via ListSaver.");
 
-const saver = new CollectionSaver({ path: '/data/todos.json', item_class: TodoItem });
+const saver = new ListSaver({ path: '/data/todos.json', item_class: TodoItem });
 const todos = new TodoList();
 
 await saver.load(todos);

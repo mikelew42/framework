@@ -14,3 +14,5 @@ export default class Base {
 		return Object.assign(this, ...args);
 	}
 }
+
+export { Base };

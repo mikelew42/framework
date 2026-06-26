@@ -1,0 +1,941 @@
+{
+  "tree": {
+    "id": "root",
+    "kind": "frame",
+    "label": "Page",
+    "w": {
+      "mode": "fill"
+    },
+    "h": {
+      "mode": "hug"
+    },
+    "dir": "col",
+    "gap": 0,
+    "pad": 0,
+    "bg": "transparent",
+    "radius": 0,
+    "children": [
+      {
+        "id": "hero",
+        "kind": "frame",
+        "label": "Hero",
+        "w": {
+          "mode": "fill"
+        },
+        "h": {
+          "mode": "hug"
+        },
+        "dir": "col",
+        "gap": 20,
+        "pad": 64,
+        "bg": "#1b1b19",
+        "radius": 0,
+        "align_items": "center",
+        "children": [
+          {
+            "id": "hero-badge",
+            "kind": "frame",
+            "label": "Badge",
+            "w": {
+              "mode": "hug"
+            },
+            "h": {
+              "mode": "hug"
+            },
+            "dir": "row",
+            "gap": 6,
+            "pad": 6,
+            "bg": "#2e2e2c",
+            "radius": 20,
+            "children": [
+              {
+                "id": "hero-badge-dot",
+                "kind": "frame",
+                "label": "Dot",
+                "w": {
+                  "mode": "fixed",
+                  "px": 8
+                },
+                "h": {
+                  "mode": "fixed",
+                  "px": 8
+                },
+                "dir": "col",
+                "gap": 0,
+                "pad": 0,
+                "bg": "#5b57d6",
+                "radius": 4,
+                "children": [],
+                "align_items": "center"
+              },
+              {
+                "id": "hero-badge-text",
+                "kind": "text",
+                "label": "Badge text",
+                "text": "WebEditor v1  —  frozen-helix framework",
+                "size": 12,
+                "weight": 500,
+                "color": "#9a9a94",
+                "w": {
+                  "mode": "hug"
+                },
+                "h": {
+                  "mode": "hug"
+                }
+              }
+            ],
+            "align_items": "center"
+          },
+          {
+            "id": "hero-heading",
+            "kind": "heading",
+            "label": "Hero heading",
+            "text": "Build beautiful\ninterfaces.",
+            "level": 1,
+            "size": 56,
+            "weight": 700,
+            "color": "#ffffff",
+            "line_height": 1.1,
+            "letter_spacing": -0.02,
+            "w": {
+              "mode": "hug"
+            },
+            "h": {
+              "mode": "hug"
+            }
+          },
+          {
+            "id": "hero-sub",
+            "kind": "text",
+            "label": "Subtitle",
+            "text": "A local-first visual editor. Seven element types.\nInline editing, keyboard shortcuts, layers panel, canvas zoom.",
+            "size": 18,
+            "weight": 400,
+            "color": "#9a9a94",
+            "line_height": 1.6,
+            "w": {
+              "mode": "hug"
+            },
+            "h": {
+              "mode": "hug"
+            }
+          },
+          {
+            "id": "hero-btns",
+            "kind": "frame",
+            "label": "CTA buttons",
+            "w": {
+              "mode": "hug"
+            },
+            "h": {
+              "mode": "hug"
+            },
+            "dir": "row",
+            "gap": 12,
+            "pad": 0,
+            "bg": "transparent",
+            "radius": 0,
+            "children": [
+              {
+                "id": "hero-btn-primary",
+                "kind": "button",
+                "label": "Primary CTA",
+                "text": "Open Editor",
+                "variant": "primary",
+                "radius": 10,
+                "w": {
+                  "mode": "hug"
+                },
+                "h": {
+                  "mode": "hug"
+                }
+              },
+              {
+                "id": "hero-btn-ghost",
+                "kind": "button",
+                "label": "Ghost CTA",
+                "text": "View Docs",
+                "variant": "ghost",
+                "radius": 10,
+                "w": {
+                  "mode": "hug"
+                },
+                "h": {
+                  "mode": "hug"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "features-section",
+        "kind": "frame",
+        "label": "Features section",
+        "w": {
+          "mode": "fill"
+        },
+        "h": {
+          "mode": "hug"
+        },
+        "dir": "col",
+        "gap": 32,
+        "pad": 64,
+        "bg": "#ffffff",
+        "radius": 0,
+        "children": [
+          {
+            "id": "features-header",
+            "kind": "heading",
+            "label": "Section heading",
+            "text": "What's new in v1",
+            "level": 2,
+            "size": 32,
+            "weight": 700,
+            "color": "#1b1b19",
+            "w": {
+              "mode": "hug"
+            },
+            "h": {
+              "mode": "hug"
+            }
+          },
+          {
+            "id": "features-cols",
+            "kind": "frame",
+            "label": "Feature columns",
+            "w": {
+              "mode": "fill"
+            },
+            "h": {
+              "mode": "hug"
+            },
+            "dir": "row",
+            "gap": 20,
+            "pad": 0,
+            "bg": "transparent",
+            "radius": 0,
+            "children": [
+              {
+                "id": "feat-1",
+                "kind": "frame",
+                "label": "Feature card 1",
+                "w": {
+                  "mode": "fill"
+                },
+                "h": {
+                  "mode": "hug"
+                },
+                "dir": "col",
+                "gap": 10,
+                "pad": 24,
+                "bg": "#f8f8f7",
+                "radius": 14,
+                "children": [
+                  {
+                    "id": "feat-1-h",
+                    "kind": "heading",
+                    "label": "Card heading",
+                    "text": "7 Elements",
+                    "level": 3,
+                    "size": 18,
+                    "weight": 700,
+                    "color": "#1b1b19",
+                    "w": {
+                      "mode": "hug"
+                    },
+                    "h": {
+                      "mode": "hug"
+                    }
+                  },
+                  {
+                    "id": "nmqufcyjv3",
+                    "kind": "text",
+                    "label": "Text",
+                    "text": "Hello",
+                    "size": 16,
+                    "weight": 400,
+                    "color": "#1b1b19",
+                    "w": {
+                      "mode": "hug"
+                    },
+                    "h": {
+                      "mode": "hug"
+                    }
+                  },
+                  {
+                    "id": "feat-1-t",
+                    "kind": "text",
+                    "label": "Card text",
+                    "text": "Frame, Heading, Text, Image, Divider, Button, Input. Each draggable from the sidebar.",
+                    "size": 14,
+                    "weight": 400,
+                    "color": "#6b6b66",
+                    "line_height": 1.6,
+                    "w": {
+                      "mode": "fill"
+                    },
+                    "h": {
+                      "mode": "hug"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "feat-2",
+                "kind": "frame",
+                "label": "Feature card 2",
+                "w": {
+                  "mode": "fill"
+                },
+                "h": {
+                  "mode": "hug"
+                },
+                "dir": "col",
+                "gap": 10,
+                "pad": 24,
+                "bg": "#f8f8f7",
+                "radius": 14,
+                "children": [
+                  {
+                    "id": "feat-2-h",
+                    "kind": "heading",
+                    "label": "Card heading",
+                    "text": "Inline editing",
+                    "level": 3,
+                    "size": 18,
+                    "weight": 700,
+                    "color": "#1b1b19",
+                    "w": {
+                      "mode": "hug"
+                    },
+                    "h": {
+                      "mode": "hug"
+                    }
+                  },
+                  {
+                    "id": "feat-2-t",
+                    "kind": "text",
+                    "label": "Card text",
+                    "text": "Double-click any text, heading, or button on the canvas to edit in-place.",
+                    "size": 14,
+                    "weight": 400,
+                    "color": "#6b6b66",
+                    "line_height": 1.6,
+                    "w": {
+                      "mode": "fill"
+                    },
+                    "h": {
+                      "mode": "hug"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "feat-3",
+                "kind": "frame",
+                "label": "Feature card 3",
+                "w": {
+                  "mode": "fill"
+                },
+                "h": {
+                  "mode": "hug"
+                },
+                "dir": "col",
+                "gap": 10,
+                "pad": 24,
+                "bg": "#f8f8f7",
+                "radius": 14,
+                "children": [
+                  {
+                    "id": "feat-3-h",
+                    "kind": "heading",
+                    "label": "Card heading",
+                    "text": "Layers panel",
+                    "level": 3,
+                    "size": 18,
+                    "weight": 700,
+                    "color": "#1b1b19",
+                    "w": {
+                      "mode": "hug"
+                    },
+                    "h": {
+                      "mode": "hug"
+                    }
+                  },
+                  {
+                    "id": "feat-3-t",
+                    "kind": "text",
+                    "label": "Card text",
+                    "text": "Switch to the Layers tab to see the tree. Click to select. Frames auto-expand.",
+                    "size": 14,
+                    "weight": 400,
+                    "color": "#6b6b66",
+                    "line_height": 1.6,
+                    "w": {
+                      "mode": "fill"
+                    },
+                    "h": {
+                      "mode": "hug"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "divider-1",
+        "kind": "divider",
+        "label": "Section divider",
+        "color": "#ececea",
+        "w": {
+          "mode": "fill"
+        },
+        "h": {
+          "mode": "fixed",
+          "px": 1
+        }
+      },
+      {
+        "id": "image-section",
+        "kind": "frame",
+        "label": "Image + text section",
+        "w": {
+          "mode": "fill"
+        },
+        "h": {
+          "mode": "hug"
+        },
+        "dir": "row",
+        "gap": 48,
+        "pad": 64,
+        "bg": "#ffffff",
+        "radius": 0,
+        "align_items": "center",
+        "children": [
+          {
+            "id": "image-placeholder",
+            "kind": "image",
+            "label": "Demo image",
+            "w": {
+              "mode": "fixed",
+              "px": 320
+            },
+            "h": {
+              "mode": "fixed",
+              "px": 240
+            },
+            "radius": 16,
+            "fit": "cover",
+            "src": null
+          },
+          {
+            "id": "image-text-col",
+            "kind": "frame",
+            "label": "Text column",
+            "w": {
+              "mode": "fill"
+            },
+            "h": {
+              "mode": "hug"
+            },
+            "dir": "col",
+            "gap": 16,
+            "pad": 0,
+            "bg": "transparent",
+            "radius": 0,
+            "children": [
+              {
+                "id": "img-sec-h",
+                "kind": "heading",
+                "label": "Image section heading",
+                "text": "Real image upload",
+                "level": 2,
+                "size": 28,
+                "weight": 700,
+                "color": "#1b1b19",
+                "w": {
+                  "mode": "hug"
+                },
+                "h": {
+                  "mode": "hug"
+                }
+              },
+              {
+                "id": "img-sec-t",
+                "kind": "text",
+                "label": "Image section text",
+                "text": "Select the image node on the left, then use the Props panel to upload any image file. It encodes to base64 and saves with the layout.",
+                "size": 16,
+                "weight": 400,
+                "color": "#6b6b66",
+                "line_height": 1.6,
+                "w": {
+                  "mode": "fill"
+                },
+                "h": {
+                  "mode": "hug"
+                }
+              },
+              {
+                "id": "img-sec-btn",
+                "kind": "button",
+                "label": "Try it",
+                "text": "Select image →",
+                "variant": "secondary",
+                "radius": 10,
+                "w": {
+                  "mode": "hug"
+                },
+                "h": {
+                  "mode": "hug"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "divider-2",
+        "kind": "divider",
+        "label": "Section divider 2",
+        "color": "#ececea",
+        "w": {
+          "mode": "fill"
+        },
+        "h": {
+          "mode": "fixed",
+          "px": 1
+        }
+      },
+      {
+        "id": "contact-section",
+        "kind": "frame",
+        "label": "Contact / form section",
+        "w": {
+          "mode": "fill"
+        },
+        "h": {
+          "mode": "hug"
+        },
+        "dir": "col",
+        "gap": 16,
+        "pad": 64,
+        "bg": "#fafaf8",
+        "radius": 0,
+        "align_items": "center",
+        "children": [
+          {
+            "id": "contact-h",
+            "kind": "heading",
+            "label": "Contact heading",
+            "text": "Try the form elements",
+            "level": 2,
+            "size": 28,
+            "weight": 700,
+            "color": "#1b1b19",
+            "w": {
+              "mode": "hug"
+            },
+            "h": {
+              "mode": "hug"
+            }
+          },
+          {
+            "id": "contact-sub",
+            "kind": "text",
+            "label": "Contact sub",
+            "text": "Inputs are read-only on the canvas. Edit placeholder text in the Props panel.",
+            "size": 15,
+            "weight": 400,
+            "color": "#9a9a94",
+            "w": {
+              "mode": "hug"
+            },
+            "h": {
+              "mode": "hug"
+            }
+          },
+          {
+            "id": "form-wrap",
+            "kind": "frame",
+            "label": "Form",
+            "w": {
+              "mode": "fixed",
+              "px": 420
+            },
+            "h": {
+              "mode": "hug"
+            },
+            "dir": "col",
+            "gap": 12,
+            "pad": 28,
+            "bg": "#ffffff",
+            "radius": 16,
+            "shadow": true,
+            "children": [
+              {
+                "id": "inp-name",
+                "kind": "input",
+                "label": "Name input",
+                "placeholder": "Your name",
+                "input_type": "text",
+                "radius": 8,
+                "w": {
+                  "mode": "fill"
+                },
+                "h": {
+                  "mode": "hug"
+                }
+              },
+              {
+                "id": "inp-email",
+                "kind": "input",
+                "label": "Email input",
+                "placeholder": "Email address",
+                "input_type": "email",
+                "radius": 8,
+                "w": {
+                  "mode": "fill"
+                },
+                "h": {
+                  "mode": "hug"
+                }
+              },
+              {
+                "id": "inp-msg",
+                "kind": "input",
+                "label": "Message input",
+                "placeholder": "Your message…",
+                "input_type": "text",
+                "radius": 8,
+                "w": {
+                  "mode": "fill"
+                },
+                "h": {
+                  "mode": "hug"
+                }
+              },
+              {
+                "id": "form-btn",
+                "kind": "button",
+                "label": "Submit button",
+                "text": "Send message",
+                "variant": "primary",
+                "radius": 10,
+                "w": {
+                  "mode": "fill"
+                },
+                "h": {
+                  "mode": "hug"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "shortcuts-section",
+        "kind": "frame",
+        "label": "Shortcuts reference",
+        "w": {
+          "mode": "fill"
+        },
+        "h": {
+          "mode": "hug"
+        },
+        "dir": "col",
+        "gap": 20,
+        "pad": 48,
+        "bg": "#1b1b19",
+        "radius": 0,
+        "children": [
+          {
+            "id": "sc-h",
+            "kind": "heading",
+            "label": "Shortcuts heading",
+            "text": "Keyboard shortcuts",
+            "level": 2,
+            "size": 24,
+            "weight": 600,
+            "color": "#ffffff",
+            "w": {
+              "mode": "hug"
+            },
+            "h": {
+              "mode": "hug"
+            }
+          },
+          {
+            "id": "sc-cols",
+            "kind": "frame",
+            "label": "Shortcuts columns",
+            "w": {
+              "mode": "fill"
+            },
+            "h": {
+              "mode": "hug"
+            },
+            "dir": "row",
+            "gap": 40,
+            "pad": 0,
+            "bg": "transparent",
+            "radius": 0,
+            "children": [
+              {
+                "id": "sc-col1",
+                "kind": "frame",
+                "label": "Col 1",
+                "w": {
+                  "mode": "fill"
+                },
+                "h": {
+                  "mode": "hug"
+                },
+                "dir": "col",
+                "gap": 8,
+                "pad": 0,
+                "bg": "transparent",
+                "radius": 0,
+                "children": [
+                  {
+                    "id": "sc1a",
+                    "kind": "text",
+                    "label": "sc",
+                    "text": "Ctrl+Z / Ctrl+Y  —  Undo / Redo",
+                    "size": 13,
+                    "weight": 400,
+                    "color": "#9a9a94",
+                    "font": "monospace",
+                    "w": {
+                      "mode": "fill"
+                    },
+                    "h": {
+                      "mode": "hug"
+                    }
+                  },
+                  {
+                    "id": "sc1b",
+                    "kind": "text",
+                    "label": "sc",
+                    "text": "Ctrl+D  —  Duplicate node",
+                    "size": 13,
+                    "weight": 400,
+                    "color": "#9a9a94",
+                    "font": "monospace",
+                    "w": {
+                      "mode": "fill"
+                    },
+                    "h": {
+                      "mode": "hug"
+                    }
+                  },
+                  {
+                    "id": "sc1c",
+                    "kind": "text",
+                    "label": "sc",
+                    "text": "Ctrl+G  —  Wrap in Frame",
+                    "size": 13,
+                    "weight": 400,
+                    "color": "#9a9a94",
+                    "font": "monospace",
+                    "w": {
+                      "mode": "fill"
+                    },
+                    "h": {
+                      "mode": "hug"
+                    }
+                  },
+                  {
+                    "id": "sc1d",
+                    "kind": "text",
+                    "label": "sc",
+                    "text": "Ctrl+S  —  Save",
+                    "size": 13,
+                    "weight": 400,
+                    "color": "#9a9a94",
+                    "font": "monospace",
+                    "w": {
+                      "mode": "fill"
+                    },
+                    "h": {
+                      "mode": "hug"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "sc-col2",
+                "kind": "frame",
+                "label": "Col 2",
+                "w": {
+                  "mode": "fill"
+                },
+                "h": {
+                  "mode": "hug"
+                },
+                "dir": "col",
+                "gap": 8,
+                "pad": 0,
+                "bg": "transparent",
+                "radius": 0,
+                "children": [
+                  {
+                    "id": "sc2a",
+                    "kind": "text",
+                    "label": "sc",
+                    "text": "Del / Bksp  —  Delete node",
+                    "size": 13,
+                    "weight": 400,
+                    "color": "#9a9a94",
+                    "font": "monospace",
+                    "w": {
+                      "mode": "fill"
+                    },
+                    "h": {
+                      "mode": "hug"
+                    }
+                  },
+                  {
+                    "id": "sc2b",
+                    "kind": "text",
+                    "label": "sc",
+                    "text": "↑  —  Select parent",
+                    "size": 13,
+                    "weight": 400,
+                    "color": "#9a9a94",
+                    "font": "monospace",
+                    "w": {
+                      "mode": "fill"
+                    },
+                    "h": {
+                      "mode": "hug"
+                    }
+                  },
+                  {
+                    "id": "sc2c",
+                    "kind": "text",
+                    "label": "sc",
+                    "text": "↓  —  Select first child",
+                    "size": 13,
+                    "weight": 400,
+                    "color": "#9a9a94",
+                    "font": "monospace",
+                    "w": {
+                      "mode": "fill"
+                    },
+                    "h": {
+                      "mode": "hug"
+                    }
+                  },
+                  {
+                    "id": "sc2d",
+                    "kind": "text",
+                    "label": "sc",
+                    "text": "← / →  —  Prev / next sibling",
+                    "size": 13,
+                    "weight": 400,
+                    "color": "#9a9a94",
+                    "font": "monospace",
+                    "w": {
+                      "mode": "fill"
+                    },
+                    "h": {
+                      "mode": "hug"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "sc-col3",
+                "kind": "frame",
+                "label": "Col 3",
+                "w": {
+                  "mode": "fill"
+                },
+                "h": {
+                  "mode": "hug"
+                },
+                "dir": "col",
+                "gap": 8,
+                "pad": 0,
+                "bg": "transparent",
+                "radius": 0,
+                "children": [
+                  {
+                    "id": "sc3a",
+                    "kind": "text",
+                    "label": "sc",
+                    "text": "Dbl-click  —  Inline edit text",
+                    "size": 13,
+                    "weight": 400,
+                    "color": "#9a9a94",
+                    "font": "monospace",
+                    "w": {
+                      "mode": "fill"
+                    },
+                    "h": {
+                      "mode": "hug"
+                    }
+                  },
+                  {
+                    "id": "sc3b",
+                    "kind": "text",
+                    "label": "sc",
+                    "text": "Right-click  —  Context menu",
+                    "size": 13,
+                    "weight": 400,
+                    "color": "#9a9a94",
+                    "font": "monospace",
+                    "w": {
+                      "mode": "fill"
+                    },
+                    "h": {
+                      "mode": "hug"
+                    }
+                  },
+                  {
+                    "id": "sc3c",
+                    "kind": "text",
+                    "label": "sc",
+                    "text": "Ctrl+= / -  —  Zoom in / out",
+                    "size": 13,
+                    "weight": 400,
+                    "color": "#9a9a94",
+                    "font": "monospace",
+                    "w": {
+                      "mode": "fill"
+                    },
+                    "h": {
+                      "mode": "hug"
+                    }
+                  },
+                  {
+                    "id": "sc3d",
+                    "kind": "text",
+                    "label": "sc",
+                    "text": "Ctrl+0  —  Reset zoom",
+                    "size": 13,
+                    "weight": 400,
+                    "color": "#9a9a94",
+                    "font": "monospace",
+                    "w": {
+                      "mode": "fill"
+                    },
+                    "h": {
+                      "mode": "hug"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "selected": "nmqufcyjv3",
+  "items": []
+}

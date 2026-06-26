@@ -1,0 +1,54 @@
+{
+  "tree": {
+    "id": "root",
+    "kind": "frame",
+    "label": "Page",
+    "w": {
+      "mode": "fill"
+    },
+    "h": {
+      "mode": "hug"
+    },
+    "dir": "col",
+    "gap": 16,
+    "pad": 16,
+    "bg": "transparent",
+    "radius": 0,
+    "children": [
+      {
+        "id": "nmqu1nyn42",
+        "kind": "frame",
+        "label": "My Frame",
+        "w": {
+          "mode": "hug"
+        },
+        "h": {
+          "mode": "hug"
+        },
+        "dir": "col",
+        "gap": 16,
+        "pad": 16,
+        "bg": "#f0f0ff",
+        "radius": 0,
+        "children": []
+      },
+      {
+        "id": "nmqu1nyn43",
+        "kind": "text",
+        "label": "My Text",
+        "text": "Hello World",
+        "size": 16,
+        "weight": 400,
+        "color": "#1b1b19",
+        "w": {
+          "mode": "hug"
+        },
+        "h": {
+          "mode": "hug"
+        }
+      }
+    ]
+  },
+  "selected": "nmqu1nyn42",
+  "items": []
+}

@@ -1,0 +1,16 @@
+{
+  "tree": {
+    "id": "root",
+    "kind": "frame",
+    "label": "Page",
+    "w": { "mode": "fill" },
+    "h": { "mode": "hug" },
+    "dir": "col",
+    "gap": 24,
+    "pad": 32,
+    "bg": "transparent",
+    "radius": 0,
+    "children": []
+  },
+  "selected": null
+}

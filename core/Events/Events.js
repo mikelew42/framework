@@ -49,7 +49,11 @@ export default class Events {
         this.events[event] = [];
     }
     
-    static events = {};
+    // each class (and subclass) gets its own events map on first access
+    static get events() {
+        if (!Object.prototype.hasOwnProperty.call(this, '_events')) this._events = {};
+        return this._events;
+    }
 
     static on(event, listener) {
         if (!this.events[event]) {

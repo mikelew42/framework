@@ -1,0 +1,33 @@
+.t3-test {
+    margin: 0.4em 0;
+    padding: 0.4em 0.6em;
+    border-left: 3px solid #888;
+    font-family: monospace;
+    font-size: 0.9em;
+}
+.t3-test.pass { border-color: #5a5; }
+.t3-test.fail { border-color: #c44; }
+
+.t3-name {
+    font-weight: bold;
+    margin-bottom: 0.2em;
+}
+.t3-test.pass .t3-name { color: #5a5; }
+.t3-test.fail .t3-name { color: #c44; }
+
+.t3-assert { padding: 0.1em 0.4em; }
+.t3-assert.pass { color: #5a5; }
+.t3-assert.fail { color: #c44; background: #fee; }
+
+/* indent nested tests */
+.t3-test .t3-test { margin-left: 1em; }
+
+.t3-summary {
+    display: inline-block;
+    padding: 0.2em 0.6em;
+    border-radius: 3px;
+    font-family: monospace;
+    font-size: 0.9em;
+}
+.t3-summary.pass { background: #efe; color: #5a5; }
+.t3-summary.fail { background: #fee; color: #c44; }

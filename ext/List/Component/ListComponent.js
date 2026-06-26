@@ -1,9 +1,9 @@
 import List from "../List.js";
 import Component from "../../Component/0/Component0.js";
-import util from "../../../lib/util.js";
+import mixin from "../../../core/mixin/mixin.js";
 import is from "../../../lib/is.js";
 
-export default class ListComponent extends util.mixin(List, Component) {
+export default class ListComponent extends mixin(Component, List) {
 	// constructor(...args){
     //     this.assign(...args);
     //     this.instantiate();

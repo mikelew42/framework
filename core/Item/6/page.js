@@ -1,7 +1,7 @@
 import app, { h1, div, el, p } from "/app.js";
 import Test1 from "/framework/core/Test/1/Test1.js";
 import Item6 from "./Item6.test.js";
-import LocalStorageSaver from "/framework/ext/LocalStorageSaver/LocalStorageSaver.js";
+import LocalStorageSaver from "/framework/ext/Saver/LocalStorageSaver/LocalStorageSaver.js";
 
 app.$root.ac("page");
 

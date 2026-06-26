@@ -113,6 +113,24 @@
 							"path": "framework/core/Events",
 							"type": "file",
 							"full": "framework/core/Events/Events.js"
+						},
+						{
+							"name": "Events.test.js",
+							"path": "framework/core/Events",
+							"type": "file",
+							"full": "framework/core/Events/Events.test.js"
+						},
+						{
+							"name": "page.js",
+							"path": "framework/core/Events",
+							"type": "file",
+							"full": "framework/core/Events/page.js"
+						},
+						{
+							"name": "readme.md",
+							"path": "framework/core/Events",
+							"type": "file",
+							"full": "framework/core/Events/readme.md"
 						}
 					]
 				},
@@ -777,6 +795,38 @@
 					]
 				},
 				{
+					"name": "mixin",
+					"path": "framework/core",
+					"type": "dir",
+					"full": "framework/core/mixin",
+					"children": [
+						{
+							"name": "mixin.js",
+							"path": "framework/core/mixin",
+							"type": "file",
+							"full": "framework/core/mixin/mixin.js"
+						},
+						{
+							"name": "mixin.test.js",
+							"path": "framework/core/mixin",
+							"type": "file",
+							"full": "framework/core/mixin/mixin.test.js"
+						},
+						{
+							"name": "page.js",
+							"path": "framework/core/mixin",
+							"type": "file",
+							"full": "framework/core/mixin/page.js"
+						},
+						{
+							"name": "readme.md",
+							"path": "framework/core/mixin",
+							"type": "file",
+							"full": "framework/core/mixin/readme.md"
+						}
+					]
+				},
+				{
 					"name": "Page",
 					"path": "framework/core",
 					"type": "dir",
@@ -867,6 +917,44 @@
 							]
 						},
 						{
+							"name": "3",
+							"path": "framework/core/Test",
+							"type": "dir",
+							"full": "framework/core/Test/3",
+							"children": [
+								{
+									"name": "page.js",
+									"path": "framework/core/Test/3",
+									"type": "file",
+									"full": "framework/core/Test/3/page.js"
+								},
+								{
+									"name": "readme.md",
+									"path": "framework/core/Test/3",
+									"type": "file",
+									"full": "framework/core/Test/3/readme.md"
+								},
+								{
+									"name": "Test3.css",
+									"path": "framework/core/Test/3",
+									"type": "file",
+									"full": "framework/core/Test/3/Test3.css"
+								},
+								{
+									"name": "Test3.js",
+									"path": "framework/core/Test/3",
+									"type": "file",
+									"full": "framework/core/Test/3/Test3.js"
+								},
+								{
+									"name": "Test3.node.test.js",
+									"path": "framework/core/Test/3",
+									"type": "file",
+									"full": "framework/core/Test/3/Test3.node.test.js"
+								}
+							]
+						},
+						{
 							"name": "ai-test-runner.md",
 							"path": "framework/core/Test",
 							"type": "file",
@@ -885,6 +973,12 @@
 							"full": "framework/core/Test/readme.md"
 						},
 						{
+							"name": "refactor.md",
+							"path": "framework/core/Test",
+							"type": "file",
+							"full": "framework/core/Test/refactor.md"
+						},
+						{
 							"name": "Test.css",
 							"path": "framework/core/Test",
 							"type": "file",
@@ -895,6 +989,78 @@
 							"path": "framework/core/Test",
 							"type": "file",
 							"full": "framework/core/Test/Test.js"
+						}
+					]
+				},
+				{
+					"name": "util",
+					"path": "framework/core",
+					"type": "dir",
+					"full": "framework/core/util",
+					"children": [
+						{
+							"name": "is",
+							"path": "framework/core/util",
+							"type": "dir",
+							"full": "framework/core/util/is",
+							"children": [
+								{
+									"name": "is.js",
+									"path": "framework/core/util/is",
+									"type": "file",
+									"full": "framework/core/util/is/is.js"
+								},
+								{
+									"name": "is.node.test.js",
+									"path": "framework/core/util/is",
+									"type": "file",
+									"full": "framework/core/util/is/is.node.test.js"
+								},
+								{
+									"name": "page.js",
+									"path": "framework/core/util/is",
+									"type": "file",
+									"full": "framework/core/util/is/page.js"
+								},
+								{
+									"name": "readme.md",
+									"path": "framework/core/util/is",
+									"type": "file",
+									"full": "framework/core/util/is/readme.md"
+								}
+							]
+						},
+						{
+							"name": "mixin",
+							"path": "framework/core/util",
+							"type": "dir",
+							"full": "framework/core/util/mixin",
+							"children": [
+								{
+									"name": "mixin.js",
+									"path": "framework/core/util/mixin",
+									"type": "file",
+									"full": "framework/core/util/mixin/mixin.js"
+								},
+								{
+									"name": "mixin.node.test.js",
+									"path": "framework/core/util/mixin",
+									"type": "file",
+									"full": "framework/core/util/mixin/mixin.node.test.js"
+								},
+								{
+									"name": "page.js",
+									"path": "framework/core/util/mixin",
+									"type": "file",
+									"full": "framework/core/util/mixin/page.js"
+								},
+								{
+									"name": "readme.md",
+									"path": "framework/core/util/mixin",
+									"type": "file",
+									"full": "framework/core/util/mixin/readme.md"
+								}
+							]
 						}
 					]
 				},
@@ -931,6 +1097,12 @@
 					]
 				}
 			]
+		},
+		{
+			"name": "core.js",
+			"path": "./framework/",
+			"type": "file",
+			"full": "framework/core.js"
 		},
 		{
 			"name": "css",
@@ -1085,32 +1257,6 @@
 							"path": "framework/ext/CodeEditor",
 							"type": "file",
 							"full": "framework/ext/CodeEditor/page.js"
-						}
-					]
-				},
-				{
-					"name": "CollectionSaver",
-					"path": "framework/ext",
-					"type": "dir",
-					"full": "framework/ext/CollectionSaver",
-					"children": [
-						{
-							"name": "CollectionSaver.js",
-							"path": "framework/ext/CollectionSaver",
-							"type": "file",
-							"full": "framework/ext/CollectionSaver/CollectionSaver.js"
-						},
-						{
-							"name": "CollectionSaver.test.js",
-							"path": "framework/ext/CollectionSaver",
-							"type": "file",
-							"full": "framework/ext/CollectionSaver/CollectionSaver.test.js"
-						},
-						{
-							"name": "readme.md",
-							"path": "framework/ext/CollectionSaver",
-							"type": "file",
-							"full": "framework/ext/CollectionSaver/readme.md"
 						}
 					]
 				},
@@ -1530,6 +1676,32 @@
 					]
 				},
 				{
+					"name": "DragDrop",
+					"path": "framework/ext",
+					"type": "dir",
+					"full": "framework/ext/DragDrop",
+					"children": [
+						{
+							"name": "DragDrop.js",
+							"path": "framework/ext/DragDrop",
+							"type": "file",
+							"full": "framework/ext/DragDrop/DragDrop.js"
+						},
+						{
+							"name": "page.js",
+							"path": "framework/ext/DragDrop",
+							"type": "file",
+							"full": "framework/ext/DragDrop/page.js"
+						},
+						{
+							"name": "readme.md",
+							"path": "framework/ext/DragDrop",
+							"type": "file",
+							"full": "framework/ext/DragDrop/readme.md"
+						}
+					]
+				},
+				{
 					"name": "Draggable",
 					"path": "framework/ext",
 					"type": "dir",
@@ -1674,18 +1846,6 @@
 							"path": "framework/ext/File",
 							"type": "file",
 							"full": "framework/ext/File/File.js"
-						},
-						{
-							"name": "FileSaver.js",
-							"path": "framework/ext/File",
-							"type": "file",
-							"full": "framework/ext/File/FileSaver.js"
-						},
-						{
-							"name": "FileSaver.test.js",
-							"path": "framework/ext/File",
-							"type": "file",
-							"full": "framework/ext/File/FileSaver.test.js"
 						},
 						{
 							"name": "page.js",
@@ -1840,6 +2000,32 @@
 					]
 				},
 				{
+					"name": "Keys",
+					"path": "framework/ext",
+					"type": "dir",
+					"full": "framework/ext/Keys",
+					"children": [
+						{
+							"name": "Keys.js",
+							"path": "framework/ext/Keys",
+							"type": "file",
+							"full": "framework/ext/Keys/Keys.js"
+						},
+						{
+							"name": "page.js",
+							"path": "framework/ext/Keys",
+							"type": "file",
+							"full": "framework/ext/Keys/page.js"
+						},
+						{
+							"name": "readme.md",
+							"path": "framework/ext/Keys",
+							"type": "file",
+							"full": "framework/ext/Keys/readme.md"
+						}
+					]
+				},
+				{
 					"name": "Layout",
 					"path": "framework/ext",
 					"type": "dir",
@@ -1990,38 +2176,6 @@
 					]
 				},
 				{
-					"name": "LocalStorageSaver",
-					"path": "framework/ext",
-					"type": "dir",
-					"full": "framework/ext/LocalStorageSaver",
-					"children": [
-						{
-							"name": "LocalStorageSaver.js",
-							"path": "framework/ext/LocalStorageSaver",
-							"type": "file",
-							"full": "framework/ext/LocalStorageSaver/LocalStorageSaver.js"
-						},
-						{
-							"name": "LocalStorageSaver.test.js",
-							"path": "framework/ext/LocalStorageSaver",
-							"type": "file",
-							"full": "framework/ext/LocalStorageSaver/LocalStorageSaver.test.js"
-						},
-						{
-							"name": "page.js",
-							"path": "framework/ext/LocalStorageSaver",
-							"type": "file",
-							"full": "framework/ext/LocalStorageSaver/page.js"
-						},
-						{
-							"name": "readme.md",
-							"path": "framework/ext/LocalStorageSaver",
-							"type": "file",
-							"full": "framework/ext/LocalStorageSaver/readme.md"
-						}
-					]
-				},
-				{
 					"name": "Lorem",
 					"path": "framework/ext",
 					"type": "dir",
@@ -2058,32 +2212,6 @@
 							"path": "framework/ext/Markdown",
 							"type": "file",
 							"full": "framework/ext/Markdown/page.js"
-						}
-					]
-				},
-				{
-					"name": "MemorySaver",
-					"path": "framework/ext",
-					"type": "dir",
-					"full": "framework/ext/MemorySaver",
-					"children": [
-						{
-							"name": "MemorySaver.js",
-							"path": "framework/ext/MemorySaver",
-							"type": "file",
-							"full": "framework/ext/MemorySaver/MemorySaver.js"
-						},
-						{
-							"name": "MemorySaver.test.js",
-							"path": "framework/ext/MemorySaver",
-							"type": "file",
-							"full": "framework/ext/MemorySaver/MemorySaver.test.js"
-						},
-						{
-							"name": "readme.md",
-							"path": "framework/ext/MemorySaver",
-							"type": "file",
-							"full": "framework/ext/MemorySaver/readme.md"
 						}
 					]
 				},
@@ -2470,6 +2598,130 @@
 					]
 				},
 				{
+					"name": "Saver",
+					"path": "framework/ext",
+					"type": "dir",
+					"full": "framework/ext/Saver",
+					"children": [
+						{
+							"name": "FileSaver",
+							"path": "framework/ext/Saver",
+							"type": "dir",
+							"full": "framework/ext/Saver/FileSaver",
+							"children": [
+								{
+									"name": "FileSaver.js",
+									"path": "framework/ext/Saver/FileSaver",
+									"type": "file",
+									"full": "framework/ext/Saver/FileSaver/FileSaver.js"
+								},
+								{
+									"name": "FileSaver.test.js",
+									"path": "framework/ext/Saver/FileSaver",
+									"type": "file",
+									"full": "framework/ext/Saver/FileSaver/FileSaver.test.js"
+								}
+							]
+						},
+						{
+							"name": "ListSaver",
+							"path": "framework/ext/Saver",
+							"type": "dir",
+							"full": "framework/ext/Saver/ListSaver",
+							"children": [
+								{
+									"name": "ListSaver.js",
+									"path": "framework/ext/Saver/ListSaver",
+									"type": "file",
+									"full": "framework/ext/Saver/ListSaver/ListSaver.js"
+								},
+								{
+									"name": "ListSaver.test.js",
+									"path": "framework/ext/Saver/ListSaver",
+									"type": "file",
+									"full": "framework/ext/Saver/ListSaver/ListSaver.test.js"
+								},
+								{
+									"name": "readme.md",
+									"path": "framework/ext/Saver/ListSaver",
+									"type": "file",
+									"full": "framework/ext/Saver/ListSaver/readme.md"
+								}
+							]
+						},
+						{
+							"name": "LocalStorageSaver",
+							"path": "framework/ext/Saver",
+							"type": "dir",
+							"full": "framework/ext/Saver/LocalStorageSaver",
+							"children": [
+								{
+									"name": "LocalStorageSaver.js",
+									"path": "framework/ext/Saver/LocalStorageSaver",
+									"type": "file",
+									"full": "framework/ext/Saver/LocalStorageSaver/LocalStorageSaver.js"
+								},
+								{
+									"name": "LocalStorageSaver.test.js",
+									"path": "framework/ext/Saver/LocalStorageSaver",
+									"type": "file",
+									"full": "framework/ext/Saver/LocalStorageSaver/LocalStorageSaver.test.js"
+								},
+								{
+									"name": "page.js",
+									"path": "framework/ext/Saver/LocalStorageSaver",
+									"type": "file",
+									"full": "framework/ext/Saver/LocalStorageSaver/page.js"
+								},
+								{
+									"name": "readme.md",
+									"path": "framework/ext/Saver/LocalStorageSaver",
+									"type": "file",
+									"full": "framework/ext/Saver/LocalStorageSaver/readme.md"
+								}
+							]
+						},
+						{
+							"name": "MemorySaver",
+							"path": "framework/ext/Saver",
+							"type": "dir",
+							"full": "framework/ext/Saver/MemorySaver",
+							"children": [
+								{
+									"name": "MemorySaver.js",
+									"path": "framework/ext/Saver/MemorySaver",
+									"type": "file",
+									"full": "framework/ext/Saver/MemorySaver/MemorySaver.js"
+								},
+								{
+									"name": "MemorySaver.test.js",
+									"path": "framework/ext/Saver/MemorySaver",
+									"type": "file",
+									"full": "framework/ext/Saver/MemorySaver/MemorySaver.test.js"
+								},
+								{
+									"name": "readme.md",
+									"path": "framework/ext/Saver/MemorySaver",
+									"type": "file",
+									"full": "framework/ext/Saver/MemorySaver/readme.md"
+								}
+							]
+						},
+						{
+							"name": "readme.md",
+							"path": "framework/ext/Saver",
+							"type": "file",
+							"full": "framework/ext/Saver/readme.md"
+						},
+						{
+							"name": "Saver.js",
+							"path": "framework/ext/Saver",
+							"type": "file",
+							"full": "framework/ext/Saver/Saver.js"
+						}
+					]
+				},
+				{
 					"name": "Socket",
 					"path": "framework/ext",
 					"type": "dir",
@@ -2480,6 +2732,32 @@
 							"path": "framework/ext/Socket",
 							"type": "file",
 							"full": "framework/ext/Socket/Socket.js"
+						}
+					]
+				},
+				{
+					"name": "Splitter",
+					"path": "framework/ext",
+					"type": "dir",
+					"full": "framework/ext/Splitter",
+					"children": [
+						{
+							"name": "page.js",
+							"path": "framework/ext/Splitter",
+							"type": "file",
+							"full": "framework/ext/Splitter/page.js"
+						},
+						{
+							"name": "readme.md",
+							"path": "framework/ext/Splitter",
+							"type": "file",
+							"full": "framework/ext/Splitter/readme.md"
+						},
+						{
+							"name": "Splitter.js",
+							"path": "framework/ext/Splitter",
+							"type": "file",
+							"full": "framework/ext/Splitter/Splitter.js"
 						}
 					]
 				},
@@ -2576,6 +2854,290 @@
 							"path": "framework/ext/Todo",
 							"type": "file",
 							"full": "framework/ext/Todo/TodoList.js"
+						}
+					]
+				},
+				{
+					"name": "Toolbar",
+					"path": "framework/ext",
+					"type": "dir",
+					"full": "framework/ext/Toolbar",
+					"children": [
+						{
+							"name": "page.js",
+							"path": "framework/ext/Toolbar",
+							"type": "file",
+							"full": "framework/ext/Toolbar/page.js"
+						},
+						{
+							"name": "readme.md",
+							"path": "framework/ext/Toolbar",
+							"type": "file",
+							"full": "framework/ext/Toolbar/readme.md"
+						},
+						{
+							"name": "Toolbar.js",
+							"path": "framework/ext/Toolbar",
+							"type": "file",
+							"full": "framework/ext/Toolbar/Toolbar.js"
+						}
+					]
+				},
+				{
+					"name": "WebApp",
+					"path": "framework/ext",
+					"type": "dir",
+					"full": "framework/ext/WebApp",
+					"children": [
+						{
+							"name": "0",
+							"path": "framework/ext/WebApp",
+							"type": "dir",
+							"full": "framework/ext/WebApp/0",
+							"children": [
+								{
+									"name": "page.js",
+									"path": "framework/ext/WebApp/0",
+									"type": "file",
+									"full": "framework/ext/WebApp/0/page.js"
+								},
+								{
+									"name": "readme.md",
+									"path": "framework/ext/WebApp/0",
+									"type": "file",
+									"full": "framework/ext/WebApp/0/readme.md"
+								},
+								{
+									"name": "WebApp0.js",
+									"path": "framework/ext/WebApp/0",
+									"type": "file",
+									"full": "framework/ext/WebApp/0/WebApp0.js"
+								}
+							]
+						},
+						{
+							"name": "1",
+							"path": "framework/ext/WebApp",
+							"type": "dir",
+							"full": "framework/ext/WebApp/1",
+							"children": [
+								{
+									"name": "page.js",
+									"path": "framework/ext/WebApp/1",
+									"type": "file",
+									"full": "framework/ext/WebApp/1/page.js"
+								},
+								{
+									"name": "readme.md",
+									"path": "framework/ext/WebApp/1",
+									"type": "file",
+									"full": "framework/ext/WebApp/1/readme.md"
+								},
+								{
+									"name": "WebApp1.js",
+									"path": "framework/ext/WebApp/1",
+									"type": "file",
+									"full": "framework/ext/WebApp/1/WebApp1.js"
+								}
+							]
+						},
+						{
+							"name": "2",
+							"path": "framework/ext/WebApp",
+							"type": "dir",
+							"full": "framework/ext/WebApp/2",
+							"children": [
+								{
+									"name": "readme.md",
+									"path": "framework/ext/WebApp/2",
+									"type": "file",
+									"full": "framework/ext/WebApp/2/readme.md"
+								}
+							]
+						},
+						{
+							"name": "readme.md",
+							"path": "framework/ext/WebApp",
+							"type": "file",
+							"full": "framework/ext/WebApp/readme.md"
+						},
+						{
+							"name": "WebApp.js",
+							"path": "framework/ext/WebApp",
+							"type": "file",
+							"full": "framework/ext/WebApp/WebApp.js"
+						}
+					]
+				},
+				{
+					"name": "WebEditor",
+					"path": "framework/ext",
+					"type": "dir",
+					"full": "framework/ext/WebEditor",
+					"children": [
+						{
+							"name": "0",
+							"path": "framework/ext/WebEditor",
+							"type": "dir",
+							"full": "framework/ext/WebEditor/0",
+							"children": [
+								{
+									"name": "Canvas0.js",
+									"path": "framework/ext/WebEditor/0",
+									"type": "file",
+									"full": "framework/ext/WebEditor/0/Canvas0.js"
+								},
+								{
+									"name": "page.js",
+									"path": "framework/ext/WebEditor/0",
+									"type": "file",
+									"full": "framework/ext/WebEditor/0/page.js"
+								},
+								{
+									"name": "Props0.js",
+									"path": "framework/ext/WebEditor/0",
+									"type": "file",
+									"full": "framework/ext/WebEditor/0/Props0.js"
+								},
+								{
+									"name": "readme.md",
+									"path": "framework/ext/WebEditor/0",
+									"type": "file",
+									"full": "framework/ext/WebEditor/0/readme.md"
+								},
+								{
+									"name": "save.json",
+									"path": "framework/ext/WebEditor/0",
+									"type": "file",
+									"full": "framework/ext/WebEditor/0/save.json"
+								},
+								{
+									"name": "Sidebar0.js",
+									"path": "framework/ext/WebEditor/0",
+									"type": "file",
+									"full": "framework/ext/WebEditor/0/Sidebar0.js"
+								},
+								{
+									"name": "WebEditor0.js",
+									"path": "framework/ext/WebEditor/0",
+									"type": "file",
+									"full": "framework/ext/WebEditor/0/WebEditor0.js"
+								},
+								{
+									"name": "WebTree0.js",
+									"path": "framework/ext/WebEditor/0",
+									"type": "file",
+									"full": "framework/ext/WebEditor/0/WebTree0.js"
+								}
+							]
+						},
+						{
+							"name": "1",
+							"path": "framework/ext/WebEditor",
+							"type": "dir",
+							"full": "framework/ext/WebEditor/1",
+							"children": [
+								{
+									"name": "Canvas1.js",
+									"path": "framework/ext/WebEditor/1",
+									"type": "file",
+									"full": "framework/ext/WebEditor/1/Canvas1.js"
+								},
+								{
+									"name": "Layers1.js",
+									"path": "framework/ext/WebEditor/1",
+									"type": "file",
+									"full": "framework/ext/WebEditor/1/Layers1.js"
+								},
+								{
+									"name": "page.js",
+									"path": "framework/ext/WebEditor/1",
+									"type": "file",
+									"full": "framework/ext/WebEditor/1/page.js"
+								},
+								{
+									"name": "Props1.js",
+									"path": "framework/ext/WebEditor/1",
+									"type": "file",
+									"full": "framework/ext/WebEditor/1/Props1.js"
+								},
+								{
+									"name": "readme.md",
+									"path": "framework/ext/WebEditor/1",
+									"type": "file",
+									"full": "framework/ext/WebEditor/1/readme.md"
+								},
+								{
+									"name": "save.json",
+									"path": "framework/ext/WebEditor/1",
+									"type": "file",
+									"full": "framework/ext/WebEditor/1/save.json"
+								},
+								{
+									"name": "Sidebar1.js",
+									"path": "framework/ext/WebEditor/1",
+									"type": "file",
+									"full": "framework/ext/WebEditor/1/Sidebar1.js"
+								},
+								{
+									"name": "WebEditor1.js",
+									"path": "framework/ext/WebEditor/1",
+									"type": "file",
+									"full": "framework/ext/WebEditor/1/WebEditor1.js"
+								},
+								{
+									"name": "WebTree1.js",
+									"path": "framework/ext/WebEditor/1",
+									"type": "file",
+									"full": "framework/ext/WebEditor/1/WebTree1.js"
+								}
+							]
+						},
+						{
+							"name": "2",
+							"path": "framework/ext/WebEditor",
+							"type": "dir",
+							"full": "framework/ext/WebEditor/2",
+							"children": [
+								{
+									"name": "readme.md",
+									"path": "framework/ext/WebEditor/2",
+									"type": "file",
+									"full": "framework/ext/WebEditor/2/readme.md"
+								}
+							]
+						},
+						{
+							"name": "demo",
+							"path": "framework/ext/WebEditor",
+							"type": "dir",
+							"full": "framework/ext/WebEditor/demo",
+							"children": [
+								{
+									"name": "demo.json",
+									"path": "framework/ext/WebEditor/demo",
+									"type": "file",
+									"full": "framework/ext/WebEditor/demo/demo.json"
+								},
+								{
+									"name": "page.js",
+									"path": "framework/ext/WebEditor/demo",
+									"type": "file",
+									"full": "framework/ext/WebEditor/demo/page.js"
+								},
+								{
+									"name": "readme.md",
+									"path": "framework/ext/WebEditor/demo",
+									"type": "file",
+									"full": "framework/ext/WebEditor/demo/readme.md"
+								}
+							]
+						},
+						{
+							"name": "readme.md",
+							"path": "framework/ext/WebEditor",
+							"type": "file",
+							"full": "framework/ext/WebEditor/readme.md"
 						}
 					]
 				}
@@ -2812,6 +3374,32 @@
 			"full": "framework/ui",
 			"children": [
 				{
+					"name": "ColorPicker",
+					"path": "framework/ui",
+					"type": "dir",
+					"full": "framework/ui/ColorPicker",
+					"children": [
+						{
+							"name": "ColorPicker.js",
+							"path": "framework/ui/ColorPicker",
+							"type": "file",
+							"full": "framework/ui/ColorPicker/ColorPicker.js"
+						},
+						{
+							"name": "page.js",
+							"path": "framework/ui/ColorPicker",
+							"type": "file",
+							"full": "framework/ui/ColorPicker/page.js"
+						},
+						{
+							"name": "readme.md",
+							"path": "framework/ui/ColorPicker",
+							"type": "file",
+							"full": "framework/ui/ColorPicker/readme.md"
+						}
+					]
+				},
+				{
 					"name": "icon",
 					"path": "framework/ui",
 					"type": "dir",
@@ -2838,6 +3426,18 @@
 					]
 				},
 				{
+					"name": "page.js",
+					"path": "framework/ui",
+					"type": "file",
+					"full": "framework/ui/page.js"
+				},
+				{
+					"name": "readme.md",
+					"path": "framework/ui",
+					"type": "file",
+					"full": "framework/ui/readme.md"
+				},
+				{
 					"name": "ui.js",
 					"path": "framework/ui",
 					"type": "file",
@@ -2851,6 +3451,72 @@
 			"type": "dir",
 			"full": "framework/ux",
 			"children": [
+				{
+					"name": "Accordion",
+					"path": "framework/ux",
+					"type": "dir",
+					"full": "framework/ux/Accordion",
+					"children": [
+						{
+							"name": "Accordion.js",
+							"path": "framework/ux/Accordion",
+							"type": "file",
+							"full": "framework/ux/Accordion/Accordion.js"
+						},
+						{
+							"name": "readme.md",
+							"path": "framework/ux/Accordion",
+							"type": "file",
+							"full": "framework/ux/Accordion/readme.md"
+						}
+					]
+				},
+				{
+					"name": "CommandPalette",
+					"path": "framework/ux",
+					"type": "dir",
+					"full": "framework/ux/CommandPalette",
+					"children": [
+						{
+							"name": "CommandPalette.js",
+							"path": "framework/ux/CommandPalette",
+							"type": "file",
+							"full": "framework/ux/CommandPalette/CommandPalette.js"
+						},
+						{
+							"name": "page.js",
+							"path": "framework/ux/CommandPalette",
+							"type": "file",
+							"full": "framework/ux/CommandPalette/page.js"
+						},
+						{
+							"name": "readme.md",
+							"path": "framework/ux/CommandPalette",
+							"type": "file",
+							"full": "framework/ux/CommandPalette/readme.md"
+						}
+					]
+				},
+				{
+					"name": "ContextMenu",
+					"path": "framework/ux",
+					"type": "dir",
+					"full": "framework/ux/ContextMenu",
+					"children": [
+						{
+							"name": "ContextMenu.js",
+							"path": "framework/ux/ContextMenu",
+							"type": "file",
+							"full": "framework/ux/ContextMenu/ContextMenu.js"
+						},
+						{
+							"name": "readme.md",
+							"path": "framework/ux/ContextMenu",
+							"type": "file",
+							"full": "framework/ux/ContextMenu/readme.md"
+						}
+					]
+				},
 				{
 					"name": "Explorer",
 					"path": "framework/ux",
@@ -2872,10 +3538,108 @@
 					]
 				},
 				{
+					"name": "Modal",
+					"path": "framework/ux",
+					"type": "dir",
+					"full": "framework/ux/Modal",
+					"children": [
+						{
+							"name": "Modal.js",
+							"path": "framework/ux/Modal",
+							"type": "file",
+							"full": "framework/ux/Modal/Modal.js"
+						},
+						{
+							"name": "readme.md",
+							"path": "framework/ux/Modal",
+							"type": "file",
+							"full": "framework/ux/Modal/readme.md"
+						}
+					]
+				},
+				{
+					"name": "Notification",
+					"path": "framework/ux",
+					"type": "dir",
+					"full": "framework/ux/Notification",
+					"children": [
+						{
+							"name": "Notification.js",
+							"path": "framework/ux/Notification",
+							"type": "file",
+							"full": "framework/ux/Notification/Notification.js"
+						},
+						{
+							"name": "page.js",
+							"path": "framework/ux/Notification",
+							"type": "file",
+							"full": "framework/ux/Notification/page.js"
+						},
+						{
+							"name": "readme.md",
+							"path": "framework/ux/Notification",
+							"type": "file",
+							"full": "framework/ux/Notification/readme.md"
+						}
+					]
+				},
+				{
 					"name": "page.js",
 					"path": "framework/ux",
 					"type": "file",
 					"full": "framework/ux/page.js"
+				},
+				{
+					"name": "Popover",
+					"path": "framework/ux",
+					"type": "dir",
+					"full": "framework/ux/Popover",
+					"children": [
+						{
+							"name": "Popover.js",
+							"path": "framework/ux/Popover",
+							"type": "file",
+							"full": "framework/ux/Popover/Popover.js"
+						},
+						{
+							"name": "readme.md",
+							"path": "framework/ux/Popover",
+							"type": "file",
+							"full": "framework/ux/Popover/readme.md"
+						}
+					]
+				},
+				{
+					"name": "readme.md",
+					"path": "framework/ux",
+					"type": "file",
+					"full": "framework/ux/readme.md"
+				},
+				{
+					"name": "Sheet",
+					"path": "framework/ux",
+					"type": "dir",
+					"full": "framework/ux/Sheet",
+					"children": [
+						{
+							"name": "page.js",
+							"path": "framework/ux/Sheet",
+							"type": "file",
+							"full": "framework/ux/Sheet/page.js"
+						},
+						{
+							"name": "readme.md",
+							"path": "framework/ux/Sheet",
+							"type": "file",
+							"full": "framework/ux/Sheet/readme.md"
+						},
+						{
+							"name": "Sheet.js",
+							"path": "framework/ux/Sheet",
+							"type": "file",
+							"full": "framework/ux/Sheet/Sheet.js"
+						}
+					]
 				},
 				{
 					"name": "Tabs",
@@ -2883,6 +3647,12 @@
 					"type": "dir",
 					"full": "framework/ux/Tabs",
 					"children": [
+						{
+							"name": "readme.md",
+							"path": "framework/ux/Tabs",
+							"type": "file",
+							"full": "framework/ux/Tabs/readme.md"
+						},
 						{
 							"name": "Tabs.css",
 							"path": "framework/ux/Tabs",
@@ -2896,6 +3666,52 @@
 							"full": "framework/ux/Tabs/Tabs.js"
 						}
 					]
+				},
+				{
+					"name": "Toast",
+					"path": "framework/ux",
+					"type": "dir",
+					"full": "framework/ux/Toast",
+					"children": [
+						{
+							"name": "readme.md",
+							"path": "framework/ux/Toast",
+							"type": "file",
+							"full": "framework/ux/Toast/readme.md"
+						},
+						{
+							"name": "Toast.js",
+							"path": "framework/ux/Toast",
+							"type": "file",
+							"full": "framework/ux/Toast/Toast.js"
+						}
+					]
+				},
+				{
+					"name": "Tooltip",
+					"path": "framework/ux",
+					"type": "dir",
+					"full": "framework/ux/Tooltip",
+					"children": [
+						{
+							"name": "readme.md",
+							"path": "framework/ux/Tooltip",
+							"type": "file",
+							"full": "framework/ux/Tooltip/readme.md"
+						},
+						{
+							"name": "Tooltip.js",
+							"path": "framework/ux/Tooltip",
+							"type": "file",
+							"full": "framework/ux/Tooltip/Tooltip.js"
+						}
+					]
+				},
+				{
+					"name": "ux.js",
+					"path": "framework/ux",
+					"type": "file",
+					"full": "framework/ux/ux.js"
 				}
 			]
 		}

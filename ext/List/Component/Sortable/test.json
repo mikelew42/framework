@@ -6,14 +6,15 @@
         "type": "SortableListComponent",
         "children": [
             {
-                "name": "Step 0",
-                "type": "SortableListComponent",
-                "children": []
-            },
-            {
                 "name": "Step 1",
                 "type": "SortableListComponent",
-                "children": []
+                "children": [
+                    {
+                        "name": "Step 0",
+                        "type": "SortableListComponent",
+                        "children": []
+                    }
+                ]
             },
             {
                 "name": "Step 2",

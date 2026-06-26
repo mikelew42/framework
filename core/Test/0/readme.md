@@ -67,3 +67,43 @@ Exit 0 = all passed. Exit 1 = at least one failure.
 ## What Test1 adds
 
 `Test1` adds a `Test1.View` browser renderer that renders the suite tree with pass/fail CSS. It's a superset of `Test0` — all `Test0` suites are compatible.
+
+---
+
+## Watcher / Incremental Runner (planned, not built)
+
+Convention-based: `Foo.js` changes → run `Foo.test.js`. Higher-level suites (e.g. `Item9.test.js` imports `Item8.test.js`) run naturally when any level changes.
+
+```sh
+# manual: run a single suite
+node --import ./scripts/register.mjs public/framework/core/Item/5/Item5.test.js
+
+# all suites (serial, ~few seconds)
+node scripts/run-all.mjs
+```
+
+A `scripts/watch.mjs` using chokidar could watch `public/framework/**/*.js` and spawn the corresponding `.test.js` on change. Not built yet — see the parent readme for the full design trade-off (convention-based vs. full import graph tracking via Vitest).
+
+## Resolved
+
+- **Runner script location** — `scripts/` at repo root. `scripts/loader.mjs` maps `/framework/...` imports. `scripts/register.mjs` loads the loader via `module.register()`.
+- **Exit code on failure** — `Test0.print()` sets `process.exitCode = 1` when any test fails (Node-safe: guards on `typeof process`). Zero exit = all green.
+- **Main-guard pattern** — each `.test.js` ends with:
+  ```js
+  if (typeof process !== 'undefined' && process.argv[1] === (await import('url')).fileURLToPath(import.meta.url)) {
+      await suite.run();
+      suite.print();
+  }
+  ```
+  The `&&` short-circuits in the browser so `import('url')` is never evaluated.
+- **`run()` is async** — `Test0.run()` is `async` and awaits each test function. Async test bodies (e.g. `auto_save` debounce tests) work correctly.
+- **`run(args)` for contract testing** — args passed as second param to each test function without mutating the suite:
+  ```js
+  Item0.test.run({ Item: Item1 });  // verify Item1 satisfies Item0's contract
+  ```
+
+## Open Questions
+
+- Playwright track for DOM/UI tests: who starts the browser? (Claude can run `npx playwright` if installed — defer until needed.)
+- Servex DevSocket integration: message shape for test results — defer until DevSocket exists.
+- Full import graph tracking (so a change to `Item5.js` triggers `Item5.test.js` through `Item9.test.js`) — requires either Vitest or a custom graph builder. See parent readme.
