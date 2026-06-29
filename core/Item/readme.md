@@ -5,6 +5,21 @@ Active Record for the framework. An `Item` wraps a plain data object, exposes
 
 ---
 
+## Learning Path
+
+Most apps need only four levels:
+
+```
+Item0  →  get/set/save (pure in-memory, no I/O — learn the contract)
+Item1  →  async load() + FileSaver — add persistence
+Item5  →  on/off/emit + reactive 'change' — bind UI
+Item9  →  schema + undo/redo — the default import (Item.js → Item9)
+```
+
+Items 2–4 (children, delta, reactive children) and 6–8 (once, batch, computed, schema) are steps in the progression. They're worth reading to understand the design, but you can jump straight to Item9 for new code.
+
+---
+
 ## Design Principles
 
 1. **Item stays ignorant** — it calls `this.save()`, never knows where data goes.
@@ -241,6 +256,12 @@ item.can_redo     // boolean
 - **LocalStorageSaver** — same interface, browser `localStorage`. Node-testable via localStorage stub.
 - **MemorySaver** — in-memory saver for tests. Tracks `save_count` and `deleted`.
 - **SQLiteSaver** — rows, not blobs. `save` maps patch keys to UPDATE columns. *(future)*
+
+---
+
+## See Also
+
+[`ext/Notes/`](../../ext/Notes/) — canonical full-stack demo: Item9 + List7 + ListSaver all wired together.
 
 ---
 

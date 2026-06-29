@@ -1,11 +1,15 @@
 # WebApp
 
-A generic three-panel app shell: header + left sidebar + main content + right sidebar.
+A simple, intuitive three-panel app shell: header + left sidebar + main content + right sidebar.
 Extracted from the WebEditor pattern into a reusable layout primitive.
 
 Pair with `framework/ui` (controls) and `framework/ux` (tabs, accordion, etc.) to build tools quickly.
 
 Default import (`WebApp.js`) always points to the latest stable version.
+
+> **Note:** WebApp and `ext/Workspace` solve overlapping problems. WebApp is the simpler,
+> concrete version; Workspace is the generalized, data-powered evolution. The long-term
+> direction is for Workspace to absorb WebApp's role. See the Suggested Improvements section.
 
 ---
 
@@ -14,7 +18,7 @@ Default import (`WebApp.js`) always points to the latest stable version.
 | Version | Status | Adds |
 |---------|--------|------|
 | **0** | ✅ | Core shell: header, panels, btn/sep/spacer |
-| **1** | ✅ | Resizable panels, optional status bar |
+| **1** | ✅ | Resizable panels (Pointer Capture API), optional status bar |
 | **2** | 🗂 planned | Panel persistence (localStorage), animated collapse, keyboard shortcuts — see [2/readme.md](2/readme.md) |
 
 ---
@@ -45,7 +49,7 @@ webapp.left.append(
     ]),
 );
 
-// Right sidebar — use ui.form for quick bound property panels
+// Right sidebar — ui.form binds controls to an Item intuitively
 webapp.right.append(
     ui.form(selected_item, [
         { key: 'color',  type: 'color',  label: 'Color' },
@@ -133,7 +137,62 @@ webapp.status.spacer();                 // flex spacer (pushes remaining items r
 ## Design decisions
 
 - **No domain logic** — WebApp is pure layout. Domain objects (Item, List) added by consumer.
-- Panels are `position:relative` containers — add any content via `.main.append()`.
+- Panels are `position:relative` containers — add content via `.main.append()`.
 - Resize handles use the Pointer Capture API (robust across viewport boundaries).
 - `header_right` is a flex row — append badges, buttons, etc.
 - `WebApp.js` re-exports the latest stable level for stable default imports.
+
+---
+
+## Suggested Improvements
+
+### 1. Converge with Workspace
+
+WebApp and `ext/Workspace` solve the same problem. Developers currently have to choose
+between them with no intuitive guidance on which to pick. The overlap creates confusion.
+
+**Proposal:** `Workspace` v1 provides a `'shell'` preset that replicates WebApp's layout:
+```js
+// WebApp stays as-is for existing code.
+// New code uses Workspace with a shell preset, gaining sessions + selection bus:
+app.workspace = new Workspace({
+    preset: 'shell',
+    left_width: 260,
+    right_width: 280,
+});
+```
+Internally, `WebApp` could become a thin wrapper around `Workspace({ preset: 'shell' })`.
+This way existing WebApp users don't break, and new code gets the full Workspace power.
+
+### 2. Page Stack on Panels
+
+Right now `webapp.main` is a static container — you append to it and the old content
+stays. There's no intuitive way to "navigate" inside the main panel.
+
+**Proposal:** Add a page stack API to each panel:
+```js
+webapp.main.push(new_view)     // show new view, previous is hidden (back possible)
+webapp.main.pop()              // go back
+webapp.main.replace(new_view)  // replace current, no history
+webapp.main.clear()            // clear all
+```
+This makes navigation inside an app intuitive without a full router.
+
+### 3. Selection Broadcasting
+
+Right now there's no standard way for the left panel (e.g., a file tree or layer list)
+to communicate to the right panel (e.g., a properties inspector) when something is selected.
+Components have to couple directly.
+
+**Proposal:** WebApp (or Workspace) provides a selection bus:
+```js
+webapp.select(item);               // broadcast selection
+webapp.on('select', item => { });  // any panel listens
+webapp.right.replace(item.props_view);  // right panel updates intuitively
+```
+
+### 4. Keyboard Shortcuts for Panel Toggle
+
+Toggling left/right panels with keyboard shortcuts (e.g., `[` for left, `]` for right)
+is a very intuitive UX pattern that WebApp currently leaves to consumers.
+WebApp2 should register these by default (configurable).

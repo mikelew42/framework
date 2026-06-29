@@ -18,7 +18,7 @@ delete(target)         // remove from storage
 | `MemorySaver` | Item | In-memory Map (testing) |
 | `FileSaver` | Item | JSON file via WebSocket RPC |
 | `LocalStorageSaver` | Item | `window.localStorage` |
-| `CollectionSaver` | List | JSON array file via WebSocket RPC |
+| `ListSaver` | List | JSON array file via WebSocket RPC (formerly `CollectionSaver`) |
 
 All live in `ext/` as peer modules. They are **word-named variants**, not a numbered progression — each is a distinct backend, not an incremental capability build.
 
@@ -33,8 +33,8 @@ Not useful for: shared logic. The implementations are too different (sync vs asy
 
 ## Open Questions
 
-**CollectionSaver → ListSaver?**  
-`CollectionSaver` saves a whole `List` to one JSON array file. "ListSaver" is more precise. It was named before `List` was the canonical name for ordered collections. Worth renaming — no external code should be pinned to it yet.
+**CollectionSaver → ListSaver: done.**  
+Renamed to `ListSaver`. The import path is `ext/Saver/ListSaver/`. `CollectionSaver` is a deprecated alias — remove when all callers are updated.
 
 **Item-saver vs List-saver split**  
 `CollectionSaver` has a different `save(list)` signature vs `save(item, patch)` — it takes a `List`, not an `Item`. If we add more List-level savers this split will be more pronounced. Could have `Saver` (item interface) and `ListSaver` (list interface) as separate base classes.

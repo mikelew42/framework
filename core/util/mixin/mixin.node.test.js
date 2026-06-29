@@ -1,7 +1,7 @@
 import mixin from './mixin.js';
 import { test, assert } from '../../Test/3/Test3.js';
 
-export default mixin.test = test("mixin");
+export default mixin.test = test("mixin", () => {
 
 test("first arg wins on method conflict", () => {
     class One { greet() { return "one"; } }
@@ -73,3 +73,5 @@ test("getter/setter copied from mixin", () => {
     assert(obj.doubled === 10, "getter/setter round-trips");
     assert(obj._x === 5, "setter stored half");
 });
+
+}); // end mixin.test

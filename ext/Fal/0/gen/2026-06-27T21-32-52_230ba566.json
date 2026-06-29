@@ -1,0 +1,15 @@
+{
+  "model": "xai/grok-imagine-image",
+  "input": {
+    "prompt": "a glowing neon spiral galaxy, dark background, digital art, vibrant colors",
+    "num_images": 1,
+    "aspect_ratio": "1:1",
+    "resolution": "1k",
+    "output_format": "jpeg"
+  },
+  "request_id": "019f0aff-d2af-7ba2-b562-86fa80749636",
+  "image_url": "https://v3b.fal.media/files/b/0aa0068c/Wa0fG7YaRej1Qr171RTk6_JR6femUN.jpg",
+  "duration_ms": 6345,
+  "timestamp": "2026-06-27T21:32:52.281Z",
+  "filename": "2026-06-27T21-32-52_230ba566.jpg"
+}

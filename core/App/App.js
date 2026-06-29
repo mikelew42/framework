@@ -1,6 +1,7 @@
 import Events from "../Events/Events.js";
 import { el, div, View, h1, h2, h3, p, is, icon, pre, a } from "../View/View.js";
 import Test, { test } from "../Test/Test.js";
+import Page from "../Page/Page.js";
 
 // this needs to load immediately, so the layers are properly defined
 View.stylesheet(import.meta, "../../framework.css");
@@ -76,17 +77,19 @@ export default class App {
 		// "/path/" -> "/path/page.js"
 		// "/path/sub" -> "/path/sub.page.js"
 
+		// Collect root pages created during THIS import via a PRIVATE captor.
+		// Top-level page() calls hit `parent.adopt(pg)` → our local array. This
+		// isolates the load from anything else running during the import (e.g. a
+		// rendered test suite that pokes the global Page.roots) — it can't clobber
+		// what we're about to render.
+		const collected = [];
+		Page.set_captor({ adopt: (pg) => collected.push(pg) });
+
 		try {
 			const mod = await import(App.path_to_page_url(window.location.pathname));
 
 			// the page.js can, but doesn't need to export a default
 			this.page = mod.default;
-
-			// render the page
-			if (this.page) {
-				this.$root.append(this.page);
-				// this.$root is not in the body yet
-			}
 		} catch (error) {
 			// this runs on any page error...
 			this.$root.append(() => {
@@ -94,6 +97,22 @@ export default class App {
 				pre.c("error", error.message);
 				console.error(error);
 			});
+			return;
+		} finally {
+			// Reset the captor statics directly — the import may have left the
+			// stack unbalanced (e.g. a test suite calling reset()).
+			Page.captor = null;
+			Page.previous_captors = [];
+		}
+
+		// Render the pages this load created (the path the browser navigated to).
+		for (const pg of collected) pg.render(this.$root);
+
+		// Back-compat: a page.js may instead export a View/default to append.
+		// (Skip if the default is a Page root we already rendered above.)
+		if (this.page && !collected.includes(this.page)) {
+			this.$root.append(this.page);
+			// this.$root is not in the body yet
 		}
 	}
 

@@ -14,6 +14,21 @@
 
 When in doubt, use `List`. If you find yourself reaching for a plain array to hold domain objects, ask whether a `List` subclass would give you rendering or hierarchy for free. The goal is that everything in the framework that feels like a sequence is visibly built on `List`.
 
+## Learning Path
+
+Most apps need only three levels:
+
+```
+List0  →  append/remove/each/walk — the bare collection, learn the contract
+List1  →  on/off/emit, 'add'/'remove' events — wire up UI reactions
+List5  →  filter_reactive — live views that re-filter when item fields change
+List8  →  index_by — O(1) lookup by key (the default import: List.js → List8)
+```
+
+Lists 2–4 (derive, sort, transform) and 6–7 (group_by, sort_reactive) fill in the middle. Read them when you need them. Start with List.js (= List8) for new code.
+
+---
+
 ## Class Progression
 
 ```

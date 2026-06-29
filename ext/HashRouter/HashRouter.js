@@ -180,29 +180,3 @@ export default class HashRouter extends Events {
 
 HashRouter.previous_captors = [];
 HashRouter.prototype.get_captured = true;
-
-/**
-
-Do we still have AI?
-
-Woohoo!
-
-Alt + \ doesn't work?
-
-Well, it worked outside thsi comment.
-
-Anyway, so HashRouter has a strange pattern:
-
-We capture the initialize.  Which means, you'd want to render within initialize.
-
-And the route.add(path, cb) method uses cb as ACTIVATE, not render...
-
-So if you want to add sub routes, and render things in them, they only render when the route activates.  Which is lazy-routing...
-
-But you might want pre/auto-rendering, and then do something else on activate.
-
-So that's pretty confusing.  
-
-But, I'm not sure the HashRouter is ever really used standalone, so maybe it's fine.
- */
-

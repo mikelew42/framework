@@ -126,7 +126,12 @@ tabs.c("white horizontal", () => {
     tab("Tab 1", () => {
         el("h1", "This is Tab 1");
         el("p", "Welcome to Tab 1");
-        tabs.c("light vertical", () => {
+        tabs.c("vertical", () => {
+            tab("Sub 1", "This is Sub Tab 1");
+            tab("Sub 2", "This is Sub Tab 2");
+            tab("Sub 3", "This is Sub Tab 3");
+        });         
+		tabs.c("", () => {
             tab("Sub 1", "This is Sub Tab 1");
             tab("Sub 2", "This is Sub Tab 2");
             tab("Sub 3", "This is Sub Tab 3");

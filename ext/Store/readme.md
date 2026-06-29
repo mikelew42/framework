@@ -1,5 +1,9 @@
 # Store — Named Item Registry
 
+**Default recommendation for app-level persistent data.** If your app has settings, a user profile, or any named "slots" of data, use Store rather than wiring Item + FileSaver by hand.
+
+
+
 `Store` is a lightweight registry that maps names to `Item9` instances, each backed by a `FileSaver` pointing to a predictable path.
 
 ## The problem it solves

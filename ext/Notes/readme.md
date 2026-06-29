@@ -1,4 +1,6 @@
-﻿# Notes — Full-Stack Demo App
+﻿# Notes — Canonical Full-Stack Demo
+
+**This is the best example of the complete framework.** If you're learning how Item, List, Saver, and View fit together, start here.
 
 A note-taking app demonstrating the entire framework stack:
 

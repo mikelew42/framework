@@ -75,6 +75,12 @@
 							"full": "framework/core/App/page.js"
 						},
 						{
+							"name": "readme.md",
+							"path": "framework/core/App",
+							"type": "file",
+							"full": "framework/core/App/readme.md"
+						},
+						{
 							"name": "ViteApp.js",
 							"path": "framework/core/App",
 							"type": "file",
@@ -833,16 +839,118 @@
 					"full": "framework/core/Page",
 					"children": [
 						{
+							"name": "0",
+							"path": "framework/core/Page",
+							"type": "dir",
+							"full": "framework/core/Page/0",
+							"children": [
+								{
+									"name": "Page0.js",
+									"path": "framework/core/Page/0",
+									"type": "file",
+									"full": "framework/core/Page/0/Page0.js"
+								},
+								{
+									"name": "Page0.node.test.js",
+									"path": "framework/core/Page/0",
+									"type": "file",
+									"full": "framework/core/Page/0/Page0.node.test.js"
+								},
+								{
+									"name": "readme.md",
+									"path": "framework/core/Page/0",
+									"type": "file",
+									"full": "framework/core/Page/0/readme.md"
+								}
+							]
+						},
+						{
+							"name": "1",
+							"path": "framework/core/Page",
+							"type": "dir",
+							"full": "framework/core/Page/1",
+							"children": [
+								{
+									"name": "page.js",
+									"path": "framework/core/Page/1",
+									"type": "file",
+									"full": "framework/core/Page/1/page.js"
+								},
+								{
+									"name": "Page1.js",
+									"path": "framework/core/Page/1",
+									"type": "file",
+									"full": "framework/core/Page/1/Page1.js"
+								},
+								{
+									"name": "Page1.node.test.js",
+									"path": "framework/core/Page/1",
+									"type": "file",
+									"full": "framework/core/Page/1/Page1.node.test.js"
+								},
+								{
+									"name": "readme.md",
+									"path": "framework/core/Page/1",
+									"type": "file",
+									"full": "framework/core/Page/1/readme.md"
+								}
+							]
+						},
+						{
+							"name": "2",
+							"path": "framework/core/Page",
+							"type": "dir",
+							"full": "framework/core/Page/2",
+							"children": [
+								{
+									"name": "page.js",
+									"path": "framework/core/Page/2",
+									"type": "file",
+									"full": "framework/core/Page/2/page.js"
+								},
+								{
+									"name": "Page2.js",
+									"path": "framework/core/Page/2",
+									"type": "file",
+									"full": "framework/core/Page/2/Page2.js"
+								},
+								{
+									"name": "Page2.node.test.js",
+									"path": "framework/core/Page/2",
+									"type": "file",
+									"full": "framework/core/Page/2/Page2.node.test.js"
+								},
+								{
+									"name": "Pager.js",
+									"path": "framework/core/Page/2",
+									"type": "file",
+									"full": "framework/core/Page/2/Pager.js"
+								},
+								{
+									"name": "readme.md",
+									"path": "framework/core/Page/2",
+									"type": "file",
+									"full": "framework/core/Page/2/readme.md"
+								}
+							]
+						},
+						{
+							"name": "context.js",
+							"path": "framework/core/Page",
+							"type": "file",
+							"full": "framework/core/Page/context.js"
+						},
+						{
 							"name": "Page.class.js",
 							"path": "framework/core/Page",
 							"type": "file",
 							"full": "framework/core/Page/Page.class.js"
 						},
 						{
-							"name": "page.js",
+							"name": "Page.js",
 							"path": "framework/core/Page",
 							"type": "file",
-							"full": "framework/core/Page/page.js"
+							"full": "framework/core/Page/Page.js"
 						}
 					]
 				},
@@ -955,34 +1063,54 @@
 							]
 						},
 						{
-							"name": "ai-test-runner.md",
+							"name": "Original",
 							"path": "framework/core/Test",
-							"type": "file",
-							"full": "framework/core/Test/ai-test-runner.md"
-						},
-						{
-							"name": "page.js",
-							"path": "framework/core/Test",
-							"type": "file",
-							"full": "framework/core/Test/page.js"
+							"type": "dir",
+							"full": "framework/core/Test/Original",
+							"children": [
+								{
+									"name": "ai-test-runner.md",
+									"path": "framework/core/Test/Original",
+									"type": "file",
+									"full": "framework/core/Test/Original/ai-test-runner.md"
+								},
+								{
+									"name": "page.js",
+									"path": "framework/core/Test/Original",
+									"type": "file",
+									"full": "framework/core/Test/Original/page.js"
+								},
+								{
+									"name": "readme.md",
+									"path": "framework/core/Test/Original",
+									"type": "file",
+									"full": "framework/core/Test/Original/readme.md"
+								},
+								{
+									"name": "refactor.md",
+									"path": "framework/core/Test/Original",
+									"type": "file",
+									"full": "framework/core/Test/Original/refactor.md"
+								},
+								{
+									"name": "Test.css",
+									"path": "framework/core/Test/Original",
+									"type": "file",
+									"full": "framework/core/Test/Original/Test.css"
+								},
+								{
+									"name": "Test.js",
+									"path": "framework/core/Test/Original",
+									"type": "file",
+									"full": "framework/core/Test/Original/Test.js"
+								}
+							]
 						},
 						{
 							"name": "readme.md",
 							"path": "framework/core/Test",
 							"type": "file",
 							"full": "framework/core/Test/readme.md"
-						},
-						{
-							"name": "refactor.md",
-							"path": "framework/core/Test",
-							"type": "file",
-							"full": "framework/core/Test/refactor.md"
-						},
-						{
-							"name": "Test.css",
-							"path": "framework/core/Test",
-							"type": "file",
-							"full": "framework/core/Test/Test.css"
 						},
 						{
 							"name": "Test.js",
@@ -1708,6 +1836,98 @@
 					"full": "framework/ext/Draggable",
 					"children": [
 						{
+							"name": "0",
+							"path": "framework/ext/Draggable",
+							"type": "dir",
+							"full": "framework/ext/Draggable/0",
+							"children": [
+								{
+									"name": "Draggable0.js",
+									"path": "framework/ext/Draggable/0",
+									"type": "file",
+									"full": "framework/ext/Draggable/0/Draggable0.js"
+								},
+								{
+									"name": "page.js",
+									"path": "framework/ext/Draggable/0",
+									"type": "file",
+									"full": "framework/ext/Draggable/0/page.js"
+								},
+								{
+									"name": "readme.md",
+									"path": "framework/ext/Draggable/0",
+									"type": "file",
+									"full": "framework/ext/Draggable/0/readme.md"
+								}
+							]
+						},
+						{
+							"name": "1",
+							"path": "framework/ext/Draggable",
+							"type": "dir",
+							"full": "framework/ext/Draggable/1",
+							"children": [
+								{
+									"name": "Draggable1.js",
+									"path": "framework/ext/Draggable/1",
+									"type": "file",
+									"full": "framework/ext/Draggable/1/Draggable1.js"
+								},
+								{
+									"name": "page.js",
+									"path": "framework/ext/Draggable/1",
+									"type": "file",
+									"full": "framework/ext/Draggable/1/page.js"
+								},
+								{
+									"name": "readme.md",
+									"path": "framework/ext/Draggable/1",
+									"type": "file",
+									"full": "framework/ext/Draggable/1/readme.md"
+								}
+							]
+						},
+						{
+							"name": "2",
+							"path": "framework/ext/Draggable",
+							"type": "dir",
+							"full": "framework/ext/Draggable/2",
+							"children": [
+								{
+									"name": "Draggable2.js",
+									"path": "framework/ext/Draggable/2",
+									"type": "file",
+									"full": "framework/ext/Draggable/2/Draggable2.js"
+								},
+								{
+									"name": "page.js",
+									"path": "framework/ext/Draggable/2",
+									"type": "file",
+									"full": "framework/ext/Draggable/2/page.js"
+								},
+								{
+									"name": "readme.md",
+									"path": "framework/ext/Draggable/2",
+									"type": "file",
+									"full": "framework/ext/Draggable/2/readme.md"
+								}
+							]
+						},
+						{
+							"name": "3",
+							"path": "framework/ext/Draggable",
+							"type": "dir",
+							"full": "framework/ext/Draggable/3",
+							"children": [
+								{
+									"name": "readme.md",
+									"path": "framework/ext/Draggable/3",
+									"type": "file",
+									"full": "framework/ext/Draggable/3/readme.md"
+								}
+							]
+						},
+						{
 							"name": "Draggable.css",
 							"path": "framework/ext/Draggable",
 							"type": "file",
@@ -1736,6 +1956,12 @@
 							"path": "framework/ext/Draggable",
 							"type": "file",
 							"full": "framework/ext/Draggable/Previewable.js"
+						},
+						{
+							"name": "readme.md",
+							"path": "framework/ext/Draggable",
+							"type": "file",
+							"full": "framework/ext/Draggable/readme.md"
 						},
 						{
 							"name": "Rewidth.js",
@@ -1768,6 +1994,104 @@
 							"path": "framework/ext/Draggable",
 							"type": "file",
 							"full": "framework/ext/Draggable/todo.md"
+						}
+					]
+				},
+				{
+					"name": "Explorer",
+					"path": "framework/ext",
+					"type": "dir",
+					"full": "framework/ext/Explorer",
+					"children": [
+						{
+							"name": "readme.md",
+							"path": "framework/ext/Explorer",
+							"type": "file",
+							"full": "framework/ext/Explorer/readme.md"
+						}
+					]
+				},
+				{
+					"name": "Fal",
+					"path": "framework/ext",
+					"type": "dir",
+					"full": "framework/ext/Fal",
+					"children": [
+						{
+							"name": "0",
+							"path": "framework/ext/Fal",
+							"type": "dir",
+							"full": "framework/ext/Fal/0",
+							"children": [
+								{
+									"name": "Fal0.css",
+									"path": "framework/ext/Fal/0",
+									"type": "file",
+									"full": "framework/ext/Fal/0/Fal0.css"
+								},
+								{
+									"name": "Fal0.js",
+									"path": "framework/ext/Fal/0",
+									"type": "file",
+									"full": "framework/ext/Fal/0/Fal0.js"
+								},
+								{
+									"name": "gen",
+									"path": "framework/ext/Fal/0",
+									"type": "dir",
+									"full": "framework/ext/Fal/0/gen",
+									"children": [
+										{
+											"name": "2026-06-27T21-32-52_230ba566.jpg",
+											"path": "framework/ext/Fal/0/gen",
+											"type": "file",
+											"full": "framework/ext/Fal/0/gen/2026-06-27T21-32-52_230ba566.jpg"
+										},
+										{
+											"name": "2026-06-27T21-32-52_230ba566.json",
+											"path": "framework/ext/Fal/0/gen",
+											"type": "file",
+											"full": "framework/ext/Fal/0/gen/2026-06-27T21-32-52_230ba566.json"
+										}
+									]
+								},
+								{
+									"name": "gen.mjs",
+									"path": "framework/ext/Fal/0",
+									"type": "file",
+									"full": "framework/ext/Fal/0/gen.mjs"
+								},
+								{
+									"name": "page.js",
+									"path": "framework/ext/Fal/0",
+									"type": "file",
+									"full": "framework/ext/Fal/0/page.js"
+								},
+								{
+									"name": "readme.md",
+									"path": "framework/ext/Fal/0",
+									"type": "file",
+									"full": "framework/ext/Fal/0/readme.md"
+								}
+							]
+						},
+						{
+							"name": "models.json",
+							"path": "framework/ext/Fal",
+							"type": "file",
+							"full": "framework/ext/Fal/models.json"
+						},
+						{
+							"name": "readme.md",
+							"path": "framework/ext/Fal",
+							"type": "file",
+							"full": "framework/ext/Fal/readme.md"
+						},
+						{
+							"name": "vision.md",
+							"path": "framework/ext/Fal",
+							"type": "file",
+							"full": "framework/ext/Fal/vision.md"
 						}
 					]
 				},
@@ -1904,6 +2228,12 @@
 							"path": "framework/ext/HashPage",
 							"type": "file",
 							"full": "framework/ext/HashPage/page.js"
+						},
+						{
+							"name": "readme.md",
+							"path": "framework/ext/HashPage",
+							"type": "file",
+							"full": "framework/ext/HashPage/readme.md"
 						}
 					]
 				},
@@ -1924,6 +2254,38 @@
 									"path": "framework/ext/HashPager/2",
 									"type": "file",
 									"full": "framework/ext/HashPager/2/page.js"
+								},
+								{
+									"name": "readme.md",
+									"path": "framework/ext/HashPager/2",
+									"type": "file",
+									"full": "framework/ext/HashPager/2/readme.md"
+								}
+							]
+						},
+						{
+							"name": "3",
+							"path": "framework/ext/HashPager",
+							"type": "dir",
+							"full": "framework/ext/HashPager/3",
+							"children": [
+								{
+									"name": "HashPager3.js",
+									"path": "framework/ext/HashPager/3",
+									"type": "file",
+									"full": "framework/ext/HashPager/3/HashPager3.js"
+								},
+								{
+									"name": "page.js",
+									"path": "framework/ext/HashPager/3",
+									"type": "file",
+									"full": "framework/ext/HashPager/3/page.js"
+								},
+								{
+									"name": "readme.md",
+									"path": "framework/ext/HashPager/3",
+									"type": "file",
+									"full": "framework/ext/HashPager/3/readme.md"
 								}
 							]
 						},
@@ -1938,6 +2300,12 @@
 							"path": "framework/ext/HashPager",
 							"type": "file",
 							"full": "framework/ext/HashPager/page.js"
+						},
+						{
+							"name": "readme.md",
+							"path": "framework/ext/HashPager",
+							"type": "file",
+							"full": "framework/ext/HashPager/readme.md"
 						}
 					]
 				},
@@ -1970,6 +2338,12 @@
 							"path": "framework/ext/HashRouter",
 							"type": "file",
 							"full": "framework/ext/HashRouter/page.js"
+						},
+						{
+							"name": "readme.md",
+							"path": "framework/ext/HashRouter",
+							"type": "file",
+							"full": "framework/ext/HashRouter/readme.md"
 						}
 					]
 				},
@@ -2584,6 +2958,20 @@
 					"full": "framework/ext/page.js"
 				},
 				{
+					"name": "Router",
+					"path": "framework/ext",
+					"type": "dir",
+					"full": "framework/ext/Router",
+					"children": [
+						{
+							"name": "readme.md",
+							"path": "framework/ext/Router",
+							"type": "file",
+							"full": "framework/ext/Router/readme.md"
+						}
+					]
+				},
+				{
 					"name": "Savable",
 					"path": "framework/ext",
 					"type": "dir",
@@ -2794,28 +3182,42 @@
 					"full": "framework/ext/Thing",
 					"children": [
 						{
-							"name": "BaseThing.js",
-							"path": "framework/ext/Thing",
-							"type": "file",
-							"full": "framework/ext/Thing/BaseThing.js"
-						},
-						{
 							"name": "page.js",
 							"path": "framework/ext/Thing",
 							"type": "file",
 							"full": "framework/ext/Thing/page.js"
+						}
+					]
+				},
+				{
+					"name": "Thing_old",
+					"path": "framework/ext",
+					"type": "dir",
+					"full": "framework/ext/Thing_old",
+					"children": [
+						{
+							"name": "BaseThing.js",
+							"path": "framework/ext/Thing_old",
+							"type": "file",
+							"full": "framework/ext/Thing_old/BaseThing.js"
+						},
+						{
+							"name": "page.js",
+							"path": "framework/ext/Thing_old",
+							"type": "file",
+							"full": "framework/ext/Thing_old/page.js"
 						},
 						{
 							"name": "ServerThing.js",
-							"path": "framework/ext/Thing",
+							"path": "framework/ext/Thing_old",
 							"type": "file",
-							"full": "framework/ext/Thing/ServerThing.js"
+							"full": "framework/ext/Thing_old/ServerThing.js"
 						},
 						{
 							"name": "Thing.js",
-							"path": "framework/ext/Thing",
+							"path": "framework/ext/Thing_old",
 							"type": "file",
-							"full": "framework/ext/Thing/Thing.js"
+							"full": "framework/ext/Thing_old/Thing.js"
 						}
 					]
 				},
@@ -3140,6 +3542,64 @@
 							"full": "framework/ext/WebEditor/readme.md"
 						}
 					]
+				},
+				{
+					"name": "Workspace",
+					"path": "framework/ext",
+					"type": "dir",
+					"full": "framework/ext/Workspace",
+					"children": [
+						{
+							"name": "0",
+							"path": "framework/ext/Workspace",
+							"type": "dir",
+							"full": "framework/ext/Workspace/0",
+							"children": [
+								{
+									"name": "Card0.js",
+									"path": "framework/ext/Workspace/0",
+									"type": "file",
+									"full": "framework/ext/Workspace/0/Card0.js"
+								},
+								{
+									"name": "page.js",
+									"path": "framework/ext/Workspace/0",
+									"type": "file",
+									"full": "framework/ext/Workspace/0/page.js"
+								},
+								{
+									"name": "Panel0.js",
+									"path": "framework/ext/Workspace/0",
+									"type": "file",
+									"full": "framework/ext/Workspace/0/Panel0.js"
+								},
+								{
+									"name": "readme.md",
+									"path": "framework/ext/Workspace/0",
+									"type": "file",
+									"full": "framework/ext/Workspace/0/readme.md"
+								},
+								{
+									"name": "Workspace0.css",
+									"path": "framework/ext/Workspace/0",
+									"type": "file",
+									"full": "framework/ext/Workspace/0/Workspace0.css"
+								},
+								{
+									"name": "Workspace0.js",
+									"path": "framework/ext/Workspace/0",
+									"type": "file",
+									"full": "framework/ext/Workspace/0/Workspace0.js"
+								}
+							]
+						},
+						{
+							"name": "readme.md",
+							"path": "framework/ext/Workspace",
+							"type": "file",
+							"full": "framework/ext/Workspace/readme.md"
+						}
+					]
 				}
 			]
 		},
@@ -3292,6 +3752,12 @@
 					]
 				}
 			]
+		},
+		{
+			"name": "guidance.md",
+			"path": "./framework/",
+			"type": "file",
+			"full": "framework/guidance.md"
 		},
 		{
 			"name": "lib",

@@ -49,3 +49,11 @@ container.appendChild(main_panel_el);
 - The handle turns purple (`.dragging`) while being dragged.
 - A wider invisible hit area (`::after`, ±2px) makes it easier to grab.
 - `WebApp1` uses this internally for its left/right panel resize handles.
+
+## Should this use Draggable0?
+
+Splitter has its own ~50-line Pointer Capture implementation that duplicates what `Draggable0` now provides. A cleaner version would extend `Draggable0` and just implement `start`/`move` hooks — maybe 20 lines of actual logic instead of a self-contained class.
+
+Splitter also needs to become part of a larger **panel/layout system** — any time you need a resizable pane, you should reach for the same thing. That system doesn't exist yet, but when it does, Splitter should probably be rebuilt on top of Draggable rather than standalone.
+
+**For now: leave it.** The refactor is straightforward but blocked on having a clear picture of the panel system first.

@@ -1,0 +1,132 @@
+/* ── Fal0 — Image Workspace ───────────────────────────────────── */
+
+/* Left panel: thumbnail grid */
+.fal-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.35em;
+    padding: 0.25em;
+    align-content: start;
+}
+
+.fal-thumb {
+    aspect-ratio: 1;
+    overflow: hidden;
+    border-radius: 4px;
+    cursor: pointer;
+    border: 2px solid transparent;
+    background: #eee;
+    transition: border-color 0.1s;
+}
+
+.fal-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.fal-thumb:hover {
+    border-color: rgba(91, 87, 214, 0.45);
+}
+
+.fal-thumb-selected {
+    border-color: #5b57d6;
+}
+
+/* Center panel: image viewer */
+.fal-viewer {
+    flex: 1 1 0;       /* fills the card-fill-h .card-body flex column */
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5em;
+    padding: 1em;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.fal-viewer-img {
+    flex: 1 1 0;       /* takes remaining height in .fal-viewer flex column */
+    min-height: 0;
+    min-width: 0;
+    max-width: 100%;
+    object-fit: contain;
+    border-radius: 6px;
+    align-self: center;
+}
+
+.fal-viewer-empty {
+    color: #bbb;
+    font-size: 0.85em;
+}
+
+.fal-viewer-label {
+    flex-shrink: 0;
+    font-size: 0.72em;
+    color: #aaa;
+    font-family: monospace;
+    letter-spacing: 0.01em;
+}
+
+/* Right panel: metadata */
+.fal-prompt-text {
+    font-size: 0.85em;
+    line-height: 1.55;
+    color: #2a2a2a;
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+.fal-detail-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 0.5em;
+    padding: 0.25em 0;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+    font-size: 0.8em;
+}
+
+.fal-detail-row:last-child {
+    border-bottom: none;
+}
+
+.fal-detail-label {
+    color: #999;
+    flex-shrink: 0;
+}
+
+.fal-detail-val {
+    color: #222;
+    text-align: right;
+    font-family: monospace;
+    font-size: 0.92em;
+    word-break: break-all;
+}
+
+.fal-tip {
+    font-size: 0.78em;
+    color: #666;
+    line-height: 1.45;
+    padding: 0.2em 0;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+
+.fal-tip:last-child { border-bottom: none; }
+
+.fal-tip::before {
+    content: '→ ';
+    color: #5b57d6;
+    font-weight: 600;
+}
+
+.fal-empty {
+    color: #bbb;
+    font-size: 0.82em;
+    text-align: center;
+    padding: 2em 0.5em;
+    line-height: 1.5;
+}

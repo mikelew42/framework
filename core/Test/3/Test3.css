@@ -4,13 +4,13 @@
     border-left: 3px solid #888;
     font-family: monospace;
     font-size: 0.9em;
+	background: rgba(0, 0, 0, 0.1);
 }
 .t3-test.pass { border-color: #5a5; }
 .t3-test.fail { border-color: #c44; }
 
-.t3-name {
+.t3-bar {
     font-weight: bold;
-    margin-bottom: 0.2em;
 }
 .t3-test.pass .t3-name { color: #5a5; }
 .t3-test.fail .t3-name { color: #c44; }

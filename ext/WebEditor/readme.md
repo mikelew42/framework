@@ -65,7 +65,7 @@ menu, image upload, font picker, auto-save with status indicator.
 
 ### Props panel
 
-- **Breadcrumb** at top showing ancestor path — click to navigate up
+- **Breadcrumb** at top showing ancestor path — click to navigate up intuitively
 - **Label**: rename node in the tree
 - **Size**: W and H each have Hug / Fill / Fixed toggle + px input
 - **Layout** (frame): direction (row/col), gap, padding
@@ -155,6 +155,12 @@ Save file is next to the class: `WebEditor/N/save.json`. `FileSaver` fetches it 
 (404 → empty start). Saves via WebSocket RPC. `Item9.save()` calls `checkpoint()` first,
 so undo/redo persists across the save boundary.
 
+### Current shell: WebApp1
+
+WebEditor currently uses `WebApp1` as its 3-panel shell. The long-term direction is
+to migrate WebEditor to use `Workspace` directly, so it participates in the app-wide
+selection bus and session system. See Suggested Improvements below.
+
 ### Class map
 
 | File                   | Version | Role                                           |
@@ -196,7 +202,7 @@ so undo/redo persists across the save boundary.
 5. **BG color picker UX**: When a frame has `bg: 'transparent'`, the "None" button is
    active and the picker shows `#ffffff`. Opening the picker and dragging immediately
    shows the color. Closing the picker commits the hex. The first interaction requires
-   two clicks (the picker re-renders after the first 'input' event). Known quirk.
+   two clicks. Known quirk.
 
 6. **Layers1 re-renders when hidden**: Layers1 listens to `tree.on('change')` even when
    its tab is not active in Sidebar1. Minor perf waste; add a dirty flag + lazy render.
@@ -231,3 +237,59 @@ See `2/readme.md` for full v2 plan. Top priorities:
 6. **Color picker debounce** — 100ms debounce on props re-render to keep picker open
 7. **`util.js`** — shared `node_css` / `size_css` helpers used by both Canvas levels
 8. **Component library** — save selection to library, drag from library onto canvas
+
+---
+
+## Suggested Improvements
+
+### 1. Migrate shell from WebApp to Workspace
+
+WebEditor currently uses `WebApp1` as its 3-panel shell. This means it's outside the
+Workspace selection bus and session system — the editor can't intuitively broadcast
+"user selected node X" to a higher-level properties panel.
+
+**Proposal for v2/v3:** WebEditor mounts itself inside `app.workspace`:
+```js
+// Instead of: const editor = new WebEditor({ ... }); app.$root.append(editor.root);
+// Do:
+app.workspace.main.push(editor.canvas);
+app.workspace.left.push(editor.sidebar);
+app.workspace.right.push(editor.props);
+
+// Node selection in the canvas broadcasts to workspace:
+canvas.on('select', node => app.workspace.select(node));
+// The right sidebar updates intuitively, not needing to know about the canvas:
+app.workspace.on('select', node => props.render(node));
+```
+
+This makes the editor a "guest" in the workspace, not a self-contained shell.
+Multiple editors (or other tools) could share the same workspace.
+
+### 2. Split WebTree out as a standalone module
+
+`WebTree` is a recursive-tree data structure backed by Item9. It has nothing specifically
+"WebEditor" about it — it's a general tree-of-nodes that could power nav menus, org charts,
+outline editors, etc.
+
+**Proposal:** Move to `ext/Tree/` or `core/Tree/`, so it's reusable:
+```js
+import Tree from '/framework/ext/Tree/Tree.js';
+```
+WebEditor imports it as a domain model. Other things (Explorer, nav trees) reuse it.
+
+### 3. HashRouter for multi-document editing
+
+Currently WebEditor can only edit one file (the hardcoded save.json path).
+A HashRouter integration would let the URL specify which file is being edited:
+
+```
+#editor/path/to/my-page.json
+```
+This would make WebEditor intuitive to use as an app-wide layout editor, not just
+a demo. The URL is the document; navigating back/forward in the browser switches documents.
+
+### 4. Preview / Export
+
+WebEditor designs cannot currently be previewed or exported. An intuitive "Preview" button
+would render the tree as a standalone HTML page (same CSS, no editor chrome).
+An "Export" would generate clean HTML+CSS from the tree structure.

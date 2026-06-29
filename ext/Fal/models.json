@@ -1,0 +1,94 @@
+{
+  "xai/grok-imagine-image": {
+    "name": "Grok Imagine Image",
+    "provider": "xAI",
+    "endpoint": "xai/grok-imagine-image",
+    "cost_per_image_usd": 0.02,
+    "speed": "fast",
+    "avg_duration_ms": 6500,
+    "notes": "Fast and cheap. Good aesthetic quality. No seed control yet.",
+    "params": {
+      "prompt":        { "type": "string",  "required": true },
+      "num_images":    { "type": "integer", "default": 1, "max": 4 },
+      "aspect_ratio":  { "type": "enum",    "default": "1:1",
+                         "options": ["2:1","20:9","19.5:9","16:9","4:3","3:2","1:1","2:3","3:4","9:16","9:19.5","9:20","1:2"] },
+      "resolution":    { "type": "enum",    "default": "1k",  "options": ["1k", "2k"] },
+      "output_format": { "type": "enum",    "default": "jpeg", "options": ["jpeg", "png"] },
+      "sync_mode":     { "type": "boolean", "default": false,
+                         "note": "true = returns data URI inline, not stored in history" }
+    },
+    "tips": [
+      "Use 1k for iteration, 2k only for finals (same cost).",
+      "~$0.02/image = ~50 images per dollar.",
+      "Use fal.subscribe() not fal.run() — subscribe polls until done.",
+      "No seed parameter: can't reproduce exact outputs.",
+      "aspect_ratio affects composition significantly — pick before prompting."
+    ],
+    "dont": [
+      "Don't use sync_mode:true for batch — outputs aren't stored in fal history.",
+      "Don't expect exact reproduction — no seed control."
+    ]
+  },
+  "fal-ai/flux/schnell": {
+    "name": "FLUX Schnell",
+    "provider": "Black Forest Labs",
+    "endpoint": "fal-ai/flux/schnell",
+    "cost_per_image_usd": 0.003,
+    "speed": "very fast",
+    "avg_duration_ms": 2000,
+    "notes": "Cheapest quality image gen. Use for rapid iteration.",
+    "params": {
+      "prompt":               { "type": "string",  "required": true },
+      "num_inference_steps":  { "type": "integer", "default": 4,    "range": [1, 12] },
+      "image_size":           { "type": "enum",    "default": "square_hd",
+                                "options": ["square_hd","square","portrait_4_3","portrait_16_9","landscape_4_3","landscape_16_9"] },
+      "num_images":           { "type": "integer", "default": 1, "max": 4 },
+      "seed":                 { "type": "integer", "note": "Set for reproducibility" },
+      "enable_safety_checker":{ "type": "boolean", "default": true }
+    },
+    "tips": [
+      "~$0.003/image = ~333 images per dollar.",
+      "4 steps is the sweet spot — more steps don't help much on Schnell.",
+      "Use for A/B prompt testing before spending on quality models.",
+      "Set seed for reproducible variations."
+    ],
+    "dont": [
+      "Don't use for final outputs — step up to flux-pro for finals."
+    ]
+  },
+  "fal-ai/sam2/auto-segment": {
+    "name": "SAM 2 Auto-Segment",
+    "provider": "Meta",
+    "endpoint": "fal-ai/sam2/auto-segment",
+    "cost_per_req_usd": 0.005,
+    "speed": "moderate",
+    "notes": "Segments every distinct region automatically. No prompt needed.",
+    "params": {
+      "image_url":                  { "type": "string",  "required": true },
+      "points_per_side":            { "type": "integer", "default": 32 },
+      "pred_iou_thresh":            { "type": "float",   "default": 0.88 },
+      "stability_score_thresh":     { "type": "float",   "default": 0.95 },
+      "min_mask_region_area":       { "type": "integer", "default": 100 }
+    },
+    "tips": [
+      "Returns individual_masks array — one URL per detected object.",
+      "Use dest-in blend with sharp to apply mask as alpha channel.",
+      "Combine with sharp to produce transparent PNGs per object."
+    ]
+  },
+  "xai/grok-imagine-video/image-to-video": {
+    "name": "Grok Imagine Video (img2vid)",
+    "provider": "xAI",
+    "endpoint": "xai/grok-imagine-video/image-to-video",
+    "cost_per_second_usd": { "480p": 0.05, "720p": 0.07 },
+    "notes": "Animate a still image into video. Async — use submit_job.",
+    "params": {
+      "image_url": { "type": "string", "required": true },
+      "prompt":    { "type": "string" }
+    },
+    "tips": [
+      "Always use fal.queue.submit() — video is slow.",
+      "Poll with fal.queue.status() every 3-5s."
+    ]
+  }
+}

@@ -1,3 +1,1 @@
-import Page from "../Page/Page.js";
-
-export default new Page();
+import app, { el, div, h1, p, style } from '/app.js';

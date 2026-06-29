@@ -6,8 +6,8 @@ import WebApp0 from './WebApp0.js';
 import View, { div } from '/framework/core/View/View.js';
 
 // Hide framework chrome so WebApp fills the viewport
-app.$header.hide();
-app.$sidenav.hide();
+// app.$header.hide();
+// app.$sidenav.hide();
 if (app.$footer) app.$footer.hide();
 
 // Helper: bare View div without captor

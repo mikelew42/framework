@@ -1,18 +1,28 @@
-Draggable needs its own Target subclass:
+# Draggable todo
 
-Draggable.Target with registry.
+## ✅ Done
 
-I don't really like the drop_check() bit, even though it kind of works.
+- `0/Draggable0.js` — clean base, Pointer Capture, on_start/on_move(dx,dy)/on_stop hooks
 
-- Remove Movable class, it's basically the follow_cursor() logic.
-- Put the Draggable.Target logic into the main Draggable class, and make Sortable a lighter extension.
+## Next up
 
+- `1/Draggable1.js` — Target registry + drop detection
+  - `Draggable1.Target` inner class (WeakMap registry)
+  - `document.elementFromPoint(e.clientX, e.clientY)` during move (pointer capture means e.target is always the handle)
+  - Hooks on Target: `on_enter(draggable)`, `on_leave(draggable)`, `on_drop(draggable)`
+  - Replaces the messy `Draggable.lookup()` + `drop_check()` pattern in the old files
 
+- `ext/Sortable/0/Sortable0.js` — extends Draggable1
+  - Needs a `list` (core/List/List.js) and `container` (DOM el)
+  - Calculates insertion index by scanning `container.children` vs `e.clientY`
+  - DOM preview: `insertBefore(dragged_el, sibling)` during move
+  - On drop: `old_list.remove(item)` + `new_list.insert(item, index)`
+  - Open question: should this live in `ext/Sortable/` or stay in `ext/Draggable/`?
 
-# Draggable should work without Sortable and Lists
+## Legacy files (keep, don't delete)
 
-The main Draggable class can be very light, and basically a skeleton for building features.
-
-The default drop(), if a Draggable is a container, can just be append().  But is that just for views?  In order for a Draggable to append its underlying object (a list? an object or component?), we need to know that property name.  It could be parent, as a generic.  And then try this.parent?.append?.(), I believe is the syntax.
-
-Then, for sortable to work, there has to be the proper insert logic, and so sortable.list seems reasonable.
+- `Draggable.js` — superseded by 0/Draggable0.js
+- `Movable.js` — "follow cursor" is just Draggable0 `on_move` with transform
+- `Sortable.js` — working but messy; will be replaced by ext/Sortable/
+- `Previewable.js` — half-baked; preview concept absorbed into Sortable
+- `Rewidth.js` — superseded by ext/Splitter and the Draggable0 resize subclass pattern

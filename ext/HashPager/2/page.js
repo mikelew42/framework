@@ -19,7 +19,7 @@ class HashPager extends _HashPager {
             // debugger;
             this.route.go();
         });
-        debugger;
+        // debugger;
         if (this.parent.view)
             this.button.append_to(this.parent.view.buttons);
     }

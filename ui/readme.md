@@ -1,5 +1,11 @@
 # UI — Reusable Controls
 
+Jamming all these UI controls into one file is no bueno.
+
+Each one should have its own directory, class, tests, readme, etc.
+
+
+
 Primitive UI controls. All factory functions returning Views with a `.val()` getter/setter and `.c()` class helper. Import via `/app.js`:
 
 ```js

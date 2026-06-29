@@ -24,8 +24,9 @@
     }
 
     &.white {
+		background: transparent;
         > .buttons > .button.active { background: white; }
-        > .buttons > .button:not(.active):hover { background: #ddd; }
+        > .buttons > .button:not(.active):hover { background: rgba(0,0,0,0.1); }
         > .contents { background: white; }
     }
     

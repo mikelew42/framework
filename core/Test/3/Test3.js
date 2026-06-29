@@ -8,45 +8,82 @@ export default class Test3 {
     constructor(...args) {
         this.tests = [];
         this.results = [];
-        this.assign(...args);
+        this._running = false;
+        Object.assign(this, ...args);
+        this.initialize();
     }
 
-    assign(...args) {
-        return Object.assign(this, ...args);
+    initialize() {
+        if (!this.parent && this.capture !== false) Test3.captor?.add(this);
+
+        // children auto_run if parent is auto_running, or is currently executing its fn
+        if (this.parent) this.auto_run = !!(this.parent.auto_run || this.parent._running);
+        else this.auto_run = !this.is_test_file();
+
+        if (this.auto_run) {
+            this._auto_ran = true;
+            if (typeof window !== 'undefined') this.render();
+            else this.run();
+        }
+        return this;
+    }
+
+    // Stack-trace check — only called for root tests (no parent).
+    is_test_file() {
+        return /\.(?:node\.)?test\.js/.test(new Error().stack);
     }
 
     get name() { return this._name ?? this.class?.name; }
     set name(v) { this._name = v; }
 
-    // add(existingTest) or add("label", fn) or add(fn)
     add(arg, fn) {
         if (arg instanceof Test3) {
             this.tests.push(arg);
+            arg.parent = this;
         } else {
             this.tests.push(new Test3({
-                _name: typeof arg === 'string' ? arg : undefined,
-                value: typeof arg === 'function' ? arg : fn
+                _name: is.str(arg) ? arg : undefined,
+                value: fn ?? (is.fn(arg) ? arg : undefined),
+                parent: this
             }));
         }
         return this;
     }
 
-    // run all fns, store results — no render
     run() {
+        this.run_self();
+        this.run_children();
+        return this;
+    }
+
+    // Execute value fn with self as captor — children created here auto_run via _running flag.
+    run_self() {
         this.results = [];
-        if (this.value) {
-            Test3.set_captor(this);
-            try { this.value(this); }
-            catch(e) { this.fail(`Threw: ${e.message}`); }
-            Test3.restore_captor();
-        }
-        for (const child of this.tests) child.run();
+        if (!this.value) return;
+        this._running = true;
+        Test3.set_captor(this);
+        try { this.value(this); }
+        catch(e) { this.fail(`Threw: ${e.message}`); }
+        Test3.restore_captor();
+        this._running = false;
+    }
+
+    // Run any children that didn't already auto_run during run_self().
+    run_children() {
+        for (const child of this.tests)
+            if (!child._auto_ran) child.run();
         return this;
     }
 
     assert(condition, message) {
-        this.results.push({ pass: !!condition, message: message ?? String(condition) });
+        const r = { pass: !!condition, message: message ?? String(condition) };
+        this.results.push(r);
+        if (this.view) this.render_assertion(r);
         return condition;
+    }
+
+    render_assertion(r) {
+        div.c('t3-assert ' + (r.pass ? 'pass' : 'fail'), r.message);
     }
 
     fail(message) {
@@ -61,7 +98,6 @@ export default class Test3 {
 
     get failed() { return !this.passed; }
 
-    // print results to console — for Node / run-all.mjs
     report() {
         this._print(0);
         if (typeof process !== 'undefined' && this.failed) process.exitCode = 1;
@@ -76,35 +112,23 @@ export default class Test3 {
         for (const child of this.tests) child._print(depth + 1);
     }
 
-    // run + render with View (browser, visual debugger)
-    // each child fn runs synchronously, so breakpoints show partial state live
+    // Idempotent — auto_run children call this from initialize() and set their view.
+    // Explicit render (test files, page) calls this once on the root.
     render() {
         if (typeof window === 'undefined') return this;
-
-        this.view = div.c('t3-test');
-        View.set_captor(this.view);
-
-        div.c('t3-name', this.name ?? '(unnamed)');
-
-        if (this.value) {
-            Test3.set_captor(this);
-            try { this.value(this); }
-            catch(e) { this.fail(`Threw: ${e.message}`); }
-            Test3.restore_captor();
-
-            for (const r of this.results)
-                div.c('t3-assert ' + (r.pass ? 'pass' : 'fail'), r.message);
-        }
-
-        for (const child of this.tests) child.render();
-
-        View.restore_captor();
+        if (this.view) return this;
+        this.view = div.c('t3-test', () => {
+            div.c('t3-bar', this.name ?? '(unnamed)');
+            div.c('t3-results', () => { this.run_self(); });
+            div.c('t3-children', () => {
+                for (const child of this.tests)
+                    if (!child.view) child.render();
+            });
+        });
         this.view.ac(this.passed ? 'pass' : 'fail');
-
         return this;
     }
 
-    // run + compact one-line summary (browser)
     summarize() {
         if (typeof window === 'undefined') return this;
         const pass = this._count(true), total = this._count();
@@ -122,61 +146,27 @@ export default class Test3 {
     }
 }
 
-// Static captor — mirrors View.captor pattern
 Object.assign(Test3, {
     captor: null,
     previous_captors: [],
-    set_captor(t) {
-        this.previous_captors.push(this.captor);
-        this.captor = t;
-    },
-    restore_captor() {
-        this.captor = this.previous_captors.pop();
-    }
+    set_captor(t) { this.previous_captors.push(this.captor); this.captor = t; },
+    restore_captor() { this.captor = this.previous_captors.pop(); }
 });
 
-// test(Class)       — root test for a class; sets Test3.captor, returns it
-// test("label", fn) — labeled child under current captor
-// test(Class)          — sticky root for a class; sets captor for the file's lifetime
-// test(Class, scope)   — scoped root; sets captor, runs scope(), restores captor
-// test("label", scope) — scoped label root (when no captor exists)
-// test("label", fn)    — child test with fn as test body (when captor is set)
-// test(fn)             — unlabeled child test
-// test("label")        — labeled child, or sticky label root if no captor
-export function test(arg, fn) {
-    // constructable → root test
-    if (is.class(arg)) {
-        const t = new Test3({ class: arg });
-        Test3.set_captor(t);
-        if (fn) try { fn(); } finally { Test3.restore_captor(); }
-        return t;
-    }
-
-    const name = typeof arg === 'string' ? arg : undefined;
-
-    // node context (no captors) + label + fn → scoped label root
-    // fn is the scope body (populates children), NOT the test body
-    if (!Test3.captor && !View.captor && name && fn) {
-        const t = new Test3({ _name: name });
-        Test3.set_captor(t);
-        try { fn(); } finally { Test3.restore_captor(); }
-        return t;
-    }
-
-    // child test — fn is the test body
-    const child = new Test3({
-        _name: name,
-        value: typeof arg === 'function' ? arg : fn
+// test(Class)                       — root for a class
+// test("label", fn)                 — labeled test
+// test(Class, InheritedTest, fn)    — variadic: pre-built tests run before own fn
+export function test(arg, ...rest) {
+    const fn    = rest.find(r => is.fn(r) && !is.class(r));
+    const inherited = rest.filter(r => r instanceof Test3);
+    return new Test3({
+        class: is.class(arg) ? arg : undefined,
+        _name: is.str(arg)   ? arg : undefined,
+        value: fn ?? (!is.class(arg) && is.fn(arg) ? arg : undefined),
+        tests: inherited  // available in tests[] before initialize() triggers auto_run
     });
-    if (Test3.captor) {
-        Test3.captor.add(child);
-    } else {
-        Test3.set_captor(child);       // no captor → sticky label root
-    }
-    return child;
 }
 
-// global assert — routes to the currently running test
 export function assert(condition, message) {
     return Test3.captor?.assert(condition, message);
 }

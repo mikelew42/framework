@@ -1,64 +1,73 @@
-# Test Module
+# Test — Design Doc
 
-## Class Progression
+## Current State
 
+**Test3 is the blessed class for all new tests.** Import it directly:
+
+```js
+import { test, assert } from '/framework/core/Test/3/Test3.js';
 ```
-core/Test/
-  readme.md        ← this file
-  Test.js          ← original browser-only test class (stable, keep)
-  0/
-    Test0.js       ← Node-compatible, results as data, class-attached suites
-    Test0.test.js
-    page.js
-    readme.md      ← Test0 design, runner plan, open questions
-  1/
-    Test1.js       ← browser renderer: upgrades tests to List0, adds Test1.View
-    Test1.css      ← monospace pass/fail styles
-    page.js        ← demo page (inline suite + Item3.test)
-    readme.md
-```
+
+See [Test/3/readme.md](3/readme.md) for full usage and design notes.
+
+**Existing suites (Test0/Test1)** — 26 Node suites and 21 Playwright tests all pass. They use `Test0` as their data layer and `Test1.View` for browser rendering. These are not being migrated; they stay as-is for compat.
+
+**Legacy Original Test.js** — still used in a handful of older `page.js` files. Backward-compat forever; not re-exported from `app.js` as the default going forward.
 
 ---
 
-## Original Test.js
+## What Each Level Is
 
-Browser-side test primitive. Each `test(name, fn)` call:
-1. Parses `fn.toString()` to extract assert conditions as labels
-2. Renders a DOM element per test (pass/green, fail/red)
-3. Pushes failures to `window.fails`
+| Path | Role |
+|------|------|
+| `Original/Test.js` | First browser REPL runner. Sync, auto-renders, hash isolation. Legacy. |
+| `0/Test0.js` | Node data layer. Async, composable `add(suite)`, contract substitution. Powers 26 existing suites. |
+| `1/Test1.js` | Browser renderer extending Test0. `<details>/<summary>` tree, collapsible. Used by existing page.js files. |
+| `3/Test3.js` | **Current blessed class.** Global captor, auto_run cascade, synchronous inline render. Use for all new tests. |
 
-Used by all existing `page.js` files. Stays as-is for backwards compat.
+Test2 was skipped — Test3 started fresh with a cleaner design rather than extending Test0.
 
 ---
 
-## Open Design Question: Test Infrastructure Evolution
+## What's Pending for Test3
 
-**Status: parked. Current system works. Deciding on next step.**
+Test3 is fully functional. One gap remains before it can fully replace Test0-based suites:
 
-As the framework grows (10+ subclasses per domain object), pain points will compound:
+1. **Async** — `run_self()` is synchronous. `await this.value(this)` would unlock FileSaver / debounce tests. Currently you can't write `async t => { await item.load(); ... }` in a Test3 fn.
 
-1. **No unified dashboard** — test results are spread across 21 separate pages; no single view of pass/fail.
-2. **No watcher** — `scripts/run-all.mjs` runs all 26 suites serially; no incremental rerun on file change.
-3. **No DOM/UI tests** — Test0 is Node-only. Testing View rendering and interaction requires Playwright navigating to a full page — slow and coarse.
+2. **Contract inheritance via `add(suite)`** — the variadic `test(Class, OtherClass.test, fn)` pattern works for composition, but doesn't handle Test0's `run(args)` substitution pattern: `Item0.test.run({ Item: Item1 })`.
 
-### Option A: Vitest browser mode + Playwright
+3. **`run-all.mjs` latent bug** — line 38 is `suite.run().report()`. This works because Test3's `run()` is sync. When async is added, it must become `await suite.run(); suite.report();`.
 
-Vitest in dev mode serves individual ES modules with HMR (it's a dev server, not a bundler — no build artifacts). The import graph is tracked automatically: when `Item5.js` changes, only tests that transitively import it rerun. Playwright can be the browser provider.
+---
 
-- `/framework/...` paths resolved via a `vite.config.js` alias — the only config needed.
-- Existing Test0/Test1 suites don't migrate. New DOM/UI tests are written in Vitest `describe/it/expect` alongside them.
-- Built-in `--ui` dashboard shows all results with file-level grouping and live status.
-- The "no bundler" concern is about build artifacts. Vite dev mode doesn't produce them.
+## Goal: One `test()` That Just Works
 
-### Option B: Custom watcher + WebSocket dashboard
+```js
+// .node.test.js — deferred, export for run-all.mjs
+export default MyClass.test = test(MyClass, () => {
+    test("does the thing", () => { assert(true); });
+});
 
-Keep Test0/Test1 as the format. Build:
-- `scripts/watch.mjs` using chokidar: when `Foo.js` changes, run `Foo.test.js` (convention-based; not full import graph tracking).
-- A `/dev/tests` page that receives results via WebSocket and displays them all.
-- Playwright stays as the CI gate for DOM tests.
+// page.js — auto-renders on creation
+import test_obj from "./MyClass.node.test.js";
+test_obj.render();
+```
 
-### Trade-off
+Same import. Same `test()`. Same fn. Browser or Node. No user decision about lifecycle.
 
-The import graph tracking is the hard part to build correctly from scratch. Knowing that a change to `Item5.js` requires rerunning `Item5.test.js` through `Item9.test.js` requires a real module graph — Vitest gets that for free. The appeal of Option B is no new tools and the whole system stays vanilla.
+---
 
-**Not blocking anything. Decision deferred.**
+## Roadmap
+
+**Near-term:**
+1. Make `run_self()` and `run()` async in Test3. Fix `run-all.mjs` line 38.
+2. Confirm all existing `.node.test.js` files work under async run.
+
+**Medium-term:**
+3. Migrate existing 26 `.test.js` suites to `.node.test.js` + Test3 as they're touched.
+4. Export `test`, `assert` from `app.js` pointing at Test3 (not legacy Original).
+
+**Long-term:**
+5. Drop spawn path from `run-all.mjs` once all suites are `.node.test.js`.
+6. Test dashboard at `/dev/tests`.
