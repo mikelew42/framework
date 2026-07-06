@@ -29,6 +29,15 @@ el("style", `
 `);
 
 el("h1", "class HashPager");
+
+el("style", `.takeaways{background:#fffbe6;border-left:4px solid #f5b300;padding:.7em 1em;margin:.4em 0 1.5em;max-width:46em;border-radius:.2em}.takeaways b{display:block;margin-bottom:.3em}.takeaways p{margin:.2em 0}`);
+div.c("takeaways", () => {
+    el("b", "What makes HashPager unique (the fix for HashPage's shrinkage)");
+    p("• ALL page cards, at every depth, live in ONE flat container → equal-width columns, no nested-DOM shrinkage.");
+    p("• Known limits (fixed in /3): singleton/captor live on the BASE class → painful to subclass (see /2); plus an activate/deactivate-at-depth bug.");
+    p("• `make(n)` builds a recursive hierarchy to stress-test the layout.");
+});
+
 // const root = new HashPager();
 // debugger;
 

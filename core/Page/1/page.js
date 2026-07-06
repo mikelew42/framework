@@ -1,4 +1,4 @@
-import app, { el, h1, h2, p } from "/app.js";
+import app, { el, div, h1, h2, p } from "/app.js";
 import Page, { page } from "./Page1.js";
 import test_obj from "./Page1.node.test.js";
 
@@ -14,6 +14,14 @@ el("style", `
 
 h1("class Page (Page1)");
 p("One `page()` helper makes both the root document and nested sub-pages — the captor decides which. Pages stay dormant until rendered; App.load_page() flushes the roots.");
+
+el("style", `.takeaways{background:#fffbe6;border-left:4px solid #f5b300;padding:.7em 1em;margin:.4em 0 1.5em;max-width:46em;border-radius:.2em}.takeaways b{display:block;margin-bottom:.3em}.takeaways p{margin:.2em 0}`);
+div.c("takeaways", () => {
+    el("b", "What makes Page1 unique");
+    p("• ONE `page()` helper builds both root documents and nested sub-pages — the captor decides (like test/assert).");
+    p("• Pages are dormant until rendered; sub-pages render lazily on first open.");
+    p("• Nav here is a placeholder show/hide — NOT URL-addressable. Page2 adds routing.");
+});
 
 // Root document — registers into Page.roots; App.load_page() renders it.
 // (No export needed, though `export default page(...)` works too.)

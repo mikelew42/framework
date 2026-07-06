@@ -935,6 +935,38 @@
 							]
 						},
 						{
+							"name": "3",
+							"path": "framework/core/Page",
+							"type": "dir",
+							"full": "framework/core/Page/3",
+							"children": [
+								{
+									"name": "page.js",
+									"path": "framework/core/Page/3",
+									"type": "file",
+									"full": "framework/core/Page/3/page.js"
+								},
+								{
+									"name": "Page3.js",
+									"path": "framework/core/Page/3",
+									"type": "file",
+									"full": "framework/core/Page/3/Page3.js"
+								},
+								{
+									"name": "Page3.node.test.js",
+									"path": "framework/core/Page/3",
+									"type": "file",
+									"full": "framework/core/Page/3/Page3.node.test.js"
+								},
+								{
+									"name": "readme.md",
+									"path": "framework/core/Page/3",
+									"type": "file",
+									"full": "framework/core/Page/3/readme.md"
+								}
+							]
+						},
+						{
 							"name": "context.js",
 							"path": "framework/core/Page",
 							"type": "file",
@@ -951,6 +983,56 @@
 							"path": "framework/core/Page",
 							"type": "file",
 							"full": "framework/core/Page/Page.js"
+						},
+						{
+							"name": "Pager",
+							"path": "framework/core/Page",
+							"type": "dir",
+							"full": "framework/core/Page/Pager",
+							"children": [
+								{
+									"name": "ColumnPager.css",
+									"path": "framework/core/Page/Pager",
+									"type": "file",
+									"full": "framework/core/Page/Pager/ColumnPager.css"
+								},
+								{
+									"name": "ColumnPager.js",
+									"path": "framework/core/Page/Pager",
+									"type": "file",
+									"full": "framework/core/Page/Pager/ColumnPager.js"
+								},
+								{
+									"name": "Pager.css",
+									"path": "framework/core/Page/Pager",
+									"type": "file",
+									"full": "framework/core/Page/Pager/Pager.css"
+								},
+								{
+									"name": "Pager.js",
+									"path": "framework/core/Page/Pager",
+									"type": "file",
+									"full": "framework/core/Page/Pager/Pager.js"
+								},
+								{
+									"name": "readme.md",
+									"path": "framework/core/Page/Pager",
+									"type": "file",
+									"full": "framework/core/Page/Pager/readme.md"
+								},
+								{
+									"name": "TabPager.css",
+									"path": "framework/core/Page/Pager",
+									"type": "file",
+									"full": "framework/core/Page/Pager/TabPager.css"
+								},
+								{
+									"name": "TabPager.js",
+									"path": "framework/core/Page/Pager",
+									"type": "file",
+									"full": "framework/core/Page/Pager/TabPager.js"
+								}
+							]
 						}
 					]
 				},

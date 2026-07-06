@@ -52,7 +52,14 @@ el("style", `
 
 `);
 
-el("h1", "class HashPager");
+el("h1", "class HashPager (variant 2)");
+
+el("style", `.takeaways{background:#fffbe6;border-left:4px solid #f5b300;padding:.7em 1em;margin:.4em 0 1.5em;max-width:46em;border-radius:.2em}.takeaways b{display:block;margin-bottom:.3em}.takeaways p{margin:.2em 0}`);
+div.c("takeaways", () => {
+    el("b", "What this is: a subclassing EXPERIMENT (diagnostic, not a real variant)");
+    p("• Exists to expose the pain of subclassing HashPager: it needs ~3 lines of manual singleton/captor plumbing (see below).");
+    p("• HashPager3 fixes exactly this with this-scoped statics — `class X extends HashPager3 {}` just works. This file can retire once /3 lands.");
+});
 
 
 // wow taht wasn't easy to figure out...

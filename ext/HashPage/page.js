@@ -22,6 +22,14 @@ app.$root.ac("pad");
 // `);
 
 el("h1", "class HashPage");
+
+el("style", `.takeaways{background:#fffbe6;border-left:4px solid #f5b300;padding:.7em 1em;margin:.4em 0 1.5em;max-width:46em;border-radius:.2em}.takeaways b{display:block;margin-bottom:.3em}.takeaways p{margin:.2em 0}`);
+div.c("takeaways", () => {
+    el("b", "What makes HashPage unique (FIRST column attempt — superseded)");
+    p("• Sub-pages render INSIDE the parent's DOM, so columns NEST: root 100% → level-1 50% → level-2 25%… unreadable after a few levels. This is THE problem.");
+    p("• Superseded by HashPager, which puts every card in ONE flat container instead. Kept for reference.");
+});
+
 const root = new HashPage();
 // debugger;
 page("test", tpg => {

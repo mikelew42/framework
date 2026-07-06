@@ -41,7 +41,7 @@
 
     .app { height: 100%; background: #ddd; /* overflow-x: hidden; overflow-y: scroll; */}
 
-    .page { max-width: 60em; background: #fff; padding: 4rem;}
+    /* .page { max-width: 60em; background: #fff; padding: 4rem;} */
 
     /*  section { margin-bottom: 3em;} no bueno */
     /* section.mb { margin-bottom: 3em;}

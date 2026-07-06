@@ -21,6 +21,13 @@ el("style", `
 
 el("h1", "class HashRouter");
 
+el("style", `.takeaways{background:#fffbe6;border-left:4px solid #f5b300;padding:.7em 1em;margin:.4em 0 1.5em;max-width:46em;border-radius:.2em}.takeaways b{display:block;margin-bottom:.3em}.takeaways p{margin:.2em 0}`);
+div.c("takeaways", () => {
+    el("b", "What this is: the routing PRIMITIVE everything Hash* builds on");
+    p("• Maps URL hash segments (#a/b/c) to nested activate/deactivate callbacks; gives shareable links + back/forward for free.");
+    p("• Captor pattern auto-registers child routes. HashTabs (this demo), HashPage, HashPager, and Page2 all sit on top of it.");
+});
+
 
 // before you can use hash tabs, you have to call this...?
 // maybe not - get_captor() automatically does this...

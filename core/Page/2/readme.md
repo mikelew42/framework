@@ -20,6 +20,10 @@ inheritance); routing is browser-verified (deep-link, refresh, back/forward).
   only overrides `render_pages()` to `new Pager({ host: this })`. `Page0/1` never import HashRouter.
 - `Page.slug` getter (derives from title).
 - Hash routing: deep-linkable (`#two/b/deep`), refresh-stable, browser back/forward.
+- **Fully lazy render:** `Pager.add()` eagerly creates only the nav **button + route**; the entire
+  page **view + content** is deferred to first activate (`if (!pg.rendered) pg.render(columns)`).
+  This is lazier than HashPager3, which renders every card's shell up front (it bundles
+  button-creation into `render()`). See `ext/HashPager/3/readme.md` → "Eager shell vs lazy view".
 - **Layout:** nested/indented (vertical), not flat horizontal columns — readable at any depth, no
   shrinkage. Flat columns (HashPager3 style) remain a separate presentation choice.
 

@@ -1,0 +1,34 @@
+/* TabPager — in-place tabs with a SEAMLESS active tab: the active tab is white
+   and merges cleanly into the white content area below it (no seam between them). */
+
+.tab-pager > .nav {
+    display: flex; flex-wrap: wrap; gap: .25em;
+    margin: 0; padding-left: .25em;
+    position: relative; z-index: 1;        /* sit above the content's top border */
+}
+
+.tab-pager > .nav .page-btn {
+    background: rgba(0, 0, 0, .035);
+    border: 1px solid var(--page-line);
+    border-radius: .4em .4em 0 0;
+    padding: .45em 1.1em;
+}
+.tab-pager > .nav .page-btn:hover { background: rgba(0, 0, 0, .07); }
+
+/* active tab: white, with its bottom edge erased so it flows into the content */
+.tab-pager > .nav .page-btn.active {
+    background: var(--page-card);
+    color: #111;
+    font-weight: 600;
+    border-bottom-color: var(--page-card);
+    margin-bottom: -1px;                   /* overlap the content's top border */
+}
+
+.tab-pager > .pages {
+    background: var(--page-card);
+    border: 1px solid var(--page-line);
+    border-radius: 0 .5em .5em .5em;
+    padding: 1.4em 1.5em;
+    margin-top: 0;
+}
+.tab-pager > .pages > :first-child { margin-top: 0; }

@@ -17,7 +17,7 @@ import Pager from "./Pager.js";
  * depth, no shrinkage. Flat horizontal columns (HashPager3 style) remain a
  * separate presentation choice for later.
  */
-export default class Page extends Page1 {
+export default class Page2 extends Page1 {
 
     // URL segment for this page — derived from the title unless set explicitly.
     get slug(){
@@ -38,12 +38,12 @@ export default class Page extends Page1 {
  */
 export function page(name, content){
     const pg = is.fn(name)
-        ? new Page({ content: name })
-        : new Page({ title: name, content });
+        ? new Page2({ content: name })
+        : new Page2({ title: name, content });
 
-    const parent = Page.captor;
+    const parent = Page2.captor;
     if (parent) parent.adopt(pg);
-    else        Page.roots.push(pg);
+    else        Page2.roots.push(pg);
 
     return pg;
 }

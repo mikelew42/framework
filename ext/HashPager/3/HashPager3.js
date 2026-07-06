@@ -14,9 +14,10 @@ import HashRouter from "../../HashRouter/HashRouter.js";
  *  1. Proper subclassing — every class self-reference is `this` / `this.constructor`
  *     (the original hardcoded `HashPager`, which is why HashPager/2 needed 3 lines
  *     of manual plumbing). `class MyPager extends HashPager3 {}` now just works.
- *  2. Lazy content — a page renders its shell up front (so routing works) but only
- *     renders its CONTENT on first activate. Adding 100 pages costs nothing until
- *     one is visited.
+ *  2. Lazy CONTENT (only) — the card shell (view + nav button) and the route are
+ *     built eagerly on construction; just the content fn is deferred to first
+ *     activate. So make(4) still builds every shell up front. (Page/2's Pager is
+ *     more fully lazy — it defers the whole view; see core/Page/2/readme.md.)
  *  3. Non-numeric, unique slugs in make().
  *
  * Construction sequence per framework convention:
@@ -91,7 +92,11 @@ export default class HashPager3 extends Base {
     activate(){
         if (!this.active){
             this.active = true;
-            this.parent.current && this.parent.current.deactivate();
+            // deactivate the PREVIOUS current sibling — but never ourselves.
+            // (parent.current can still point at us after a route-driven
+            //  deactivate, which would otherwise re-hide us here.)
+            if (this.parent.current && this.parent.current !== this)
+                this.parent.current.deactivate();
             this.parent.current = this;
             this.render_content();   // lazy content render
             this.update();
@@ -100,6 +105,8 @@ export default class HashPager3 extends Base {
 
     deactivate(){
         this.active = false;
+        // don't leave parent.current dangling on an inactive page
+        if (this.parent.current === this) this.parent.current = null;
         this.update();
     }
 
@@ -108,6 +115,9 @@ export default class HashPager3 extends Base {
         if (this.active){
             this.view.ac("active").show();
             this.button.ac("active");
+            // reveal the newly-active column (Finder-style horizontal scroll).
+            // When deeper columns later hide, the browser clamps scrollLeft back.
+            this.view.el.scrollIntoView({ inline: "nearest", block: "nearest", behavior: "smooth" });
         } else {
             this.view.hide().rc("active");
             this.button.rc("active");

@@ -16,17 +16,35 @@ Follows the original `HashPager.js` as closely as possible. Changed only what's 
   this-scoped via `Object.hasOwn` (`singleton()`, `own()`), and a static `page()` resolves the
   captor's class. `class MyPager extends HashPager3 {}` now works with **zero** manual plumbing
   (the demo proves it with `FancyPager`). This was the headline `2/` pain.
-- ✅ **Lazy content** — `render()` builds only the page shell (so routing works); `render_content()`
-  runs on first `activate()`. Adding 100 pages costs nothing until one is visited.
+- ✅ **Lazy content (only)** — `render()` builds the card **shell** (view + nav button) and the
+  route up front; only `render_content()` (the content fn) is deferred to first `activate()`. So
+  `make(4)` still builds ~340 shells + routes + buttons eagerly — just not their content. This is
+  **partial** laziness, not "render nothing until visited." (See "Eager shell vs lazy view" below.)
 - ✅ **Non-numeric, unique slugs** in `make()` (`p-1-2-3`), fixing the router-path collision.
 
 Deferred (next):
-- ⏳ **Page-object integration** — make `Page` (core/Page) delegate its `render_pages()` to a
-  HashPager3 so the placeholder nav is replaced by routing + columns. (Currently HashPager3 is
-  self-contained/page-like, like the original.)
+- ⏳ **Fully lazy view** — defer the whole shell (not just content) to first activate, like Page/2.
+  Blocked by HashPager3 bundling button-creation *into* `render()`: you need the button before you
+  can navigate to (activate) the page. Page/2's `Pager` split button-creation from view-rendering,
+  which is what unlocked full laziness — HashPager3 would need the same split.
+- ⏳ **Page-object integration** — done in `core/Page/2` (`Pager` drives Page objects). HashPager3
+  remains the standalone, page-like, flat-column variant; converging it with Page/2's `Pager` is open.
 - ⏳ **Adaptive columns** — Finder-style collapse of ancestor columns at depth (JS; CSS can't).
 - ⏳ **activate/deactivate at depth** — only deactivate the diverging tail of the path. Currently
-  inherits the router's recursive activate/deactivate (good enough for the demo).
+  inherits the router's recursive activate/deactivate.
+
+---
+
+## Eager shell vs lazy view (what actually renders when)
+
+| | eager (on construction) | lazy (on first activate) |
+|---|---|---|
+| **HashPager3** | route + card view + nav button | content fn (`render_content()`) |
+| **Page/2 `Pager`** | route + nav button | **entire** view + content (`pg.render()`) |
+
+HashPager3 renders shells eagerly because the route's `initialize` callback calls `render()`,
+and `render()` also creates the nav button. Page/2 creates the button in `Pager.add()` (separate
+from `pg.render()`), so it can defer the whole view. For large trees, Page/2 is the lazier choice.
 
 **Cannot be Node-tested** (HashRouter needs `window` + `Events`, both browser-only / stubbed in
 Node) — same as the original HashPager. Verify in the browser via `page.js`.

@@ -23,7 +23,7 @@ import ctx from "../context.js";
  * with hash routing + flat-column layout. Page stays the noun; the pager layer
  * owns routing/columns.
  */
-export default class Page extends Page0 {
+export default class Page1 extends Page0 {
 
     // --- captor: set while a page renders its content, so page() calls inside
     //     it register as sub-pages. Backed by the shared `ctx` (see context.js) so
@@ -48,9 +48,9 @@ export default class Page extends Page0 {
     // Wrap content rendering with the Page captor, so any page() called inside
     // the content fn is captured as a sub-page of THIS page.
     render_content(){
-        Page.set_captor(this);
+        Page1.set_captor(this);
         super.render_content();      // View captor + run content fn
-        Page.restore_captor();
+        Page1.restore_captor();
     }
 
     render(target){
@@ -99,12 +99,12 @@ export default class Page extends Page0 {
  */
 export function page(name, content){
     const pg = is.fn(name)
-        ? new Page({ content: name })
-        : new Page({ title: name, content });
+        ? new Page1({ content: name })
+        : new Page1({ title: name, content });
 
-    const parent = Page.captor;
+    const parent = Page1.captor;
     if (parent) parent.adopt(pg);     // sub-page
-    else        Page.roots.push(pg);  // root document — dormant until App flushes
+    else        Page1.roots.push(pg);  // root document — dormant until App flushes
 
     return pg;
 }

@@ -16,7 +16,7 @@ import is from "../../util/is/is.js";   // real `is` (View.js's is is stubbed em
  *
  * Naming: `Page` is the class, `pg` an instance, `page()` the helper (Page/1).
  */
-export default class Page extends Base {
+export default class Page0 extends Base {
 
     // Construction does NO work beyond storing args — the page stays dormant.
     // (Base.instantiate already does assign() + initialize(); no setup needed here.)

@@ -1,0 +1,29 @@
+/* Page-system theme tokens — override these to retheme columns/tabs. */
+:root {
+    --col-w: 24em;            /* column width */
+    --page-line: rgba(0, 0, 0, .12);
+    --page-card: #fff;
+    --page-accent: #3b82f6;
+    --page-muted: #6b7280;
+}
+
+/* Neutralize the generic document `.page` theme (framework.css: 4rem padding /
+   60em max-width / #fff bg) for interactive Page-system pages — columns & tabs
+   manage their own spacing. (Proper long-term fix: give Page views their own
+   class instead of reusing `.page`, or scope the generic rule. See readme.) */
+.pager { max-width: none; padding: 0; background: transparent; }
+
+/* shared nav button strip (variants layer their own layout on top) */
+.pager > .nav { display: flex; flex-wrap: wrap; gap: .35em; margin: 0 0 1em; }
+
+.pager .page-btn {
+    cursor: pointer;
+    padding: .35em .85em;
+    background: rgba(0, 0, 0, .06);
+    border-radius: .3em;
+    user-select: none;
+    line-height: 1.3;
+    white-space: nowrap;
+}
+.pager .page-btn:hover { background: rgba(0, 0, 0, .11); }
+.pager .page-btn.active { background: var(--page-accent); color: #fff; }

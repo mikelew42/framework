@@ -1,4 +1,4 @@
-import { app, el, h1, h2, h3, p } from "/app.js";
+import { app, el, div, h1, h2, h3, p } from "/app.js";
 import { page } from "./Page2.js";
 import test_obj from "./Page2.node.test.js";
 
@@ -13,6 +13,14 @@ el("style", `
 
 h1("class Page2 — URL routing");
 p("Sub-pages are hash routes: click around, then check the URL. Deep links (#two/b/deep) and refresh work; so does browser back/forward.");
+
+el("style", `.takeaways{background:#fffbe6;border-left:4px solid #f5b300;padding:.7em 1em;margin:.4em 0 1.5em;max-width:46em;border-radius:.2em}.takeaways b{display:block;margin-bottom:.3em}.takeaways p{margin:.2em 0}`);
+div.c("takeaways", () => {
+    el("b", "What makes Page2 unique (the promoted default)");
+    p("• Adds URL hash routing: deep-linkable, refresh-stable, browser back/forward.");
+    p("• Page = the noun; it COMPOSES a `Pager` for navigation. Page0/1 never import HashRouter.");
+    p("• Fully lazy: only the button + route are eager; the whole view + content renders on first activate.");
+});
 
 // Root document; App.load_page() renders it. Sub-pages become hash segments.
 page("Routing demo", (root) => {
