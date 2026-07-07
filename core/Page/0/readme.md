@@ -115,8 +115,10 @@ idea obvious at a glance.
 
 ---
 
-## Note on the existing `core/Page/Page.class.js`
+## Note on `core/Page/Old_App_Like_Page.class.js`
 
 That file is an **older, unrelated experiment** — essentially a fork of `App.js` that loads real
-sub-`page.js` files by filesystem path (`load_sub_page`). It is *not* this Page system. Leave it
-for now; the new system lives under `0/`, `1/`. Revisit/retire `Page.class.js` once Page/1 lands.
+sub-`page.js` files by filesystem path (`load_sub_page`). It is *not* this Page system. It was
+renamed from `Page.class.js` → `Old_App_Like_Page.class.js` so the `Page.class.js` name could be
+reused for the blessed re-export (`Page.class.js → ./3/Page3.js`), freeing the lowercase `page.js`
+for a demo page. Kept for reference; retire when nothing needs it.

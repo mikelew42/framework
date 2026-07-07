@@ -146,7 +146,7 @@ tests, where there's no App) — but the App load path no longer depends on it.
 ## Open Questions
 
 - Where does `page()` live for the toolbelt import? Re-export from `/app.js` alongside
-  `test`, `assert`, `el`, `div`. (`Page/Page.js → export { default, page } from "./1/Page1.js"`.) ✓ done
+  `test`, `assert`, `el`, `div`. (`Page/Page.class.js → export { default, page } from "./1/Page1.js"`.) ✓ done
 - Should `Page.roots` be cleared on error too, so a failed load doesn't leak into the next?
 - Does a root `pg` with sub-pages render its pager into `$root`, with columns flowing from there?
   (Yes — root is just the first column; HashPager/3's flat-container model handles the rest.)
@@ -163,6 +163,6 @@ tests, where there's no App) — but the App load path no longer depends on it.
 | `page.js` | Browser demo: root `Docs` + nested sub-pages (`Install`, `Guides/Routing…`) |
 
 **Also wired:**
-- `core/Page/Page.js` — re-exports `{ default, page }` from `1/Page1.js` (stable default).
+- `core/Page/Page.class.js` — re-exports `{ default, page }` from `1/Page1.js` (stable default).
 - `core/App/App.js` — `load_page()` now flushes `Page.roots` into `$root` (back-compat preserved).
 - `app.js` — exports `Page` and `page` for the toolbelt: `import { page } from "/app.js"`.

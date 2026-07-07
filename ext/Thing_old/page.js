@@ -1,3 +1,3 @@
-import Page from "../Page/Page.js";
+import Page from "../Page/Page.class.js";
 
 export default new Page();

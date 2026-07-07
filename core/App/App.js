@@ -1,7 +1,7 @@
 import Events from "../Events/Events.js";
 import { el, div, View, h1, h2, h3, p, is, icon, pre, a } from "../View/View.js";
 import Test, { test } from "../Test/Test.js";
-import Page from "../Page/Page.js";
+import Page from "../Page/Page.class.js";
 
 // this needs to load immediately, so the layers are properly defined
 View.stylesheet(import.meta, "../../framework.css");

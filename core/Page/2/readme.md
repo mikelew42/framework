@@ -10,7 +10,7 @@ that owns the routes — without `Page` becoming routing-aware itself.
 
 ## Status — Built & promoted ✅
 
-`Page2.js` + `Pager.js` + `page.js` demo shipped and browser-verified. `core/Page/Page.js` now
+`Page2.js` + `Pager.js` + `page.js` demo shipped and browser-verified. `core/Page/Page.class.js` now
 re-exports Page2, so `import { page } from "/app.js"` is routed everywhere (the `/examples/` tree
 is now URL-addressable). Node suite covers the non-routing logic (slug, page() → Page2,
 inheritance); routing is browser-verified (deep-link, refresh, back/forward).
