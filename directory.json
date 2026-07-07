@@ -973,16 +973,22 @@
 							"full": "framework/core/Page/context.js"
 						},
 						{
+							"name": "Old_App_Like_Page.class.js",
+							"path": "framework/core/Page",
+							"type": "file",
+							"full": "framework/core/Page/Old_App_Like_Page.class.js"
+						},
+						{
 							"name": "Page.class.js",
 							"path": "framework/core/Page",
 							"type": "file",
 							"full": "framework/core/Page/Page.class.js"
 						},
 						{
-							"name": "Page.js",
+							"name": "page.js",
 							"path": "framework/core/Page",
 							"type": "file",
-							"full": "framework/core/Page/Page.js"
+							"full": "framework/core/Page/page.js"
 						},
 						{
 							"name": "Pager",
@@ -1033,6 +1039,12 @@
 									"full": "framework/core/Page/Pager/TabPager.js"
 								}
 							]
+						},
+						{
+							"name": "readme.md",
+							"path": "framework/core/Page",
+							"type": "file",
+							"full": "framework/core/Page/readme.md"
 						}
 					]
 				},

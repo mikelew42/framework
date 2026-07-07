@@ -45,4 +45,11 @@ function create(Cls, name, content){
 }
 
 export function page(name, content){ return create(Page3,    name, content); }   // columns
-export function tabs(name, content){ return create(TabsPage, name, content); }   // tabs
+export function tabs(name, content){ return create(TabsPage, name, content); }   // tabs (paper look)
+
+// Same tabs, "button" look — TabPager reads pg.tab_style (a CSS class), no subclass needed.
+tabs.buttons = (name, content) => {
+    const pg = create(TabsPage, name, content);
+    pg.tab_style = "button-tabs";
+    return pg;
+};

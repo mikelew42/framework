@@ -1,6 +1,7 @@
 /* Page-system theme tokens — override these to retheme columns/tabs. */
 :root {
-    --col-w: 24em;            /* column width */
+    --col-w: 24em;            /* column width (fixed / fill basis) */
+    --col-max: 40em;          /* cap for .cols-fill columns */
     --page-line: rgba(0, 0, 0, .12);
     --page-card: #fff;
     --page-accent: #3b82f6;

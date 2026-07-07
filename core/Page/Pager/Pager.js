@@ -37,8 +37,15 @@ export default class Pager {
         for (const pg of this.host.pages) this.add(pg);
         for (const pg of this.host.pages) pg.route.match();
 
-        if (!this.current) this.activate(this.host.pages[0]);   // default-open the first
-        this.router.on("reset", () => { if (!this.current) this.activate(this.host.pages[0]); });
+        this.activate_default();                              // default-open the first (if nothing matched)
+        this.router.on("reset", () => this.activate_default());
+    }
+
+    // Open the first child when none is active. Called at construction, on router
+    // reset, AND whenever the host re-activates (see activate) — so navigating away
+    // and back re-opens the default child instead of coming back to an empty page.
+    activate_default(){
+        if (!this.current && this.host.pages?.length) this.activate(this.host.pages[0]);
     }
 
     classify(){ this.host.view.ac("pager"); }
@@ -69,6 +76,10 @@ export default class Pager {
         pg.button.ac("active");
         if (!pg.rendered) pg.render(this.columns);   // lazy: render on first open
         pg.view.show();
+        // if pg has sub-pages but the deactivate-cascade closed its active child,
+        // re-open its default so a revisited page isn't empty. (Runs synchronously
+        // before paint, so a subsequent deep-link route match overrides it cleanly.)
+        if (pg.pager) pg.pager.activate_default();
         this.activated(pg);
     }
 

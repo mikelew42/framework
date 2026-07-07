@@ -37,9 +37,13 @@ export default class ColumnPager extends Pager {
         return root.col_row;
     }
 
+    // The "column root" holds the shared flat row. We climb only through a
+    // CONTIGUOUS chain of column pages — so a column section nested inside tabs
+    // roots to that section (its columns stay inside the tab), instead of
+    // escaping to the very top of the app.
     root(){
         let p = this.host;
-        while (p.parent) p = p.parent;
+        while (p.parent && p.parent.pager instanceof ColumnPager) p = p.parent;
         return p;
     }
 

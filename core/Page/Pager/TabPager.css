@@ -1,34 +1,75 @@
-/* TabPager — in-place tabs with a SEAMLESS active tab: the active tab is white
-   and merges cleanly into the white content area below it (no seam between them). */
+/* TabPager styles.
+   Two looks, chosen by a modifier class (set in TabPager.js from `tab_style`):
+     .paper-tabs   white; active tab flows into the content, inactive dimmed  (default)
+     .button-tabs  pill buttons; active tab uses the accent color
+   Plus .full for a full-width, full-height tab strip (top tab bars).            */
 
+/* ---- shared tab-strip layout ---- */
 .tab-pager > .nav {
-    display: flex; flex-wrap: wrap; gap: .25em;
-    margin: 0; padding-left: .25em;
-    position: relative; z-index: 1;        /* sit above the content's top border */
+    display: flex; flex-wrap: wrap;
+    margin: 0;
+    position: relative; z-index: 1;   /* sit above the content's top edge */
 }
 
-.tab-pager > .nav .page-btn {
-    background: rgba(0, 0, 0, .035);
-    border: 1px solid var(--page-line);
-    border-radius: .4em .4em 0 0;
-    padding: .45em 1.1em;
+/* =====================================================================
+   PAPER TABS — the default. The active tab is white and merges seamlessly
+   into the white content below it; inactive tabs are dimmed, chrome-free.
+   ===================================================================== */
+.paper-tabs > .nav {
+    gap: .15em;
+    border-bottom: 1px solid var(--page-line);   /* the line the active tab breaks through */
 }
-.tab-pager > .nav .page-btn:hover { background: rgba(0, 0, 0, .07); }
-
-/* active tab: white, with its bottom edge erased so it flows into the content */
-.tab-pager > .nav .page-btn.active {
+.paper-tabs > .nav .page-btn {
+    background: transparent;
+    border: 1px solid transparent;
+    border-bottom: none;
+    border-radius: .45em .45em 0 0;
+    padding: .55em 1.15em;
+    color: var(--page-muted);
+    opacity: .6;                       /* dimmed inactive */
+    margin-bottom: -1px;               /* overlap the strip's bottom line */
+    transition: opacity .12s, color .12s;
+}
+.paper-tabs > .nav .page-btn:hover { opacity: .9; }
+.paper-tabs > .nav .page-btn.active {
     background: var(--page-card);
     color: #111;
+    opacity: 1;
     font-weight: 600;
-    border-bottom-color: var(--page-card);
-    margin-bottom: -1px;                   /* overlap the content's top border */
+    border-color: var(--page-line);
+    border-bottom-color: var(--page-card);   /* erase the seam → flows into content */
 }
-
-.tab-pager > .pages {
+.paper-tabs > .pages {
     background: var(--page-card);
     border: 1px solid var(--page-line);
-    border-radius: 0 .5em .5em .5em;
+    border-top: none;                  /* the strip's bottom line is our top edge */
+    border-radius: 0 0 .5em .5em;
     padding: 1.4em 1.5em;
-    margin-top: 0;
 }
-.tab-pager > .pages > :first-child { margin-top: 0; }
+.paper-tabs > .pages > :first-child { margin-top: 0; }
+
+/* =====================================================================
+   BUTTON TABS — pill buttons; the active tab is accent-colored.
+   ===================================================================== */
+.button-tabs > .nav { gap: .35em; margin-bottom: 1em; }
+.button-tabs > .nav .page-btn {
+    background: rgba(0, 0, 0, .06);
+    border-radius: .4em;
+    padding: .4em 1em;
+}
+.button-tabs > .nav .page-btn:hover { background: rgba(0, 0, 0, .11); }
+.button-tabs > .nav .page-btn.active { background: var(--page-accent); color: #fff; }
+.button-tabs > .pages > :first-child { margin-top: 0; }
+
+/* =====================================================================
+   FULL — the tab strip spans the width (tabs grow equally) and the pager
+   fills its container, so the active panel takes the remaining height.
+   Top-level (direct child of the app .root) fills the viewport area.
+   ===================================================================== */
+.tab-pager.full { display: flex; flex-direction: column; height: 100%; min-height: 0; }
+.tab-pager.full > .nav { flex: 0 0 auto; }
+.tab-pager.full > .nav .page-btn { flex: 1 1 0; text-align: center; }
+.tab-pager.full > .pages { flex: 1 1 auto; min-height: 0; overflow: auto; }
+
+/* a full paper strip should stretch its bottom line across the whole width */
+.paper-tabs.full > .nav { padding-left: 0; }
