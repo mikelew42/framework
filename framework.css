@@ -57,7 +57,7 @@
     pre, code { font-family: Consolas, 'Courier New', Monaco, monospace; }
 
     input:not([type="checkbox"], [type="radio"], [type="color"]), select, textarea {
-        padding: 0.25em 0.5em;
+        padding: 0.25em 0.6em;
         border: 1px solid var(--subtle); /* adding a border affects input[type=submit] height and bg + hover, for some reason */
     }
 

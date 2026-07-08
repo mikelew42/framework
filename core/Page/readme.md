@@ -112,6 +112,73 @@ We explored extracting the "one-of-many visible" core. The useful conclusion, ke
 
 ---
 
+## The auto-render dilemma
+
+The deepest tension in the module — worked through live on `core/Page/page.js` (Auto-render tab).
+
+**The two behaviors pull opposite ways.** Views **auto-render on create** — synchronous, ordered,
+captured; it "just works". Pages are **dormant** — created but not rendered — so a module can
+`export` a page without it drawing itself the moment it's imported.
+
+**The App collector** bridges them: `App.load_page()` sets a Page captor that pushes created pages
+into `collected[]`, dynamically imports the `page.js`, then renders them into `$root` **after** the
+module finishes. Because that render is batched to the end, it **loses three things views give free**:
+- **Order** — interleaved `p()` / `page()` / `p()` no longer renders top-to-bottom.
+- **Capture** — a `page()` inside a `div(() => …)` or a `CodeEditor` can't render there.
+- **Synchronicity** — the page appears a beat later, after the module settles.
+
+**Why the collector exists — really only one reason.** (1) "root `p("hi")` just works" is actually
+the *View* captor (`$root`), independent of the collector. (2) The real reason: **pages must be
+exportable** — if they auto-rendered like views, `import X from "./somepage.js"` would draw X on
+import, losing placement control.
+
+**Why one magic `page()` can't do both:** JS can't tell statement position (`page(…)` on its own line
+= "render here") from expression position (`export default page(…)` = "give me the value"). Same call.
+
+**Proposed best-of-both — two explicit verbs (not magic):**
+- `page(…)` / `tabs(…)` = **render here.** Inside a parent → adopt as child (unchanged). At the root →
+  render **inline into the View captor** (ordered, captured, synchronous, like `div()`). This fixes the
+  CodeEditor case *and* interleaving.
+- `def(…)` (name TBD — `def` / `Page` / `page.def`) = **dormant value.** Creates, renders nothing,
+  returns it. For `export default def("Docs", …)`. Import is always safe.
+- Then `App.load_page()` drops the collector: set the View captor to `$root`, import, done. Safety
+  comes from *which verb you chose*, not from batching.
+
+**Rejected:** a single `page()` that sniffs entry-vs-dependency via `Error().stack` caller URL vs the
+App's loading URL. Fragile (browser stack formats, minifiers), breaks under helper indirection, and is
+spooky (same code behaves differently by who imported it). Explicit verbs match the framework's ethos.
+
+**Related — the two-captor split** (also documented on the page): element helpers use the **View
+captor**; `page()`/`tabs()` use the separate **Page captor**. Setting one doesn't set the other — which
+is exactly why `page()` inside a `CodeEditor` (which only redirects the View captor) escapes to `$root`.
+The general fix is: a render context should set **both**, or route `page()` through a Page captor whose
+`adopt` renders into the same view.
+
+**Status:** analysis + proposal only. No core change yet — `def()`'s name/ergonomics and whether the
+common single-root case keeps a one-liner are open. Decide before implementing.
+
+---
+
+## Docs & viewing — the meta-goal (why any of this exists)
+
+The Page/Pager/tabs system isn't the product; it's the **tool for building, organizing, and viewing
+UI fast** — "see the right things in the right place." The pieces serve that:
+- **`page.js`-per-directory** — every folder can auto-render a demo/doc page (this file is one). The
+  convention: keep each class's page **very simple** — the 1–3 things that make it unique.
+- **Tabs / columns / sub-pages** — organize many small demos so you can drill without losing context.
+  (`core/Page/page.js` dogfoods this: its section tabs *are* `tabs()`.)
+- **`CodeEditor`** (`ext/CodeEditor`) — code next to its rendered output, with a drag handle to resize
+  → you see *exactly* what produces what, responsively. The `code.eval(src, fn)` form exists so the
+  snippet can use the page module's scope (at the cost of `eval` + the two-captor gotcha above).
+  Open question: is `eval` worth it, or should previews be plain functions passed in?
+- **Responsiveness is a first-class requirement**, not a polish step — every layout above must collapse
+  gracefully (see the Pager readme's styling factors: overflow menus, swipe, horizontal-list widget).
+
+The through-line: **simple authoring, organized viewing, inherently responsive.** When a Page/Pager
+decision is ambiguous, prefer whichever keeps *authoring a demo* a one-liner and *viewing it* obvious.
+
+---
+
 ## Paths forward
 
 ### 1. `ui.tabs` — and the AI-generated `ux/Tabs` already exists

@@ -182,3 +182,4 @@ export default class Lew42 extends App {
 export * from "../../lib/util.js";
 export * from "../../core/App/App.js";
 export * from "../Draggable/Rewidth.js";
+export * from "../Markdown/Markdown.js";
